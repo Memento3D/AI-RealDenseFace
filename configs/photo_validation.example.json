@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "photo_set_validation",
+  "pipeline_version": 1,
+  "min_short_side": 640,
+  "max_file_bytes": 20000000,
+  "max_pixels": 24000000,
+  "min_face_fraction": 0.12,
+  "min_face_pixels": 220,
+  "min_sharpness": 35.0,
+  "min_brightness": 45.0,
+  "max_brightness": 220.0,
+  "front_max_yaw": 12.0,
+  "side_min_yaw": 25.0,
+  "side_max_yaw": 55.0,
+  "max_pitch": 15.0,
+  "max_roll": 12.0
+}

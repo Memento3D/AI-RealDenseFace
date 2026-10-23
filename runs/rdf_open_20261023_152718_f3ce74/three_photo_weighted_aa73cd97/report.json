@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "status": "JOINT_CANDIDATE_EXPORTED",
+  "research_only": true,
+  "model_variant": "FLAME2023_Open",
+  "upstream_commit": "ebf0063835f520f07fdf5a813b1af9cdc0ae46b5",
+  "input_sha256": {
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\front.flame.npz": "b40537c0fd0db504e9f4d64d7fc00f257041c4c0e64f4c5cfa9a52ea564776c5",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame2023_Open.pkl": "e75a0990728ba038c7da2a420ae4396f7ddd7781366c13026066c5b24f127623",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame_assets.npz": "922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\realdenseface\\vits.pth": "9644fb9c7b7b8b5b6ca0d06fdebae418c154f1f4224a1ef5298777cc399ea15c",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\facebox\\face_box.pth": "3fde8561f059dd60d876021cbd2f67d955d5e02f24c25b297913a4115e433b4d",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\configs\\model\\vits.yaml": "1f02b837a62dfa1959b6e09be23332441eacf6a74892d50c0e18d569eeec8686",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\tracker\\fitting\\gn_flame_optimizer.py": "cce858491076a2bb09b73825a2558cd3d4082a176078de47449326f5b9d3740e",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\tracker\\inference\\realdenseface_inferencer.py": "13cf8df65d00cf990ef16f6ebd74b55798d90538b83b63b6f5c50b4602cdb0d1",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\front.jpg": "389af1c17db74e412a0e83454746c9cb961312e4b7854d7cdb6a427a1f4927f7",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\left.jpg": "54cf8f24727fccbfcf8b8fb5d1aa7eca75d9d2dca91119ceab018d2a6713f6e7",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\right.jpg": "a062a38e437c778262ff48d3bcce51740c79e0457fca5a920c1dec487d84685f"
+  },
+  "shared_identity": true,
+  "per_photo_expression_and_pose": true,
+  "experiment_version": 2,
+  "front_squared_loss_weight": 2.0,
+  "identity_regularization": 0.05,
+  "settings_are_experimental_not_calibrated": true,
+  "camera_intrinsics_assumed_shared": true,
+  "camera_fov_y": 25.41019630432129,
+  "likeness_verified": false,
+  "texture_generated": false,
+  "baseline_photo_binding_verified": false,
+  "iterations": 10,
+  "metric_note": "Residuals are to network predictions, not ground truth or likeness scores",
+  "error": null,
+  "views": {
+    "front": {
+      "before": {
+        "dense_prior_inliers": 3752,
+        "dense_prior_points": 4129,
+        "median_inlier_residual_px": 1.7878922545526332,
+        "median_all_residual_px": 1.9395831180699388,
+        "residual_is_to_network_predictions_not_ground_truth": true
+      },
+      "after": {
+        "dense_prior_inliers": 3336,
+        "dense_prior_points": 4129,
+        "median_inlier_residual_px": 2.574883250704538,
+        "median_all_residual_px": 3.005037602752329,
+        "residual_is_to_network_predictions_not_ground_truth": true
+      }
+    },
+    "left": {
+      "before": {
+        "dense_prior_inliers": 3204,
+        "dense_prior_points": 4532,
+        "median_inlier_residual_px": 3.117965841498112,
+        "median_all_residual_px": 3.7938195584004633,
+        "residual_is_to_network_predictions_not_ground_truth": true
+      },
+      "after": {
+        "dense_prior_inliers": 3633,
+        "dense_prior_points": 4532,
+        "median_inlier_residual_px": 2.3793775642915307,
+        "median_all_residual_px": 2.815985889073863,
+        "residual_is_to_network_predictions_not_ground_truth": true
+      }
+    },
+    "right": {
+      "before": {
+        "dense_prior_inliers": 3179,
+        "dense_prior_points": 4595,
+        "median_inlier_residual_px": 3.132839229492716,
+        "median_all_residual_px": 4.087928499265449,
+        "residual_is_to_network_predictions_not_ground_truth": true
+      },
+      "after": {
+        "dense_prior_inliers": 3542,
+        "dense_prior_points": 4595,
+        "median_inlier_residual_px": 2.4881537629239836,
+        "median_all_residual_px": 3.0551532138941146,
+        "residual_is_to_network_predictions_not_ground_truth": true
+      }
+    }
+  },
+  "identity_delta_l2": 2.1300668716430664,
+  "max_neutral_displacement_native_units": 0.004474795889109373,
+  "peak_cuda_allocated_bytes": 626837504,
+  "automatic_acceptance": false,
+  "diagnostic_expression": "neutral for both meshes",
+  "elapsed_seconds": 14.856229200000598
+}

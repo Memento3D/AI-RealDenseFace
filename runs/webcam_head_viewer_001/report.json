@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "offline_head_comparison",
+  "pipeline_version": 1,
+  "status": "HEAD_COMPARISON_EXPORTED",
+  "error": null,
+  "viewer": {
+    "vertices": 5023,
+    "faces": 9976,
+    "max_displacement_mm": 1.3398989449861103,
+    "shared_camera": true,
+    "shared_scale": true,
+    "geometry_exaggerated": false,
+    "renderer": "offline_webgl1_on_demand",
+    "external_assets": false
+  },
+  "geometry_modified": false,
+  "likeness_verified": false,
+  "automatic_acceptance": false,
+  "input": {
+    "head_report_sha256": "5b45e6e2d53f3cc68de91a670d32362255f98f9116a24d03a66a5553cf442696",
+    "candidate_report_sha256": "081fe2b3fe0340f07c187d88efa1d5723fc011a102d056a6980e647d5d91ca1c",
+    "head_obj_sha256": "e8c7900b9eecdc65ebe738d50be16687962408151e8aa2b84983e2e87423af54",
+    "candidate_obj_sha256": "9ef6b76e4a390b142cf22e7969640bc2016a44427a7f4e7eb420da292ad8d532"
+  },
+  "artifacts": {
+    "head_comparison.html": {
+      "path": "head_comparison.html",
+      "sha256": "2b0f988ef2dd366f60e015c5eb06072462d357698b8083950a947468cb5ccd94"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "head_texture_workspace",
+  "status": "TEXTURE_REVIEW_READY",
+  "source_texture_run": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\three_textures_73087dd7",
+  "source_viewer_sha256": "267d5984509b7eebe783215f5b865114467cf057f71e96631ec1f61808aef242",
+  "input_sha256": {
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\three_textures_73087dd7\\head.three_textures.html": "267d5984509b7eebe783215f5b865114467cf057f71e96631ec1f61808aef242",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\three_textures_73087dd7\\report.json": "e4eb9a96faf2e8f16f7ff13777a9a86a1d298f03b2823ad6723a8d2d2af0001d",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\report.json": "c2fa4ddcc1664f298264a0741646b49bccb79e378fc8412ab2601962dda6bb15",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\joint.flame.npz": "f7374be11efb6a3449c028130074959a92524df33c112439b1db37a9815f1f0e",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\configs\\head_masks.json": "2dca1104197191cec6c0393c9fd3a4e707c2e76383e6b23799cbeddd7d0e4907"
+  },
+  "masks_reviewed": true,
+  "human_review_is_declaration": true,
+  "mask_semantic_accuracy_verified": false,
+  "color_gains_linear": [
+    [
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.9393500324642344,
+      0.8988889766057533,
+      0.85
+    ],
+    [
+      1.044566827673316,
+      1.0854723337021943,
+      1.135424705020692
+    ]
+  ],
+  "color_overlap_vertices": [
+    959,
+    1091
+  ],
+  "color_gain_limits": [
+    0.85,
+    1.18
+  ],
+  "skin_color_rgb": [
+    125,
+    90,
+    89
+  ],
+  "skin_color_method": "heuristic median photo color; requires review",
+  "photo_covered_triangles": 4524,
+  "total_triangles": 9976,
+  "fill_method": "flat base material, not recovered hidden texture",
+  "geometry_modified": false,
+  "uv_atlas_baked": false,
+  "albedo_recovered": false,
+  "hair_reconstructed": false,
+  "mouth_corrected": false,
+  "likeness_verified": false,
+  "printability_verified": false,
+  "review_items": [
+    "Remove projected hair, earbuds, shirt with masks",
+    "Inspect color seams and eyes/lips for ghosting",
+    "Review sampled skin base in unobserved areas",
+    "Mouth geometry and eyeballs still require separate review",
+    "Hair and graduation cap assets not yet attached"
+  ]
+}

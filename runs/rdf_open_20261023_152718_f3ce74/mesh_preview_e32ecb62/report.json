@@ -1,0 +1,9 @@
+{
+  "parameters_sha256": "b40537c0fd0db504e9f4d64d7fc00f257041c4c0e64f4c5cfa9a52ea564776c5",
+  "model_sha256": "e75a0990728ba038c7da2a420ae4396f7ddd7781366c13026066c5b24f127623",
+  "model_variant": "FLAME2023_Open",
+  "units": "native_model_units_unverified",
+  "inference_rerun": false,
+  "global_rotation_and_translation_removed": true,
+  "likeness_verified": false
+}

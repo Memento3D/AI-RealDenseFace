@@ -1,0 +1,12 @@
+# Experimental compatibility candidate, NOT a Windows/GPU verified lock.
+# Separate Python 3.10 environment. Install Torch separately as documented.
+numpy==1.23.5
+Pillow==11.3.0
+scipy==1.10.1
+opencv-python==4.11.0.86
+trimesh==4.7.4
+loguru==0.7.3
+yacs==0.1.8
+onnxruntime==1.20.1
+insightface==0.7.3
+chumpy==0.70

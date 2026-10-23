@@ -1,0 +1,1302 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "shared_camera_experiment",
+  "pipeline_version": 1,
+  "status": "CAMERA_EXPERIMENT_EXPORTED",
+  "error": null,
+  "research_only": true,
+  "geometry_modified": false,
+  "multi_view_fitting": false,
+  "likeness_verified": false,
+  "views": {
+    "front": {
+      "baseline": {
+        "camera_matrix": [
+          [
+            1280.0,
+            0.0,
+            640.0
+          ],
+          [
+            0.0,
+            1280.0,
+            360.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rotation_vector": [
+          -2.888903689239953,
+          -0.014907373401328382,
+          0.07030622239632198
+        ],
+        "translation_mm": [
+          3.3777944254217815,
+          28.069229032159235,
+          579.8667640504573
+        ],
+        "landmarks": [
+          {
+            "name": "nose_tip",
+            "mediapipe_index": 1,
+            "observed_px": [
+              642.3421478271484,
+              493.79313468933105
+            ],
+            "projected_px": [
+              641.9325623182692,
+              489.4581099137846
+            ],
+            "residual_px": 4.3543311878732265,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_outer_a",
+            "mediapipe_index": 33,
+            "observed_px": [
+              536.5719223022461,
+              384.4479274749756
+            ],
+            "projected_px": [
+              531.60623957751,
+              391.57668319740986
+            ],
+            "residual_px": 8.687759381617449,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_inner_a",
+            "mediapipe_index": 133,
+            "observed_px": [
+              600.0701141357422,
+              394.8413372039795
+            ],
+            "projected_px": [
+              594.5524608122504,
+              399.1849669882512
+            ],
+            "residual_px": 7.022223145204956,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_inner_b",
+            "mediapipe_index": 362,
+            "observed_px": [
+              689.8679351806641,
+              401.13804817199707
+            ],
+            "projected_px": [
+              696.47621095626,
+              403.6350552554674
+            ],
+            "residual_px": 7.064301317273339,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_outer_b",
+            "mediapipe_index": 263,
+            "observed_px": [
+              753.0534362792969,
+              397.2651958465576
+            ],
+            "projected_px": [
+              761.794724919472,
+              397.0248530738238
+            ],
+            "residual_px": 8.744592142533529,
+            "used_for_fit": true
+          },
+          {
+            "name": "mouth_corner_a",
+            "mediapipe_index": 61,
+            "observed_px": [
+              582.3023223876953,
+              564.0266704559326
+            ],
+            "projected_px": [
+              582.6155460496792,
+              558.0702786786062
+            ],
+            "residual_px": 5.964621703631199,
+            "used_for_fit": true
+          },
+          {
+            "name": "mouth_corner_b",
+            "mediapipe_index": 291,
+            "observed_px": [
+              705.2491760253906,
+              564.0590286254883
+            ],
+            "projected_px": [
+              700.4395004526694,
+              560.8634524263247
+            ],
+            "residual_px": 5.774485809099518,
+            "used_for_fit": true
+          },
+          {
+            "name": "chin_held_out",
+            "mediapipe_index": 152,
+            "observed_px": [
+              639.3986892700195,
+              662.0790481567383
+            ],
+            "projected_px": [
+              644.2711227415656,
+              653.3889033661139
+            ],
+            "residual_px": 9.962892372030213,
+            "used_for_fit": false
+          }
+        ],
+        "mean_fit_residual_px": 6.801759241033316,
+        "max_fit_residual_px": 8.744592142533529,
+        "intrinsics_calibrated": false,
+        "mapping": "approximate_semantic_pairs_v1",
+        "evaluation": "seven_fit_points_and_one_held_out_chin_not_likeness",
+        "hidden_surface_removal": false,
+        "geometry_modified": false,
+        "likeness_verified": false,
+        "detected_yaw_degrees": 0.5218838693329169,
+        "side_visibility_verified": false
+      },
+      "candidate": {
+        "camera_matrix": [
+          [
+            704.0,
+            0.0,
+            640.0
+          ],
+          [
+            0.0,
+            704.0,
+            360.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rotation_vector": [
+          -2.9701478844096343,
+          -0.007900042129579721,
+          0.033830621631038824
+        ],
+        "translation_mm": [
+          2.0567137298989886,
+          31.19983543031799,
+          336.97752227244416
+        ],
+        "landmarks": [
+          {
+            "name": "nose_tip",
+            "mediapipe_index": 1,
+            "observed_px": [
+              642.3421478271484,
+              493.79313468933105
+            ],
+            "projected_px": [
+              643.282842475451,
+              490.01322016609953
+            ],
+            "residual_px": 3.8952099076021285,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_outer_a",
+            "mediapipe_index": 33,
+            "observed_px": [
+              536.5719223022461,
+              384.4479274749756
+            ],
+            "projected_px": [
+              531.6508048175872,
+              393.3731177368828
+            ],
+            "residual_px": 10.191978145044233,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_inner_a",
+            "mediapipe_index": 133,
+            "observed_px": [
+              600.0701141357422,
+              394.8413372039795
+            ],
+            "projected_px": [
+              593.7050893052467,
+              399.2533298987917
+            ],
+            "residual_px": 7.744625273820583,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_inner_b",
+            "mediapipe_index": 362,
+            "observed_px": [
+              689.8679351806641,
+              401.13804817199707
+            ],
+            "projected_px": [
+              695.5397144790113,
+              402.77325598309824
+            ],
+            "residual_px": 5.902794676646533,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_outer_b",
+            "mediapipe_index": 263,
+            "observed_px": [
+              753.0534362792969,
+              397.2651958465576
+            ],
+            "projected_px": [
+              758.7650482194327,
+              396.6291932710056
+            ],
+            "residual_px": 5.746913104511971,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "mouth_corner_a",
+            "mediapipe_index": 61,
+            "observed_px": [
+              582.3023223876953,
+              564.0266704559326
+            ],
+            "projected_px": [
+              582.0262013221326,
+              560.5316435343568
+            ],
+            "residual_px": 3.5059172872997317,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "mouth_corner_b",
+            "mediapipe_index": 291,
+            "observed_px": [
+              705.2491760253906,
+              564.0590286254883
+            ],
+            "projected_px": [
+              700.971992204067,
+              562.1852464805448
+            ],
+            "residual_px": 4.669621073288681,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "chin_held_out",
+            "mediapipe_index": 152,
+            "observed_px": [
+              639.3986892700195,
+              662.0790481567383
+            ],
+            "projected_px": [
+              644.0366943416936,
+              655.1202192934118
+            ],
+            "residual_px": 8.362797988349415,
+            "used_for_fit": false,
+            "fit_weight": 0.0
+          }
+        ],
+        "mean_fit_residual_px": 5.9510084954591225,
+        "max_fit_residual_px": 10.191978145044233,
+        "intrinsics_calibrated": false,
+        "mapping": "approximate_semantic_pairs_v1",
+        "evaluation": "seven_fit_points_and_one_held_out_chin_not_likeness",
+        "hidden_surface_removal": false,
+        "geometry_modified": false,
+        "likeness_verified": false
+      }
+    },
+    "left": {
+      "baseline": {
+        "camera_matrix": [
+          [
+            1280.0,
+            0.0,
+            640.0
+          ],
+          [
+            0.0,
+            1280.0,
+            360.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rotation_vector": [
+          -2.7745922792396396,
+          0.09965929142236729,
+          1.3012606224789742
+        ],
+        "translation_mm": [
+          -37.85081452742396,
+          33.06182833519871,
+          558.3073831038413
+        ],
+        "landmarks": [
+          {
+            "name": "nose_tip",
+            "mediapipe_index": 1,
+            "observed_px": [
+              412.7684783935547,
+              489.2576265335083
+            ],
+            "projected_px": [
+              417.4971839100634,
+              476.23393484693423
+            ],
+            "residual_px": 13.855583748395398,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_outer_a",
+            "mediapipe_index": 33,
+            "observed_px": [
+              434.03839111328125,
+              396.56310081481934
+            ],
+            "projected_px": [
+              434.57673768049096,
+              394.8718765464396
+            ],
+            "residual_px": 1.7748398666874496,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_inner_a",
+            "mediapipe_index": 133,
+            "observed_px": [
+              457.2454833984375,
+              396.9554328918457
+            ],
+            "projected_px": [
+              450.6635612317347,
+              397.68092000838743
+            ],
+            "residual_px": 6.621784575535622,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_inner_b",
+            "mediapipe_index": 362,
+            "observed_px": [
+              510.1338195800781,
+              398.32876682281494
+            ],
+            "projected_px": [
+              506.33709590874736,
+              400.0117983636664
+            ],
+            "residual_px": 4.153035733526045,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_outer_b",
+            "mediapipe_index": 263,
+            "observed_px": [
+              562.9164505004883,
+              391.3788843154907
+            ],
+            "projected_px": [
+              563.284761037239,
+              394.82594442379093
+            ],
+            "residual_px": 3.466680839321131,
+            "used_for_fit": true
+          },
+          {
+            "name": "mouth_corner_a",
+            "mediapipe_index": 61,
+            "observed_px": [
+              432.1479797363281,
+              552.0095157623291
+            ],
+            "projected_px": [
+              436.87634190293005,
+              556.567917306256
+            ],
+            "residual_px": 6.567833235872241,
+            "used_for_fit": true
+          },
+          {
+            "name": "mouth_corner_b",
+            "mediapipe_index": 291,
+            "observed_px": [
+              501.6313934326172,
+              563.6878108978271
+            ],
+            "projected_px": [
+              501.5441582732442,
+              568.0208653637096
+            ],
+            "residual_px": 4.333932507242682,
+            "used_for_fit": true
+          },
+          {
+            "name": "chin_held_out",
+            "mediapipe_index": 152,
+            "observed_px": [
+              462.0526123046875,
+              651.5511417388916
+            ],
+            "projected_px": [
+              489.57128324489656,
+              669.7388158614913
+            ],
+            "residual_px": 32.98588698679161,
+            "used_for_fit": false
+          }
+        ],
+        "mean_fit_residual_px": 5.824812929511509,
+        "max_fit_residual_px": 13.855583748395398,
+        "intrinsics_calibrated": false,
+        "mapping": "approximate_semantic_pairs_v1",
+        "evaluation": "seven_fit_points_and_one_held_out_chin_not_likeness",
+        "hidden_surface_removal": false,
+        "geometry_modified": false,
+        "likeness_verified": false,
+        "detected_yaw_degrees": -41.354226407477526,
+        "side_visibility_verified": false
+      },
+      "candidate": {
+        "camera_matrix": [
+          [
+            704.0,
+            0.0,
+            640.0
+          ],
+          [
+            0.0,
+            704.0,
+            360.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rotation_vector": [
+          -2.8867678554046323,
+          0.13080497266693772,
+          1.1269550919097466
+        ],
+        "translation_mm": [
+          -44.674519417832464,
+          34.96937885663086,
+          333.2761628149466
+        ],
+        "landmarks": [
+          {
+            "name": "nose_tip",
+            "mediapipe_index": 1,
+            "observed_px": [
+              412.7684783935547,
+              489.2576265335083
+            ],
+            "projected_px": [
+              415.7151618738193,
+              476.37552019780975
+            ],
+            "residual_px": 13.214825279855539,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_outer_a",
+            "mediapipe_index": 33,
+            "observed_px": [
+              434.03839111328125,
+              396.56310081481934
+            ],
+            "projected_px": [
+              433.0899173609322,
+              397.97813384964974
+            ],
+            "residual_px": 1.7035025531405696,
+            "used_for_fit": true,
+            "fit_weight": 0.35
+          },
+          {
+            "name": "eye_inner_a",
+            "mediapipe_index": 133,
+            "observed_px": [
+              457.2454833984375,
+              396.9554328918457
+            ],
+            "projected_px": [
+              448.9822536148837,
+              399.20533667176386
+            ],
+            "residual_px": 8.564054733284975,
+            "used_for_fit": true,
+            "fit_weight": 0.35
+          },
+          {
+            "name": "eye_inner_b",
+            "mediapipe_index": 362,
+            "observed_px": [
+              510.1338195800781,
+              398.32876682281494
+            ],
+            "projected_px": [
+              505.9052756879197,
+              399.1845971080558
+            ],
+            "residual_px": 4.314281970971046,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_outer_b",
+            "mediapipe_index": 263,
+            "observed_px": [
+              562.9164505004883,
+              391.3788843154907
+            ],
+            "projected_px": [
+              565.1326008587189,
+              392.54400431811996
+            ],
+            "residual_px": 2.503762574768702,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "mouth_corner_a",
+            "mediapipe_index": 61,
+            "observed_px": [
+              432.1479797363281,
+              552.0095157623291
+            ],
+            "projected_px": [
+              434.8361070830762,
+              551.7311162781916
+            ],
+            "residual_px": 2.70250530158642,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "mouth_corner_b",
+            "mediapipe_index": 291,
+            "observed_px": [
+              501.6313934326172,
+              563.6878108978271
+            ],
+            "projected_px": [
+              501.7960456725045,
+              566.8683018912315
+            ],
+            "residual_px": 3.184750118804583,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "chin_held_out",
+            "mediapipe_index": 152,
+            "observed_px": [
+              462.0526123046875,
+              651.5511417388916
+            ],
+            "projected_px": [
+              487.3821117566969,
+              663.6598254502185
+            ],
+            "residual_px": 28.074966851454978,
+            "used_for_fit": false,
+            "fit_weight": 0.0
+          }
+        ],
+        "mean_fit_residual_px": 5.16966893320169,
+        "max_fit_residual_px": 13.214825279855539,
+        "intrinsics_calibrated": false,
+        "mapping": "approximate_semantic_pairs_v1",
+        "evaluation": "seven_fit_points_and_one_held_out_chin_not_likeness",
+        "hidden_surface_removal": false,
+        "geometry_modified": false,
+        "likeness_verified": false
+      }
+    },
+    "right": {
+      "baseline": {
+        "camera_matrix": [
+          [
+            1280.0,
+            0.0,
+            640.0
+          ],
+          [
+            0.0,
+            1280.0,
+            360.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rotation_vector": [
+          -2.8613905440593723,
+          -0.20082855130547747,
+          -1.24362442202498
+        ],
+        "translation_mm": [
+          35.7663668950618,
+          36.345578839055854,
+          520.1045958932258
+        ],
+        "landmarks": [
+          {
+            "name": "nose_tip",
+            "mediapipe_index": 1,
+            "observed_px": [
+              871.4044189453125,
+              500.75035572052
+            ],
+            "projected_px": [
+              871.2968638239158,
+              489.62444414659836
+            ],
+            "residual_px": 11.126431433971204,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_outer_a",
+            "mediapipe_index": 33,
+            "observed_px": [
+              713.8433074951172,
+              386.34976387023926
+            ],
+            "projected_px": [
+              712.0344476249593,
+              391.50185938369117
+            ],
+            "residual_px": 5.460408611962935,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_inner_a",
+            "mediapipe_index": 133,
+            "observed_px": [
+              773.0130004882812,
+              401.10594749450684
+            ],
+            "projected_px": [
+              776.4069108718785,
+              401.3656953230461
+            ],
+            "residual_px": 3.4038355756881185,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_inner_b",
+            "mediapipe_index": 362,
+            "observed_px": [
+              833.3743286132812,
+              411.96091175079346
+            ],
+            "projected_px": [
+              840.6942105331165,
+              413.6058054942876
+            ],
+            "residual_px": 7.502422725207946,
+            "used_for_fit": true
+          },
+          {
+            "name": "eye_outer_b",
+            "mediapipe_index": 263,
+            "observed_px": [
+              863.6433410644531,
+              416.3880157470703
+            ],
+            "projected_px": [
+              861.4087190410407,
+              414.73412217950084
+            ],
+            "residual_px": 2.7800898403410144,
+            "used_for_fit": true
+          },
+          {
+            "name": "mouth_corner_a",
+            "mediapipe_index": 61,
+            "observed_px": [
+              774.0270233154297,
+              584.2732286453247
+            ],
+            "projected_px": [
+              772.8347016058779,
+              585.9483350707901
+            ],
+            "residual_px": 2.056115900357779,
+            "used_for_fit": true
+          },
+          {
+            "name": "mouth_corner_b",
+            "mediapipe_index": 291,
+            "observed_px": [
+              854.9506378173828,
+              579.5859289169312
+            ],
+            "projected_px": [
+              849.6415657539408,
+              583.701882965267
+            ],
+            "residual_px": 6.7176873924612845,
+            "used_for_fit": true
+          },
+          {
+            "name": "chin_held_out",
+            "mediapipe_index": 152,
+            "observed_px": [
+              812.7449035644531,
+              685.1761293411255
+            ],
+            "projected_px": [
+              790.3932894000479,
+              703.4945914954608
+            ],
+            "residual_px": 28.899147244412823,
+            "used_for_fit": false
+          }
+        ],
+        "mean_fit_residual_px": 5.578141639998612,
+        "max_fit_residual_px": 11.126431433971204,
+        "intrinsics_calibrated": false,
+        "mapping": "approximate_semantic_pairs_v1",
+        "evaluation": "seven_fit_points_and_one_held_out_chin_not_likeness",
+        "hidden_surface_removal": false,
+        "geometry_modified": false,
+        "likeness_verified": false,
+        "detected_yaw_degrees": 35.930082834027274,
+        "side_visibility_verified": false
+      },
+      "candidate": {
+        "camera_matrix": [
+          [
+            704.0,
+            0.0,
+            640.0
+          ],
+          [
+            0.0,
+            704.0,
+            360.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rotation_vector": [
+          -2.972193086861288,
+          -0.24300090021031703,
+          -1.0615467120926494
+        ],
+        "translation_mm": [
+          42.69780503623868,
+          38.72067278071309,
+          311.9323611862314
+        ],
+        "landmarks": [
+          {
+            "name": "nose_tip",
+            "mediapipe_index": 1,
+            "observed_px": [
+              871.4044189453125,
+              500.75035572052
+            ],
+            "projected_px": [
+              873.8040095582327,
+              490.2838420173213
+            ],
+            "residual_px": 10.738060542242291,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_outer_a",
+            "mediapipe_index": 33,
+            "observed_px": [
+              713.8433074951172,
+              386.34976387023926
+            ],
+            "projected_px": [
+              711.3011538062514,
+              389.4858921293759
+            ],
+            "residual_px": 4.0370590577262355,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_inner_a",
+            "mediapipe_index": 133,
+            "observed_px": [
+              773.0130004882812,
+              401.10594749450684
+            ],
+            "projected_px": [
+              777.3647606245154,
+              400.9476490347474
+            ],
+            "residual_px": 4.354638295619824,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "eye_inner_b",
+            "mediapipe_index": 362,
+            "observed_px": [
+              833.3743286132812,
+              411.96091175079346
+            ],
+            "projected_px": [
+              842.3266534292787,
+              415.2783516038013
+            ],
+            "residual_px": 9.547226130633394,
+            "used_for_fit": true,
+            "fit_weight": 0.35
+          },
+          {
+            "name": "eye_outer_b",
+            "mediapipe_index": 263,
+            "observed_px": [
+              863.6433410644531,
+              416.3880157470703
+            ],
+            "projected_px": [
+              862.2736174184998,
+              417.697886835083
+            ],
+            "residual_px": 1.895232210969182,
+            "used_for_fit": true,
+            "fit_weight": 0.35
+          },
+          {
+            "name": "mouth_corner_a",
+            "mediapipe_index": 61,
+            "observed_px": [
+              774.0270233154297,
+              584.2732286453247
+            ],
+            "projected_px": [
+              772.2905765645842,
+              585.9321383080744
+            ],
+            "residual_px": 2.401505483584464,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "mouth_corner_b",
+            "mediapipe_index": 291,
+            "observed_px": [
+              854.9506378173828,
+              579.5859289169312
+            ],
+            "projected_px": [
+              852.1573106596795,
+              579.818053085398
+            ],
+            "residual_px": 2.8029552689169255,
+            "used_for_fit": true,
+            "fit_weight": 1.0
+          },
+          {
+            "name": "chin_held_out",
+            "mediapipe_index": 152,
+            "observed_px": [
+              812.7449035644531,
+              685.1761293411255
+            ],
+            "projected_px": [
+              792.6788909952884,
+              700.2805868275161
+            ],
+            "residual_px": 25.11552301633512,
+            "used_for_fit": false,
+            "fit_weight": 0.0
+          }
+        ],
+        "mean_fit_residual_px": 5.110953855670331,
+        "max_fit_residual_px": 10.738060542242291,
+        "intrinsics_calibrated": false,
+        "mapping": "approximate_semantic_pairs_v1",
+        "evaluation": "seven_fit_points_and_one_held_out_chin_not_likeness",
+        "hidden_surface_removal": false,
+        "geometry_modified": false,
+        "likeness_verified": false
+      }
+    }
+  },
+  "artifacts": {
+    "front.candidate.png": {
+      "path": "front.candidate.png",
+      "sha256": "206ded4dae2bf8526eed725921c1960cee75366eb6f26ede2d1193c682b631e9"
+    },
+    "front.comparison.png": {
+      "path": "front.comparison.png",
+      "sha256": "3a395879b8627d398738e093266f448bca9491942256af4444f3bc9483936aea"
+    },
+    "left.candidate.png": {
+      "path": "left.candidate.png",
+      "sha256": "d24e47865675e52f2cc5708f35c7192d4379b5867fec0b82d7d03e288f435560"
+    },
+    "left.comparison.png": {
+      "path": "left.comparison.png",
+      "sha256": "0f46b6813e2ed86780ee60f6c55e3d732d66666dd82741bb77d19acba1debb01"
+    },
+    "right.candidate.png": {
+      "path": "right.candidate.png",
+      "sha256": "29d7c065a3aa31bc1443061fb0d6463abc96347b7a1e031a8b43a7783df741ff"
+    },
+    "right.comparison.png": {
+      "path": "right.comparison.png",
+      "sha256": "5bd96e01c13b2679874445aecbebcabf4a6cad89aeeabdb12c02fffdecc3a2fd"
+    }
+  },
+  "experiment": {
+    "focal_px": 704.0,
+    "search_bounds_px": [
+      704.0,
+      2560.0
+    ],
+    "at_search_boundary": true,
+    "baseline_weighted_huber": 20.734096257118352,
+    "candidate_weighted_huber": 16.7195920126729,
+    "candidate_reduces_fit_objective": true,
+    "trials": [
+      {
+        "focal_px": 704.0,
+        "objective": 16.7195920126729,
+        "per_view": {
+          "front": 18.598479533543323,
+          "left": 16.604441206161827,
+          "right": 14.955855298313558
+        }
+      },
+      {
+        "focal_px": 768.0000000000001,
+        "objective": 17.20681607110951,
+        "per_view": {
+          "front": 19.51723722449073,
+          "left": 16.885176392185194,
+          "right": 15.2180345966526
+        }
+      },
+      {
+        "focal_px": 832.0,
+        "objective": 17.629896161089526,
+        "per_view": {
+          "front": 20.25051118867152,
+          "left": 17.151757760659798,
+          "right": 15.487419533937265
+        }
+      },
+      {
+        "focal_px": 896.0000000000001,
+        "objective": 18.00139136741912,
+        "per_view": {
+          "front": 20.83119015603248,
+          "left": 17.41066670640543,
+          "right": 15.762317239819446
+        }
+      },
+      {
+        "focal_px": 960.0,
+        "objective": 18.33302744027378,
+        "per_view": {
+          "front": 21.29418477364325,
+          "left": 17.664340272886534,
+          "right": 16.040557274291558
+        }
+      },
+      {
+        "focal_px": 1024.0,
+        "objective": 18.633336500370145,
+        "per_view": {
+          "front": 21.66683248834828,
+          "left": 17.913311515283137,
+          "right": 16.31986549747902
+        }
+      },
+      {
+        "focal_px": 1088.0,
+        "objective": 18.908233649021753,
+        "per_view": {
+          "front": 21.969262755311934,
+          "left": 18.157304818710884,
+          "right": 16.59813337304244
+        }
+      },
+      {
+        "focal_px": 1152.0,
+        "objective": 19.16194461405063,
+        "per_view": {
+          "front": 22.216504080499273,
+          "left": 18.39577728611012,
+          "right": 16.87355247554249
+        }
+      },
+      {
+        "focal_px": 1216.0,
+        "objective": 19.39758362215428,
+        "per_view": {
+          "front": 22.419922860243197,
+          "left": 18.628172391710056,
+          "right": 17.14465561450958
+        }
+      },
+      {
+        "focal_px": 1280.0,
+        "objective": 19.617517303030866,
+        "per_view": {
+          "front": 22.588219454930158,
+          "left": 18.8540269894399,
+          "right": 17.410305464722544
+        }
+      },
+      {
+        "focal_px": 1344.0,
+        "objective": 19.823597138088473,
+        "per_view": {
+          "front": 22.728127372899014,
+          "left": 19.07300563826136,
+          "right": 17.669658403105043
+        }
+      },
+      {
+        "focal_px": 1408.0,
+        "objective": 20.017310734534902,
+        "per_view": {
+          "front": 22.84491176809447,
+          "left": 19.284900650499132,
+          "right": 17.922119785011102
+        }
+      },
+      {
+        "focal_px": 1472.0,
+        "objective": 20.19988146163934,
+        "per_view": {
+          "front": 22.942727594594555,
+          "left": 19.48961753191035,
+          "right": 18.167299258413113
+        }
+      },
+      {
+        "focal_px": 1536.0,
+        "objective": 20.372336410915377,
+        "per_view": {
+          "front": 23.024883437841403,
+          "left": 19.687155638056538,
+          "right": 18.40497015684819
+        }
+      },
+      {
+        "focal_px": 1600.0,
+        "objective": 20.535552446261708,
+        "per_view": {
+          "front": 23.09403413142079,
+          "left": 19.87758872778699,
+          "right": 18.635034479577335
+        }
+      },
+      {
+        "focal_px": 1663.9999999999998,
+        "objective": 20.690288648228417,
+        "per_view": {
+          "front": 23.152324848596994,
+          "left": 20.0610474467938,
+          "right": 18.85749364929445
+        }
+      },
+      {
+        "focal_px": 1728.0,
+        "objective": 20.837210895212042,
+        "per_view": {
+          "front": 23.201503643450195,
+          "left": 20.23770443183807,
+          "right": 19.07242461034787
+        }
+      },
+      {
+        "focal_px": 1792.0,
+        "objective": 20.9769080425318,
+        "per_view": {
+          "front": 23.243001454697502,
+          "left": 20.407762085154015,
+          "right": 19.279960587743876
+        }
+      },
+      {
+        "focal_px": 1856.0,
+        "objective": 21.10990579261124,
+        "per_view": {
+          "front": 23.277998826646712,
+          "left": 20.571442778610198,
+          "right": 19.480275772576803
+        }
+      },
+      {
+        "focal_px": 1920.0,
+        "objective": 21.23667572845145,
+        "per_view": {
+          "front": 23.307472790727022,
+          "left": 20.728981150050814,
+          "right": 19.67357324457651
+        }
+      },
+      {
+        "focal_px": 1983.9999999999998,
+        "objective": 21.357643619370325,
+        "per_view": {
+          "front": 23.33223719627653,
+          "left": 20.880618137965918,
+          "right": 19.860075523868534
+        }
+      },
+      {
+        "focal_px": 2047.9999999999998,
+        "objective": 21.47319508387092,
+        "per_view": {
+          "front": 23.35297158461572,
+          "left": 21.026596430692308,
+          "right": 20.040017236304738
+        }
+      },
+      {
+        "focal_px": 2112.0,
+        "objective": 21.58345468141573,
+        "per_view": {
+          "front": 23.370247358609483,
+          "left": 21.16715704886025,
+          "right": 20.21295963677745
+        }
+      },
+      {
+        "focal_px": 2176.0,
+        "objective": 21.68822285727155,
+        "per_view": {
+          "front": 23.384549213166764,
+          "left": 21.302536825621292,
+          "right": 20.377582533026594
+        }
+      },
+      {
+        "focal_px": 2240.0,
+        "objective": 21.787876822119134,
+        "per_view": {
+          "front": 23.39628834421834,
+          "left": 21.432966591709327,
+          "right": 20.534375530429745
+        }
+      },
+      {
+        "focal_px": 2304.0,
+        "objective": 21.88278470513257,
+        "per_view": {
+          "front": 23.405813428653413,
+          "left": 21.558669909617542,
+          "right": 20.683870777126756
+        }
+      },
+      {
+        "focal_px": 2368.0,
+        "objective": 21.973279826448373,
+        "per_view": {
+          "front": 23.41342250806031,
+          "left": 21.67986223242666,
+          "right": 20.826554738858142
+        }
+      },
+      {
+        "focal_px": 2432.0,
+        "objective": 22.0597128243674,
+        "per_view": {
+          "front": 23.419515279878034,
+          "left": 21.79675038855257,
+          "right": 20.962872804671598
+        }
+      },
+      {
+        "focal_px": 2496.0,
+        "objective": 22.142347156719655,
+        "per_view": {
+          "front": 23.424275780435092,
+          "left": 21.9095323145495,
+          "right": 21.093233375174382
+        }
+      },
+      {
+        "focal_px": 2560.0,
+        "objective": 22.22142185178355,
+        "per_view": {
+          "front": 23.427857084654814,
+          "left": 22.0183969748329,
+          "right": 21.21801149586294
+        }
+      }
+    ],
+    "intrinsics_calibrated": false,
+    "visibility_policy": "depth_based_far_eye_weight_0.35_above_20deg_heuristic",
+    "huber_delta_px": 6.0,
+    "weights": {
+      "front": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "left": [
+        1.0,
+        0.35,
+        0.35,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "right": [
+        1.0,
+        1.0,
+        1.0,
+        0.35,
+        0.35,
+        1.0,
+        1.0
+      ]
+    },
+    "geometry_modified": false,
+    "likeness_verified": false
+  },
+  "source_registration_sha256": "1bc599f2de6774e03ab8cc20bcc9348598f4db472750600b9a5bb10f255dab69",
+  "source_mesh_sha256": "e8c7900b9eecdc65ebe738d50be16687962408151e8aa2b84983e2e87423af54",
+  "embedding_sha256": "8095348eeafce5a02f6bd8765146307f9567a3f03b316d788a2e47336d667954",
+  "warning": "Candidate cameras are uncalibrated; compare held-out diagnostics. No shape improvement established."
+}

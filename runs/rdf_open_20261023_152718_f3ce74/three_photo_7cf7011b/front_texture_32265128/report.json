@@ -1,0 +1,25 @@
+{
+  "status": "FRONT_TEXTURE_PREVIEW_EXPORTED",
+  "input_sha256": {
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\joint.flame.npz": "f7374be11efb6a3449c028130074959a92524df33c112439b1db37a9815f1f0e",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\report.json": "c2fa4ddcc1664f298264a0741646b49bccb79e378fc8412ab2601962dda6bb15",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\front.jpg": "389af1c17db74e412a0e83454746c9cb961312e4b7854d7cdb6a427a1f4927f7",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame2023_Open.pkl": "e75a0990728ba038c7da2a420ae4396f7ddd7781366c13026066c5b24f127623",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame_assets.npz": "922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3"
+  },
+  "geometry_refitted": false,
+  "texture_type": "front-only projective photograph; planar UV in OBJ; not full-head UV atlas",
+  "source_resolution": [
+    1280,
+    720
+  ],
+  "lighting_removed": false,
+  "skin_hair_segmentation": false,
+  "unobserved_regions": "gray",
+  "display_expression": "saved front expression, global pose removed",
+  "likeness_verified": false,
+  "error": null,
+  "textured_triangles": 3812,
+  "total_triangles": 9976,
+  "note": "Original photo pixels retained. Hair/accessories and shadows can be projected. OBJ uses affine UV interpolation; HTML uses perspective-correct projective lookup. Mouth geometry unchanged."
+}

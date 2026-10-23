@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "three_photo_head_demo",
+  "pipeline_version": 1,
+  "package_version": "0.11.0",
+  "status": "DEMO_PREVIEW_EXPORTED",
+  "stages": {
+    "validation": {
+      "status": "NEEDS_HUMAN_REVIEW",
+      "report": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\demo_01_20261023_025255_fbc4c9\\01_validation\\report.json"
+    },
+    "head": {
+      "status": "GEOMETRY_EXPORTED",
+      "report": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\demo_01_20261023_025255_fbc4c9\\02_head\\report.json"
+    },
+    "registration": {
+      "status": "REGISTRATIONS_EXPORTED",
+      "report": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\demo_01_20261023_025255_fbc4c9\\03_registration\\report.json"
+    }
+  },
+  "error": null,
+  "input": {
+    "front": {
+      "path": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\front.jpg",
+      "sha256": "389af1c17db74e412a0e83454746c9cb961312e4b7854d7cdb6a427a1f4927f7"
+    },
+    "left": {
+      "path": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\left.jpg",
+      "sha256": "54cf8f24727fccbfcf8b8fb5d1aa7eca75d9d2dca91119ceab018d2a6713f6e7"
+    },
+    "right": {
+      "path": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\right.jpg",
+      "sha256": "a062a38e437c778262ff48d3bcce51740c79e0457fca5a920c1dec487d84685f"
+    }
+  },
+  "review": {
+    "reviewed_by": "don",
+    "human_review_is_declaration": true
+  },
+  "final_viewer": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\demo_01_20261023_025255_fbc4c9\\final\\multiview_preview.html",
+  "manual_jaw_fit_performed": false,
+  "geometry_views": [
+    "front"
+  ],
+  "color_views": [
+    "front",
+    "left",
+    "right"
+  ],
+  "likeness_verified": false,
+  "printability_verified": false,
+  "elapsed_seconds": 65.657
+}

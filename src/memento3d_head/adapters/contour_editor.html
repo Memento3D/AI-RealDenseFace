@@ -1,0 +1,59 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'">
+<title>Đánh dấu viền mặt nhìn thấy — Memento3D</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#111827;color:#e5e7eb;font:15px system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:22px}h1{font-size:24px;margin:0 0 10px}p{line-height:1.6}button,select,input{font:inherit}button,select,.file{background:#253249;color:white;border:1px solid #52617b;border-radius:7px;padding:8px 12px;cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}button.active{background:#1d4ed8;border-color:#93c5fd}nav,.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.hint{background:#1e293b;padding:12px 16px;border-radius:9px}.stage{background:#080e19;overflow:auto;max-height:73vh;border:1px solid #465670}canvas{display:block;touch-action:none;cursor:crosshair}#message{min-height:24px;color:#fbbf24}small{color:#b6c3d6}.file input{display:none}#segments{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.review{display:block;margin:14px 0;line-height:1.7}#progress{color:#a5b4fc}a{color:#93c5fd}
+</style><main><h1>Đánh dấu các đoạn viền mặt nhìn thấy</h1>
+<p class="hint">Bấm lần lượt dọc đường ranh giữa mặt và nền mà bạn nhìn thấy rõ. Không nối qua vùng khuất, tóc, tai, cổ hoặc vùng không chắc chắn. Mỗi đoạn cần ít nhất 3 điểm. Có thể vẽ nhiều đoạn rời. Các điểm xanh lá là do bạn đánh dấu; đường xanh cyan/tím chỉ là biên toàn đầu 3D tham khảo.</p>
+<nav id="tabs"><button data-slot="front">Chính diện</button><button data-slot="left">Ảnh trái</button><button data-slot="right">Ảnh phải</button><span id="progress"></span></nav>
+<div class="tools"><label>Loại đoạn <select id="kind"><option value="jaw_left_image">Hàm phía trái ảnh</option><option value="jaw_right_image">Hàm phía phải ảnh</option><option value="visible_profile">Biên mặt nhìn nghiêng</option></select></label><button id="new">Đoạn mới</button><button id="undo">Lùi 1 điểm</button><button id="remove">Xóa đoạn đang chọn</button><label>Mesh tham khảo <select id="overlay"><option value="none">Ẩn — vẽ theo ảnh thật</option><option value="baseline">MICA gốc — cyan</option><option value="candidate">Ứng viên v0.5 — tím</option></select></label><label>Zoom <input id="zoom" type="range" min="50" max="200" step="10" value="100"><span id="zoomLabel">100%</span></label></div>
+<div id="segments"></div><div class="stage"><canvas id="canvas" aria-label="Ảnh khuôn mặt và các đoạn viền đánh dấu"></canvas></div>
+<p id="message" role="status"></p><small>Chính diện: có thể tách hàm trái và hàm phải thành hai đoạn. Góc nghiêng: chỉ đánh dấu đường ranh mặt thật sự nhìn thấy. Nhãn trái/phải chỉ vị trí trên ảnh. Không cần vẽ hết đường bao nếu bị che. Điểm được lưu theo pixel ảnh gốc dù thay đổi zoom.</small>
+<label class="review"><input type="checkbox" id="review"> Tôi đã kiểm tra cả ba ảnh và chỉ đánh dấu các đoạn viền mặt nhìn thấy rõ.</label>
+<div class="tools"><button id="export">Tải visible_contours.json</button><label class="file">Mở lại JSON đã lưu<input type="file" id="import" accept=".json,application/json"></label></div>
+<p><small>Chạy cục bộ, không gửi ảnh hay dữ liệu lên mạng. Tiến độ nằm trong tab này cho đến khi tải JSON; hãy tải file trước khi đóng. Đây là đánh dấu tham chiếu cho thử nghiệm, chưa phải xác nhận độ giống hoặc lệnh sửa mesh.</small></p></main>
+<script>
+'use strict';
+const SOURCE=__CONTOUR_DATA__;
+const $=id=>document.getElementById(id), slots=['front','left','right'];
+let slot='front',serial=0,active=null;
+let views=Object.fromEntries(slots.map(s=>[s,{image_size:SOURCE.views[s].image_size,image_sha256:SOURCE.views[s].image_sha256,curves:[]}]))
+const photos={};const canvas=$('canvas'),ctx=canvas.getContext('2d');
+function tell(s){$('message').textContent=s}
+function current(){return views[slot].curves.find(c=>c.id===active)}
+function changed(){ $('review').checked=false; render(); }
+function newCurve(){serial++;const c={id:slot+'-'+serial+'-'+Date.now().toString(36),kind:$('kind').value,points_px:[]};views[slot].curves.push(c);active=c.id;changed();}
+function render(){
+ const [w,h]=SOURCE.views[slot].image_size;canvas.width=w;canvas.height=h;canvas.style.width=(w*Number($('zoom').value)/100)+'px';canvas.style.height=(h*Number($('zoom').value)/100)+'px';
+ if(photos[slot]?.complete)ctx.drawImage(photos[slot],0,0,w,h);
+ const mode=$('overlay').value;
+ if(mode!=='none'){ctx.strokeStyle=mode==='baseline'?'#00d8ef':'#c084fc';ctx.lineWidth=1.5;for(const poly of SOURCE.views[slot].outlines[mode]){ctx.beginPath();poly.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();ctx.stroke();}}
+ for(const c of views[slot].curves){ctx.strokeStyle=c.id===active?'#5bff70':'#ffe16b';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=2;ctx.beginPath();c.points_px.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.stroke();for(const p of c.points_px){ctx.beginPath();ctx.arc(p[0],p[1],3,0,Math.PI*2);ctx.fill();}}
+ $('segments').replaceChildren();views[slot].curves.forEach((c,i)=>{const b=document.createElement('button');b.textContent=`Đoạn ${i+1} · ${c.points_px.length} điểm`;b.className=c.id===active?'active':'';b.onclick=()=>{active=c.id;$('kind').value=c.kind;render()};$('segments').appendChild(b)});
+ document.querySelectorAll('[data-slot]').forEach(b=>b.classList.toggle('active',b.dataset.slot===slot));
+ $('progress').textContent=slots.map(s=>`${s}: ${views[s].curves.filter(c=>c.points_px.length>=3).length} đoạn`).join(' | ');
+ $('undo').disabled=!current()?.points_px.length;$('remove').disabled=!current();
+}
+function validate(data){
+ if(data.schema_version!==1||data.pipeline_type!=='manual_visible_contours'||data.workspace_id!==SOURCE.workspace_id||JSON.stringify(data.source_binding)!==JSON.stringify(SOURCE.source_binding))throw Error('JSON thuộc bộ ảnh hoặc workspace khác.');
+ if(data.visible_only_reviewed!==true)throw Error('Hãy kiểm tra cả ba ảnh và đánh dấu ô xác nhận.');
+ if(!data.views||Object.keys(data.views).length!==3)throw Error('JSON phải có đúng ba góc.');
+ for(const s of slots){const v=data.views[s],spec=SOURCE.views[s];if(!v||JSON.stringify(v.image_size)!==JSON.stringify(spec.image_size)||v.image_sha256!==spec.image_sha256)throw Error('Ảnh không khớp: '+s);
+ if(!Array.isArray(v.curves)||v.curves.length<1||v.curves.length>10)throw Error(s+': cần 1–10 đoạn. Xóa các đoạn trống.');
+ const ids=new Set();for(const c of v.curves){if(!c||typeof c.id!=='string'||!c.id||ids.has(c.id)||!['jaw_left_image','jaw_right_image','visible_profile'].includes(c.kind))throw Error('Đoạn không hợp lệ.');ids.add(c.id);
+ if(!Array.isArray(c.points_px)||c.points_px.length<3||c.points_px.length>500)throw Error(s+': mỗi đoạn cần 3–500 điểm.');let length=0;
+ c.points_px.forEach((p,i)=>{if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<0||p[1]<0||p[0]>=spec.image_size[0]||p[1]>=spec.image_size[1])throw Error('Tọa độ không hợp lệ.');if(i){const d=Math.hypot(p[0]-c.points_px[i-1][0],p[1]-c.points_px[i-1][1]);if(d<.1)throw Error('Có hai điểm liên tiếp trùng nhau.');length+=d;}});if(length<5)throw Error('Đoạn quá ngắn.');}}
+}
+canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;const rect=canvas.getBoundingClientRect();let x=(e.clientX-rect.left)*canvas.width/rect.width,y=(e.clientY-rect.top)*canvas.height/rect.height;if(!Number.isFinite(x+y)||x<0||y<0||x>=canvas.width||y>=canvas.height)return;if(!current())newCurve();const c=current(),last=c.points_px.at(-1);if(last&&Math.hypot(x-last[0],y-last[1])<1)return;if(c.points_px.length>=500){tell('Tối đa 500 điểm mỗi đoạn.');return;}c.points_px.push([Math.min(canvas.width-.01,Math.round(x*100)/100),Math.min(canvas.height-.01,Math.round(y*100)/100)]);changed();tell('');});
+$('new').onclick=()=>{if(views[slot].curves.length>=10){tell('Tối đa 10 đoạn mỗi ảnh.');return;}newCurve()};
+$('undo').onclick=()=>{current()?.points_px.pop();changed()};$('remove').onclick=()=>{views[slot].curves=views[slot].curves.filter(c=>c.id!==active);active=null;changed()};
+$('kind').onchange=()=>{if(current()){current().kind=$('kind').value;changed()}};
+$('overlay').onchange=render;$('zoom').oninput=()=>{$('zoomLabel').textContent=$('zoom').value+'%';render()};
+for(const b of document.querySelectorAll('[data-slot]'))b.onclick=()=>{slot=b.dataset.slot;active=views[slot].curves[0]?.id??null;$('kind').value=current()?current().kind:(slot==='front'?'jaw_left_image':'visible_profile');render();tell('')};
+function bundle(){return {schema_version:1,pipeline_type:'manual_visible_contours',workspace_id:SOURCE.workspace_id,source_binding:SOURCE.source_binding,visible_only_reviewed:$('review').checked,created_at:new Date().toISOString(),coordinate_space:'original_normalized_photo_pixels',views:views};}
+$('export').onclick=()=>{try{const data=bundle();validate(data);const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='visible_contours.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);tell('Đã yêu cầu tải visible_contours.json. Kiểm tra thư mục Downloads trước khi đóng tab.')}catch(e){tell(e.message)}};
+$('import').onchange=async e=>{try{const f=e.target.files[0];if(!f)return;if(f.size>2000000)throw Error('JSON quá lớn.');const data=JSON.parse(await f.text());validate(data);if(slots.some(s=>views[s].curves.length)&&!confirm('Thay tiến độ đang vẽ bằng JSON đã chọn?'))return;views=data.views;active=views[slot].curves[0]?.id??null;$('review').checked=true;render();tell('Đã mở lại dữ liệu.')}catch(error){tell(error.message)}finally{e.target.value=''}};
+window.addEventListener('beforeunload',e=>{if(slots.some(s=>views[s].curves.length)){e.preventDefault();e.returnValue=''}});
+for(const s of slots){const image=new Image();photos[s]=image;image.onload=render;image.src=SOURCE.images[s];}
+render();
+</script></html>

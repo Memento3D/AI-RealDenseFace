@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "demo_photo_color_projection",
+  "pipeline_version": 1,
+  "status": "MULTIVIEW_COLOR_EXPORTED",
+  "input": {
+    "head_obj_sha256": "e8c7900b9eecdc65ebe738d50be16687962408151e8aa2b84983e2e87423af54",
+    "head_report_sha256": "c1cffb0e2f4e3798c928b9140bdfd589a14d1d7144dfe09132dc96b316bd3fed",
+    "registration_report_sha256": "636825d83800d25b6b1837602017f55560531fbec95d7c2724f3c6499550c0f2",
+    "manual_jaw_fit_performed": false
+  },
+  "projection": {
+    "views": {
+      "front": {
+        "policy": {
+          "version": 2,
+          "mask_erosion_px": 4,
+          "minimum_facing_cosine": 0.4,
+          "visibility_tolerance_mm": 0.75,
+          "visibility_samples_per_face": 4,
+          "calibrated": false
+        },
+        "covered_triangles": 3011,
+        "total_triangles": 9976,
+        "covered_fraction_of_entire_mesh": 0.3018243785084202,
+        "rejections": {
+          "facing_rejected": 5128,
+          "mask_or_frame_rejected": 940,
+          "depth_rejected": 897
+        },
+        "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+        "skin_segmentation_performed": false,
+        "visibility": "full_mesh_pixel_center_ray_plane_depth_four_interior_samples",
+        "lighting_removed": false,
+        "unobserved_regions_filled": false,
+        "likeness_verified": false,
+        "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+      },
+      "left": {
+        "policy": {
+          "version": 2,
+          "mask_erosion_px": 4,
+          "minimum_facing_cosine": 0.4,
+          "visibility_tolerance_mm": 0.75,
+          "visibility_samples_per_face": 4,
+          "calibrated": false
+        },
+        "covered_triangles": 1775,
+        "total_triangles": 9976,
+        "covered_fraction_of_entire_mesh": 0.1779270248596632,
+        "rejections": {
+          "facing_rejected": 6283,
+          "mask_or_frame_rejected": 1096,
+          "depth_rejected": 822
+        },
+        "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+        "skin_segmentation_performed": false,
+        "visibility": "full_mesh_pixel_center_ray_plane_depth_four_interior_samples",
+        "lighting_removed": false,
+        "unobserved_regions_filled": false,
+        "likeness_verified": false,
+        "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+      },
+      "right": {
+        "policy": {
+          "version": 2,
+          "mask_erosion_px": 4,
+          "minimum_facing_cosine": 0.4,
+          "visibility_tolerance_mm": 0.75,
+          "visibility_samples_per_face": 4,
+          "calibrated": false
+        },
+        "covered_triangles": 1856,
+        "total_triangles": 9976,
+        "covered_fraction_of_entire_mesh": 0.18604651162790697,
+        "rejections": {
+          "facing_rejected": 6225,
+          "mask_or_frame_rejected": 1089,
+          "depth_rejected": 806
+        },
+        "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+        "skin_segmentation_performed": false,
+        "visibility": "full_mesh_pixel_center_ray_plane_depth_four_interior_samples",
+        "lighting_removed": false,
+        "unobserved_regions_filled": false,
+        "likeness_verified": false,
+        "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+      }
+    },
+    "selected_triangles": {
+      "front": 3011,
+      "left": 121,
+      "right": 106
+    },
+    "unknown_triangles": 6738,
+    "covered_triangles": 3238,
+    "total_triangles": 9976,
+    "selection": "front_priority; side_supplement_outside_protected_feature_rectangles",
+    "protected_triangles": 5019,
+    "color_balance": {
+      "left": {
+        "shared_outer_face_samples": 463,
+        "rgb_offset": [
+          -6.0,
+          -7.0,
+          -10.0
+        ],
+        "applied": true,
+        "offset_limit": 15
+      },
+      "right": {
+        "shared_outer_face_samples": 424,
+        "rgb_offset": [
+          4.0,
+          6.0,
+          8.0
+        ],
+        "applied": true,
+        "offset_limit": 15
+      }
+    },
+    "coverage_boundary_feather": {
+      "method": "one_mesh_edge_ring_to_original_gray_outside_protected_features",
+      "rings": 1,
+      "fills_unknown_regions": false
+    },
+    "color_blending": false,
+    "seam_color_correction": false,
+    "geometry_modified": false,
+    "cameras_modified": false,
+    "albedo_recovered": false,
+    "unobserved_regions_filled": false,
+    "likeness_verified": false
+  },
+  "research_only": true,
+  "manual_jaw_fit_performed": false,
+  "geometry_views": [
+    "front"
+  ],
+  "color_views": [
+    "front",
+    "left",
+    "right"
+  ],
+  "likeness_verified": false,
+  "printability_verified": false,
+  "artifacts": {
+    "head.obj": {
+      "path": "head.obj",
+      "sha256": "e8c7900b9eecdc65ebe738d50be16687962408151e8aa2b84983e2e87423af54"
+    },
+    "head.ply": {
+      "path": "head.ply",
+      "sha256": "91795672303479365ddb779cfd4f93bc48faf68f17c7fec179195c9b1301ffb4"
+    },
+    "identity.npy": {
+      "path": "identity.npy",
+      "sha256": "2fbb4186aec581dc895fc590bc2d36dfabbcdaf855ccb421a7ac8279f6351307"
+    },
+    "multiview_preview.html": {
+      "path": "multiview_preview.html",
+      "sha256": "9bf5910cb90d4a3cf10331ab993ef51c027e5b11ff9693973315132a889c2226"
+    },
+    "multiview_projection.npz": {
+      "path": "multiview_projection.npz",
+      "sha256": "68db794abd22473184da2fcfde2f0055b55d7924e18b3da195e495cc68de9916"
+    },
+    "photos.atlas.png": {
+      "path": "photos.atlas.png",
+      "sha256": "2126bddbda901f8663fdfa069371f9bbf4d544cbbc2e0ec3ec312d4fd3f21cab"
+    },
+    "photos.raw.atlas.png": {
+      "path": "photos.raw.atlas.png",
+      "sha256": "d4a8ff75564a4770709088fd1647da406787a8d67bbffb79920667fc27383663"
+    }
+  }
+}

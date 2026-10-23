@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "frontal_photo_color_projection",
+  "pipeline_version": 1,
+  "status": "PHOTO_PROJECTION_EXPORTED",
+  "error": null,
+  "projection": {
+    "policy": {
+      "version": 1,
+      "mask_erosion_px": 4,
+      "minimum_facing_cosine": 0.4,
+      "visibility_tolerance_mm": 0.75,
+      "visibility_samples_per_face": 4,
+      "calibrated": false
+    },
+    "covered_triangles": 3018,
+    "total_triangles": 9976,
+    "covered_fraction_of_entire_mesh": 0.30252606255012027,
+    "rejections": {
+      "facing_rejected": 5113,
+      "mask_or_frame_rejected": 960,
+      "depth_rejected": 885
+    },
+    "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+    "skin_segmentation_performed": false,
+    "visibility": "full_mesh_perspective_depth_buffer_four_interior_samples",
+    "lighting_removed": false,
+    "unobserved_regions_filled": false,
+    "likeness_verified": false,
+    "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+  },
+  "input": {
+    "candidate_obj_sha256": "9ef6b76e4a390b142cf22e7969640bc2016a44427a7f4e7eb420da292ad8d532",
+    "candidate_report_sha256": "081fe2b3fe0340f07c187d88efa1d5723fc011a102d056a6980e647d5d91ca1c",
+    "registration_report_sha256": "1bc599f2de6774e03ab8cc20bcc9348598f4db472750600b9a5bb10f255dab69",
+    "photo_sha256": "06abca09b33df864686665f971af4ce878c28cd8ccac43cfa60779473269c265"
+  },
+  "geometry_modified": false,
+  "cameras_modified": false,
+  "photo_projection_only": true,
+  "albedo_recovered": false,
+  "uv_atlas_generated": false,
+  "multi_view_texture": false,
+  "likeness_verified": false,
+  "printability_verified": false,
+  "automatic_acceptance": false,
+  "obj_uv_mapping": "per_vertex_projected_uv_approximation; viewer uses homogeneous projective lookup",
+  "artifacts": {
+    "front.coverage.png": {
+      "path": "front.coverage.png",
+      "sha256": "bb2654d7b43c2818baec18fa7bfe26d7f4484622138164995782a1f6d99db32c"
+    },
+    "front.photo.png": {
+      "path": "front.photo.png",
+      "sha256": "06abca09b33df864686665f971af4ce878c28cd8ccac43cfa60779473269c265"
+    },
+    "head.photo.mtl": {
+      "path": "head.photo.mtl",
+      "sha256": "0c0ddc1a977bf1772ac4bea219858577f0f2fe3c1dac9ac13633409d6719057e"
+    },
+    "head.photo.obj": {
+      "path": "head.photo.obj",
+      "sha256": "dc493cac77b23fa3855fcc203356460fbd712f0c1c1bd36de66829a63889514d"
+    },
+    "photo_preview.html": {
+      "path": "photo_preview.html",
+      "sha256": "e66e08ad77ac3af46b6179e6aabce1d25416efbd031628575b2a55d48e9f58b3"
+    },
+    "photo_projection.npz": {
+      "path": "photo_projection.npz",
+      "sha256": "672ba2cc914d6e7952a8e51a5a604215fb2dffcfe777264a40a55604e4dc5a19"
+    }
+  }
+}

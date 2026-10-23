@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "memento3d-head"
+version = "0.13.1"
+description = "CPU photo-set validation for a future personalized-head pipeline"
+requires-python = ">=3.11,<3.13"
+dependencies = ["numpy==1.26.4", "Pillow==11.3.0"]
+
+[project.optional-dependencies]
+vision = ["mediapipe==0.10.32", "opencv-contrib-python==4.11.0.86"]
+
+[project.scripts]
+memento3d-head = "memento3d_head.bootstrap:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+memento3d_head = ["adapters/contour_editor.html", "adapters/head_compare.html", "adapters/photo_preview.html", "adapters/head_texture_workspace.html", "adapters/head_mask_review.html", "adapters/visible_contour_editor.html"]

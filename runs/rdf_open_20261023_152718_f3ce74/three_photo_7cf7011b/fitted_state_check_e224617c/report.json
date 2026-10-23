@@ -1,0 +1,42 @@
+{
+  "status": "FITTED_STATE_DIAGNOSTIC_EXPORTED",
+  "pipeline_type": "saved_fitted_state_diagnostic",
+  "input_sha256": {
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\joint.flame.npz": "f7374be11efb6a3449c028130074959a92524df33c112439b1db37a9815f1f0e",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\rdf_open_20261023_152718_f3ce74\\three_photo_7cf7011b\\report.json": "c2fa4ddcc1664f298264a0741646b49bccb79e378fc8412ab2601962dda6bb15",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\front.jpg": "389af1c17db74e412a0e83454746c9cb961312e4b7854d7cdb6a427a1f4927f7",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\left.jpg": "54cf8f24727fccbfcf8b8fb5d1aa7eca75d9d2dca91119ceab018d2a6713f6e7",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\input\\01\\right.jpg": "a062a38e437c778262ff48d3bcce51740c79e0457fca5a920c1dec487d84685f",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame2023_Open.pkl": "e75a0990728ba038c7da2a420ae4396f7ddd7781366c13026066c5b24f127623",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame_assets.npz": "922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\realdenseface\\vits.pth": "9644fb9c7b7b8b5b6ca0d06fdebae418c154f1f4224a1ef5298777cc399ea15c",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\facebox\\face_box.pth": "3fde8561f059dd60d876021cbd2f67d955d5e02f24c25b297913a4115e433b4d"
+  },
+  "geometry_modified": false,
+  "camera_refitted": false,
+  "expression_modified": false,
+  "pose_modified": false,
+  "likeness_verified": false,
+  "metric_reference": "network predictions, not ground truth",
+  "visible_subset": "depth-tested vertices; finite in-frame predictions; lowest 50 percent log variance",
+  "anatomical_region_metrics_available": false,
+  "anatomical_region_note": "No verified anatomical vertex masks supplied; no invented region labels",
+  "views": {
+    "front": {
+      "evaluated_vertices": 2179,
+      "median_visible_residual_px": 1.7125465911363054,
+      "p90_visible_residual_px": 4.811946861180423
+    },
+    "left": {
+      "evaluated_vertices": 1712,
+      "median_visible_residual_px": 1.8045921719052416,
+      "p90_visible_residual_px": 4.072382277220085
+    },
+    "right": {
+      "evaluated_vertices": 1919,
+      "median_visible_residual_px": 2.0048628971420404,
+      "p90_visible_residual_px": 4.555861057489506
+    }
+  },
+  "error": null
+}

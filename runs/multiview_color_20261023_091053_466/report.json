@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "pipeline_type": "multiview_photo_color_projection",
+  "pipeline_version": 1,
+  "status": "MULTIVIEW_COLOR_EXPORTED",
+  "error": null,
+  "input_sha256": {
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\webcam_jaw_fit_001\\report.json": "081fe2b3fe0340f07c187d88efa1d5723fc011a102d056a6980e647d5d91ca1c",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\webcam_registration_001\\report.json": "1bc599f2de6774e03ab8cc20bcc9348598f4db472750600b9a5bb10f255dab69",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\webcam_jaw_fit_001\\head.candidate.obj": "9ef6b76e4a390b142cf22e7969640bc2016a44427a7f4e7eb420da292ad8d532",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\webcam_registration_001\\front.normalized.png": "06abca09b33df864686665f971af4ce878c28cd8ccac43cfa60779473269c265",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\webcam_registration_001\\left.normalized.png": "727f55c01b1b9e885aeef02c4c1819011032985bbcb05bf75086d388b4851dbd",
+    "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\webcam_registration_001\\right.normalized.png": "503390b64d8919c7d705f50b1d1ea408d0e65faf883a74f7a28a3e15b6e8c0b5"
+  },
+  "projection": {
+    "views": {
+      "front": {
+        "policy": {
+          "version": 2,
+          "mask_erosion_px": 4,
+          "minimum_facing_cosine": 0.4,
+          "visibility_tolerance_mm": 0.75,
+          "visibility_samples_per_face": 4,
+          "calibrated": false
+        },
+        "covered_triangles": 3019,
+        "total_triangles": 9976,
+        "covered_fraction_of_entire_mesh": 0.302626303127506,
+        "rejections": {
+          "facing_rejected": 5113,
+          "mask_or_frame_rejected": 960,
+          "depth_rejected": 884
+        },
+        "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+        "skin_segmentation_performed": false,
+        "visibility": "full_mesh_pixel_center_ray_plane_depth_four_interior_samples",
+        "lighting_removed": false,
+        "unobserved_regions_filled": false,
+        "likeness_verified": false,
+        "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+      },
+      "left": {
+        "policy": {
+          "version": 2,
+          "mask_erosion_px": 4,
+          "minimum_facing_cosine": 0.4,
+          "visibility_tolerance_mm": 0.75,
+          "visibility_samples_per_face": 4,
+          "calibrated": false
+        },
+        "covered_triangles": 1779,
+        "total_triangles": 9976,
+        "covered_fraction_of_entire_mesh": 0.1783279871692061,
+        "rejections": {
+          "facing_rejected": 6286,
+          "mask_or_frame_rejected": 1095,
+          "depth_rejected": 816
+        },
+        "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+        "skin_segmentation_performed": false,
+        "visibility": "full_mesh_pixel_center_ray_plane_depth_four_interior_samples",
+        "lighting_removed": false,
+        "unobserved_regions_filled": false,
+        "likeness_verified": false,
+        "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+      },
+      "right": {
+        "policy": {
+          "version": 2,
+          "mask_erosion_px": 4,
+          "minimum_facing_cosine": 0.4,
+          "visibility_tolerance_mm": 0.75,
+          "visibility_samples_per_face": 4,
+          "calibrated": false
+        },
+        "covered_triangles": 1859,
+        "total_triangles": 9976,
+        "covered_fraction_of_entire_mesh": 0.18634723336006415,
+        "rejections": {
+          "facing_rejected": 6223,
+          "mask_or_frame_rejected": 1087,
+          "depth_rejected": 807
+        },
+        "mask_type": "eroded_convex_hull_of_registered_photo_face_landmarks",
+        "skin_segmentation_performed": false,
+        "visibility": "full_mesh_pixel_center_ray_plane_depth_four_interior_samples",
+        "lighting_removed": false,
+        "unobserved_regions_filled": false,
+        "likeness_verified": false,
+        "warning": "Finite visibility samples and approximate camera cannot guarantee no bleed; photo includes shadows and any occlusions"
+      }
+    },
+    "selected_triangles": {
+      "front": 3019,
+      "left": 120,
+      "right": 107
+    },
+    "unknown_triangles": 6730,
+    "covered_triangles": 3246,
+    "total_triangles": 9976,
+    "selection": "front_priority; side_supplement_outside_protected_feature_rectangles",
+    "protected_triangles": 4988,
+    "color_balance": {
+      "left": {
+        "shared_outer_face_samples": 471,
+        "rgb_offset": [
+          -6.0,
+          -7.0,
+          -10.0
+        ],
+        "applied": true,
+        "offset_limit": 15
+      },
+      "right": {
+        "shared_outer_face_samples": 428,
+        "rgb_offset": [
+          4.0,
+          6.0,
+          8.0
+        ],
+        "applied": true,
+        "offset_limit": 15
+      }
+    },
+    "coverage_boundary_feather": {
+      "method": "one_mesh_edge_ring_to_original_gray_outside_protected_features",
+      "rings": 1,
+      "fills_unknown_regions": false
+    },
+    "color_blending": false,
+    "seam_color_correction": false,
+    "geometry_modified": false,
+    "cameras_modified": false,
+    "albedo_recovered": false,
+    "unobserved_regions_filled": false,
+    "likeness_verified": false
+  },
+  "geometry_modified": false,
+  "cameras_modified": false,
+  "research_only": true,
+  "automatic_acceptance": false,
+  "artifacts": {
+    "multiview_preview.html": {
+      "path": "multiview_preview.html",
+      "sha256": "fc00dc067e3c21ce48aa23d1bf01cd613abe97c3f6eaf59b757b0b65aa020d4f"
+    },
+    "multiview_projection.npz": {
+      "path": "multiview_projection.npz",
+      "sha256": "6ccc1c1a43192c9141a763dda37a68ed6bdebb7e64f0f6c83e17b069344f79f6"
+    },
+    "photos.atlas.png": {
+      "path": "photos.atlas.png",
+      "sha256": "2126bddbda901f8663fdfa069371f9bbf4d544cbbc2e0ec3ec312d4fd3f21cab"
+    },
+    "photos.raw.atlas.png": {
+      "path": "photos.raw.atlas.png",
+      "sha256": "d4a8ff75564a4770709088fd1647da406787a8d67bbffb79920667fc27383663"
+    }
+  }
+}
