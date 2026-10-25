@@ -1,46 +1,29 @@
-# Python environments
 .venv/
 .venv-*/
-venv/
-
-# Python cache and build
 __pycache__/
-*.py[cod]
 *.egg-info/
 build/
 dist/
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.coverage
-htmlcov/
-
-# Generated data and model repositories
+runs/
 models/
 input/
+inputs/
+.env
+.env.*
+!.env.example
 vendor/
-
-# Model weights
+.venv-mica/
+configs/mica.local.json
+configs/mica.local.before-fix-*.json
+configs/*.local.json
+configs/*.local.*.json
 *.onnx
 *.pth
 *.pt
 *.ckpt
 *.safetensors
-
-# Local configuration and annotations
-.env
-.env.*
-!.env.example
-configs/*.local.json
-configs/*.local.*.json
-configs/mica.local.before-fix-*.json
-configs/head_masks*.json
-
-# Logs
 *.log
-
-# Editors and operating system
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/

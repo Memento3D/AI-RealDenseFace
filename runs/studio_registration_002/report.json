@@ -1,8 +1,0 @@
-{
-  "schema_version": 1,
-  "status": "FAILED",
-  "error": {
-    "code": "INVALID_EMBEDDING",
-    "message": "Expected MICA FLAME2020 topology and 68 landmarks"
-  }
-}

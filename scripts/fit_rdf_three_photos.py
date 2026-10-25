@@ -18,6 +18,7 @@ def main():
     p.add_argument('--input-dir', type=Path, required=True)
     p.add_argument('--repo', type=Path, default=Path('vendor/RealDenseFace'))
     p.add_argument('--iterations', type=int, default=10)
+    p.add_argument('--flame-model', type=Path, help='Explicit FLAME model; default is official flame2023.pkl')
     args = p.parse_args()
     if not 1 <= args.iterations <= 30:
         p.error('--iterations must be between 1 and 30')
@@ -39,7 +40,8 @@ def main():
         raise ValueError('This experiment requires the documented pinned RDF commit')
     params = args.params.resolve()
     photos = find_photos(args.input_dir.resolve())
-    cfg = FLAMEConfig(flame_model_path=str(repo / 'weights/flame/flame2023_Open.pkl'),
+    flame_model = args.flame_model.resolve() if args.flame_model else repo / 'weights/flame/flame2023.pkl'
+    cfg = FLAMEConfig(flame_model_path=str(flame_model),
                       flame_assets_path=str(repo / 'weights/flame/flame_assets.npz'), num_expressions=100)
     weights = repo / 'weights/realdenseface/vits.pth'
     detector = repo / 'weights/facebox/face_box.pth'
@@ -56,7 +58,7 @@ def main():
         raise ValueError('Expected a finite 300-dimensional identity, 100 expressions and valid FOV')
     out = params.parent / ('three_photo_' + uuid4().hex[:8])
     out.mkdir(exist_ok=False)
-    report = dict(schema_version=1, status='FAILED', research_only=True, model_variant='FLAME2023_Open',
+    report = dict(schema_version=1, status='FAILED', research_only=True, model_variant=flame_model.stem,
                   upstream_commit=commit, input_sha256=hashes, shared_identity=True,
                   per_photo_expression_and_pose=True, camera_intrinsics_assumed_shared=True,
                   camera_fov_y=fov, likeness_verified=False, texture_generated=False,
@@ -121,7 +123,7 @@ def main():
         faces = model.faces.cpu().numpy()
         with np.load(cfg.flame_assets_path, allow_pickle=False) as assets:
             if not np.array_equal(faces, assets['faces']):
-                raise ValueError('Open model and dense-prior face topology differ')
+                raise ValueError('FLAME model and dense-prior face topology differ')
         zero = torch.zeros(118)
         with torch.no_grad():
             before = model.forward(torch.from_numpy(beta), zero).numpy()

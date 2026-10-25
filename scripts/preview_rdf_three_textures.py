@@ -71,6 +71,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run-dir',type=Path,required=True);p.add_argument('--input-dir',type=Path,required=True)
     p.add_argument('--repo',type=Path,default=Path('vendor/RealDenseFace'))
+    p.add_argument('--flame-model',type=Path,help='Explicit FLAME model; default is official flame2023.pkl')
     p.add_argument('--masks-dir',type=Path,help='Optional front.png/left.png/right.png: white keeps texture, black excludes hair/background')
     args=p.parse_args();root=Path(__file__).resolve().parents[1];repo=args.repo.resolve();run=args.run_dir.resolve()
     sys.path[:0]=[str(root/'src'),str(repo)]
@@ -87,7 +88,7 @@ def main():
     from memento3d_head.adapters.smooth_preview import vertex_normals
     photos=find_photos(args.input_dir.resolve());source_path=run/'report.json';source=json.loads(source_path.read_text(encoding='utf-8'))
     if source.get('status')!='JOINT_CANDIDATE_EXPORTED':raise ValueError('Expected successful joint fit')
-    model=repo/'weights/flame/flame2023_Open.pkl';assets=repo/'weights/flame/flame_assets.npz';params=run/'joint.flame.npz'
+    model=args.flame_model.resolve() if args.flame_model else repo/'weights/flame/flame2023.pkl';assets=repo/'weights/flame/flame_assets.npz';params=run/'joint.flame.npz'
     for path in [*photos.values(),model,assets]:
         matches=[v for k,v in source['input_sha256'].items() if k.replace('\\','/').split('/')[-1].lower()==path.name.lower()]
         if len(matches)!=1 or digest(path)!=matches[0]:raise ValueError('Source mismatch: '+str(path))
