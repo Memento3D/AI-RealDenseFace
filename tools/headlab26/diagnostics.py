@@ -39,7 +39,7 @@ def run(fit,crops,semantic,out,profile):
  with np.load(Path(fit)/'projection_bundle.npz',allow_pickle=False) as data:
   source=data['vertices'];faces=data['faces'];views=data['view_vertices'];cameras=data['cameras']
  if sha(Path(fit)/'projection_bundle.npz')!=fitreport['projection_bundle_sha256']:raise ValueError('Fit bundle changed')
- corners=source[faces].reshape(-1,3);component,_=identify(corners);head=corners[np.repeat(component==0,3)];lo,hi=head.min(0),head.max(0);scale=profile['head_neck_mm']/(hi[1]-lo[1]);center=(lo+hi)/2;model=trimesh.Trimesh((source-center)*scale,faces,process=False)
+ corners=source[faces].reshape(-1,3);component,_=identify(source,faces);head=corners[np.repeat(component==0,3)];lo,hi=head.min(0),head.max(0);scale=profile['head_neck_mm']/(hi[1]-lo[1]);center=(lo+hi)/2;model=trimesh.Trimesh((source-center)*scale,faces,process=False)
  glb(out/'face_gray.glb',[('SourceFace',model,[.68,.68,.68,1.])]);preview(out/'face_gray.glb',out/'face_gray.png',([0,0,0],profile['head_neck_mm']*1.4),profile['preview_size'])
  rows=[];all_metrics=[]
  for i,slot in enumerate(SLOTS):

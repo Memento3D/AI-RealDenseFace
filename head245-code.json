@@ -2,27 +2,27 @@
   "version": "Head24.5 multiview skin, explicit glasses design and guarded library hair",
   "files": [
     {
-      "path": "HEAD24-2-PROFILE-VI.md",
+      "path": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-2-PROFILE-VI.md",
       "sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84"
     },
     {
-      "path": "HEAD24-3-RESUME-VI.md",
+      "path": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-3-RESUME-VI.md",
       "sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c"
     },
     {
-      "path": "HEAD24-4-START-VI.md",
+      "path": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-4-START-VI.md",
       "sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5"
     },
     {
-      "path": "HEAD24-5-START-VI.md",
+      "path": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-5-START-VI.md",
       "sha256": "6cc83fac6cdfef020d6e6e45526af1825737f39ffbe88aade38e63b109e65067"
     },
     {
-      "path": "HEAD24-METHODS.md",
+      "path": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-METHODS.md",
       "sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f"
     },
     {
-      "path": "HEAD24-START-VI.md",
+      "path": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-START-VI.md",
       "sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "path": "head24-code.json",
-      "sha256": "256b9cad384924c14eeb5a53cfa2d5edf50ba3e22af9fb642a4635a100e83033"
+      "sha256": "222924027801fb50e53aec8c48946ea1fd807193c788e9035fb2bb7c1ed31bca"
     },
     {
       "path": "head24-rdf-source.json",

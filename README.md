@@ -1,187 +1,227 @@
-> **Mới: Figurine V3 — đầu cá nhân hóa, tóc khối, mắt và nụ cười custom cho thử nghiệm resin.** Xem [FIGURINE_V3.md](FIGURINE_V3.md). Nhánh CPU dùng lại workspace; chưa xác nhận in thật.
+# Memento3D Head API — hướng dẫn sử dụng
 
-# Setup V1/V2 trên Windows
+Tài liệu này mô tả API đang xuất hiện trong Swagger của project. API chạy trong cùng một FastAPI service, nhưng có hai nhóm endpoint với mục đích và định dạng input khác nhau:
 
-## Im2Haircut personal field-transform update 0.3
+1. **Backend API** (`/jobs`): BE gửi JSON chứa URL ảnh, API tải ảnh và tạo job; dùng để tích hợp Spring BE.
+2. **Local test API** (`/v1/head/jobs`): người phát triển upload file ảnh trực tiếp; phù hợp để thử pipeline trên máy local.
 
-See [IM2_FIELD_FIX_UPDATE.md](IM2_FIELD_FIX_UPDATE.md). One WSL command: `bash scripts/test_im2_fix04.sh`. Reuses existing baseline runs; at most one additional 50-epoch worker. This remains an experimental single-view pipeline.
+API hiện chạy pipeline thử nghiệm **RDF + hair cap tham số**. Đây không phải Hunyuan/TripoSR, không có API ghép/assembly riêng, và kết quả chưa được xác nhận về độ giống, hiệu chuẩn sản xuất hay khả năng in.
 
+## 1. Khởi động API
 
-Cài mới hoặc chuyển máy: xem [SETUP_WINDOWS.md](SETUP_WINDOWS.md). Máy đang chạy ổn: dùng phần kiểm tra/snapshot trước.
-
-# Update v0.13.1 — Mask boundary fix
-
-Xem [UPDATE-v0.13.1.md](UPDATE-v0.13.1.md). Giữ nguyên model/môi trường, chạy lại `--auto-mask` để sửa các khe bị loại nhầm quanh mắt–mũi–miệng.
-
-# Update v0.13.0 — Automatic face masks
-
-Xem [UPDATE-v0.13.md](UPDATE-v0.13.md) để setup model một lần và chạy `optimize-head --auto-mask`. Mask thủ công trở thành công cụ sửa ngoại lệ. Các luồng v0.12 và trước vẫn được giữ.
-
-# Update v0.12.0 — Head texture workspace
-
-Xem [UPDATE-v0.12.md](UPDATE-v0.12.md) để cập nhật bản đầy đủ, chạy một lệnh và review toàn bộ mask/màu/đường nối/vùng thiếu. Luồng mới dùng kết quả RealDenseFace hiện có, chạy CPU, giữ nguyên các run trước.
+Mở PowerShell tại thư mục gốc project. Nếu chưa cài môi trường:
 
 ```powershell
-.\.venv\Scripts\python.exe .\scripts\optimize_head.py --head-run runs/rdf_open_20261023_152718_f3ce74/three_photo_7cf7011b
+powershell -ExecutionPolicy Bypass -File .\SETUP-HEADAPI.ps1
 ```
 
-# Memento3D Head Reconstruction — 0.3.0
-
-Project độc lập cho nhánh dựng đầu cá nhân hóa từ bộ ảnh. Bộ kiểm ảnh dùng
-MediaPipe CPU. Bản 0.2.0 thêm adapter dựng geometry bằng MICA trong môi trường
-riêng; chưa xác minh inference MICA/GPU trên Windows, chưa texture hoặc fitting
-ba ảnh. Không mang .venv cũ sang. Xem docs/MICA_SETUP_WINDOWS.md cho mốc mới.
-
-## 1. Setup Windows PowerShell
-
-Giải nén thư mục này cạnh Memento3D-AI-check. Mở terminal mới tại project mới:
+Tạo `.env.local` từ file mẫu nếu chưa có, sau đó điền API key cá nhân:
 
 ```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -e ".[vision]"
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m memento3d_head config-check --config configs/photo_validation.local.json
+Copy-Item .\.env.example .\.env.local
+notepad .\.env.local
 ```
 
-Không cần activate; dùng Python đúng .venv. Dependency được ghim trực tiếp, chưa có
-transitive lock/Windows inference benchmark. Đây là môi trường mới, không sửa môi trường cũ.
-
-## 2. Chuẩn bị Face Landmarker model
-
-Tải task model từ liên kết chính thức trong tài liệu:
-https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker#models
-
-Đặt ở D:\AI-cache\mediapipe\face_landmarker.task. Pipeline không tự tải model.
-Bản model /float16/1 đã được kiểm tra khi tạo project; hash dự kiến bên dưới.
-So sánh Get-FileHash với hash này. Nếu khác, dừng và kiểm tra nguồn/version, không
-tự sửa hash để bỏ qua lỗi:
+Giữ `HEADAPI_API_KEY` bí mật và không commit `.env.local`. Khởi động service:
 
 ```powershell
-$modelPath = 'D:\AI-cache\mediapipe\face_landmarker.task'
-$modelHash = '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
-(Get-FileHash -LiteralPath $modelPath -Algorithm SHA256).Hash
-.\.venv\Scripts\python.exe -m memento3d_head doctor --model $modelPath --model-sha256 $modelHash
+powershell -ExecutionPolicy Bypass -File .\RUN-HEADAPI.ps1
 ```
 
-MODEL_LOADED chỉ xác nhận khởi tạo task; không phải bằng chứng inference/độ chính xác.
-Link trực tiếp đến bản đã kiểm tra và bằng chứng chạy nằm trong docs/VERIFICATION.md.
-Không tự tính lại hash để chấp nhận một file đã bị thay đổi ngoài ý muốn.
+Mặc định:
 
-## 3. Kiểm bộ ba ảnh
+- Trang giới thiệu: <http://127.0.0.1:8090/>
+- Swagger UI: <http://127.0.0.1:8090/docs>
+- OpenAPI JSON: <http://127.0.0.1:8090/openapi.json>
+- Health check: <http://127.0.0.1:8090/health>
 
-Tạo input/ và đặt front.jpg, left.jpg, right.jpg. Khuyến nghị ảnh chụp thật từ cùng
-buổi, góc 0° và hai bên khoảng 45°, biểu cảm trung tính, không filter/mirror. Giữ cả tóc,
-tai và cằm; v1 chỉ đo mặt, chưa có detector xác nhận tóc/tai đầy đủ.
+Giữ cửa sổ PowerShell đang chạy server mở trong lúc gọi API. Có thể đổi port bằng `.\RUN-HEADAPI.ps1 -Port 8091`.
+Trang `/` cũng nằm sau middleware xác thực; dùng `/docs` hoặc `/health` để truy cập không cần key.
+
+## 2. Xác thực và cách thử Swagger
+
+`GET /health`, Swagger UI, OpenAPI JSON và ReDoc không cần key. Các endpoint xử lý job, status, logs và artifacts cần header:
+
+```text
+X-API-Key: <giá trị HEADAPI_API_KEY>
+```
+
+Key trên AI server nằm trong `.env.local`. Nếu chưa cấu hình key, endpoint được bảo vệ trả `503`; nếu thiếu/sai key, trả `401`.
+
+### Thử nhanh bằng Swagger UI
+
+1. Mở <http://127.0.0.1:8090/docs>.
+2. Chọn `GET /health` → **Try it out** → **Execute**. Response có `status`, `service_status`, `backend_ready` và `ready_for_machine`.
+3. Với các route job, Swagger hiển thị danh sách, mô tả và một số tham số. Tuy nhiên, giao diện hiện tại chưa hỗ trợ đầy đủ việc tạo job:
+   - `POST /jobs` nhận JSON bằng cách đọc request thô nên Swagger không dựng ô nhập request body.
+   - Các route `/v1/head/...` được bảo vệ bằng middleware nhưng không khai báo API key trong OpenAPI, nên Swagger không có ô nhập key cho chúng.
+4. Vì vậy, dùng Swagger để xem tài liệu/health; dùng script hoặc lệnh PowerShell ở dưới để gửi job thật.
+
+## 3. Danh sách endpoint trong Swagger
+
+### Endpoint chung
+
+| Method và route | Xác thực | Tác dụng | Kết quả thường gặp |
+|---|---|---|---|
+| `GET /health` | Không | Kiểm tra API đang chạy và kiểm tra sơ bộ các prerequisite của pipeline. Không chạy reconstruction. | JSON gồm trạng thái service và `backend_ready`. |
+
+### Backend API — BE gửi URL ảnh
+
+| Method và route | Xác thực | Tác dụng |
+|---|---|---|
+| `POST /jobs` | Bắt buộc | Tạo job từ JSON. AI tải ảnh HTTPS từ host cho phép (mặc định `res.cloudinary.com`) rồi đưa vào queue. Trả `202 Accepted`. |
+| `GET /jobs/{job_id}` | Bắt buộc | Lấy trạng thái job theo ID. |
+| `GET /jobs/{job_id}/outputs/glb?attempt_id={attempt_id}` | Bắt buộc | Tải GLB khi job đã hoàn thành thành công và `attempt_id` khớp. |
+
+`POST /jobs` yêu cầu `job_id`, `attempt_id` là UUID và 3 ảnh `front`, `left`, `right`; `back` tùy chọn. Mỗi ảnh cần `image_id`, `input_url`, `view_hint`; `sha256` là tùy chọn:
+
+```json
+{
+  "job_id": "11111111-1111-4111-8111-111111111111",
+  "attempt_id": "22222222-2222-4222-8222-222222222222",
+  "profile": "default",
+  "input_images": [
+    {
+      "image_id": "33333333-3333-4333-8333-333333333333",
+      "input_url": "https://res.cloudinary.com/example/image/upload/front.jpg",
+      "view_hint": "front"
+    },
+    {
+      "image_id": "44444444-4444-4444-8444-444444444444",
+      "input_url": "https://res.cloudinary.com/example/image/upload/left.jpg",
+      "view_hint": "left"
+    },
+    {
+      "image_id": "55555555-5555-4555-8555-555555555555",
+      "input_url": "https://res.cloudinary.com/example/image/upload/right.jpg",
+      "view_hint": "right"
+    }
+  ]
+}
+```
+
+Thay các URL ví dụ bằng URL ảnh thật mà server có thể truy cập. Ảnh phải là JPEG/PNG/WebP, tối đa 12 MiB mỗi ảnh, tối đa 24 megapixel và chiều ngắn ít nhất 64 pixel. URL phải dùng HTTPS, đúng host allowlist, không redirect; các ảnh phải khác nhau. Không gửi Cloudinary secret trong URL hoặc request.
+
+Ví dụ gửi request từ PowerShell (đặt key an toàn trong biến môi trường của terminal trước khi chạy):
 
 ```powershell
-.\.venv\Scripts\python.exe -m memento3d_head validate-photos `
-  --front input/front.jpg `
-  --left input/left.jpg `
-  --right input/right.jpg `
-  --source-kind real_capture `
-  --model $modelPath `
-  --model-sha256 $modelHash `
-  --config configs/photo_validation.local.json `
-  --output runs/photo_check_001
+$headers = @{ "X-API-Key" = $env:HEADAPI_API_KEY }
+$body = @{
+  job_id = (New-Guid).Guid
+  attempt_id = (New-Guid).Guid
+  profile = "default"
+  input_images = @(
+    @{ image_id = (New-Guid).Guid; input_url = "https://res.cloudinary.com/example/image/upload/front.jpg"; view_hint = "front" },
+    @{ image_id = (New-Guid).Guid; input_url = "https://res.cloudinary.com/example/image/upload/left.jpg"; view_hint = "left" },
+    @{ image_id = (New-Guid).Guid; input_url = "https://res.cloudinary.com/example/image/upload/right.jpg"; view_hint = "right" }
+  )
+} | ConvertTo-Json -Depth 5
+
+$job = Invoke-RestMethod -Method Post `
+  -Uri "http://127.0.0.1:8090/jobs" `
+  -Headers $headers -ContentType "application/json" -Body $body
+$job
 ```
 
-Nếu dùng ảnh AI tạo để test chọn --source-kind synthetic. Không dùng chúng làm
-bằng chứng độ giống hoặc hiệu quả multi-view. source-kind chỉ là khai báo.
-
-Output: report.json, 3 ảnh normalized PNG, 3 ảnh overlay landmark có yaw/pitch/roll.
-Mỗi lần chạy dùng thư mục output mới. Report/ảnh chứa dữ liệu cá nhân, giữ local;
-không commit input/, runs/, weights. Không có tự động xóa ảnh hay upload.
-
-Exit codes: 0 NEEDS_HUMAN_REVIEW; 2 NEEDS_RETAKE; 1 FAILED; 130 CANCELLED.
-**Exit 0 không có nghĩa sẵn sàng dựng 3D.** Chưa có review approval workflow.
-
-Ngưỡng góc, độ nét (variance Laplacian trên crop 256), độ sáng trung bình và kích
-thước mặt là giá trị thử nghiệm. Chúng không phát hiện đầy đủ bóng sáng, beauty,
-che khuất, ảnh giả hoặc khác người. Cần bộ ảnh thật để hiệu chỉnh và test false
-accept/reject. Xem docs/ARCHITECTURE.md.
-
-## 4. Tests và boundary check
+Nếu cần dùng key từ `.env.local`, nạp nó vào biến môi trường của terminal hiện tại mà không in giá trị ra màn hình:
 
 ```powershell
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-.\.venv\Scripts\python.exe scripts/check_architecture.py
+$keyLine = Get-Content .\.env.local | Where-Object { $_ -match '^HEADAPI_API_KEY=' } | Select-Object -First 1
+$env:HEADAPI_API_KEY = $keyLine.Substring('HEADAPI_API_KEY='.Length).Trim().Trim('"').Trim("'")
+Remove-Variable keyLine
 ```
 
-Tests dùng evidence giả để kiểm contract/failure, không được gọi là inference thật.
-Đọc docs/VERIFICATION.md để biết chính xác những gì đã chạy trong môi trường tạo ZIP.
-
-## 5. Research milestones
-
-Đo CPU validation trên Windows bằng ba ảnh thật. Sau đó thử dựng đầu bằng backend
-riêng, đo RAM/VRAM. Chỉ thêm fitting ba góc, texture và tóc khi mỗi bước có bằng
-chứng. Không cài MICA/DECA vào .venv này cho đến khi kiểm tương thích dependency.
-
-## Update 0.2.0 — head initialization adapter
-
-New commands: mica-status, mica-pin, mica-doctor, reconstruct-head. Full steps and
-limits: **docs/MICA_SETUP_WINDOWS.md**. This adds a real external MICA execution
-path, not verified GPU inference in this delivery. Start with cloning/checking
-assets; do not install MICA dependencies into the validation .venv.
-
-
-## Update 0.3.0 — research comparison
-
-New commands: **experiment-head** (one frontal image, research-only quality gate)
-and **render-head** (CPU smooth preview of existing OBJ, no inference). See
-**docs/SINGLE_IMAGE_EXPERIMENT.md** for upgrade and exact Windows commands.
-Existing three-photo approval requirements, MICA config and model pins are
-unchanged. No need to reinstall Torch or regenerate model hashes. Smooth preview
-changes display only and adds two 90-degree profiles; geometry stays untouched.
-
-
-## v0.4.0: frontal camera registration
-
-See docs/FRONTAL_REGISTRATION.md. New register-head command estimates an approximate camera and exports photo/mesh landmark overlay without modifying geometry. Seven fit points and one held-out chin diagnostic are not a likeness score. 45 local tests pass; real Windows embedding/MICA mesh integration remains to be verified.
-
-
-## v0.4.1: three-view camera diagnostics
-
-New register-views command: see docs/THREE_VIEW_REGISTRATION.md. Includes dispatch and embedding batch fixes. Registers three cameras against one unchanged mesh; shape optimization remains unimplemented. 51 local tests pass; real three-view Windows output remains to be checked.
-
-
-## v0.4.2: shared camera experiment
-
-See docs/SHARED_CAMERA_EXPERIMENT.md. refine-cameras tests shared focal length and robust pose fits without modifying mesh. Includes all preceding fixes. 56 local tests pass. Actual webcam improvement remains to be measured.
-
-
-## v0.4.3: checkerboard camera comparison
-
-New compare-calibration command reads both experimental camera models, including distortion, and compares their per-view pose fits against register-views. Includes derived numeric webcam calibration profile. See docs/CALIBRATION_COMPARISON.md. Mesh unchanged; no automatic model acceptance or shape/likeness improvement claim. 60 local tests pass; real Windows execution remains to be checked.
-
-
-## v0.5.0: bounded shared identity fitting
-
-New fit-head command uses three views to produce a conservative eight-parameter FLAME shape candidate while freezing original cameras. See docs/BOUNDED_SHAPE_FIT.md. Source MICA mesh/identity remain untouched. Contour and occlusion handling remain incomplete; no automatic likeness acceptance. 67 local tests pass; real FLAME decoder/Windows results still require verification.
-
-
-## v0.5.1: dynamic contour diagnostics
-
-New audit-contours command: see docs/DYNAMIC_CONTOUR_AUDIT.md. Exports numbered pose-dependent jaw correspondences and mesh ray self-occlusion for original and candidate, flags angles outside FLAME table support. Does not modify geometry or add unverified contour constraints to fitting. 73 local tests pass; real Windows audit still requires verification.
-
-
-## v0.6.0: manual visible-contour reference
-
-New prepare-contours and validate-contours commands create an offline annotation editor and check exported source-bound curves. Whole-head outer mesh silhouettes are optional references; no new fitting or automatic anatomical correctness claim. See docs/MANUAL_VISIBLE_CONTOURS.md. 80 local tests, architecture and package-data checks pass. Windows browser interaction remains to be checked.
-
-## New-photo demo (v0.11.0)
-
-Put front.jpg, left.jpg, right.jpg (or PNG/JPEG/WebP) in input/01, then run from
-this project root:
+Giữ lại `job_id` và `attempt_id` từ request. Poll trạng thái:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install --no-deps -e .
-.\.venv\Scripts\python.exe -m memento3d_head demo --input-dir input/01
+Invoke-RestMethod -Uri "http://127.0.0.1:8090/jobs/$($job.job_id)" -Headers $headers
 ```
 
-Review the newly generated landmark images when prompted, enter your name in the
-terminal, and the run continues to the offline colored-head preview. Change 01
-to any other folder name for a new subject. Runs are isolated; no prior manual
-contours or adjusted meshes are reused. Geometry is initialized from the front;
-three views supply camera/color information. See docs/demo.md for steps, outputs,
-limitations and troubleshooting.
+Khi response có `status = "done"`, tải GLB:
+
+```powershell
+Invoke-WebRequest `
+  -Uri "http://127.0.0.1:8090/jobs/$($job.job_id)/outputs/glb?attempt_id=$($job.attempt_id)" `
+  -Headers $headers -OutFile ".\scene.glb"
+```
+
+Response status backend dùng `queued`, `running`, `done`, `failed`. Các field chính gồm `job_id`, `attempt_id`, `stage`, `progress`, `error_code`, `error_message` và timestamp. `done` nghĩa là cả head và hair cap đã export; không đồng nghĩa với mesh đã sẵn sàng để in.
+
+### Local test API — upload ảnh trực tiếp
+
+| Method và route | Xác thực | Tác dụng |
+|---|---|---|
+| `POST /v1/head/jobs` | Bắt buộc | Nhận multipart gồm `front`, `left`, `right`; `back` tùy chọn. Tạo job local, trả `job_id`, trạng thái và `status_url`. |
+| `GET /v1/head/jobs/{job_id}` | Bắt buộc | Xem toàn bộ trạng thái, stages, artifacts, lỗi và thông tin input của job. |
+| `GET /v1/head/jobs/{job_id}/logs?stage={stage}` | Bắt buộc | Đọc log hiện tại hoặc log stage cụ thể. Không truyền `stage` để lấy stage hiện tại; log được giới hạn kích thước. |
+| `GET /v1/head/jobs/{job_id}/files/{relative}` | Bắt buộc | Tải artifact đã được job công bố, dùng đường dẫn tương đối như `hair/scene.glb`. Không thể dùng route này để đọc tùy ý file nội bộ. |
+
+Cách dễ nhất để gửi ảnh local là đặt đúng tên file trong một folder:
+
+```text
+input\04\
+  front.png
+  left.png
+  right.png
+  back.png       # tùy chọn
+```
+
+Gọi test client; client tự nạp key từ `.env.local`, upload ảnh và với `-Wait` sẽ poll đến khi job kết thúc:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\TEST-HEADAPI.ps1 -InputDir ".\input\04" -Wait
+```
+
+Có thể bỏ `-Wait` để nhận `job_id` và kiểm tra sau. Từ terminal khác, dùng `job_id` đã trả về:
+
+```powershell
+$headers = @{ "X-API-Key" = $env:HEADAPI_API_KEY }
+Invoke-RestMethod -Uri "http://127.0.0.1:8090/v1/head/jobs/<job_id>" -Headers $headers
+Invoke-WebRequest -Uri "http://127.0.0.1:8090/v1/head/jobs/<job_id>/logs" -Headers $headers
+```
+
+Thay `<job_id>` bằng ID thật. Artifact có thể được liệt kê trong response trạng thái; dùng đúng giá trị `path` để tải, ví dụ:
+
+```powershell
+Invoke-WebRequest `
+  -Uri "http://127.0.0.1:8090/v1/head/jobs/<job_id>/files/hair/scene.glb" `
+  -Headers $headers -OutFile ".\scene.glb"
+```
+
+## 4. Trạng thái job và lỗi thường gặp
+
+Local test API lưu trạng thái chi tiết như `QUEUED`, `RUNNING`, `MVP_EXPORTED`, `PARTIAL`, `FAILED` hoặc `INTERRUPTED`. Kiểm tra `current_stage`, `stages`, `errors` và artifacts trong status response. `MVP_EXPORTED` chỉ xác nhận pipeline đã xuất đầu và hair cap theo các gate hiện có.
+
+| HTTP status | Ý nghĩa thường gặp |
+|---|---|
+| `202` | Request hợp lệ, job đã được nhận/đưa vào queue. |
+| `401` | Thiếu hoặc sai `X-API-Key`. |
+| `404` | Không tìm thấy job, attempt hoặc artifact. |
+| `409` | Output chưa sẵn sàng, hoặc dùng lại `job_id` với input/attempt khác. |
+| `413` | Request/ảnh vượt giới hạn kích thước. |
+| `422` | JSON, UUID, view, URL hoặc ảnh không hợp lệ; thiếu view bắt buộc. |
+| `429` | Hàng đợi job đã đầy; thử lại sau khi job đang chạy kết thúc. |
+| `503` | Chưa cấu hình API key hoặc prerequisite/pipeline chưa sẵn sàng. |
+
+Các lỗi của một stage cụ thể thường nằm trong status response và file log tương ứng. Dùng endpoint logs hoặc artifacts thay vì suy luận thành công chỉ từ việc server trả `202`.
+
+## 5. Input, output và giới hạn
+
+- Ba ảnh bắt buộc phải được gán đúng `front`, `left`, `right`; ảnh `back` là tùy chọn. Không suy ra góc chụp từ thứ tự ảnh.
+- RDF sử dụng các view phía trước/bên mà stage fit hỗ trợ; hair-cap worker cũng nhận ảnh để fit ranh giới tóc. Xem `rdf_views_actually_used` và các report trong artifacts để biết job thực tế đã dùng gì.
+- GLB scene hiện xuất head và hair cap thành các component riêng, không Boolean-union. Đây không phải API assembly thành một khối.
+- `ready_for_machine` cố ý là `false`. File STL/GLB hoặc trạng thái `done` không phải chứng nhận độ chính xác, khả năng in, an toàn, hay hiệu chuẩn máy.
+- Pipeline phụ thuộc weights, parser và các Python environments được khai báo trong `configs/headapi.json`.
+- Không commit ảnh cá nhân, weights, output `runs/`, API key hoặc `.env.local`.
+
+## 6. Các workflow khác trong project
+
+Project hiện giữ thêm Pipeline V2.3 độc lập với HeadAPI:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\RUN-PIPELINE-V23.ps1
+```
+
+Xem [hướng dẫn Pipeline V2.3](./PIPELINE-V23-START-VI.md) và [ghi chú phương pháp](./PIPELINE-V23-METHODS.md). Tài liệu/snapshot lịch sử được lưu dưới [`_archive/project_cleanup_20261030_182137/`](./_archive/project_cleanup_20261030_182137/).
+
+Giữ `runs/` vì đây là dữ liệu kết quả của các lần chạy. Các môi trường còn dùng gồm `.venv`, `.venv-headapi`, `.venv-rdf` và `.venv-triposr`; `.venv-mica` đã được gỡ. `configs/mica.local.json` vẫn còn và có thể tham chiếu tới môi trường đã gỡ.

@@ -48,7 +48,7 @@ def pixel_observations(common,task,original_crops):
  from eye_components import identify
  from head24_policy import project,eye_gate
  with np.load(common/'projection_bundle.npz',allow_pickle=False) as bundle:
-  _,eye_info=identify(bundle['vertices'][bundle['faces']].reshape(-1,3));xy,_=project(np.asarray(eye_info['eye_centers_native']),bundle['cameras'][0])
+  _,eye_info=identify(bundle['vertices'],bundle['faces']);xy,_=project(np.asarray(eye_info['eye_centers_native']),bundle['cameras'][0])
  lm=np.asarray(rows['front']['landmarks_crop']);observed=np.asarray([(lm[33]+lm[133])/2,(lm[362]+lm[263])/2]);gate=eye_gate(xy,observed)
  native=read(common/'native.report.json');fit={'status':'FIT_GATES_PASSED','variant':'pixel3dmm','projection_bundle_sha256':sha(common/'projection_bundle.npz'),'crop_report_sha256':sha(common/'report.json'),'native_report':native,'front_eye_center_gate':gate,'gate_scope':'numeric cameras and finite mesh only; independent face diagnostics not a calibrated pass'}
  write(common/'fit.report.json',fit)

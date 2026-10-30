@@ -16,7 +16,10 @@ def prepare_back(path,model,face):
     def parse(box):
         logits=session.run(None,{session.get_inputs()[0].name:preprocess(image.crop(box))})[0]
         return restore_crop(logits[0].argmax(0).astype('uint8'),box,image.size)
-    labels=parse((0,0,*image.size));yy,xx=np.nonzero(labels==17)
+    width,height=image.size;side=int(min(width,height)*.6)
+    if side<64:raise ValueError('Back image is too small for a supported parser crop')
+    left=(width-side)//2;top=(height-side)//2
+    labels=parse((left,top,left+side,top+side));yy,xx=np.nonzero(labels==17)
     if len(xx)<200:raise ValueError('Back image has no supported hair/head region; refuse guessed posterior camera')
     low=np.array([xx.min(),yy.min()]);high=np.array([xx.max(),yy.max()]);center=(low+high)/2
     side=int(max(high-low)*1.6);center[1]+=.12*side

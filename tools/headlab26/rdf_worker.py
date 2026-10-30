@@ -79,7 +79,7 @@ def run(repo,crops,out,settings,variant,semantic,prediction_cache):
             with torch.no_grad():return optimizer.decode(FittingOutput(identity=beta,x=x))[0].detach().cpu().numpy()
         def check_front(beta,x):
             points=decode(beta,x)
-            components,info=identify(points[faces].reshape(-1,3))
+            components,info=identify(points,faces)
             centers=np.asarray(info['eye_centers_native'])
             E=cameras[0].get_w2v.cpu().numpy();K=cameras[0].intrisics.cpu().numpy()
             projected,_=project(centers,K@E[:3])

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "design_mesh_height_mm": 22.0,
+  "scaffold": {
+    "theta_samples": 160,
+    "phi_samples": 90,
+    "min_facing": 0.5,
+    "front_views_max_theta_deg": 115,
+    "unknown_prior_weight": 0.1,
+    "boundary_smoothness": 16,
+    "cap_rings": 42
+  },
+  "volume": {
+    "base_mm": 2.5,
+    "edge_mm": 0.1,
+    "min_mm": 1.0,
+    "max_mm": 5.0
+  },
+  "inset_mm": 0.14
+}

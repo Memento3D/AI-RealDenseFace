@@ -19,7 +19,7 @@ def run(repo,crops,out):
     metadata=json.loads((crops/'report.json').read_text());assert metadata['status']=='CROPS_PREPARED'
     slots=[slot for slot in ('front','left','right') if slot in metadata['views']]
     if not slots or slots[0]!='front':raise ValueError('FRONT_REQUIRED')
-    report={'views_used':slots,'view_count':len(slots),'status':'RUNNING','camera_intrinsics_assumed_shared':False,'photo_quality_gate_executed':True,'gates_calibrated':False,'likeness_verified':False,'input_sha256':{},'camera_maps':[],'single_frame_registration_iterations':20,'joint_registration_iterations':10 if len(slots)>1 else 0,'neural_variant':'vitb for each actually supplied crop','joint_camera_layout':'T=available views,C=1,4,4','vitb_expected_weight_checksum_verified':False}
+    report={'views_used':slots,'view_count':len(slots),'status':'RUNNING','camera_intrinsics_assumed_shared':False,'photo_quality_gate_executed':True,'gates_calibrated':False,'likeness_verified':False,'input_sha256':{},'camera_maps':[],'single_frame_registration_iterations':20,'joint_registration_iterations':10 if len(slots)>1 else 0,'eye_region_boost_enabled':False,'neural_variant':'vitb for each actually supplied crop','joint_camera_layout':'T=available views,C=1,4,4','vitb_expected_weight_checksum_verified':False}
     required=[repo/'weights/flame/flame2023.pkl',repo/'weights/flame/flame_assets.npz',repo/'weights/realdenseface/vitb.pth',repo/'weights/facebox/face_box.pth']
     pins={'flame2023.pkl':'8fb1af0db1abb51053ead8fd1f2624a63d01c9602f4a4fb4ea23bd2c82017fa0','flame_assets.npz':'922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3','face_box.pth':'3fde8561f059dd60d876021cbd2f67d955d5e02f24c25b297913a4115e433b4d'}
     # Original front model remains vitb; its local hash is recorded, not independently pinned.
@@ -35,7 +35,8 @@ def run(repo,crops,out):
             if p.name in pins and actual!=pins[p.name]:raise ValueError('Model pin mismatch: '+p.name)
         cfg=FLAMEConfig(flame_model_path=str(required[0]),flame_assets_path=str(required[1]),num_expressions=100)
         infer=RealDenseFaceInferencer(RealDenseFaceInferenceConfig(model_config_path=str(repo/'configs/model/vitb.yaml'),model_weights_path=str(required[2]),flame=cfg,device='cuda',compile_model=False),FaceBoxConfig(model_weights_path=str(required[3]),device='cuda'))
-        optimizer=GNFlameOptimizer(GNFlameOptimizerConfig(flame=cfg,device='cuda',registration_iterations=20))
+        # Eye boosting can destabilize FOV search; the independent eye gate still validates alignment.
+        optimizer=GNFlameOptimizer(GNFlameOptimizerConfig(flame=cfg,device='cuda',registration_iterations=20,boost_eye_region=False))
         predictions=[];fits=[];cameras=[];images=[]
         for slot in slots:
             path=crops/(slot+'.png');images.append(np.asarray(Image.open(path).convert('RGB')))
@@ -52,7 +53,7 @@ def run(repo,crops,out):
             with torch.no_grad():return optimizer.decode(FittingOutput(identity=beta,x=x))[0].detach().cpu().numpy()
         def check_front(beta,x):
             points=decode(beta,x)
-            components,info=identify(points[faces].reshape(-1,3))
+            components,info=identify(points,faces)
             centers=np.asarray(info['eye_centers_native'])
             E=cameras[0].get_w2v.cpu().numpy();K=cameras[0].intrisics.cpu().numpy()
             projected,_=project(centers,K@E[:3])

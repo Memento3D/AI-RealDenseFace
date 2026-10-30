@@ -10,11 +10,12 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 ROOT=Path(__file__).resolve().parents[2]
-SLOTS=('front','left','right')
-TERMINAL={'MVP_ASSEMBLED','COMPONENTS_EXPORTED','RAW_EXPORTED','PARTIAL','FAILED','INTERRUPTED'}
+SLOTS=('front','left','right','back')
+RDF_SLOTS=('front','left','right')
+TERMINAL={'MVP_EXPORTED','MVP_ASSEMBLED','COMPONENTS_EXPORTED','RAW_EXPORTED','PARTIAL','FAILED','INTERRUPTED'}
 
 
 def write(path,value):
@@ -69,18 +70,14 @@ class JobService:
     def close(self):
         self.executor.shutdown(wait=True,cancel_futures=False);self.lock.release()
     def preflight(self,mode):
-        names=['cpu_python','probe_python','landmarker']
-        if mode in ('components','mvp'):names+=['rdf_python','rdf_repo']
-        if mode in ('mvp','assembly'):
-            if not self.config['paths'].get('parser'):raise ValueError('Missing parser config; update configs/headapi.json')
-            names+=['parser']
+        if mode!='mvp':raise ValueError('Only the RDF + hair-cap MVP is supported')
+        names=['cpu_python','rdf_python','haircap_python','rdf_repo','landmarker','parser']
         missing=[name for name in names if not Path(self.config['paths'][name]).exists()]
-        if mode in ('components','mvp'):
-            repo=Path(self.config['paths']['rdf_repo'])
-            missing += ['RDF/'+rel for rel in ('weights/flame/flame2023.pkl','weights/flame/flame_assets.npz','weights/realdenseface/vitb.pth','weights/facebox/face_box.pth') if not (repo/rel).is_file()]
+        repo=Path(self.config['paths']['rdf_repo'])
+        missing += ['RDF/'+rel for rel in ('weights/flame/flame2023.pkl','weights/flame/flame_assets.npz','weights/realdenseface/vitb.pth','weights/facebox/face_box.pth') if not (repo/rel).is_file()]
         if missing:raise ValueError('Missing prerequisites: '+', '.join(missing))
     def get(self,job_id):
-        if not re.fullmatch(r'[0-9a-f]{32}',job_id):raise KeyError(job_id)
+        if not isinstance(job_id,str) or not re.fullmatch(r'(?:[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})',job_id):raise KeyError(job_id)
         p=self.jobs/job_id/'job.json'
         if not p.is_file():raise KeyError(job_id)
         with self.mutex:return json.loads(p.read_text(encoding='utf-8'))
@@ -88,88 +85,71 @@ class JobService:
         with self.mutex:
             row=self.get(job_id);row.update(changes);write(self.jobs/job_id/'job.json',row)
         return row
-    def submit(self,images,mode,resolution):
-        if mode not in ('raw','components','mvp'):raise ValueError('Invalid mode')
-        if resolution not in (128,192,256):raise ValueError('Invalid resolution')
-        if 'front' not in images or not set(images)<=set(SLOTS):raise ValueError('FRONT_REQUIRED / invalid slots')
+    def submit(self,images,mode='mvp',job_id=None,attempt_id=None,image_metadata=None,profile='default'):
+        if mode!='mvp':raise ValueError('Only the RDF + hair-cap MVP is supported')
+        if not set(images)<=set(SLOTS) or not set(RDF_SLOTS)<=set(images):
+            raise ValueError('MVP requires front, left and right views; back is optional')
         self.preflight(mode)
+        if profile!='default':raise ValueError("Only profile 'default' is supported")
+        job_id=job_id or uuid4().hex
+        if not re.fullmatch(r'(?:[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})',job_id):
+            raise ValueError('Invalid job id')
+        if attempt_id is not None:
+            try:attempt_id=str(UUID(str(attempt_id)))
+            except (ValueError,TypeError,AttributeError) as exc:raise ValueError('Invalid attempt id') from exc
+        metadata_by_view={item['view_hint']:item for item in (image_metadata or [])}
         with self.mutex:
+            existing_path=self.jobs/job_id/'job.json'
+            if existing_path.is_file():
+                existing=json.loads(existing_path.read_text(encoding='utf-8'))
+                same_images=all(
+                    next((item for item in existing.get('observations',[]) if item.get('slot')==slot),{}).get('normalized_sha256')
+                    ==hashlib.sha256(entry['png']).hexdigest()
+                    for slot,entry in images.items()
+                )
+                if (existing.get('attempt_id')==attempt_id and existing.get('profile')==profile
+                        and len(existing.get('observations',[]))==len(images) and same_images):
+                    return existing
+                raise ValueError('Job id already exists for a different attempt or input')
             active=sum(json.loads(p.read_text()).get('status') not in TERMINAL for p in self.jobs.glob('*/job.json'))
             if active>=self.config.get('max_pending_jobs',3):raise OverflowError('QUEUE_FULL')
-            job_id=uuid4().hex;folder=self.jobs/job_id;folder.mkdir()
+            folder=self.jobs/job_id;folder.mkdir()
             inputs=folder/'inputs';inputs.mkdir();observations=[]
             for slot in SLOTS:
                 if slot not in images:continue
                 entry=images[slot];path=inputs/(slot+'.png');path.write_bytes(entry['png'])
                 original=folder/'uploads';original.mkdir(exist_ok=True)
                 (original/(slot+'.'+entry['format'].lower())).write_bytes(entry['original'])
-                observations.append({'slot':slot,'original_sha256':hashlib.sha256(entry['original']).hexdigest(),
+                image_meta=metadata_by_view.get(slot,{})
+                observations.append({'slot':slot,'image_id':image_meta.get('image_id'),
+                    'view_hint':image_meta.get('view_hint',slot),'original_sha256':hashlib.sha256(entry['original']).hexdigest(),
                     'normalized_sha256':sha(path),'normalized_size':entry['size'],
                     'normalization':'EXIF transpose and lossless RGB PNG; source upload retained',
-                    'used_by_triposr':slot=='front','requested_for_rdf':mode in ('components','mvp')})
-            row={'job_id':job_id,'status':'QUEUED','mode':mode,'resolution':resolution,
-                 'created_at':datetime.now(timezone.utc).isoformat(),'observations':observations,
+                    'requested_for_rdf':slot in RDF_SLOTS,'used_for_hair_cap':True})
+            row={'job_id':job_id,'status':'QUEUED','mode':mode,
+                 'attempt_id':attempt_id,'profile':profile,'created_at':datetime.now(timezone.utc).isoformat(),
+                 'observations':observations,
                  'stages':[],'artifacts':[],'errors':[],'ready_for_machine':False,
-                 'hair_isolated':False,'hybrid_assembly_performed':False,'face_identity_verified':False,
-                 'profile_images_condition_triposr':False,'rdf_views_actually_used':[],
+                 'hair_cap_exported':False,'hair_flow_or_part_inferred':False,
+                 'face_identity_verified':False,'rdf_views_actually_used':[],
                  'code_sha256':self.code_hashes()}
             write(folder/'config.snapshot.json',self.config);write(folder/'job.json',row)
             self.executor.submit(self.run,job_id)
         return row
-    def submit_assembly(self,parent_id):
-        self.preflight('assembly')
-        with self.mutex:
-            parent=self.get(parent_id)
-            if parent['status'] not in TERMINAL:raise ValueError('Source job must finish before assembly')
-            folder=self.jobs/parent_id
-            for name in ('rdf/projection_bundle.npz','rdf/report.json','rdf_crops/report.json','raw/raw_native.glb','raw/report.json','observation/report.json'):
-                if not (folder/name).is_file():raise ValueError('Source job missing '+name)
-            if json.loads((folder/'rdf/report.json').read_text()).get('status')!='FIT_GATES_PASSED':raise ValueError('RDF source job failed')
-            if json.loads((folder/'raw/report.json').read_text()).get('status')!='RAW_PROPOSAL_EXPORTED':raise ValueError('TripoSR source job failed')
-            active=sum(json.loads(p.read_text()).get('status') not in TERMINAL for p in self.jobs.glob('*/job.json'))
-            if active>=self.config.get('max_pending_jobs',3):raise OverflowError('QUEUE_FULL')
-            job_id=uuid4().hex;out=self.jobs/job_id;out.mkdir()
-            row={'job_id':job_id,'parent_job_id':parent_id,'job_type':'assembly_only','mode':'mvp','status':'QUEUED',
-                'resolution':parent['resolution'],'created_at':datetime.now(timezone.utc).isoformat(),
-                'observations':copy.deepcopy(parent['observations']),'rdf_views_actually_used':parent['rdf_views_actually_used'],
-                'stages':[],'errors':[],'artifacts':[],'code_sha256':self.code_hashes(),
-                'ready_for_machine':False,'hair_isolated':False,'hybrid_assembly_performed':False,'face_identity_verified':False,
-                'profile_images_condition_triposr':False}
-            write(out/'job.json',row);write(out/'config.snapshot.json',self.config)
-            self.executor.submit(self.run_assembly,job_id)
-        return row
-    def assemble_stages(self,job_id,source):
-        c=self.config['paths'];out=self.jobs/job_id/'fusion'
-        steps=[('06_mvp_render',[c['probe_python'],'-m','tools.headapi.fusion','--job',source,'--output',out,'--phase','prepare']),
-               ('07_mvp_landmarks',[c['cpu_python'],'-m','tools.headapi.fusion_landmarks','--image',out/'registration_front.png','--task',c['landmarker'],'--output',out/'raw_landmarks.json']),
-               ('08_mvp_assembly',[c['probe_python'],'-m','tools.headapi.fusion','--job',source,'--output',out,'--phase','assemble','--parser',c['parser']])]
-        for name,args in steps:
-            if not self.stage(job_id,name,args):return False
-        result=json.loads((out/'assembly.report.json').read_text())
-        if result.get('status')!='MVP_ASSEMBLED' or not result.get('rdf_geometry_unchanged'):raise ValueError('Assembly output contract failed')
-        self.update(job_id,hybrid_assembly_performed=True,hair_isolated=True,hair_segmentation_verified=False,rdf_geometry_unchanged=True)
-        return True
-    def run_assembly(self,job_id):
-        self.update(job_id,status='RUNNING')
-        try:
-            job=self.get(job_id)
-            if self.code_hashes()!=job['code_sha256']:raise ValueError('Pipeline code changed after submission')
-            success=self.assemble_stages(job_id,self.jobs/job['parent_job_id'])
-            if self.code_hashes()!=job['code_sha256']:raise ValueError('Pipeline code changed during assembly')
-            self.update(job_id,status='MVP_ASSEMBLED' if success else 'FAILED',current_stage=None)
-        except Exception as exc:
-            row=self.get(job_id);row['errors'].append({'stage':row.get('current_stage'),'error':str(exc)})
-            self.update(job_id,status='FAILED',errors=row['errors'],current_stage=None)
-        finally:
-            try:self.review_page(job_id)
-            finally:self.update(job_id,artifacts=self.collect(job_id),finished_at=datetime.now(timezone.utc).isoformat())
     def code_hashes(self):
-        files=[]
-        for sub in ('tools/headapi','tools/triposr_probe'):
-            files.extend((self.root/sub).glob('*.py'))
-        for name in ('head24_policy.py','head24_detection.py','detect_head24_profile.py','eye_components.py'):
+        files=list((self.root/'tools/headapi').glob('*.py'))
+        files.extend(path for path in
+            (self.root/'tools/triposr_probe'/name for name in ('audit.py','common.py'))
+            if path.is_file())
+        for name in ('head24_policy.py','head24_detection.py','detect_head24_profile.py','eye_components.py',
+                     'scalp_cap.py','back_view.py','figurine22_hair.py','headlab_raster.py',
+                     'add_graduation_cap.py','figurine_preview.py'):
             path=self.root/'scripts'/name
             if path.is_file():files.append(path)
+        path=self.root/'src/memento3d_head/adapters/automatic_face_masks.py'
+        if path.is_file():files.append(path)
+        path=self.root/'configs/hair-cap.json'
+        if path.is_file():files.append(path)
         return {p.relative_to(self.root).as_posix():sha(p) for p in sorted(files)}
     def environment(self):
         env=os.environ.copy();cache=Path(self.config['paths']['cache_root'])
@@ -194,7 +174,7 @@ class JobService:
         self.update(job_id,stages=row['stages'],errors=row['errors'])
         return code==0
     def collect(self,job_id):
-        folder=self.jobs/job_id;allowed={'.glb','.obj','.png','.jpg','.json','.html','.log','.npz'}
+        folder=self.jobs/job_id;allowed={'.glb','.obj','.png','.jpg','.json','.html','.log','.npz','.stl'}
         rows=[]
         for path in sorted(folder.rglob('*')):
             rel=path.relative_to(folder)
@@ -203,38 +183,42 @@ class JobService:
             rows.append({'path':rel.as_posix(),'bytes':path.stat().st_size,'sha256':sha(path)})
         return rows
     def run(self,job_id):
-        folder=self.jobs/job_id;c=self.config['paths'];job=self.get(job_id);rdf_ok=False;raw_ok=False
-        self.update(job_id,status='RUNNING')
+        folder=self.jobs/job_id;c=self.config['paths'];job=self.get(job_id);rdf_ok=False;cap_ok=False
+        self.update(job_id,status='RUNNING',started_at=datetime.now(timezone.utc).isoformat())
         try:
             for entry in job['observations']:
                 if sha(folder/'inputs'/(entry['slot']+'.png'))!=entry['normalized_sha256']:
                     raise ValueError('Input changed after upload: '+entry['slot'])
             if self.code_hashes()!=job['code_sha256']:raise ValueError('Pipeline code changed after submission; submit a new attempt')
-            if job['mode'] in ('components','mvp'):
-                rdf_ok=self.stage(job_id,'01_rdf_observations',[c['cpu_python'],'-m','tools.headapi.prepare_faces',
-                    '--input',folder/'inputs','--task',c['landmarker'],'--output',folder/'rdf_crops','--rdf-python',c['rdf_python'],'--repo',c['rdf_repo']])
-                if rdf_ok:
-                    rdf_ok=self.stage(job_id,'02_rdf_fit',[c['rdf_python'],'-m','tools.headapi.rdf_worker',
-                        '--repo',c['rdf_repo'],'--crops',folder/'rdf_crops','--output',folder/'rdf'])
-                if rdf_ok:
-                    report=json.loads((folder/'rdf/report.json').read_text())
-                    if report['status']!='FIT_GATES_PASSED':raise ValueError('RDF did not pass its gates')
-                    self.update(job_id,rdf_views_actually_used=report['views_used'])
-                    rdf_ok=self.stage(job_id,'02b_rdf_export',[c['probe_python'],'-m','tools.headapi.face_export',
-                        '--fit',folder/'rdf','--crops',folder/'rdf_crops'])
-            crop_ok=self.stage(job_id,'03_head_observation',[c['cpu_python'],'-m','tools.triposr_probe.prepare',
-                '--source',folder/'inputs/front.png','--task',c['landmarker'],'--output',folder/'observation'])
-            if crop_ok:
-                raw_ok=self.stage(job_id,'04_triposr',[c['probe_python'],'-m','tools.triposr_probe.worker',
-                    '--image',folder/'observation/head_crop.png','--output',folder/'raw','--resolution',job['resolution']])
-            if raw_ok:
-                r=json.loads((folder/'raw/report.json').read_text())
-                if r['status']!='RAW_PROPOSAL_EXPORTED':raise ValueError('TripoSR did not export')
-                raw_ok=self.stage(job_id,'05_audit',[c['probe_python'],'-m','tools.triposr_probe.audit',
-                    '--mesh',folder/'raw/raw_native.glb','--report',folder/'raw/report.json','--output',folder/'audit'])
-            status=('COMPONENTS_EXPORTED' if rdf_ok and raw_ok else 'PARTIAL' if rdf_ok or raw_ok else 'FAILED') if job['mode'] in ('components','mvp') else ('RAW_EXPORTED' if raw_ok else 'FAILED')
-            if job['mode']=='mvp' and rdf_ok and raw_ok:
-                status='MVP_ASSEMBLED' if self.assemble_stages(job_id,folder) else 'PARTIAL'
+            rdf_ok=self.stage(job_id,'01_rdf_observations',[c['cpu_python'],'-m','tools.headapi.prepare_faces',
+                '--input',folder/'inputs','--task',c['landmarker'],'--output',folder/'rdf_crops','--rdf-python',c['rdf_python'],'--repo',c['rdf_repo']])
+            if rdf_ok:
+                rdf_ok=self.stage(job_id,'02_rdf_fit',[c['rdf_python'],'-m','tools.headapi.rdf_worker',
+                    '--repo',c['rdf_repo'],'--crops',folder/'rdf_crops','--output',folder/'rdf'])
+            if rdf_ok:
+                report=json.loads((folder/'rdf/report.json').read_text())
+                if report['status']!='FIT_GATES_PASSED':raise ValueError('RDF did not pass its gates')
+                used_views=report.get('views_used',[])
+                if (not used_views or 'front' not in used_views
+                        or any(view not in RDF_SLOTS for view in used_views)):
+                    raise ValueError('RDF did not use a supported front-containing view set')
+                self.update(job_id,rdf_views_actually_used=used_views)
+                rdf_ok=self.stage(job_id,'02b_rdf_export',[c['haircap_python'],'-m','tools.headapi.face_export',
+                    '--fit',folder/'rdf','--crops',folder/'rdf_crops'])
+            if rdf_ok:
+                cap_ok=self.stage(job_id,'03_hair_cap',[c['haircap_python'],'-m','tools.headapi.hair_cap_worker',
+                    '--job',folder,'--output',folder/'hair','--parser',c['parser'],
+                    '--profile',self.root/'configs/hair-cap.json'])
+            if cap_ok:
+                scene_path=folder/'hair/scene.glb'
+                if not scene_path.is_file() or scene_path.stat().st_size<12:
+                    raise ValueError('Scene GLB output is missing or invalid')
+                cap_report=json.loads((folder/'hair/report.json').read_text())
+                if cap_report.get('status')!='HAIR_CAP_EXPORTED' or not cap_report.get('geometry',{}).get('watertight'):
+                    raise ValueError('Hair-cap output contract failed')
+                self.update(job_id,hair_cap_exported=True,
+                    hair_flow_or_part_inferred=cap_report.get('hair_flow_or_part_inferred',False))
+            status='MVP_EXPORTED' if rdf_ok and cap_ok else 'PARTIAL' if rdf_ok or cap_ok else 'FAILED'
             if self.code_hashes()!=job['code_sha256']:raise ValueError('Pipeline code changed during job')
             self.update(job_id,status=status,current_stage=None)
         except Exception as exc:
@@ -242,15 +226,19 @@ class JobService:
             self.update(job_id,status='FAILED',errors=row['errors'],current_stage=None)
         finally:
             try:self.review_page(job_id)
-            finally:self.update(job_id,artifacts=self.collect(job_id),finished_at=datetime.now(timezone.utc).isoformat())
+            finally:self.update(job_id,artifacts=self.collect(job_id),finished_at=datetime.now(timezone.utc).isoformat(),
+                                completed_at=datetime.now(timezone.utc).isoformat())
     def review_page(self,job_id):
         folder=self.jobs/job_id;row=self.get(job_id)
         text='<meta charset="utf-8"><title>Head API result</title><style>body{background:#171c24;color:white;font:16px system-ui;margin:24px}img{max-width:100%}a{color:#acf}</style>'
-        text+='<h1>'+html.escape(row['status'])+'</h1><p>'+('MVP: RDF head + aligned TripoSR hair surface. Not a manufacturing solid or identity guarantee.' if row.get('hybrid_assembly_performed') else 'TripoSR head and RDF face are separate components; assembly not completed.')+'</p>'
-        if (folder/'fusion/mvp_head.glb').is_file():text+='<p><a href="fusion/mvp_head.glb">MVP GLB</a> · <a href="fusion/review.html">Assembly review</a></p>'
-        for label,relative in [('MVP assembled head','fusion/mvp_color.png'),('MVP gray geometry','fusion/mvp_gray.png'),('TripoSR front-conditioned head','raw/raw_preview.png'),('RDF geometry','rdf/rdf_face_gray.png'),('RDF photographic color approximation','rdf/rdf_face_photo.png')]:
+        text+='<h1>'+html.escape(row['status'])+'</h1><p>RealDenseFace head and a separate experimental solid hair-cap proposal. The cap uses hair masks and multi-view silhouette/volume fitting; hair flow is not inferred. Neither output is certified for printing.</p>'
+        if (folder/'hair/hair_cap_native.glb').is_file():text+='<p><a href="hair/hair_cap_native.glb">Hair cap (RDF native units)</a> · <a href="hair/hair_cap_design_mm.stl">Hair cap design-scale STL</a> · <a href="hair/report.json">Hair-cap report</a></p>'
+        for label,relative in [('RDF geometry','rdf/rdf_face_gray.png'),('RDF photographic color approximation','rdf/rdf_face_photo.png')]:
             if (folder/relative).is_file():text+='<h2>'+label+'</h2><img src="'+relative+'">'
-        text+='<p>'+('MVP uses solved landmark alignment. Source diagnostic previews retain their own cameras; export coordinates are RDF native.' if row.get('hybrid_assembly_performed') else 'RDF previews use a display-only axis permutation; exports retain RDF coordinates. Cameras are not jointly registered.')+'</p>'
+        for slot in ('front','left','right','back'):
+            relative='hair/'+slot+'.fit.png'
+            if (folder/relative).is_file():text+='<h2>'+slot+' · tóc dự đoán / mask ảnh</h2><img src="'+relative+'">'
+        text+='<p>Scale 22 mm là giả định theo chiều cao mesh, không phải số đo vật lý. Ba ảnh dùng prior giới hạn cho tóc khuất phía sau; ảnh back thêm ràng buộc silhouette sau đầu nhưng không quan sát đỉnh từ trên xuống.</p>'
         text+='<pre>'+html.escape(json.dumps({'observations':row['observations'],'rdf_views_actually_used':row['rdf_views_actually_used'],'errors':row['errors']},indent=2))+'</pre>'
         (folder/'review.html').write_text(text,encoding='utf-8')
     def logs(self,job_id,stage=None):

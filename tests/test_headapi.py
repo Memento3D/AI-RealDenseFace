@@ -20,58 +20,131 @@ def image(color=(150,100,80)):
 class APITests(unittest.TestCase):
  def setUp(self):
   self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name);self.executor=HeldExecutor()
-  paths={k:str(self.root/k) for k in ('cpu_python','probe_python','rdf_python','landmarker','rdf_repo','cache_root','jobs','parser')}
-  for k in ('cpu_python','probe_python','rdf_python','landmarker','parser'):Path(paths[k]).write_bytes(b'fixture, not a model')
+  paths={k:str(self.root/k) for k in ('cpu_python','probe_python','rdf_python','haircap_python','landmarker','rdf_repo','cache_root','jobs','parser')}
+  for k in ('cpu_python','probe_python','rdf_python','haircap_python','landmarker','parser'):Path(paths[k]).write_bytes(b'fixture, not a model')
   for rel in ('weights/flame/flame2023.pkl','weights/flame/flame_assets.npz','weights/realdenseface/vitb.pth','weights/facebox/face_box.pth'):
    p=Path(paths['rdf_repo'])/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b'fixture')
   self.config={'schema_version':1,'root':str(self.root),'paths':paths,'max_pending_jobs':3}
-  self.service=JobService(self.config,self.executor);self.client=TestClient(create_app(self.service));self.client.__enter__()
+  self.service=JobService(self.config,self.executor);self.client=TestClient(create_app(self.service,api_key='test-backend-key'),headers={'X-API-Key':'test-backend-key'});self.client.__enter__()
  def tearDown(self):self.client.__exit__(None,None,None);self.temp.cleanup()
- def post(self,slots=('front',),mode='components'):
+ def post(self,slots=('front','left','right'),mode='mvp'):
   files={slot:(slot+'.png',image((100+i*20,110,120)),'image/png') for i,slot in enumerate(slots)}
   return self.client.post('/v1/head/jobs',files=files,data={'mode':mode})
  def test_mvp_is_default_upload_mode(self):
-  r=self.client.post('/v1/head/jobs',files={'front':('front.png',image(),'image/png')})
+  files={slot:(slot+'.png',image((100+i*20,110,120)),'image/png') for i,slot in enumerate(('front','left','right'))}
+  r=self.client.post('/v1/head/jobs',files=files)
   self.assertEqual(r.status_code,202,r.text);self.assertEqual(self.service.get(r.json()['job_id'])['mode'],'mvp')
- def test_assembly_creates_child_and_does_not_modify_parent(self):
-  id=self.post().json()['job_id'];folder=self.service.jobs/id
-  for name in ['rdf','rdf_crops','raw','observation']:(folder/name).mkdir()
-  (folder/'rdf/projection_bundle.npz').write_bytes(b'test fixture')
-  (folder/'raw/raw_native.glb').write_bytes(b'test fixture')
-  write(folder/'rdf/report.json',{'status':'FIT_GATES_PASSED'})
-  write(folder/'raw/report.json',{'status':'RAW_PROPOSAL_EXPORTED'})
-  write(folder/'rdf_crops/report.json',{});write(folder/'observation/report.json',{})
-  self.service.update(id,status='COMPONENTS_EXPORTED');before=(folder/'job.json').read_bytes()
-  r=self.client.post('/v1/head/jobs/'+id+'/assemble');self.assertEqual(r.status_code,202,r.text)
-  child=self.service.get(r.json()['job_id']);self.assertEqual(child['parent_job_id'],id)
-  self.assertEqual(child['job_type'],'assembly_only');self.assertEqual(before,(folder/'job.json').read_bytes())
-  self.assertFalse(child['hybrid_assembly_performed'])
- def test_running_parent_cannot_be_assembled(self):
-  id=self.post().json()['job_id'];self.assertEqual(self.client.post('/v1/head/jobs/'+id+'/assemble').status_code,409)
- def test_missing_assembly_source(self):
+ def test_backend_contract_accepts_three_referenced_images(self):
+  from unittest.mock import patch
+  from uuid import uuid4
+  views=('front','left','right')
+  entries=[normalize(image((80+i*40,100,120))) for i in range(len(views))]
+  request={'job_id':str(uuid4()),'attempt_id':str(uuid4()),'profile':'default',
+           'input_images':[{'image_id':str(uuid4()),'input_url':'https://res.cloudinary.com/demo/image/upload/'+str(i)+'.jpg',
+                            'view_hint':view} for i,view in enumerate(views)]}
+  with patch('tools.headapi.api._fetch_remote_image',side_effect=entries):
+   response=self.client.post('/jobs',json=request,headers={'X-API-Key':'test-backend-key'})
+  self.assertEqual(response.status_code,202,response.text)
+  self.assertEqual(response.json()['job_id'],request['job_id'])
+  self.assertEqual(response.json()['attempt_id'],request['attempt_id'])
+  self.assertEqual(response.json()['status'],'queued')
+  row=self.service.get(request['job_id'])
+  self.assertEqual([item['view_hint'] for item in row['observations']],list(views))
+  self.assertEqual(row['observations'][0]['image_id'],request['input_images'][0]['image_id'])
+  with patch('tools.headapi.api._fetch_remote_image') as fetch:
+   retry=self.client.post('/jobs',json=request)
+  self.assertEqual(retry.status_code,202);self.assertEqual(fetch.call_count,0)
+ def test_backend_contract_rejects_fewer_than_three_images_before_fetching(self):
+  from unittest.mock import patch
+  from uuid import uuid4
+  for views in (('front',),('front','left')):
+   request={'job_id':str(uuid4()),'attempt_id':str(uuid4()),
+            'input_images':[{'image_id':str(uuid4()),'input_url':'https://res.cloudinary.com/demo/'+view+'.jpg',
+                             'view_hint':view} for view in views]}
+   with self.subTest(views=views),patch('tools.headapi.api._fetch_remote_image') as fetch:
+    response=self.client.post('/jobs',json=request)
+    self.assertEqual(response.status_code,422,response.text)
+    fetch.assert_not_called()
+    self.assertFalse(self.executor.pending)
+ def test_backend_contract_accepts_four_distinct_view_hints(self):
+  from unittest.mock import patch
+  from uuid import uuid4
+  entries=[normalize(image((20+i*40,90,120))) for i in range(4)]
+  request={'job_id':str(uuid4()),'attempt_id':str(uuid4()),'profile':'default',
+           'input_images':[{'image_id':str(uuid4()),'input_url':'https://res.cloudinary.com/demo/'+str(i),
+                            'view_hint':view} for i,view in enumerate(('front','left','right','back'))]}
+  with patch('tools.headapi.api._fetch_remote_image',side_effect=entries):
+   response=self.client.post('/jobs',json=request)
+  self.assertEqual(response.status_code,202,response.text)
+  self.assertEqual([row['slot'] for row in self.service.get(request['job_id'])['observations']],
+                   ['front','left','right','back'])
+ def test_health_status_matches_backend_client(self):
+  self.assertEqual(self.client.get('/health').json()['status'],'ok')
+  self.assertEqual(self.client.get('/v1/head/jobs',headers={'X-API-Key':'wrong'}).status_code,401)
+ def test_all_non_health_routes_fail_closed_without_configured_key(self):
+  from unittest.mock import patch
+  app=create_app(self.service,api_key='')
+  with patch.dict('os.environ',{'HEADAPI_API_KEY':''}):
+   client=TestClient(app)
+   self.assertEqual(client.get('/health').status_code,200)
+   self.assertEqual(client.get('/').status_code,503)
+   self.assertEqual(client.get('/v1/head/jobs/'+'0'*32).status_code,503)
+ def test_backend_contract_requires_key_and_front_view(self):
+  from uuid import uuid4
+  request={'job_id':str(uuid4()),'attempt_id':str(uuid4()),
+           'input_images':[{'image_id':str(uuid4()),'input_url':'https://res.cloudinary.com/'+view+'.jpg','view_hint':view}
+                           for view in ('left','right','back')]}
+  self.assertEqual(self.client.post('/jobs',json=request,headers={'X-API-Key':'wrong'}).status_code,401)
+  response=self.client.post('/jobs',json=request,headers={'X-API-Key':'test-backend-key'})
+  self.assertEqual(response.status_code,422,response.text)
+  self.assertFalse(self.executor.pending)
+ def test_remote_input_url_rejects_non_https_and_untrusted_hosts(self):
+  from fastapi import HTTPException
+  from tools.headapi.api import _fetch_remote_image
+  for url in ('http://res.cloudinary.com/a.jpg','https://127.0.0.1/a.jpg',
+              'https://res.cloudinary.com.evil.example/a.jpg'):
+   with self.subTest(url=url),self.assertRaises(HTTPException):
+    _fetch_remote_image(url,{'res.cloudinary.com'})
+ def test_backend_status_and_glb_endpoint_match_attempt(self):
+  from uuid import uuid4
+  job_id=str(uuid4());attempt_id=str(uuid4())
+  self.service.submit({view:normalize(image((80+i*40,100,120)))
+                       for i,view in enumerate(('front','left','right'))},
+                      job_id=job_id,attempt_id=attempt_id)
+  folder=self.service.jobs/job_id/'hair';folder.mkdir(parents=True)
+  output=folder/'scene.glb';output.write_bytes(b'glTF'+b'\x02\x00\x00\x00'+b'\x04\x00\x00\x00')
+  self.service.update(job_id,status='MVP_EXPORTED',artifacts=[{'path':'hair/scene.glb'}])
+  headers={'X-API-Key':'test-backend-key'}
+  status=self.client.get('/jobs/'+job_id,headers=headers)
+  self.assertEqual(status.status_code,200);self.assertEqual(status.json()['status'],'done')
+  self.assertEqual(status.json()['attempt_id'],attempt_id)
+  self.assertEqual(self.client.get('/jobs/'+job_id+'/outputs/glb',params={'attempt_id':attempt_id},headers=headers).content,output.read_bytes())
+  self.assertEqual(self.client.get('/jobs/'+job_id+'/outputs/glb',params={'attempt_id':str(uuid4())},headers=headers).status_code,404)
+ def test_assembly_endpoint_is_removed(self):
   self.assertEqual(self.client.post('/v1/head/jobs/'+'0'*32+'/assemble').status_code,404)
- def test_front_required(self):self.assertEqual(self.post(('left',)).status_code,422);self.assertFalse(self.executor.pending)
- def test_all_four_supported_view_combinations(self):
+ def test_three_views_required_and_back_optional(self):
+  self.assertEqual(self.client.post('/v1/head/jobs',files={'front':('front.png',image(),'image/png')}).status_code,422)
+  self.assertFalse(self.executor.pending)
+  with self.assertRaisesRegex(ValueError,'front, left and right'):
+   self.service.submit({'front':normalize(image())})
   self.config['max_pending_jobs']=10;self.service.config['max_pending_jobs']=10
-  for slots in [('front',),('front','left'),('front','right'),('front','left','right')]:
+  for slots in [('front','left','right'),('front','left','right','back')]:
    with self.subTest(slots=slots):
     r=self.post(slots);self.assertEqual(r.status_code,202,r.text)
     row=self.service.get(r.json()['job_id']);self.assertEqual([v['slot'] for v in row['observations']],list(slots))
-    self.assertEqual(row['rdf_views_actually_used'],[]);self.assertFalse(row['hybrid_assembly_performed'])
- def test_no_front_duplication_for_missing_sides(self):
-  r=self.post();folder=self.service.jobs/r.json()['job_id']/'inputs';self.assertEqual([p.name for p in folder.iterdir()],['front.png'])
+    self.assertEqual(row['rdf_views_actually_used'],[]);self.assertFalse(row['hair_cap_exported'])
+ def test_legacy_modes_are_rejected(self):self.assertEqual(self.post(mode='raw').status_code,422)
  def test_identical_view_pixels_rejected(self):
-  self.assertEqual(self.client.post('/v1/head/jobs',files={s:(s+'.png',image(),'image/png') for s in ['front','left']}).status_code,422)
- def test_raw_does_not_silently_accept_unused_sides(self):self.assertEqual(self.post(('front','left'),'raw').status_code,422)
+  self.assertEqual(self.client.post('/v1/head/jobs',files={s:(s+'.png',image(),'image/png') for s in ['front','left','right']}).status_code,422)
  def test_invalid_image_rejected(self):self.assertEqual(self.client.post('/v1/head/jobs',files={'front':('bad.jpg',b'not-image','image/jpeg')}).status_code,422)
- def test_resolution_rejected(self):self.assertEqual(self.client.post('/v1/head/jobs',files={'front':('a.png',image())},data={'resolution':'512'}).status_code,422)
  def test_queue_capacity(self):
   for _ in range(3):self.assertEqual(self.post().status_code,202)
   self.assertEqual(self.post().status_code,429)
  def test_missing_backend_rejected_without_fake_job(self):
   Path(self.config['paths']['rdf_python']).unlink();self.assertEqual(self.post().status_code,503);self.assertFalse(self.executor.pending)
  def test_original_names_cannot_escape_upload_folder(self):
-  r=self.client.post('/v1/head/jobs',files={'front':('../../outside.png',image(),'image/png')});self.assertEqual(r.status_code,202)
+  files={slot:('../../outside.png',image((100+i*20,110,120)),'image/png') for i,slot in enumerate(('front','left','right'))}
+  r=self.client.post('/v1/head/jobs',files=files);self.assertEqual(r.status_code,202)
   self.assertFalse((self.root/'outside.png').exists())
  def test_status_and_protected_artifacts(self):
   r=self.post();id=r.json()['job_id'];self.assertEqual(self.client.get('/v1/head/jobs/'+id).status_code,200)
@@ -82,28 +155,30 @@ class APITests(unittest.TestCase):
   self.assertEqual(self.client.get('/v1/head/jobs/'+id+'/files/test.glb').content,b'synthetic mesh fixture')
  def test_unknown_job(self):self.assertEqual(self.client.get('/v1/head/jobs/'+'0'*32).status_code,404)
  def test_changed_queued_input_stops_before_worker(self):
-  id=self.post(('front',),'raw').json()['job_id'];(self.service.jobs/id/'inputs/front.png').write_bytes(b'changed')
+  id=self.post().json()['job_id'];(self.service.jobs/id/'inputs/front.png').write_bytes(b'changed')
   self.service.stage=lambda *a,**k:self.fail('Must reject before running any stage')
   self.service.run(id);row=self.service.get(id);self.assertEqual(row['status'],'FAILED')
   self.assertIn('Input changed',row['errors'][0]['error'])
  def test_worker_failed_stage_does_not_mark_complete(self):
-  id=self.post(('front',),'raw').json()['job_id']
+  id=self.post().json()['job_id']
   self.service.stage=lambda *a,**k:False
   self.service.run(id);row=self.service.get(id);self.assertEqual(row['status'],'FAILED');self.assertFalse(row['ready_for_machine'])
- def test_orchestration_synthetic_contract_uses_separate_envs_and_reports_components(self):
-  id=self.post(('front','right')).json()['job_id'];folder=self.service.jobs/id;calls=[]
+ def test_orchestration_runs_rdf_and_hair_cap_without_triposr_or_assembly(self):
+  id=self.post().json()['job_id'];folder=self.service.jobs/id;calls=[]
   def stage(job,name,args):
    calls.append((name,args))
    if name=='02_rdf_fit':
-    (folder/'rdf').mkdir();write(folder/'rdf/report.json',{'status':'FIT_GATES_PASSED','views_used':['front','right']})
-   if name=='04_triposr':
-    (folder/'raw').mkdir();write(folder/'raw/report.json',{'status':'RAW_PROPOSAL_EXPORTED'})
+    (folder/'rdf').mkdir();write(folder/'rdf/report.json',{'status':'FIT_GATES_PASSED','views_used':['front','left','right']})
+   if name=='03_hair_cap':
+    (folder/'hair').mkdir();write(folder/'hair/report.json',{'status':'HAIR_CAP_EXPORTED','geometry':{'watertight':True}})
+    (folder/'hair/scene.glb').write_bytes(b'glTF'+b'\x02\x00\x00\x00'+b'\x04\x00\x00\x00')
    return True
   self.service.stage=stage;self.service.run(id);row=self.service.get(id)
-  self.assertEqual(row['status'],'COMPONENTS_EXPORTED');self.assertEqual(row['rdf_views_actually_used'],['front','right'])
-  self.assertFalse(row['hybrid_assembly_performed']);self.assertFalse(row['ready_for_machine'])
+  self.assertEqual(row['status'],'MVP_EXPORTED');self.assertEqual(row['rdf_views_actually_used'],['front','left','right'])
+  self.assertTrue(row['hair_cap_exported']);self.assertFalse(row['ready_for_machine'])
   self.assertEqual(next(a[0] for n,a in calls if n=='02_rdf_fit'),self.config['paths']['rdf_python'])
-  self.assertEqual(next(a[0] for n,a in calls if n=='04_triposr'),self.config['paths']['probe_python'])
+  self.assertEqual(next(a[0] for n,a in calls if n=='03_hair_cap'),self.config['paths']['haircap_python'])
+  self.assertFalse(any('triposr' in n.lower() or 'assemble' in n.lower() for n,_ in calls))
  def test_restart_marks_unfinished_attempt_without_rerun(self):
   id=self.post().json()['job_id'];self.service.lock.release();self.service.start()
   self.assertEqual(self.service.get(id)['status'],'INTERRUPTED');self.assertEqual(len(self.executor.pending),1)
@@ -145,6 +220,47 @@ class FaceHelpersTests(unittest.TestCase):
    self.assertTrue(result['geometry_preserved_from_bundle']);self.assertFalse(result['ready_for_machine'])
 
 
+class RenderSceneTests(unittest.TestCase):
+ def test_render_scene_contains_independent_head_and_hair_nodes(self):
+  import trimesh
+  from tools.headapi.hair_cap_worker import export_render_scene
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d)
+   trimesh.creation.box().export(root/'head.glb')
+   trimesh.creation.icosphere(subdivisions=1).export(root/'hair.glb')
+   manifest=export_render_scene(root/'head.glb',root/'hair.glb',root/'scene.glb')
+   scene=trimesh.load(root/'scene.glb',force='scene')
+   self.assertEqual(set(scene.graph.nodes_geometry),{'RDF_Head','Hair_Cap'})
+   self.assertFalse(manifest['geometry_union_performed'])
+   self.assertEqual(manifest['coordinate_frame'],'RDF native coordinates')
+
+class HeadApiClientTests(unittest.TestCase):
+ def test_client_sends_api_key_for_submit_and_poll(self):
+  from contextlib import redirect_stdout
+  from unittest.mock import patch
+  from tools.headapi import client
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d)
+   for slot in ('front','left','right'):(root/(slot+'.png')).write_bytes(image())
+   responses=[
+    {'job_id':'job-id','status_url':'/jobs/job-id'},
+    {'status':'MVP_EXPORTED','current_stage':'complete'},
+   ]
+   class Response:
+    def __init__(self,value):self.value=value
+    def __enter__(self):return self
+    def __exit__(self,*args):return None
+    def read(self):return json.dumps(self.value).encode()
+   requests=[]
+   def urlopen(request,timeout):
+    requests.append(request);return Response(responses.pop(0))
+   with patch('sys.argv',['headapi-client','--input',str(root),'--wait']),\
+        patch.dict('os.environ',{'HEADAPI_API_KEY':'unit-test-secret'}),\
+        patch('urllib.request.urlopen',side_effect=urlopen),\
+        patch('time.sleep'),redirect_stdout(io.StringIO()):
+    self.assertEqual(client.main(),0)
+   self.assertEqual(len(requests),2)
+   self.assertTrue(all(request.get_header('X-api-key')=='unit-test-secret' for request in requests))
 
 class FittingContractTests(unittest.TestCase):
  def test_no_joint_registration_for_front_only(self):

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "paths": {
     "cpu_python": ".venv/Scripts/python.exe",
-    "probe_python": ".venv-triposr/Scripts/python.exe",
     "rdf_python": ".venv-rdf/Scripts/python.exe",
+    "haircap_python": ".venv-triposr/Scripts/python.exe",
     "rdf_repo": "vendor/RealDenseFace",
     "landmarker": "D:/AI-cache/mediapipe/face_landmarker.task",
     "cache_root": "D:/AI-cache/triposr-probe",
