@@ -1,0 +1,10 @@
+{
+  "workspace_sha256": "0822ea326a0890d895b8a6dcd3caef9ca5fd6cf067fe3531b7d5efc937e0e5f8",
+  "face_sha256": "dbed1ab1636859148057d7a7a5add96cb18e2ec81c77120aa3e3badce177105f",
+  "mask_sha256": "9c28821689f51d5be3379f2e0d8762cc219954a4b91e80440acc3549aa0c13ff",
+  "cpu_subject_preparation_passed": true,
+  "original_face_bytes_preserved": true,
+  "regression_tests": 20,
+  "windows_powershell_executed": false,
+  "gpu_inference_executed": false
+}

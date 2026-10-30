@@ -1,0 +1,191 @@
+"""V2.4 correction: source face texture, bright skin reference, compact short hair."""
+import argparse,html,json,shutil,sys,time,traceback
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[2];sys.path[:0]=[str(ROOT/'src'),str(ROOT/'scripts')]
+import numpy as np
+from PIL import Image,ImageDraw
+import trimesh
+from tools.headlab26.face import load_face,sha
+from figurine2_hair import read_library,fit_hair
+from figurine245_boolean import solid_union
+from figurine2_repair import repair_hair
+from figurine2_evaluation import mesh_audit,audit_input,vertex_fans
+from tools.headlab26.appearance import canonical_appearance,assemble_appearance,export_eye_pbr_probe
+from figurine24_hair import extend_sideburns,contact_screen,reference_correspondence,ear_intrusion_screen
+from figurine23_render import render_fast
+from figurine22_hair import shell_fit
+from head245_glasses import frame_mesh,visible_ear_coverage
+from add_graduation_cap import load,save
+from figurine_preview import add_mesh
+from figurine23_render import srgb_to_linear
+from figurine_geometry import weld
+from run_pipeline_v2 import validate,write,hair_assessment,front_surface_guard,glb
+from run_figurine_v3 import export_print_stl
+from headlab_diagnostics5 import diagnose
+from head245_supports import prepare_supports
+
+def preview(source,destination,frame,size=360):
+    sheet=Image.new('RGB',(size*4,size+24),(23,28,35));draw=ImageDraw.Draw(sheet)
+    for i,yaw in enumerate([0,65,-65,180]):
+        sheet.paste(render_fast(source,yaw,size,frame),(i*size,24));draw.text((i*size+8,5),str(yaw)+' deg',fill='white')
+    sheet.save(destination)
+
+def review(out,report):
+    esc=html.escape
+    text='<!doctype html><meta charset="utf-8"><title>HeadLab26</title><style>body{background:#171c24;color:#eee;font:16px system-ui;margin:24px;max-width:1480px}img{max-width:100%}section{background:#252f3b;padding:16px;margin:18px 0}a{color:#9cd0ff}pre{white-space:pre-wrap;overflow-wrap:anywhere}.status{padding:16px;background:#503c20}</style><h1>HeadLab26 · màu đa góc, gọng kính 3D, đối chiếu tóc</h1>'
+    quality=report.get('quality',{})
+    text+='<p class="status">Xuất file: '+esc(report['status'])+' · Ngoại hình: '+esc(quality.get('appearance_status','CHƯA KIỂM CHỨNG'))+' · Sẵn sàng máy in: CHƯA ĐẠT</p>'
+    text+='<p>Gọng kính và mắt bị che là thiết kế ước lượng. Màu da lấy từ ảnh bên có vùng da đủ sáng hơn; chưa hiệu chuẩn. Hình học mặt nguồn giữ nguyên. STL không chứa màu.</p><h2>Đối chứng nguồn</h2><img src="shared/source_reference.png"><h2>Màu mới, chưa ghép tóc và kính</h2><img src="shared/canonical_reference.png"><h2>Màu nền không đèn</h2><img src="shared/canonical_unlit.png"><h2>Vùng da tham chiếu đã chọn</h2><img width="512" src="shared/skin_reference_patch.png">'
+    if report.get('selected'):text+='<h2>Ứng viên điểm silhouette tốt nhất trong các bản qua kiểm tra hình học</h2><img src="selected/appearance.png"><p><a href="selected/appearance.glb">GLB</a> · <a href="selected/head_mm.stl">STL đầu và kính</a> · <a href="selected/selection.json">Trạng thái</a></p>'
+    if (out/'selected/glasses_mm.stl').exists():text+='<p><a href="selected/glasses_mm.stl">STL kính tham khảo, không phải connector tháo lắp</a></p>'
+    for c in report['candidates']:
+        text+='<section><h2>'+esc(c['id'])+'</h2>'
+        if c['status']=='FAILED':text+='<pre>'+esc(c['error'])+'</pre>'
+        else:
+            text+='<img src="'+esc(c['id'])+'/appearance.png"><details><summary>Hình học và fit ảnh</summary><img src="'+esc(c['id'])+'/geometry.png">'
+            for view in ['front','left','right']:text+='<img width="360" src="'+esc(c['id'])+'/'+view+'.fit.png">'
+            text+='<pre>'+esc(json.dumps(c,indent=2))+'</pre></details>'
+        text+='</section>'
+    text+='<pre>'+esc(json.dumps({k:v for k,v in report.items() if k!='candidates'},indent=2))+'</pre>'
+    (out/'review.html').write_text(text,encoding='utf-8')
+
+def append_frame(path,mesh,rgb):
+    if mesh is None:return
+    doc,blob=load(path);color=np.r_[srgb_to_linear(np.asarray(rgb)/255),1.]
+    add_mesh(doc,blob,'Observed_Glasses_Frame_Design',mesh,np.tile(color,(len(mesh.vertices),1)))
+    temporary=path.with_suffix('.frame.glb');save(temporary,doc,blob);temporary.replace(path)
+
+def run(workspace,model,out,profile,reference_run=None,geometry_cache=None):
+    validate(profile)
+    if out.exists():raise ValueError('Output exists; refusing overwrite')
+    out.mkdir(parents=True);shared=out/'shared';shared.mkdir();started=time.perf_counter()
+    write(out/'profile.used.json',profile)
+    from head24_policy import InputRejected
+    try:
+        face=load_face(workspace,model,profile,shared)
+    except InputRejected as e:
+        write(out/'rejection.json',{'status':'INPUT_GATE_REJECTED','error':str(e),'ready_for_machine':False})
+        raise
+    original_skin=face['report']['skin'].copy()
+    from tools.headlab26.face_states import appearance_cached
+    native,unlit,skin=appearance_cached(workspace,face,profile,shared,profile.get('reuse_face26'))
+    write(shared/'face.json',face['report']);write(shared/'bright_skin.json',skin)
+    frame=([0,0,0],profile['head_neck_mm']*1.4)
+    for name in ['source_reference','canonical_reference','canonical_unlit']:
+        preview(shared/(name+'.glb'),shared/(name+'.png'),frame,profile['preview_size'])
+    report={'version':'Memento3D HeadLab26.1','status':'RUNNING','face':face['report'],
+            'rejected_v20_skin_estimate_for_comparison':original_skin,'input_assessment':audit_input(face,profile),
+            'candidates':[],'selected':None,'ready_for_machine':False,'physical_print_verified':False,'execution':{'python':sys.version.split()[0],'numpy':np.__version__,'trimesh':trimesh.__version__,'ray_backend':type(face['head'].ray).__module__,'timing_scope':'CPU host after supplied GPU fit; not Windows/GPU benchmark'},
+            'scope':'multiview observed skin; explicit glasses/occluded-eye design; two template assets with bounded scalp shell and sideburns'}
+    assets=read_library(ROOT/profile['library'],ROOT)
+    assets=[a for a in assets if a['id'] in profile['asset_ids']]
+    if len(assets)!=len(profile['asset_ids']):raise ValueError('Unknown asset ID')
+    frame_mesh_value,frame_report=frame_mesh(face,profile['glasses245']);write(shared/'glasses.json',frame_report)
+    report['glasses']=frame_report
+    report['quality']={'appearance_status':'UNVERIFIED_WITH_WARNINGS','skin_confidence':skin['confidence'],'hidden_eyes_recovered':False,'printability':'UNVERIFIED','warnings':['uncalibrated multiview color','source fitting accuracy unverified','template hairstyle likeness unverified']+(['occluded eyes are a neutral design estimate'] if frame_mesh_value is not None else [])}
+    head=face['head'];eye_solids=[weld(face['points'][np.repeat(face['components']==i,3)]) for i in [1,2]]
+    for asset in assets:
+        from head24_cache import cache_key,load_hair_cache,save_hair_cache
+        key_data=cache_key(face,asset,profile,ROOT)
+        cachefile=None if geometry_cache is None else Path(geometry_cache)/'shared'/('hair_checkpoint_'+asset['id']+'.json')
+        cached=load_hair_cache(Path(geometry_cache)/'shared',asset['id'],key_data) if cachefile is not None and cachefile.exists() else None
+        if cached is None:
+            fitted,fit=fit_hair(asset,ROOT,head,float(face['eye_centers'][:,1].mean()),profile['fit'],'cage')
+        else:fitted,fit,_,_=cached
+        correspondence={}
+        provenance={'mode':'fresh bounded radial shell; no protected-exterior retraction floor'}
+        write(shared/('fit_'+asset['id']+'.json'),fit)
+        for combination in [(b,m) for b in profile['hair245']['body_mm'] for m in profile.get('hair26',{}).get('methods',['radial'])]:
+            body,method=combination
+            settings=dict(profile['compact_fit'],body_mm=body,detail_strength=profile['hair245']['detail_strength'])
+            shell,shell_report=shell_fit(fitted,head,float(face['eye_centers'][:,1].mean()),settings,correspondence)
+            # Reuse exact rays only inside this head+asset solve; persisted source hashes below.
+            arap_note=None
+            if method=='arap':
+                from tools.headlab26.geometry import fit_style_arap
+                eye_y=float(face['eye_centers'][:,1].mean());upper=head.vertices[head.vertices[:,1]>eye_y+.07*head.extents[1]];lo,hi=np.quantile(upper,[.005,.995],axis=0)
+                origin=[(lo[0]+hi[0])/2,eye_y-.04*head.extents[1],(lo[2]+hi[2])/2]
+                try:
+                    shell,arap_note=fit_style_arap(fitted,shell,correspondence,{'origin':origin,'iterations':profile['hair26']['iterations'],'max_displacement_mm':profile['hair26']['max_displacement_mm'],'cell_mm':profile['hair26'].get('cell_mm',.55),'max_nodes':profile['hair26'].get('max_nodes',6000),'min_fraction':profile['hair26'].get('min_fraction',.125)})
+                    shell_report=dict(shell_report,crown_added_height_mm=float(shell.bounds[1,1]-head.bounds[1,1]),crown_proxy_pass=bool(shell.bounds[1,1]-head.bounds[1,1]<=profile['compact_fit']['max_crown_added_mm']))
+                except Exception as exc:
+                    failure={'id':'arap_'+asset['id']+'_'+str(body).replace('.','p'),'status':'FAILED','error':str(exc),'ready_for_machine':False};folder=out/failure['id'];folder.mkdir();write(folder/'failure.json',failure);report['candidates'].append(failure);continue
+            extra=profile['sideburns']['preferred_extra_mm']
+            key=method+'_hair_'+asset['id']+'_body_'+str(body).replace('.','p');folder=out/key;folder.mkdir();tick=time.perf_counter();print('HeadLab26 candidate:',key,flush=True)
+            try:
+                if asset['id'] in profile['hair245']['sideburn_asset_ids']:
+                    hair,sideburn=extend_sideburns(shell,head,face,extra,profile['sideburns'])
+                else:
+                    hair=shell.copy();sideburn={'method':'template-native boundary retained; no certified local tip handles for this asset','requested_extension_applied':False,'source_face_modified':False}
+                absolute_ears=visible_ear_coverage(hair,face,profile.get('hair26',{}).get('ear_coverage_limit',.10))
+                if not absolute_ears['pass']:raise ValueError('Hair covers too many observed ear samples: '+str(absolute_ears))
+                compact=dict(shell_report)
+                contact=contact_screen(hair,head,float(face['eye_centers'][:,1].mean()))
+                attachment,views=hair_assessment(hair,head,face,profile)
+                if not attachment['attachment_and_front_proxy_pass']:raise ValueError('Protected face/contact gate failed: '+str(attachment))
+                if not compact['crown_proxy_pass']:raise ValueError('Hair crown protrudes beyond close-fit budget')
+                if not contact['pass']:raise ValueError('Edited hair failed radial contact gate: '+str(contact))
+                repair={'used':False}
+                try:solid=solid_union([head,hair]+eye_solids)
+                except ValueError:
+                    hair,repair=repair_hair(hair,.08);repair['used']=True
+                    attachment,views=hair_assessment(hair,head,face,profile)
+                    if not attachment['attachment_and_front_proxy_pass']:raise ValueError('Repaired hair failed core-face gate')
+                    solid=solid_union([head,hair]+eye_solids)
+                # Recheck the actual post-repair hair, not only its pre-boolean proposal.
+                contact=contact_screen(hair,head,float(face['eye_centers'][:,1].mean()))
+                ear_check=ear_intrusion_screen(hair,shell,face)
+                if not contact['pass'] or not ear_check['pass']:raise ValueError('Post-repair contact or source-ear coverage gate failed')
+                guard=front_surface_guard(solid,head,face)
+                if frame_mesh_value is not None:
+                    solid=solid_union([solid]+list(frame_mesh_value.split()))
+                    if len(solid.split())!=1:raise ValueError('Frame does not attach to head as one component')
+                base_y=float(head.bounds[0,1]-.1);export_print_stl(solid,folder/'head_mm.stl',base_y)
+                export_print_stl(hair,folder/'hair_mm.stl',base_y)
+                if frame_mesh_value is not None:export_print_stl(frame_mesh_value,folder/'glasses_mm.stl',base_y)
+                surface=mesh_audit(trimesh.load(folder/'head_mm.stl',force='mesh',process=True),'mm Z-up')
+                if not surface['closed_surface_manifold']:raise ValueError('Final STL failed manifold gate')
+                write(folder/'surface_audit.json',surface)
+                position_error=assemble_appearance(native,folder/'appearance.glb',face,hair,profile.get('hair_rgb',[35,28,24]))
+                assemble_appearance(unlit,folder/'unlit.glb',face,hair,profile.get('hair_rgb',[35,28,24]))
+                for path in [folder/'appearance.glb',folder/'unlit.glb']:append_frame(path,frame_mesh_value,profile['glasses245']['rgb'])
+                export_eye_pbr_probe(folder/'appearance.glb',folder/'eye_pbr_probe.glb')
+                glb(folder/'geometry.glb',[('PrintShape',solid,[.7,.7,.7,1.])])
+                for row in views:row.pop('overlay').save(folder/(row['view']+'.fit.png'))
+                checks=diagnose(folder/'head_mm.stl',folder,profile['printer'])
+                preview(folder/'appearance.glb',folder/'appearance.png',frame,profile['preview_size'])
+                preview(folder/'unlit.glb',folder/'unlit.png',frame,profile['preview_size'])
+                preview(folder/'geometry.glb',folder/'geometry.png',frame,profile['preview_size'])
+                # Rank only after geometry/contact/crown guards; this is not a beauty score.
+                score=float(1-views[0]['iou']+.25*(2-views[1]['iou']-views[2]['iou'])+.15*compact['crown_added_height_mm'])
+                c={'id':key,'status':'EXPORTED','fit':fit,'compact':compact,'sideburn':sideburn,'ear_intrusion_screen':ear_check,'contact_after_edit':contact,'extra_mm':extra,'body_mm':body,'asset_id':asset['id'],'asset_name':asset['name'],'hair_method':method,'arap':arap_note,'manufacturing_union':solid.metadata.get('surface_processing'),'repair':repair,'attachment':attachment,
+                   'absolute_ear_coverage':absolute_ears,'source_face_surface_guard_stage':'after hair union, before added glasses','source_face_surface_guard':guard,'source_face_position_export_error_mm':position_error,'photo_consistency':views,
+                   'proposal_score':score,'geometry':checks,'seconds':time.perf_counter()-tick,'ready_for_machine':False}
+                write(folder/'candidate.json',c)
+            except Exception as exc:
+                c={'id':key,'status':'FAILED','error':str(exc),'ready_for_machine':False};write(folder/'failure.json',c);(folder/'traceback.txt').write_text(traceback.format_exc())
+                print('HeadLab26 rejected:',str(exc),flush=True)
+            report['candidates'].append(c);write(out/'report.json',report);review(out,report)
+    valid=[c for c in report['candidates'] if c['status']=='EXPORTED']
+    if valid:
+        chosen=min(valid,key=lambda c:c['proposal_score']);dest=out/'selected';dest.mkdir()
+        for name in ['appearance.glb','unlit.glb','eye_pbr_probe.glb','geometry.glb','head_mm.stl','hair_mm.stl','appearance.png','unlit.png','geometry.png','candidate.json','glasses_mm.stl']:
+            if (out/chosen['id']/name).exists():shutil.copy2(out/chosen['id']/name,dest/name)
+        report['selected']={'candidate':chosen['id'],'reason':'lowest multiview silhouette mismatch among geometry/contact guarded candidates; no independent aesthetic or identity validation','ready_for_machine':False}
+        if profile['support_preparation']['enabled']:
+            try:report['selected']['experimental_supports']=prepare_supports(dest/'head_mm.stl',dest/'experimental_supports',profile['support_preparation'])
+            except Exception as exc:report['selected']['support_error']=str(exc)
+        write(dest/'selection.json',report['selected'])
+    report['status']=('DEMO_EXPORTED' if len(valid)==len(report['candidates']) else 'PARTIAL_DEMO_EXPORTED') if valid else 'NO_VALID_CANDIDATE'
+    report['seconds']=time.perf_counter()-started
+    write(out/'report.json',report);review(out,report)
+    write(out/'checksums.json',{p.relative_to(out).as_posix():sha(p) for p in out.rglob('*') if p.is_file() and p.name!='checksums.json'})
+    print(json.dumps({'status':report['status'],'selected':report['selected']['candidate'] if valid else None,'seconds':report['seconds'],'output':str(out)},indent=2),flush=True)
+    return report
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--profile',type=Path,default=ROOT/'configs/pipeline-v245.json');p.add_argument('--workspace',type=Path,required=True);p.add_argument('--parser-model',type=Path);p.add_argument('--reference-run',type=Path);p.add_argument('--output',type=Path);p.add_argument('--geometry-cache',type=Path)
+    a=p.parse_args();c=json.loads(a.profile.read_text(encoding='utf-8-sig'))
+    r=run(a.workspace or ROOT/c['workspace'],a.parser_model or Path(c['parser_model']),a.output or ROOT/'runs'/('pipeline_v24_'+time.strftime('%Y%m%d_%H%M%S')),c,a.reference_run,a.geometry_cache)
+    return 0 if r['status'] in ['DEMO_EXPORTED','PARTIAL_DEMO_EXPORTED'] else 2
+if __name__=='__main__':raise SystemExit(main())

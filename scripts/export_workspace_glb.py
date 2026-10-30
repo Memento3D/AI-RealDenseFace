@@ -28,7 +28,7 @@ def sample(image, uv):
             + image[jy, ix]*(1-a)*b + image[jy, jx]*a*b)
 
 
-def export(source, output, cell=32, refine=False):
+def export(source, output, cell=32, refine=False, separate_eyes=False, harmonize=False):
     if output.exists():
         raise ValueError('Output already exists; choose another --output path')
     raw = source.read_bytes()
@@ -48,10 +48,42 @@ def export(source, output, cell=32, refine=False):
     images = [np.asarray(Image.open(io.BytesIO(base64.b64decode(s.split(',',1)[1]))).convert('RGB'), dtype=float)/255 for s in d['images']]
     gains = np.asarray(d['gains'], dtype=float)
     skin = np.asarray(d['skin'], dtype=float)
+    corner_gains=None;source_bias=None;calibration_report=None;feature_report=None
+    if harmonize:
+        from eye_components import identify
+        from color_harmonization import estimate
+        component,_=identify(vertices)
+        # Calibrate before feature source changes, using original visibility.
+        corner_gains,source_bias,calibration_report=estimate(vertices,coords,weights,images,gains,skin,sample,linear,component)
+        centers=vertices.reshape(-1,3,3).mean(1)
+        height=np.ptp(vertices[:,1]);width=np.ptp(vertices[:,0]);eye_y=vertices[np.repeat(component>0,3),1].mean()
+        center_x=(vertices[:,0].min()+vertices[:,0].max())/2
+        x=(centers[:,0]-center_x)/width
+        y=(centers[:,1]-eye_y)/height
+        # Smooth source preference avoids a rectangular hard switch at cheeks.
+        eye_strength=np.exp(-((x/.34)**4+(y/.065)**4))
+        mouth_strength=np.exp(-((x/.24)**4+((y+.245)/.07)**4))
+        strength=np.maximum(eye_strength,mouth_strength)
+        valid_front=weights[:,:,0].min(1)>1e-10
+        strength*=valid_front
+        weights[:,:,0]*=(1+25*strength[:,None])
+        weights[:,:,1:]*=(1-.95*strength[:,None,None])
+        feature_report=dict(front_preferred_triangles=int((strength>.1).sum()),method='smooth geometric eye/mouth front preference, only previously valid front triangles',geometry_modified=False,gaze_estimated=False,mouth_geometry_corrected=False)
+    eye_report=None
+    if separate_eyes:
+        from eye_components import identify
+        component,eye_report=identify(vertices)
+        front_eye=(component>0)&(weights[:,:,0].min(1)>1e-10)
+        weights[front_eye]=0
+        weights[front_eye,:,0]=1
+        eye_report['front_only_texture_triangles']=int(front_eye.sum())
+        eye_report['other_eye_triangles']='existing source weights retained; no new projection'
     refinement = None
     if refine:
         from refine_texture_boundary import prepare
-        fade, fill, refinement = prepare(vertices,weights,coords,images,gains,skin,sample,linear)
+        fade, fill, refinement = prepare(vertices,weights,coords,images,gains,skin,sample,linear,corner_gains,source_bias)
+        if separate_eyes:
+            fade[component>0]=1
     grid = math.ceil(math.sqrt(count))
     side = grid * cell
     atlas = np.zeros((side, side, 3), dtype=np.uint8)
@@ -72,7 +104,10 @@ def export(source, output, cell=32, refine=False):
             if np.any(q[:,2] <= 0):
                 raise ValueError('Non-positive source depth')
             rgb = sample(images[j], q[:,:2]/q[:,2,None])
-            color += linear(rgb)*gains[j]*w[:,j,None]
+            gain=gains[j] if corner_gains is None else bary@corner_gains[j].reshape(-1,3,3)[i]
+            corrected=linear(rgb)*gain
+            if source_bias is not None:corrected=np.maximum(corrected+source_bias[j],0)
+            color += corrected*w[:,j,None]
         color /= np.maximum(sums[:,None],1e-12)
         color = np.where(color <= .0031308, color*12.92, 1.055*np.maximum(color,0)**(1/2.4)-.055)
         # Hidden-region fill is flat: the HTML's view-dependent fill shading is not baked.
@@ -109,6 +144,18 @@ def export(source, output, cell=32, refine=False):
         textures=[{'source':0,'sampler':0}],samplers=[{'magFilter':9729,'minFilter':9729,'wrapS':33071,'wrapT':33071}],
         images=[{'bufferView':image_view,'mimeType':'image/png'}],
         buffers=[{'byteLength':len(blob)}],bufferViews=views,accessors=accessors)
+    if separate_eyes:
+        # Shared buffers preserve positions, UVs and normals exactly. Each node
+        # references only its own triangles and gets an independent material.
+        meshes=[];nodes=[];materials=[]
+        for i,name in enumerate(eye_report['object_names']):
+            indices=np.flatnonzero(np.repeat(component==i,3)).astype('<u4')
+            view=add(indices.tobytes(),34963)
+            accessors.append(dict(bufferView=view,componentType=5125,count=len(indices),type='SCALAR'))
+            meshes.append({'name':name,'primitives':[{'attributes':{'POSITION':0,'NORMAL':1,'TEXCOORD_0':2},'indices':len(accessors)-1,'material':i,'mode':4}]})
+            nodes.append({'mesh':i,'name':name})
+            material=json.loads(json.dumps(doc['materials'][0]));material['name']=name+'_Photo';materials.append(material)
+        doc.update(meshes=meshes,nodes=nodes,materials=materials,scenes=[{'nodes':[0,1,2]}],buffers=[{'byteLength':len(blob)}])
     js=json.dumps(doc,separators=(',',':')).encode()
     js+=b' '*((-len(js))%4)
     blob+=b'\0'*((-len(blob))%4)
@@ -120,6 +167,10 @@ def export(source, output, cell=32, refine=False):
     report=dict(status='GLB_EXPORTED',source=str(source.resolve()),source_sha256=hashlib.sha256(raw).hexdigest(),output=str(output.resolve()),triangles=count,atlas_size=side,geometry_modified=False,texture_baked=True,hidden_fill='flat sampled skin; no recovered hidden detail',appearance='optimized default blend and gains; unlit photo material; view-dependent HTML fill shading omitted',units='native model units; physical scale unverified')
     if refine:
         report.update(texture_refinement=refinement,hidden_fill='smooth approximate skin material; not recovered hidden texture')
+    if separate_eyes:
+        report['eye_components']=eye_report
+    if harmonize:
+        report.update(color_harmonization=calibration_report,feature_texture=feature_report)
     output.with_suffix('.report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print(json.dumps(report,indent=2))
 
@@ -130,5 +181,7 @@ if __name__=='__main__':
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--cell',type=int,choices=(16,32,48,64),default=32)
     p.add_argument('--refine-texture',action='store_true',help='Experimental V2.1 inward coverage fade and smooth skin fill')
+    p.add_argument('--separate-eyes',action='store_true',help='V2.2: split verified existing eyeballs; prefer valid front eye texture')
+    p.add_argument('--harmonize-colors',action='store_true',help='Experimental spatial color match and protected front feature texture')
     a=p.parse_args()
-    export(a.workspace,a.output,a.cell,a.refine_texture)
+    export(a.workspace,a.output,a.cell,a.refine_texture,a.separate_eyes,a.harmonize_colors)

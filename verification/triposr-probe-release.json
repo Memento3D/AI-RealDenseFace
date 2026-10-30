@@ -1,0 +1,78 @@
+{
+  "release": "TripoSR Raw Probe v1.1.0",
+  "date": "2026-10-30",
+  "cpu_tests": {
+    "passed": 24,
+    "failed": 0,
+    "scope": "prior14 + mesh audit provenance/immutability/scene transforms/open boundary/output protection + verified input reuse + synthetic worker one-field multires/OOM continuation"
+  },
+  "full_suite": {
+    "tests": 423,
+    "failures": 2,
+    "errors": 5,
+    "same_named_legacy_issues_as_baseline": true
+  },
+  "architecture": "PASS",
+  "prepare_smoke": {
+    "source": "previous saved subject05 crop; not a new native input01-06 capture",
+    "status": "OBSERVATION_CROP_EXPORTED",
+    "white_padding_applied": false,
+    "neural_inference_executed": false,
+    "json_coordinates_verified": true
+  },
+  "neural_inference_verified": false,
+  "windows_setup_verified": false,
+  "gpu_execution_verified": false,
+  "native_torchmcubes_parity_verified": false,
+  "hair_isolated": false,
+  "ready_for_machine": false,
+  "pins": {
+    "TripoSR_code": "107cefdc244c39106fa830359024f6a2f1c78871",
+    "TripoSR_model": "5b521936b01fbe1890f6f9baed0254ab6351c04a",
+    "DINO_config": "f205d5d8e640a89a2b8ef0369670dfc37cc07fc2"
+  },
+  "limitations": [
+    "head crop is geometric, not guaranteed full hair coverage",
+    "rembg may remove hair or retain background",
+    "model generates the entire head/bust and may alter identity",
+    "single-photo hidden geometry is inferred",
+    "mesh native units have not been scaled for printing",
+    "CPU extraction is a deliberate alternate backend, not native benchmark"
+  ],
+  "bootstrap_fix": {
+    "directory_rename_used": false,
+    "verified_legacy_staging_reused": true,
+    "recovery_tests": "mocked PermissionError for Path.rename plus reuse/no-download, empty target, tampered and unverified source trees, fresh install",
+    "actual_windows_execution_verified": false,
+    "source_model_pins_changed": false
+  },
+  "user_provided_original_probe": {
+    "report_status": "RAW_PROPOSAL_EXPORTED",
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "neural_seconds": 3.252436699985992,
+    "scope": "user-provided v1.0.1 report, not execution by release author; not validation of v1.1 multi-resolution code"
+  },
+  "uploaded_mesh_cpu_audit": {
+    "sha256": "441e27e5b540d435ae9efbf81ad5a55557ef4e5c358b6aaa0dc1d307ef61717c",
+    "vertices": 13843,
+    "triangles": 27694,
+    "components": 1,
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "zero_area_triangles": 0,
+    "watertight": true,
+    "positive_volume": true,
+    "source_bytes_unchanged": true,
+    "self_intersections_verified": false,
+    "minimum_thickness_verified": false
+  },
+  "v11": {
+    "read_only_mesh_audit_implemented": true,
+    "prepared_input_reuse_implemented": true,
+    "single_forward_multi_resolution_implemented": true,
+    "hybrid_assembly_performed": false,
+    "new_gpu_features_verified_on_hardware": false,
+    "powershell_runtime_verified": false,
+    "model_pins_changed": false
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "checks": [
+    "initial source head + current V2.2 fitted hair loaded",
+    "switch to second registered hairstyle preserves head UUID, source hash and camera; exactly one hair object",
+    "new GLB + optional sidecar discovered without HTML edits or manual refresh; approximate fit loaded",
+    "asset content replacement triggers new revision and reload",
+    "deleting active file removes hair, keeps head",
+    "UI controls export GLB with exact original head positions and preview-only metadata",
+    "gray mesh mode applied without reloading head",
+    "390px mobile layout has no horizontal overflow"
+  ],
+  "page_errors": []
+}

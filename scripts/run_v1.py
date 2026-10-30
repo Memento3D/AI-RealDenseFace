@@ -112,6 +112,9 @@ def main():
     p.add_argument('--cell', type=int, choices=(16,32,48,64), default=32)
     p.add_argument('--flame-model', type=Path, default=ROOT/'vendor/RealDenseFace/weights/flame/flame2023.pkl')
     p.add_argument('--refine-texture', action='store_true',help='Enable experimental V2.1 texture boundary refinement')
+    p.add_argument('--separate-eyes', action='store_true',help='Split existing verified FLAME eyes at export')
+    p.add_argument('--graduation-cap', action='store_true',help='Add original procedural prototype cap after GLB export')
+    p.add_argument('--complete-head', action='store_true',help='Integrated experimental color/hair/glasses/cap review bundle')
     args = p.parse_args()
     folder = args.input_dir.resolve()
     repo = ROOT/'vendor/RealDenseFace'
@@ -140,6 +143,9 @@ def main():
         input_dir=str(folder),input_sha256={s:sha(f) for s,f in photos.items()},stages=stages,
         workflow_release='v1-flame2023-1.1',model_variant=flame_model.stem,
         texture_refinement_requested=args.refine_texture,
+        eye_split_requested=args.separate_eyes,
+        graduation_cap_requested=args.graduation_cap,
+        integrated_review_requested=args.complete_head,
         flame_model_path=str(flame_model),flame_model_sha256=sha(flame_model),
         flame_assets_sha256=sha(repo/'weights/flame/flame_assets.npz'),
         photo_quality_gate_executed=False,likeness_verified=False,printability_verified=False,
@@ -147,6 +153,9 @@ def main():
             'GPU metrics are device-wide, not process-specific. One-second sampling can miss peaks.',
             'Wall times include imports, model loading, IO and monitoring overhead.',
             'Monitoring parent RAM is excluded. No concurrent-load capability is established.'])
+    if args.complete_head:
+        report['workflow_release']='v2.4-integrated-experiment'
+        report['pipeline_version']=2
     started = time.perf_counter()
     report['gpu_baseline'] = gpu()
     def execute(name, command, cwd=ROOT):
@@ -166,7 +175,14 @@ def main():
         texture = latest(head,'three_textures_*','THREE_TEXTURES_PREVIEW_EXPORTED')
         execute('04_optimize',[python,ROOT/'scripts/optimize_head.py','--head-run',head,'--texture-run',texture,'--auto-mask','--face-parser-model',parser_model])
         workspace = latest(head,'head_workspace_*','TEXTURE_REVIEW_READY')
-        execute('05_export',[python,ROOT/'scripts/export_workspace_glb.py','--workspace',workspace/'head.workspace.html','--output',out/'head.optimized.glb','--cell',args.cell]+(['--refine-texture'] if args.refine_texture else []))
+        execute('05_export',[python,ROOT/'scripts/export_workspace_glb.py','--workspace',workspace/'head.workspace.html','--output',out/'head.optimized.glb','--cell',args.cell]+(['--refine-texture'] if args.refine_texture else [])+(['--separate-eyes'] if args.separate_eyes else []))
+        if args.graduation_cap:
+            execute('06_cap',[python,ROOT/'scripts/add_graduation_cap.py','--head',out/'head.optimized.glb','--output-dir',out/'cap'])
+            report['head_with_cap_glb']=str(out/'cap/head.with_cap.glb')
+        if args.complete_head:
+            execute('07_integrated',[python,ROOT/'scripts/complete_head.py','--workspace',workspace/'head.workspace.html','--input-dir',folder,'--output-dir',out/'integrated'])
+            report['integrated_review_glb']=str(out/'integrated/head.complete.glb')
+            report['integrated_report']=str(out/'integrated/complete.report.json')
         for slot, f in photos.items():
             if sha(f)!=report['input_sha256'][slot]: raise RuntimeError('Input photograph changed during run')
         if sha(flame_model)!=report['flame_model_sha256']: raise RuntimeError('FLAME model changed during run')

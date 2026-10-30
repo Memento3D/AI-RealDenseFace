@@ -1,0 +1,27 @@
+{
+  "models": {
+    "triposr": {
+      "repo": "https://github.com/VAST-AI-Research/TripoSR.git",
+      "commit": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "default": true,
+      "specialized_hair": false,
+      "weights_repo": "stabilityai/TripoSR",
+      "weights_revision": "5b521936b01fbe1890f6f9baed0254ab6351c04a",
+      "dino_config_revision": "f205d5d8e640a89a2b8ef0369670dfc37cc07fc2"
+    },
+    "hunyuan-mini": {
+      "repo": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.git",
+      "commit": "f8db63096c8282cb27354314d896feba5ba6ff8a",
+      "default": true,
+      "specialized_hair": false,
+      "weights_repo": "tencent/Hunyuan3D-2mini",
+      "weights_revision": "f90a0f7df7d5e6f71109cf333f6a95a0ae3194a6"
+    },
+    "difflocks": {
+      "repo": "https://github.com/Meshcapade/difflocks.git",
+      "commit": "fcc73747dc60320c30228b6711000a53fc0c9d84",
+      "default": false,
+      "specialized_hair": true
+    }
+  }
+}

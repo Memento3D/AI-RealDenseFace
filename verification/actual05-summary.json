@@ -1,0 +1,67 @@
+{
+  "status": "PARTIAL_DEMO_EXPORTED",
+  "selected": "hair_21778_body_0p85",
+  "skin_rgb8": [
+    177,
+    129,
+    96
+  ],
+  "skin_confidence": "LOW",
+  "head_stl": {
+    "vertices": 60381,
+    "triangles": 120794,
+    "bounds": [
+      [
+        -7.2469658851623535,
+        -7.616185188293457,
+        0.10000000149011612
+      ],
+      [
+        7.2469658851623535,
+        8.480962753295898,
+        22.902542114257812
+      ]
+    ],
+    "extents": [
+      14.493931770324707,
+      16.097147941589355,
+      22.802542112767696
+    ],
+    "unit_basis": "mm Z-up",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "signed_volume": 1937.4541788730248,
+    "connected_components": 1,
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0,
+    "finite": true,
+    "vertex_link_audit": {
+      "nonmanifold_vertex_count": 0,
+      "vertex_ids": [],
+      "max_incident_fan_count": 1
+    },
+    "euler_characteristic": -16,
+    "closed_surface_manifold": true,
+    "self_intersections_verified": false,
+    "minimum_wall_thickness_verified": false
+  },
+  "execution": {
+    "python": "3.12.14",
+    "numpy": "1.26.4",
+    "trimesh": "4.7.4",
+    "ray_backend": "trimesh.ray.ray_pyembree",
+    "timing_scope": "CPU host after supplied GPU fit; not Windows/GPU benchmark"
+  },
+  "cpu_after_supplied_fit_seconds": 100.89480851600001,
+  "support_stage_separately_recomputed": {
+    "method": "six-orientation voxel precheck after geometry export",
+    "seconds": 14.84135398799981,
+    "geometry_changed": false
+  },
+  "coarse_support_precheck_pass": true,
+  "ready_for_machine": false,
+  "targeted_tests": 68,
+  "legacy_files_unchanged": 63
+}

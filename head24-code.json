@@ -1,0 +1,153 @@
+{
+  "version": "Head24.4 cranial frame and observed feature fallback",
+  "files": [
+    {
+      "path": "HEAD24-2-PROFILE-VI.md",
+      "sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84"
+    },
+    {
+      "path": "HEAD24-3-RESUME-VI.md",
+      "sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c"
+    },
+    {
+      "path": "HEAD24-4-START-VI.md",
+      "sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5"
+    },
+    {
+      "path": "HEAD24-METHODS.md",
+      "sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f"
+    },
+    {
+      "path": "HEAD24-START-VI.md",
+      "sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504"
+    },
+    {
+      "path": "RUN-HEAD24.ps1",
+      "sha256": "619b6c079cd41d1a3c4a8d61f484ea6545cae688c1bbb3213fe49ad7c9ec4966"
+    },
+    {
+      "path": "configs/pipeline-v24.json",
+      "sha256": "1f1408b15f740429e329c89a46fef1c8382beaf71e4643f6b13e4ac62d3bad52"
+    },
+    {
+      "path": "head24-rdf-source.json",
+      "sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557"
+    },
+    {
+      "path": "scripts/build_head24_workspace.py",
+      "sha256": "4cb6e148f85cbf1c84d8832f86f811bd089e764673d7eb2467d497568fa1ea37"
+    },
+    {
+      "path": "scripts/detect_head24_profile.py",
+      "sha256": "87597f933078750d1fa051b6ed57f66b6de2d994e833a78ba6c807ddc64e0113"
+    },
+    {
+      "path": "scripts/figurine24_appearance.py",
+      "sha256": "2be68dfcf5f989b83a2e6c538c9d9e8340ba59388f273f473799ddb483179c03"
+    },
+    {
+      "path": "scripts/figurine24_face.py",
+      "sha256": "8b2969ba871c41d28549898ec72963dc8dea11d2229bf72352bda8a3d3b421b2"
+    },
+    {
+      "path": "scripts/figurine24_hair.py",
+      "sha256": "fc955dd36fa71c86154680180c0e94e842e46c773d81232d9326db4766b3863d"
+    },
+    {
+      "path": "scripts/fit_head24.py",
+      "sha256": "b7a700728621cd608d40df9465532ed5b89388e39d24d5e497f14915f82b2cbf"
+    },
+    {
+      "path": "scripts/head24_cache.py",
+      "sha256": "5b85a67f4e0b329197d70db730c228e7b7e06a4c166c90062f89b7059e6c226b"
+    },
+    {
+      "path": "scripts/head24_detection.py",
+      "sha256": "9055419c18271a4a06b66e80f27b483f022e97bc18f34c18abdc2b6e91c7c919"
+    },
+    {
+      "path": "scripts/head24_features.py",
+      "sha256": "bfe0365c6e4c561abebd3f9304fa4061b2f699420214177d282a7f6adede08b5"
+    },
+    {
+      "path": "scripts/head24_policy.py",
+      "sha256": "c70143895f6181c2455c7c005f6098557572cb5c3a3af2c7bc48447297a18266"
+    },
+    {
+      "path": "scripts/head24_pose.py",
+      "sha256": "f5291ac33eaee16b4118dde5b8f76a9af5e5ba280ee9a5294a34beb78d690d0f"
+    },
+    {
+      "path": "scripts/prepare_head24.py",
+      "sha256": "a1ebecb900d81e34c1cce70515cd5403209e6f042b37ec7b37e5b6b674837134"
+    },
+    {
+      "path": "scripts/run_head24.py",
+      "sha256": "60249e161a31c00a89a03d216a8c1d94a5e4f407d6c8bda1464d149828b45756"
+    },
+    {
+      "path": "scripts/run_pipeline_v24.py",
+      "sha256": "dee966b2f6dba7f98984e6cecd8b4cfd7fa7ce767d39bf50d7bb0174955f1542"
+    },
+    {
+      "path": "tests/test_head24.py",
+      "sha256": "c8a351fc6729679e3c80a2cb7464032f59fe4778b36553f110a944e439995251"
+    },
+    {
+      "path": "tests/test_head242_profile.py",
+      "sha256": "ff254ac3f04908fda3bc3bf3a36b165e8e711ca9b627128b7eaf32b95834aca2"
+    },
+    {
+      "path": "tests/test_head243_workspace_resume.py",
+      "sha256": "9626604fe9ede1576f7ae5856175093b984dccd7b1b041f3d3bfeb54aaa2b2ac"
+    },
+    {
+      "path": "tests/test_head244_hair_cache.py",
+      "sha256": "713ff10ce0888fa5e9f72438ad787f3c521315f7658a3617dc4caa3e56235318"
+    },
+    {
+      "path": "tests/test_head244_pose_features.py",
+      "sha256": "071a39003c690b768f72ef252babbc91e7d45571d39bf7b96dbaab33facb012f"
+    },
+    {
+      "path": "tests/test_head24_detection.py",
+      "sha256": "6991cc9f23012c1f887708d76e0961283864e4b62aa3492cea609246a81c77b2"
+    },
+    {
+      "path": "verification/architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "verification/baseline-current-runtime.log",
+      "sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d"
+    },
+    {
+      "path": "verification/head244-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "verification/head244-full-after.log",
+      "sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8"
+    },
+    {
+      "path": "verification/head244-full-before.log",
+      "sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581"
+    },
+    {
+      "path": "verification/head244-targeted.log",
+      "sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9"
+    },
+    {
+      "path": "verification/profile-policy-tests.log",
+      "sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc"
+    },
+    {
+      "path": "verification/unit-tests.log",
+      "sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5"
+    },
+    {
+      "path": "verification/workspace-resume-tests.log",
+      "sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1"
+    }
+  ]
+}

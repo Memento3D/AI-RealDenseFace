@@ -1,0 +1,225 @@
+{
+  "version": "Head24.5 multiview skin, explicit glasses design and guarded library hair",
+  "files": [
+    {
+      "path": "HEAD24-2-PROFILE-VI.md",
+      "sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84"
+    },
+    {
+      "path": "HEAD24-3-RESUME-VI.md",
+      "sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c"
+    },
+    {
+      "path": "HEAD24-4-START-VI.md",
+      "sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5"
+    },
+    {
+      "path": "HEAD24-5-START-VI.md",
+      "sha256": "6cc83fac6cdfef020d6e6e45526af1825737f39ffbe88aade38e63b109e65067"
+    },
+    {
+      "path": "HEAD24-METHODS.md",
+      "sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f"
+    },
+    {
+      "path": "HEAD24-START-VI.md",
+      "sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504"
+    },
+    {
+      "path": "RUN-HEAD24.ps1",
+      "sha256": "619b6c079cd41d1a3c4a8d61f484ea6545cae688c1bbb3213fe49ad7c9ec4966"
+    },
+    {
+      "path": "RUN-HEAD245.ps1",
+      "sha256": "de77ae79b1029569672383cf97f157adca1b78e49fd36252fa34fa20193122e7"
+    },
+    {
+      "path": "configs/pipeline-v24.json",
+      "sha256": "1f1408b15f740429e329c89a46fef1c8382beaf71e4643f6b13e4ac62d3bad52"
+    },
+    {
+      "path": "configs/pipeline-v245.json",
+      "sha256": "dbcaca8a12741fbbd81089d13d635e3786407af32006c43e9f09d096c510c3a0"
+    },
+    {
+      "path": "head24-code.json",
+      "sha256": "256b9cad384924c14eeb5a53cfa2d5edf50ba3e22af9fb642a4635a100e83033"
+    },
+    {
+      "path": "head24-rdf-source.json",
+      "sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557"
+    },
+    {
+      "path": "scripts/build_head24_workspace.py",
+      "sha256": "4cb6e148f85cbf1c84d8832f86f811bd089e764673d7eb2467d497568fa1ea37"
+    },
+    {
+      "path": "scripts/detect_head24_profile.py",
+      "sha256": "87597f933078750d1fa051b6ed57f66b6de2d994e833a78ba6c807ddc64e0113"
+    },
+    {
+      "path": "scripts/figurine245_appearance.py",
+      "sha256": "8438762e150ef0e121410f144302ce4f41759475a4a63f61a25a135dcab424bf"
+    },
+    {
+      "path": "scripts/figurine245_boolean.py",
+      "sha256": "f9d342a0172100a247c7f91015569b380586821eba5aa7563dfe5bd88eb30b54"
+    },
+    {
+      "path": "scripts/figurine24_appearance.py",
+      "sha256": "2be68dfcf5f989b83a2e6c538c9d9e8340ba59388f273f473799ddb483179c03"
+    },
+    {
+      "path": "scripts/figurine24_face.py",
+      "sha256": "8b2969ba871c41d28549898ec72963dc8dea11d2229bf72352bda8a3d3b421b2"
+    },
+    {
+      "path": "scripts/figurine24_hair.py",
+      "sha256": "fc955dd36fa71c86154680180c0e94e842e46c773d81232d9326db4766b3863d"
+    },
+    {
+      "path": "scripts/fit_head24.py",
+      "sha256": "b7a700728621cd608d40df9465532ed5b89388e39d24d5e497f14915f82b2cbf"
+    },
+    {
+      "path": "scripts/head245_glasses.py",
+      "sha256": "1dd2bfbaa06dc695b08218f64ad297baa28252dcdb0a45972c1dd170f3a8ed83"
+    },
+    {
+      "path": "scripts/head245_skin.py",
+      "sha256": "70721e12b4b4d5b8e8072273acf2072f8918ccd97e6f4ce3f784225c8f870f49"
+    },
+    {
+      "path": "scripts/head245_supports.py",
+      "sha256": "71d2964248ac1e1370d6399389563a77338d4c6099f827e565102978ef0086a7"
+    },
+    {
+      "path": "scripts/head24_cache.py",
+      "sha256": "5b85a67f4e0b329197d70db730c228e7b7e06a4c166c90062f89b7059e6c226b"
+    },
+    {
+      "path": "scripts/head24_detection.py",
+      "sha256": "9055419c18271a4a06b66e80f27b483f022e97bc18f34c18abdc2b6e91c7c919"
+    },
+    {
+      "path": "scripts/head24_features.py",
+      "sha256": "bfe0365c6e4c561abebd3f9304fa4061b2f699420214177d282a7f6adede08b5"
+    },
+    {
+      "path": "scripts/head24_policy.py",
+      "sha256": "c70143895f6181c2455c7c005f6098557572cb5c3a3af2c7bc48447297a18266"
+    },
+    {
+      "path": "scripts/head24_pose.py",
+      "sha256": "f5291ac33eaee16b4118dde5b8f76a9af5e5ba280ee9a5294a34beb78d690d0f"
+    },
+    {
+      "path": "scripts/prepare_head24.py",
+      "sha256": "a1ebecb900d81e34c1cce70515cd5403209e6f042b37ec7b37e5b6b674837134"
+    },
+    {
+      "path": "scripts/run_head24.py",
+      "sha256": "60249e161a31c00a89a03d216a8c1d94a5e4f407d6c8bda1464d149828b45756"
+    },
+    {
+      "path": "scripts/run_head245.py",
+      "sha256": "90a088b2c14719efe31d55fd6dd6bbcda824dc195a6b3499f5dc165cb1a3467e"
+    },
+    {
+      "path": "scripts/run_pipeline_v24.py",
+      "sha256": "dee966b2f6dba7f98984e6cecd8b4cfd7fa7ce767d39bf50d7bb0174955f1542"
+    },
+    {
+      "path": "scripts/run_pipeline_v245.py",
+      "sha256": "5e411e5986563855ce144557fd382116db6cd8b9603d00e714c70f6b4ae40ea0"
+    },
+    {
+      "path": "tests/test_head24.py",
+      "sha256": "c8a351fc6729679e3c80a2cb7464032f59fe4778b36553f110a944e439995251"
+    },
+    {
+      "path": "tests/test_head242_profile.py",
+      "sha256": "ff254ac3f04908fda3bc3bf3a36b165e8e711ca9b627128b7eaf32b95834aca2"
+    },
+    {
+      "path": "tests/test_head243_workspace_resume.py",
+      "sha256": "9626604fe9ede1576f7ae5856175093b984dccd7b1b041f3d3bfeb54aaa2b2ac"
+    },
+    {
+      "path": "tests/test_head244_hair_cache.py",
+      "sha256": "713ff10ce0888fa5e9f72438ad787f3c521315f7658a3617dc4caa3e56235318"
+    },
+    {
+      "path": "tests/test_head244_pose_features.py",
+      "sha256": "071a39003c690b768f72ef252babbc91e7d45571d39bf7b96dbaab33facb012f"
+    },
+    {
+      "path": "tests/test_head245_quality.py",
+      "sha256": "343f1dfdcf7c50c29c439a3e3cb41dd2bb9e220ed7b05da368da73d69b37f68c"
+    },
+    {
+      "path": "tests/test_head24_detection.py",
+      "sha256": "6991cc9f23012c1f887708d76e0961283864e4b62aa3492cea609246a81c77b2"
+    },
+    {
+      "path": "verification/actual05-summary.json",
+      "sha256": "416350a6c65cd624469eade5bfc247ea9584ae77974495f209d0cfccd5f506a3"
+    },
+    {
+      "path": "verification/architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "verification/baseline-current-runtime.log",
+      "sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d"
+    },
+    {
+      "path": "verification/head244-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "verification/head244-full-after.log",
+      "sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8"
+    },
+    {
+      "path": "verification/head244-full-before.log",
+      "sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581"
+    },
+    {
+      "path": "verification/head244-targeted.log",
+      "sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9"
+    },
+    {
+      "path": "verification/head245-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "verification/head245-baseline-embree.log",
+      "sha256": "477d8f8d4a8ee888ad80626fc6ef98c82c72d879db692d5ecf5993163bc3dee6"
+    },
+    {
+      "path": "verification/head245-full-rtree.log",
+      "sha256": "3876b6daa637dfbbdbf81a942267fa4ff4aa7e4fdaa161eeb5207262ee39618b"
+    },
+    {
+      "path": "verification/head245-full-tests-final.log",
+      "sha256": "45da3791cf009adcb8cf244cb6b3ab87e67db3517232f1e860e6139257353831"
+    },
+    {
+      "path": "verification/head245-head-tests.log",
+      "sha256": "994f5c6f1218f69af469740fb192e23948260d6517832cb72ce14992432a2015"
+    },
+    {
+      "path": "verification/profile-policy-tests.log",
+      "sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc"
+    },
+    {
+      "path": "verification/unit-tests.log",
+      "sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5"
+    },
+    {
+      "path": "verification/workspace-resume-tests.log",
+      "sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1"
+    }
+  ]
+}

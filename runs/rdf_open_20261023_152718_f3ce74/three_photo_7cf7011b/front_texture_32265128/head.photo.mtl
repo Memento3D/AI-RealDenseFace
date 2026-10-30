@@ -1,6 +1,0 @@
-newmtl unknown
-Kd 0.65 0.68 0.72
-
-newmtl photo
-Kd 1 1 1
-map_Kd front.photo.png

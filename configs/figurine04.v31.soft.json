@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "workspace": "runs/v1_20261025_132459_bbbc53c9/three_photo_346bb6bf/head_workspace_3cdeba95/head.workspace.html",
+  "parser_model": "D:/AI-cache/face-parsing/resnet18.onnx",
+  "front_rgb_sha256": "5735dfa2d9d77955078c5eecb71b78983ae052dfeb0f51a4879371730c392e01",
+  "head_neck_height_mm": 35.0,
+  "voxel_mm": 0.23,
+  "hair": {
+    "base_mm": 0.7,
+    "ridge_mm": 0.45,
+    "anchor_mm": 0.7,
+    "clumps": 8,
+    "part": 0.15,
+    "sweep": 1.4,
+    "rgb": [
+      34,
+      29,
+      27
+    ],
+    "mask_dilation_px": 1,
+    "groove_mm": 0.2
+  },
+  "eyes": {
+    "gaze_yaw_deg": 0,
+    "gaze_pitch_deg": 0,
+    "iris_ratio": 0.7,
+    "pupil_ratio": 0.48,
+    "highlight_ratio": 0.045,
+    "sclera_rgb": [
+      192,
+      183,
+      170
+    ],
+    "iris_rgb": [
+      58,
+      39,
+      27
+    ],
+    "per_eye_yaw_deg": [
+      0,
+      0
+    ],
+    "per_eye_pitch_deg": [
+      0,
+      0
+    ]
+  },
+  "smile": {
+    "enabled": false,
+    "gap_mm": 0.5,
+    "corner_lift_mm": 0.45
+  },
+  "notes": "V3.1: scalp-fitted continuous hair cap and photo-candidate painted eyes; source expression is the default. Back completion is a design prior. 35mm trial head-and-neck height.",
+  "design_version": "3.1"
+}

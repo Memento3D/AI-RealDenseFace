@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "paths": {
+    "cache_root": "D:/AI-cache",
+    "rdf_python": null,
+    "rdf_repo": null,
+    "parser_model": null,
+    "landmarker_model": null
+  },
+  "backends": [
+    "rdf_baseline",
+    "rdf_occlusion"
+  ],
+  "fitting": {
+    "single_iterations": 20,
+    "joint_iterations": 15,
+    "joint_refits": 2,
+    "glasses_weight": 0.06,
+    "nonface_weight": 0.15,
+    "outside_weight": 0.02,
+    "huber_delta_px": 12.0,
+    "minimum_robust_weight": 0.03
+  },
+  "render": {
+    "preview_size": 300,
+    "atlas_cell": 16
+  },
+  "figurine": {
+    "enabled": true,
+    "best_only": true,
+    "hair_methods": [
+      "radial",
+      "arap"
+    ],
+    "arap_iterations": 6,
+    "arap_max_displacement_mm": 3.0,
+    "ear_coverage_limit": 0.1,
+    "arap_cell_mm": 0.55,
+    "arap_max_nodes": 6000,
+    "arap_min_fraction": 0.125
+  },
+  "execution": {
+    "stage_timeout_seconds": 1800
+  },
+  "pixel3dmm": {
+    "python": null,
+    "repo": null,
+    "required_files": [],
+    "iterations": 100,
+    "global_iterations": 500,
+    "batch_size": 3
+  },
+  "trust": {
+    "python": null,
+    "repo": null,
+    "required_files": [
+      "data/deca_model.tar",
+      "data/E_scene_light_BalanceAlb.tar",
+      "data/E_face_light_BalanceAlb.tar",
+      "data/E_albedo_BalanceAlb.tar",
+      "data/head_template.obj",
+      "data/generic_model.pkl",
+      "data/landmark_embedding.npy",
+      "data/BalanceAlb_model.npz",
+      "data/lightprobe_normal_images.npy",
+      "data/lightprobe_albedo_images.npy"
+    ],
+    "enabled": false
+  },
+  "manufacturing": {
+    "slicer_argv": [],
+    "machine_export_argv": [],
+    "uvtools_argv": [],
+    "calibrated_profile": false,
+    "machine_format_verified": false
+  }
+}

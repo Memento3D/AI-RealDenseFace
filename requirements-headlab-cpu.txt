@@ -1,0 +1,4 @@
+# Same CPU stack as V3.2, plus optional process-memory measurement.
+-r requirements-figurine-cpu.txt
+networkx==3.4.2
+psutil==7.1.0

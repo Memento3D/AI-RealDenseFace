@@ -1,0 +1,248 @@
+{
+  "release": "HeadLab26.1",
+  "date_local": "2026-10-29",
+  "runtime": "Linux CPU Python3.12, NumPy1.26.4, SciPy1.15.3, Trimesh4.7.4, Embree; not Windows/GPU benchmark",
+  "targeted_tests_passed": 35,
+  "full_tests": {
+    "baseline_total": 296,
+    "updated_total": 399,
+    "failures": 2,
+    "errors": 5,
+    "same_named_legacy_issues_as_baseline": true,
+    "added_tests_since_baseline": 103
+  },
+  "architecture": "PASS",
+  "legacy_source_checks": {
+    "v23_runtime_files": 63,
+    "head245_files": 55,
+    "modified": 0
+  },
+  "actual_cpu_replay": {
+    "source": "same previously saved subject05 fit/workspace, not new GPU reconstruction",
+    "new_gpu_fit_executed": false,
+    "total_figurine_seconds": 63.565957626,
+    "candidate_count": 8,
+    "exported": 4,
+    "rejected": 4,
+    "selected": "arap_hair_21778_body_0p6",
+    "candidates": [
+      {
+        "id": "radial_hair_21778_body_0p6",
+        "status": "EXPORTED",
+        "error": null,
+        "arap": null,
+        "score": 0.7176161651074927,
+        "topology_pass": true,
+        "watertight": true,
+        "components": 1
+      },
+      {
+        "id": "arap_hair_21778_body_0p6",
+        "status": "EXPORTED",
+        "error": null,
+        "arap": {
+          "method": "uniform-edge local/global ARAP with hard Dirichlet handles",
+          "iterations": 6,
+          "energy_trace": [
+            0.02586065720849393,
+            0.015290420995099384,
+            0.014360836388090497,
+            0.014091013322648551,
+            0.01396588686735072,
+            0.013890565910080581
+          ],
+          "max_displacement_mm": 2.8049378263060727,
+          "handle_count": 1731,
+          "volume_preservation_verified": false,
+          "self_intersections_verified": false,
+          "printability_verified": false,
+          "control_nodes": 4181,
+          "control_edges": 12627,
+          "source_vertices": 88350,
+          "cell_mm": 0.55,
+          "control_layer_counts": {
+            "0": 1570,
+            "1": 199,
+            "2": 2412
+          },
+          "transfer": "4-nearest inverse-distance displacement within shell layer; inner dense vertices exactly reattached to radial target",
+          "dense_max_displacement_mm": 2.92658424721037,
+          "dense_topology_preserved": true,
+          "triangle_flips_vs_radial": 0,
+          "radial_locked_vertices": 35642,
+          "crease_anchor_angle_degrees": 60,
+          "residual_smoothing_iterations": 24,
+          "orientation_blend": {
+            "retained_arap_fraction": 0.125,
+            "backtracking": [
+              {
+                "fraction": 1.0,
+                "flipped": 1203,
+                "collapsed": 0
+              },
+              {
+                "fraction": 0.5,
+                "flipped": 362,
+                "collapsed": 0
+              },
+              {
+                "fraction": 0.25,
+                "flipped": 21,
+                "collapsed": 0
+              },
+              {
+                "fraction": 0.125,
+                "flipped": 0,
+                "collapsed": 0
+              }
+            ],
+            "scope": "local triangle orientation relative to radial reference; not self-intersection certification"
+          },
+          "radial_residual_p95_mm": 0.0549541368625184,
+          "seconds": 1.6234145569999328
+        },
+        "score": 0.7148988609312892,
+        "topology_pass": true,
+        "watertight": true,
+        "components": 1
+      },
+      {
+        "id": "radial_hair_21778_body_0p85",
+        "status": "EXPORTED",
+        "error": null,
+        "arap": null,
+        "score": 0.7238316561169347,
+        "topology_pass": true,
+        "watertight": true,
+        "components": 1
+      },
+      {
+        "id": "arap_hair_21778_body_0p85",
+        "status": "EXPORTED",
+        "error": null,
+        "arap": {
+          "method": "uniform-edge local/global ARAP with hard Dirichlet handles",
+          "iterations": 6,
+          "energy_trace": [
+            0.024387228154765656,
+            0.014733041386153996,
+            0.013891907622466013,
+            0.013660259848613385,
+            0.013555870263336873,
+            0.013493689250117947
+          ],
+          "max_displacement_mm": 2.7890682239348097,
+          "handle_count": 1731,
+          "volume_preservation_verified": false,
+          "self_intersections_verified": false,
+          "printability_verified": false,
+          "control_nodes": 4181,
+          "control_edges": 12627,
+          "source_vertices": 88350,
+          "cell_mm": 0.55,
+          "control_layer_counts": {
+            "0": 1570,
+            "1": 199,
+            "2": 2412
+          },
+          "transfer": "4-nearest inverse-distance displacement within shell layer; inner dense vertices exactly reattached to radial target",
+          "dense_max_displacement_mm": 2.92658424721037,
+          "dense_topology_preserved": true,
+          "triangle_flips_vs_radial": 0,
+          "radial_locked_vertices": 35589,
+          "crease_anchor_angle_degrees": 60,
+          "residual_smoothing_iterations": 24,
+          "orientation_blend": {
+            "retained_arap_fraction": 0.125,
+            "backtracking": [
+              {
+                "fraction": 1.0,
+                "flipped": 1559,
+                "collapsed": 0
+              },
+              {
+                "fraction": 0.5,
+                "flipped": 456,
+                "collapsed": 0
+              },
+              {
+                "fraction": 0.25,
+                "flipped": 28,
+                "collapsed": 0
+              },
+              {
+                "fraction": 0.125,
+                "flipped": 0,
+                "collapsed": 0
+              }
+            ],
+            "scope": "local triangle orientation relative to radial reference; not self-intersection certification"
+          },
+          "radial_residual_p95_mm": 0.05074255973956784,
+          "seconds": 1.4639398959999426
+        },
+        "score": 0.7234507996268382,
+        "topology_pass": true,
+        "watertight": true,
+        "components": 1
+      },
+      {
+        "id": "radial_hair_11256_body_0p6",
+        "status": "FAILED",
+        "error": "Hair covers too many observed ear samples: {'pass': False, 'limit': 0.1, 'sides': [{'side': -1, 'unique_samples': 240, 'covered_fraction': 0.3375}, {'side': 1, 'unique_samples': 258, 'covered_fraction': 0.1434108527131783}], 'scope': 'visible semantic source-ear samples, not exact clearance or mechanical certification'}",
+        "arap": null,
+        "score": null,
+        "topology_pass": null,
+        "watertight": null,
+        "components": null
+      },
+      {
+        "id": "arap_11256_0p6",
+        "status": "FAILED",
+        "error": "ARAP solve exceeded bounded movement or became nonfinite",
+        "arap": null,
+        "score": null,
+        "topology_pass": null,
+        "watertight": null,
+        "components": null
+      },
+      {
+        "id": "radial_hair_11256_body_0p85",
+        "status": "FAILED",
+        "error": "Hair covers too many observed ear samples: {'pass': False, 'limit': 0.1, 'sides': [{'side': -1, 'unique_samples': 240, 'covered_fraction': 0.375}, {'side': 1, 'unique_samples': 258, 'covered_fraction': 0.16666666666666666}], 'scope': 'visible semantic source-ear samples, not exact clearance or mechanical certification'}",
+        "arap": null,
+        "score": null,
+        "topology_pass": null,
+        "watertight": null,
+        "components": null
+      },
+      {
+        "id": "arap_11256_0p85",
+        "status": "FAILED",
+        "error": "ARAP solve exceeded bounded movement or became nonfinite",
+        "arap": null,
+        "score": null,
+        "topology_pass": null,
+        "watertight": null,
+        "components": null
+      }
+    ],
+    "source_face_changed_by_hair_algorithm": false,
+    "appearance_improvement_verified": false,
+    "independent_likeness_verified": false,
+    "support_precheck_pass": false,
+    "support_collisions_voxels": 23,
+    "actual_slicing_verified": false,
+    "printability_verified": false
+  },
+  "cache_scope": "26.1 stage-specific prepare/semantic/fit bindings; geometry-only edits preserve fit key; image/model/policy changes invalidate relevant stages. 26.0 whole-code cache keys are not silently accepted.",
+  "limits": [
+    "hybrid ARAP is strongly damped toward radial reference; small appearance difference",
+    "11256 still rejected by displacement/ear gates",
+    "control transfer and triangle orientation proxy do not certify self-intersection freedom",
+    "no new RDF CUDA, Pixel3DMM or TRUST inference on this release host",
+    "actual input01-06 dataset-wide reconstruction not run here",
+    "Windows and physical printing unverified"
+  ],
+  "ready_for_machine": false
+}

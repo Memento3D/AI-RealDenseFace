@@ -1,0 +1,290 @@
+{
+  "status": "ARCHIVED",
+  "files": [
+    {
+      "path": "EXPERIMENT_PLAN.md",
+      "sha256": "7d67aa3ab7c8a41172234f04461be71325af4258e99fe5c623f81d6002be81d3",
+      "category": "docs"
+    },
+    {
+      "path": "FIGURINE-V31-VALIDATION.md",
+      "sha256": "32cc006d0dd625943be1b42eaabaf08f77057c45dbe72153b4481853ccbf367e",
+      "category": "docs"
+    },
+    {
+      "path": "FIGURINE-V32-VALIDATION.md",
+      "sha256": "478cecc62d13ede3fcc3b317b8e13c7d31e7b7a85cde00694a7c160918ace6b4",
+      "category": "docs"
+    },
+    {
+      "path": "FIGURINE_V3.md",
+      "sha256": "5e8556cec466c9f07c8b53ca0295bc25765bd059aec0023b8ad8599602d2fb0b",
+      "category": "docs"
+    },
+    {
+      "path": "FIGURINE_V3_VALIDATION.md",
+      "sha256": "44136c3a50d54c46a0e49f4831e62b2a7534eb73e13fd1d536a94c2845767c6f",
+      "category": "docs"
+    },
+    {
+      "path": "HAIR-ON-HEAD-PATH-FIX-VI.md",
+      "sha256": "0a896f54a3e529e5252d35286a044dbd7c2c5ac505b70f4d48ae823c468f8a05",
+      "category": "docs"
+    },
+    {
+      "path": "HAIR-STUDIO-V23-VI.md",
+      "sha256": "57645ec574674baa445787bac5fcc068b81a850ab3d027e1b25a6708ca47cdf2",
+      "category": "docs"
+    },
+    {
+      "path": "HAIR-STUDIO-VALIDATION.md",
+      "sha256": "74a0ec0d5ae6357837103d2bb50502623a2e806be35890c0161f8dc0b9a6adf9",
+      "category": "docs"
+    },
+    {
+      "path": "HEADLAB-V4-METHODS.md",
+      "sha256": "191d277b67f7996f438f28843473f9f44263eecf6cc2de89b3f062989e63c6b0",
+      "category": "docs"
+    },
+    {
+      "path": "HEADLAB-V4-VI.md",
+      "sha256": "6fa3b5f57a21f9532c20d95f96ae4cb0fa1c2ba55d06902e7fc529cdc215b715",
+      "category": "docs"
+    },
+    {
+      "path": "HEADLAB-V5-METHODS.md",
+      "sha256": "f466b13ebff58dc6fe871c234474d5fe2a0ed4eabce9025cf449d6b6d8283921",
+      "category": "docs"
+    },
+    {
+      "path": "HEADLAB-V5-VI.md",
+      "sha256": "55ead50ef8059ba5acf7b1ddf40e0aadf2d77444c711ce8deccd68a004244108",
+      "category": "docs"
+    },
+    {
+      "path": "HEADLAB-V6-METHODS.md",
+      "sha256": "ad1064eb37b920c31680d908066141a2ec0ccae3a16eefeed10da1bb4c9b154b",
+      "category": "docs"
+    },
+    {
+      "path": "HEADLAB-V6-VI.md",
+      "sha256": "df61591957db0c54fd6f70b74ee8f6316b52f99f477ade7fb986aeccaded6e59",
+      "category": "docs"
+    },
+    {
+      "path": "IM2HAIRCUT_UPDATE.md",
+      "sha256": "0aa89d5ff323c3b3906e13f027bf35e2b72e88e96ce499e87486a14dbe0d5afc",
+      "category": "docs"
+    },
+    {
+      "path": "IM2_FIELD_FIX_UPDATE.md",
+      "sha256": "780a6b198e0cf5af39fbbf24cc449b22c10fe807127ee7f7c96734000c992fb8",
+      "category": "docs"
+    },
+    {
+      "path": "IM2_FIELD_FIX_VALIDATION.md",
+      "sha256": "25079e5dcdd9abba74a1127b2f087653d8df06249cba9d0a0849df23da04b774",
+      "category": "docs"
+    },
+    {
+      "path": "IM2_REVIEW_UPDATE.md",
+      "sha256": "50857ee9bfd08174b81dbe97b5b19253056b3bf5f21ea6e317ec66a2d8e1be8a",
+      "category": "docs"
+    },
+    {
+      "path": "IM2_REVIEW_VALIDATION.md",
+      "sha256": "dae48ac10020c1c5f43bcc3a44231d94580b2b2eed6dd831bbe515606fa6af46",
+      "category": "docs"
+    },
+    {
+      "path": "IM2_VALIDATION.md",
+      "sha256": "d0379e7c1cd96ee7b783d01fb71ad3e4bc92d9d28951e214a1b85438e81f7abc",
+      "category": "docs"
+    },
+    {
+      "path": "Khung-danh-gia-Pipeline-V2.md",
+      "sha256": "bf5ed3c996e19e30cd38f26b46cf7514ef190d954b2d20220913e4b5171e993d",
+      "category": "docs"
+    },
+    {
+      "path": "METHODS.md",
+      "sha256": "e52f0fca0b9a1c47ad94833a69c4540f2977a6aba8fd782ece0e4cfa86353aa8",
+      "category": "docs"
+    },
+    {
+      "path": "OPEN-HAIR-BENCH.ps1",
+      "sha256": "d80826b5ce713390b0b01aeda750019aea65a54ddabf0fe6c40cd2a84a48be30",
+      "category": "launchers"
+    },
+    {
+      "path": "OPEN-HAIR-ON-HEAD.ps1",
+      "sha256": "38c157e0b384e00c84005b5b88932b9ac2fbd3decf88a9028dd70db2fe71e409",
+      "category": "launchers"
+    },
+    {
+      "path": "PIPELINE-V2-ASSET-CONTRACT.md",
+      "sha256": "555cf8267384d9be341bde9e2a555b04bda3fd09282daca2d1a48fef657701e0",
+      "category": "docs"
+    },
+    {
+      "path": "PIPELINE-V2-EVALUATION-VI.md",
+      "sha256": "bf5ed3c996e19e30cd38f26b46cf7514ef190d954b2d20220913e4b5171e993d",
+      "category": "docs"
+    },
+    {
+      "path": "PIPELINE-V2-METHODS.md",
+      "sha256": "9bab5c5234ca4c22207d030f0e93b8703158ba968a66cd8f76ea7e290daef46a",
+      "category": "docs"
+    },
+    {
+      "path": "PIPELINE-V2-START-VI.md",
+      "sha256": "e1fd205caf4a1c67e69c0f8329b53a2857f5bef40f19cc524df4a814a29c7dda",
+      "category": "docs"
+    },
+    {
+      "path": "PIPELINE-V21-START-VI.md",
+      "sha256": "877cd52aec790fdb45dd64c25fe0e463cc76d390f54c959a8bc060937f45e996",
+      "category": "docs"
+    },
+    {
+      "path": "PIPELINE-V22-METHODS.md",
+      "sha256": "f2c039b281e7cd1f894815aa3b9e0e56384db11370c177ca9b5c89ccb4a02365",
+      "category": "docs"
+    },
+    {
+      "path": "PIPELINE-V22-START-VI.md",
+      "sha256": "0ad2078a8f95de787e51d4f50cda5f14089bee9efc5e31c8101acd7cbd96e703",
+      "category": "docs"
+    },
+    {
+      "path": "README-three-photo.txt",
+      "sha256": "bff36fffb633542dc21e606e3f1fa1c4fd91f3eae04ebfcc9a9b1b9c5f2037a0",
+      "category": "docs"
+    },
+    {
+      "path": "README-weighted-v2.txt",
+      "sha256": "316ec233306b4c9df87408977d7dd2aaa7a24242dbc526e62fc9ade925684c9f",
+      "category": "docs"
+    },
+    {
+      "path": "README.txt",
+      "sha256": "6119150278a6d766eed3931f83ab516de350de7457bdffbd1ecdfd9bc0d880b3",
+      "category": "docs"
+    },
+    {
+      "path": "RESUME-TRIPOSR-CACHED.ps1",
+      "sha256": "bb5b57591e3e59caa92d06366b250a81fd7e1bdc0210289ae0a010d5cbae9445",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-FIGURINE-V31.ps1",
+      "sha256": "64cf9883f8fec9528880d1c9af5e8293f62097b9bd700b62db95fe1d949fa667",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-FIGURINE-V32.ps1",
+      "sha256": "9a53eaabcb3e1be8c9dd8dea6bbe3ec191c640cd0817db737bc5b134008ceaac",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-HAIR-BENCH.ps1",
+      "sha256": "33f42d8ec10612b41e00d2ba0e2fc78d89910b1c5b6fc35c966843e079305a5b",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-HAIR-STUDIO.ps1",
+      "sha256": "413ef4584c02e93bc769a85478783d4b8f97069f70159f34c86e683f8a21a799",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-HEADLAB-V4.ps1",
+      "sha256": "bf99274e9df6f7da1560df03ef2edf63d89b0579292afe040e3b63344bbd2933",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-HEADLAB-V5.ps1",
+      "sha256": "55abb8414794c8d5db9a18385bce1968e791c0b2929a6735625e941980637455",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-HEADLAB-V6.ps1",
+      "sha256": "c43f78f41f5d84d3a0e3044c931144cd232808819e93010937f1a9ba0a83e182",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-PIPELINE-V2.ps1",
+      "sha256": "2845b7af16332881d1c4e271c22ba805fa014bbfb6286a1fc886fc88d908eb59",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-PIPELINE-V21.ps1",
+      "sha256": "1368aef5967cb18bcf8fbe809e29640f7b5c46004c87e6a3fba304e79168a244",
+      "category": "launchers"
+    },
+    {
+      "path": "RUN-TRIPOSR-04.ps1",
+      "sha256": "945b630be7678fa7b2812af3a1c6fc1084617169e4035beef36b52a29e369a60",
+      "category": "launchers"
+    },
+    {
+      "path": "SETUP_VALIDATION.md",
+      "sha256": "4b889d6459eab57aa3f39596b24182b326dd3943e4415bcc385cc06953e84874",
+      "category": "docs"
+    },
+    {
+      "path": "SETUP_WINDOWS.md",
+      "sha256": "44f441fd47626c64f0535e721eb5368619f09463e6ce3df985ef948909aa0fed",
+      "category": "docs"
+    },
+    {
+      "path": "UPDATE-FIGURINE-V31.md",
+      "sha256": "2dcda227f841ec20022551dcbb93a23259ef94fb01b27c20628841574ac55853",
+      "category": "docs"
+    },
+    {
+      "path": "UPDATE-FIGURINE-V32.md",
+      "sha256": "e6b3fbe553371d4df6ff335876aa75056456ed991de9a883990387570dbfef1e",
+      "category": "docs"
+    },
+    {
+      "path": "UPDATE-v0.12.md",
+      "sha256": "c6f3e5ce9dca78431ef37596bba0b5c1523935c25cde3bafca653012b4cd2367",
+      "category": "docs"
+    },
+    {
+      "path": "UPDATE-v0.13.1.md",
+      "sha256": "4931b578a727fea8b642afa0859d4a9e271241849acb1744ea3c8e708870ee83",
+      "category": "docs"
+    },
+    {
+      "path": "UPDATE-v0.13.md",
+      "sha256": "0e1dc8b34ab5baf578fb1918071d349b5d7c706126967e7f91b37d154f4ea16a",
+      "category": "docs"
+    },
+    {
+      "path": "V1_QUICKSTART.md",
+      "sha256": "2294a0f1dbd5c41970983bad7a23d8009a47595f87c2aa43ab6ddd22ff435adb",
+      "category": "docs"
+    },
+    {
+      "path": "V2_1_TEXTURE.md",
+      "sha256": "7e346406b34f3085e949cb041fb3da733afaa764120ba74de25f7c8428637205",
+      "category": "docs"
+    },
+    {
+      "path": "V2_2_EYES.md",
+      "sha256": "b2be455849e74847b4a1edff715a5ba1522e240c3a897f10a595b7c27ec4229b",
+      "category": "docs"
+    },
+    {
+      "path": "V2_3_CAP.md",
+      "sha256": "e03525a5c6fad691cf474a62dcac842fe32566819924c4cbd50f247676d332af",
+      "category": "docs"
+    },
+    {
+      "path": "V2_4_INTEGRATED.md",
+      "sha256": "906b1637e788a9be1f0f12ec5992d8453ff5e12d3364a272f019cb23ba905df4",
+      "category": "docs"
+    }
+  ]
+}

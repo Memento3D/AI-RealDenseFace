@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "path": "CLEAN-PROJECT.ps1",
+      "sha256": "5de5038b5ab594001624751136d4412cf2aa7353e258c91a17297e5f9e89b15d"
+    },
+    {
+      "path": "PROJECT-MAP-VI.md",
+      "sha256": "1cd87d8ba0b2988f03a881544fa2e81656868552252dbc8d68ee419c6e5e13ac"
+    },
+    {
+      "path": "README-CLEANUP-VI.md",
+      "sha256": "3501d287f6edece6c779e04069dac4ff5516c88aeb3d447f4fa65a3a4ada0c44"
+    },
+    {
+      "path": "RUN-CURRENT.ps1",
+      "sha256": "8da7d807fe6672d1a8865d554581cd612a9a3f0a9686791eeb9f4b2073718ca6"
+    },
+    {
+      "path": "maintenance/cleanup-plan.json",
+      "sha256": "22b31d2fa448da61306a52babf5f2f5f42d0cafb8ee69972e7a39444295ae242"
+    },
+    {
+      "path": "maintenance/cleanup_project.py",
+      "sha256": "40d327858071df458e892b46180f96d375c97195f4c1da67ff83a0d47a795ca3"
+    },
+    {
+      "path": "maintenance/verification/architecture-after.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "maintenance/verification/tests-after.log",
+      "sha256": "32d3fbe49c31303c9e33eb1417aa7f6d3cde9871bc5f57ddee39436122bec506"
+    },
+    {
+      "path": "maintenance/verification/tests-before.log",
+      "sha256": "83abbca9d43b16dbd9a5c50d01c3c8b36f9e6b49bf02b6e77a9219588b2ece85"
+    },
+    {
+      "path": "maintenance/verification/verification.json",
+      "sha256": "040c9d3c6adf08740f35cb2a31a6b853cc92c311a6bb3c1dad2bae461563090a"
+    }
+  ]
+}

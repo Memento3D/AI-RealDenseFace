@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "21778",
+      "name": "short_curly",
+      "path": "assets/hair/21778_hp_fixed.stl",
+      "sha256": "f190ae309efcca1a298130de7beee0d10fa4c4b8b74b912c96bbb0030083b94b",
+      "source": "user-supplied STL demo asset",
+      "license_status": "not verified; user-supplied demonstration only",
+      "input_units": "mm assumed from authoring scale, STL has no unit metadata",
+      "source_to_y_up": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      "inner_roof_y": 9.334,
+      "inner_radius": 4.7,
+      "source_base_y": 0.0,
+      "front_direction": [
+        0,
+        0,
+        1
+      ],
+      "limits": {
+        "scale_min": 0.65,
+        "scale_max": 2.0,
+        "cage_displacement_mm": 1.25
+      },
+      "custom": {
+        "volume": 0.0,
+        "fringe_lift_mm": 0.0,
+        "nape_lift_mm": 0.0,
+        "yaw_deg": 0.0
+      }
+    },
+    {
+      "id": "11256",
+      "name": "medium_wavy",
+      "path": "assets/hair/11256_hp_fixed.stl",
+      "sha256": "d67f1ce49e358fc4bff3c773dac08511a75b51173088fa896fd2d4c53d73d30e",
+      "source": "user-supplied STL demo asset",
+      "license_status": "not verified; user-supplied demonstration only",
+      "input_units": "mm assumed from authoring scale, STL has no unit metadata",
+      "source_to_y_up": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      "inner_roof_y": 10.71,
+      "inner_radius": 4.7,
+      "source_base_y": 0.0,
+      "front_direction": [
+        0,
+        0,
+        1
+      ],
+      "limits": {
+        "scale_min": 0.65,
+        "scale_max": 2.0,
+        "cage_displacement_mm": 1.25
+      },
+      "custom": {
+        "volume": 0.0,
+        "fringe_lift_mm": 0.0,
+        "nape_lift_mm": 0.0,
+        "yaw_deg": 0.0
+      }
+    }
+  ]
+}

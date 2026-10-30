@@ -27,3 +27,6 @@ configs/*.local.*.json
 .ruff_cache/
 .coverage
 htmlcov/
+
+.venv-rdf/
+local_setup/

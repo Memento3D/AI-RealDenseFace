@@ -1,0 +1,3 @@
+# Install separately, ONLY with the CUDA index documented in SETUP_WINDOWS.md.
+torch==2.7.1
+torchvision==0.22.1

@@ -1,3 +1,14 @@
+> **Mới: Figurine V3 — đầu cá nhân hóa, tóc khối, mắt và nụ cười custom cho thử nghiệm resin.** Xem [FIGURINE_V3.md](FIGURINE_V3.md). Nhánh CPU dùng lại workspace; chưa xác nhận in thật.
+
+# Setup V1/V2 trên Windows
+
+## Im2Haircut personal field-transform update 0.3
+
+See [IM2_FIELD_FIX_UPDATE.md](IM2_FIELD_FIX_UPDATE.md). One WSL command: `bash scripts/test_im2_fix04.sh`. Reuses existing baseline runs; at most one additional 50-epoch worker. This remains an experimental single-view pipeline.
+
+
+Cài mới hoặc chuyển máy: xem [SETUP_WINDOWS.md](SETUP_WINDOWS.md). Máy đang chạy ổn: dùng phần kiểm tra/snapshot trước.
+
 # Update v0.13.1 — Mask boundary fix
 
 Xem [UPDATE-v0.13.1.md](UPDATE-v0.13.1.md). Giữ nguyên model/môi trường, chạy lại `--auto-mask` để sửa các khe bị loại nhầm quanh mắt–mũi–miệng.

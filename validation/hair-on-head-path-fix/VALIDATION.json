@@ -1,0 +1,15 @@
+{
+  "status": "PASSED",
+  "layout": "project root with scripts/configs/src/requirements/viewer",
+  "python_cli_foreign_cwd_test": true,
+  "test_count": 7,
+  "tests_skipped": 0,
+  "project_with_spaces_pipeline_status": "FITTED_ON_SOURCE_HEAD",
+  "geometry_closed_surface_manifold": true,
+  "face_vertex_buffer_unchanged": true,
+  "face_texture_unchanged": true,
+  "pipeline_host_cpu_seconds": 19.687570121001045,
+  "execution_platform": "Linux",
+  "windows_powershell_executed": false,
+  "source_geometry_algorithm_changed": false
+}

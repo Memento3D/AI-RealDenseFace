@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "workspace": "runs/v1_20261025_132459_bbbc53c9/three_photo_346bb6bf/head_workspace_3cdeba95/head.workspace.html",
+  "parser_model": "D:/AI-cache/face-parsing/resnet18.onnx",
+  "front_rgb_sha256": "5735dfa2d9d77955078c5eecb71b78983ae052dfeb0f51a4879371730c392e01",
+  "head_neck_height_mm": 35.0,
+  "voxel_mm": 0.23,
+  "hair": {
+    "base_mm": 1.0,
+    "ridge_mm": 0.65,
+    "anchor_mm": 0.6,
+    "clumps": 9,
+    "part": 0.15,
+    "sweep": 1.2,
+    "rgb": [
+      34,
+      29,
+      27
+    ],
+    "mask_dilation_px": 1
+  },
+  "eyes": {
+    "gaze_yaw_deg": 0,
+    "gaze_pitch_deg": 0,
+    "iris_ratio": 0.61,
+    "pupil_ratio": 0.55,
+    "highlight_ratio": 0.08,
+    "sclera_rgb": [
+      216,
+      208,
+      196
+    ],
+    "iris_rgb": [
+      55,
+      37,
+      26
+    ]
+  },
+  "smile": {
+    "enabled": true,
+    "gap_mm": 0.5,
+    "corner_lift_mm": 0.45
+  },
+  "notes": "35mm is an explicit trial head-and-neck height, not final product size. Source expression stays unchanged in source_expression; smile_custom is synthetic. No copied LEGO geometry/assets."
+}

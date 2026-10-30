@@ -1,0 +1,197 @@
+{
+  "scope": "Source files from user-supplied RealDenseFace ZIP; no vendor mutation; not a weights manifest",
+  "files": [
+    {
+      "path": "camera/__init__.py",
+      "sha256": "ab2d436e9dae163698a9965cd33c843ab8fb4bb12470a0d0063d1132b69fdd40"
+    },
+    {
+      "path": "camera/camera.py",
+      "sha256": "76bae8eb412b60e22eca4409d71681515e460e1ee59dc7fde3b7dd004c5436b9"
+    },
+    {
+      "path": "common/__init__.py",
+      "sha256": "d0dc34e0dc9180b72f2776e23054b12513cb0385e0751bc56d868094ba6a6449"
+    },
+    {
+      "path": "common/config.py",
+      "sha256": "7970cf3142bb0cc1aaa9e564a0582aa52112fb8c4d517529961070763fd39179"
+    },
+    {
+      "path": "common/fix_chumpy.py",
+      "sha256": "293cb545a3f5a6f3d075710f245e4f8b85e6cd3dd952cac4d67060cd2dec5c10"
+    },
+    {
+      "path": "common/types.py",
+      "sha256": "03200ac33021fbeb1f164e7731b867eb94c5907000809cfcf3147997a08581f7"
+    },
+    {
+      "path": "common/utils.py",
+      "sha256": "9c3838fdf22bc6edc4487c4e11447d76d984b9f18589570f862bc82945efeff1"
+    },
+    {
+      "path": "configs/fitting/nersemble_multiview.yaml",
+      "sha256": "79d23b303d37cd439a7e834fd8a18dd14b60c06607ba2c509fc7bb80f66d1c2b"
+    },
+    {
+      "path": "configs/fitting/single_image.yaml",
+      "sha256": "e0433a66441abcad8229fb93c373b81707a24659ddf7a7d9c8d6e7226dbb98e4"
+    },
+    {
+      "path": "configs/fitting/video_offline.yaml",
+      "sha256": "e0433a66441abcad8229fb93c373b81707a24659ddf7a7d9c8d6e7226dbb98e4"
+    },
+    {
+      "path": "configs/fitting/video_online.yaml",
+      "sha256": "69d9951f621eb29ec6a5724f12f948e18beabac10af5380927372bf834650f96"
+    },
+    {
+      "path": "configs/model/vitb.yaml",
+      "sha256": "8c1cced899f4409c71f3e50e174d312a161fd26982aad0894ddde4a30246a6ab"
+    },
+    {
+      "path": "configs/model/vits.yaml",
+      "sha256": "1f02b837a62dfa1959b6e09be23332441eacf6a74892d50c0e18d569eeec8686"
+    },
+    {
+      "path": "cuda_extensions/flame_solver/flame_solver/__init__.py",
+      "sha256": "2ecefb1aa390151e0db1f3cca359c6a5cfbb22203d555087d843710152d18242"
+    },
+    {
+      "path": "cuda_extensions/flame_solver/flame_solver/context.py",
+      "sha256": "2069790bd5e3e9f1773065032764d6c1eaa9e49ca414a90ee986eb425a1bfced"
+    },
+    {
+      "path": "cuda_extensions/flame_solver/flame_solver/ops.py",
+      "sha256": "0f12a72e623f56eb8c95d2174a80182c1474e2116c607e07ac208187b0b28607"
+    },
+    {
+      "path": "cuda_extensions/flame_solver/setup.py",
+      "sha256": "673c8f98c27387c56af2d21053b8a205caceb866bbcddcb208d0f3c7dc7443c4"
+    },
+    {
+      "path": "cuda_extensions/third_party/glm/.appveyor.yml",
+      "sha256": "c713ce93fe25d90e1ffc10351b0d139342c57e6ee8e82c8b4e5408a02f2cae59"
+    },
+    {
+      "path": "cuda_extensions/third_party/glm/.travis.yml",
+      "sha256": "008ad795810f1f8853d8ac54f50a9e83f907bcb667d268de2b84460c4f82bae7"
+    },
+    {
+      "path": "fit_single_image.py",
+      "sha256": "7cda7705a62fa7f8e8598f0cb3ea7c3d8770ed6a7cc11e4c1ad39a4d56f85f43"
+    },
+    {
+      "path": "models/__init__.py",
+      "sha256": "cfd7d15398e2765f8b16c8a0e49ec0ccd956efac6bb360cbe36b1b6e886438b9"
+    },
+    {
+      "path": "models/facebox/__init__.py",
+      "sha256": "8aa0a19a8d81cbbd6e5146a673d8144edb58939a27e9813ff5643859212e53c1"
+    },
+    {
+      "path": "models/facebox/detector.py",
+      "sha256": "f6c0727852113369048dfa4a66f6c99502728adaf360f581a9e57dbb6a6e5b77"
+    },
+    {
+      "path": "models/facebox/model.py",
+      "sha256": "63eef8d18062ea61ec2ac1b321fe719164f6085d2cd0d3949319b0f971be4ccc"
+    },
+    {
+      "path": "models/flame/__init__.py",
+      "sha256": "3cf61d8b3edd193f3105b09b3b9832da4e2b8fdcb9c70aae34b865b0b731f88b"
+    },
+    {
+      "path": "models/flame/model.py",
+      "sha256": "bf967516eb033d70f3d566e6b5fd7e7facc46cbcb55d54c94546cbf402af7ac8"
+    },
+    {
+      "path": "models/realdenseface/__init__.py",
+      "sha256": "7ff7ae3ef40940dbe54ef93907af9fe4d37583633826aa8501193976186388f6"
+    },
+    {
+      "path": "models/realdenseface/decoder.py",
+      "sha256": "c955d32800f616b8641f40b2abcb7e0e37819910f6a308cfd63831000d212488"
+    },
+    {
+      "path": "models/realdenseface/dpt_head.py",
+      "sha256": "6e607f452c43d507efa7c7ae569cd2969b2140c52f97d78282374c8cbb995a8b"
+    },
+    {
+      "path": "models/realdenseface/model.py",
+      "sha256": "ce175fb411bf4fb1d2d7c909ea735078355438bf714511dc0bacc6a6c03fe518"
+    },
+    {
+      "path": "preprocess_nersemble_v2.py",
+      "sha256": "d6d3f0fb2c0c091347ae7018c5f0572619befb4f2fe5c626633c40bcb708bac0"
+    },
+    {
+      "path": "track_video_offline.py",
+      "sha256": "aae39d556f5f826e224a58021592f5ebe3d567e8ba9ba07de50cb363c9da3f3d"
+    },
+    {
+      "path": "track_video_online.py",
+      "sha256": "047ee9462573970fa2ca393c0f3c053395bb9f896776b58b1a2e15a45972a8d4"
+    },
+    {
+      "path": "tracker/__init__.py",
+      "sha256": "cdc5bffe774f93e7fe0f545d81998d3cb7aae3fd93d79e2905daa02fbbccb8ab"
+    },
+    {
+      "path": "tracker/fitting/__init__.py",
+      "sha256": "812c5802711a4cea92d2bcf104301cc9a9f22a4145bfb14a03cfee3cae9021e1"
+    },
+    {
+      "path": "tracker/fitting/gn_flame_optimizer.py",
+      "sha256": "cce858491076a2bb09b73825a2558cd3d4082a176078de47449326f5b9d3740e"
+    },
+    {
+      "path": "tracker/fitting/online_fov_search.py",
+      "sha256": "3b4b24613100e1d87077593d5f1f1e90f8bd8a3532bc47c9ea39185c00c450f5"
+    },
+    {
+      "path": "tracker/fitting/online_gn_optimizer.py",
+      "sha256": "b57c218191552ef56a4cde75104cca8e0340ccf8ac0c7b74ed902ff8c637a359"
+    },
+    {
+      "path": "tracker/inference/__init__.py",
+      "sha256": "cc86142bc330b49a8401556e980c6b98e15cc2147416e202420fe41c391f7068"
+    },
+    {
+      "path": "tracker/inference/preprocess.py",
+      "sha256": "818930bbf465df106fc911e5ae0ce0d65c5649b91477196db419eea9f84c8b12"
+    },
+    {
+      "path": "tracker/inference/realdenseface_inferencer.py",
+      "sha256": "13cf8df65d00cf990ef16f6ebd74b55798d90538b83b63b6f5c50b4602cdb0d1"
+    },
+    {
+      "path": "tracker/inference/video_input.py",
+      "sha256": "1a5457c2a41c334ef71cc92eafdea280acc3d401991643edb4b14b78674db692"
+    },
+    {
+      "path": "visualization/__init__.py",
+      "sha256": "c589af671ecb6c0fc56bf702063f43aa1a87e2d96972542b7c97d126c322c9a1"
+    },
+    {
+      "path": "visualization/image.py",
+      "sha256": "861b2b58dde6991b4ba73c5af636167bb355e741a632caaedf3956ee19d20a8c"
+    },
+    {
+      "path": "visualization/mesh.py",
+      "sha256": "637580cfe90cefaec63bf4961db78fe73523391d714ca67ff26011c872123fc6"
+    },
+    {
+      "path": "visualization/nersemble.py",
+      "sha256": "76c03aaa7da1ae1dadcef482f1312fee4425133911aa2a040f4f9a9557e63d28"
+    },
+    {
+      "path": "visualization/video.py",
+      "sha256": "377e83f64f3097ce3f9b52dbff7718b6d95c698a23eff54780b6a059b1499106"
+    },
+    {
+      "path": "visualization/visualizer.py",
+      "sha256": "e03f25329632c4b04e9ca0b105e1232a9e8f0c5c7beb749c32b2ce64684f77c8"
+    }
+  ]
+}

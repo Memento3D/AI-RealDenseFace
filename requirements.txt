@@ -1,0 +1,5 @@
+# Run from the project root, using .venv (Python 3.11).
+# RDF / CUDA dependencies belong to .venv-rdf, NOT this environment.
+-e .[vision]
+-r requirements/observability.txt
+-r requirements/face-parsing.cpu.txt

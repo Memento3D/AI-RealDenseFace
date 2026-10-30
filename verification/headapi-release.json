@@ -1,0 +1,68 @@
+{
+  "release": "Head API MVP v0.2.0",
+  "date": "2026-10-30",
+  "target_tests": {
+    "passed": 60,
+    "failed": 0,
+    "scope": "API queue/provenance/parent-child endpoints; rendering/registration maths; TripoSR regressions; no synthetic identity or print claims"
+  },
+  "actual_uploaded_job_replay": {
+    "status": "MVP_ASSEMBLED",
+    "child_job_id": "6fc913aa24a74f40a61d013ed5821f8a",
+    "seconds_cpu_this_host": 34.125369043999854,
+    "source_job_unchanged": true,
+    "rdf_glb_vertices_match_npz_within_1e_minus7": true,
+    "rdf_faces_equal": true,
+    "glb_geometry_nodes": [
+      "RDF_Head_Preserved",
+      "TripoSR_Hair_Surface"
+    ],
+    "artifact_bytes": 519392,
+    "rdf_triposr_neural_regeneration": false,
+    "scope": "real uploaded components, actual CPU semantic and landmark models, ASGI API with real worker subprocesses; Linux host only"
+  },
+  "assembly_evidence": {
+    "status": "MVP_ASSEMBLED",
+    "rdf_geometry_unchanged": true,
+    "control_pairs": 23,
+    "residual_p95_fraction_head_height": 0.05690726928074519,
+    "selected_hair_triangles": 15633,
+    "crown_completion_inferred": true,
+    "hair_segmentation_verified": false
+  },
+  "architecture": "PASS",
+  "full_suite": {
+    "tests": 459,
+    "failures": 2,
+    "errors": 9,
+    "same_named_issues_as_restored_control": true,
+    "control_tests": 423,
+    "issues": [
+      "test_manifest_covers_feature_owned_paths_only (test_hair_on_head_paths.RootLayoutTests.test_manifest_covers_feature_owned_paths_only)",
+      "test_asset_hash_mismatch_rejected (test_pipeline_v2.PipelineV2Tests.test_asset_hash_mismatch_rejected)",
+      "test_asset_path_escape_rejected (test_pipeline_v2.PipelineV2Tests.test_asset_path_escape_rejected)",
+      "test_out_of_range_head_rejected_instead_of_stretching_asset (test_pipeline_v2.PipelineV2Tests.test_out_of_range_head_rejected_instead_of_stretching_asset)",
+      "test_supplied_assets_validate_without_modifying_source (test_pipeline_v2.PipelineV2Tests.test_supplied_assets_validate_without_modifying_source)",
+      "test_compact_shell_attaches_without_moving_source_head (test_pipeline_v21.PipelineV21Tests.test_compact_shell_attaches_without_moving_source_head)",
+      "test_cap_surrounds_rear_and_sides_instead_of_a_front_plate (test_scalp_pipeline.ScalpPipelineTests.test_cap_surrounds_rear_and_sides_instead_of_a_front_plate)",
+      "test_no_posterior_root_observations_are_claimed_from_oblique_front_views (test_scalp_pipeline.ScalpPipelineTests.test_no_posterior_root_observations_are_claimed_from_oblique_front_views)",
+      "test_scaffold_closes_to_one_positive_manifold_volume_without_moving_head (test_scalp_pipeline.ScalpPipelineTests.test_scaffold_closes_to_one_positive_manifold_volume_without_moving_head)",
+      "test_expected_flat_paths_exist (test_hair_on_head_paths.RootLayoutTests.test_expected_flat_paths_exist)",
+      "test_missing_cavity_observations_are_not_replaced_by_an_invented_shell (test_pipeline_v21.PipelineV21Tests.test_missing_cavity_observations_are_not_replaced_by_an_invented_shell)"
+    ],
+    "note": "legacy asset/layout and older pipeline issues remain; no newly failing HeadAPI/fusion tests"
+  },
+  "windows_api_v02_runtime_verified": false,
+  "reconstruction_gpu_rerun_verified_in_this_release": false,
+  "model_pins_changed": false,
+  "face_identity_verified": false,
+  "ready_for_machine": false,
+  "limitations": [
+    "GLB scene assembly contains two aligned components, not a watertight Boolean solid",
+    "hair boundary/gaps and intersections not independently validated",
+    "short-hair MVP: inferred crown closure can change silhouette; long/tied/blond/occluded hair not validated",
+    "RDF vertex geometry preserved; appearance is approximate",
+    "no full body/base/slicer/calibration",
+    "same fitting controls used for alignment residual, not independent accuracy validation"
+  ]
+}

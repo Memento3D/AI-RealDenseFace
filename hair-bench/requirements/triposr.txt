@@ -1,0 +1,16 @@
+torch==2.5.0
+torchvision==0.20.0
+numpy==1.26.4
+Pillow==10.4.0
+scipy==1.15.3
+scikit-image==0.24.0
+trimesh==4.7.4
+omegaconf==2.3.0
+einops==0.7.0
+transformers==4.35.0
+huggingface-hub==0.17.3
+imageio==2.37.0
+rembg==2.0.57
+onnxruntime==1.20.1
+
+opencv-python-headless==4.10.0.84

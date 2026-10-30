@@ -1,0 +1,20 @@
+{
+  "front_photo": "input/04/front.jpg",
+  "dataset_folder": "personal04_20261027_164721_57ebd419",
+  "prepared_run": "runs/hairprep04_20261027_144453_14f44c88",
+  "canonical_run": "runs/hairprep04_20261027_144453_14f44c88/deep3d_20261027_162444_0UyMcz/canonical_20261027_163740_By5pN1",
+  "baseline_50": "~/memento-hair/Im2Haircut/experiments/memento_im2_20261027_094722_dca28255",
+  "baseline_300": "~/memento-hair/Im2Haircut/experiments/memento_im2_20261027_095350_27352267",
+  "affine_2d": [
+    [
+      0.44292067112384886,
+      0.017549055652036214,
+      135.1668680224915
+    ],
+    [
+      -0.017549055652036214,
+      0.44292067112384886,
+      52.463180214982856
+    ]
+  ]
+}

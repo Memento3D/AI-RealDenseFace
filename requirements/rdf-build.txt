@@ -1,0 +1,4 @@
+# Build prerequisites, not a runtime lock.
+setuptools>=75,<81
+wheel>=0.45,<1
+ninja>=1.11,<2

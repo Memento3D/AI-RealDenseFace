@@ -1,0 +1,130 @@
+{
+  "release": "HeadLab26.0",
+  "date_utc": "2026-10-29",
+  "runtime": "Linux CPU Python3.12; isolated dependency versions in log, not a Windows/GPU speed benchmark",
+  "new_tests": {
+    "passed": 28,
+    "failed": 0
+  },
+  "full_suite": {
+    "baseline_total": 296,
+    "updated_total": 392,
+    "baseline_failures": 2,
+    "baseline_errors": 5,
+    "updated_failures": 2,
+    "updated_errors": 5,
+    "same_named_legacy_issues": true,
+    "new_regression_detected": false,
+    "added_tests_since_baseline": 96,
+    "legacy_issues": [
+      "test_manifest_covers_feature_owned_paths_only (test_hair_on_head_paths.RootLayoutTests.test_manifest_covers_feature_owned_paths_only)",
+      "test_compact_shell_attaches_without_moving_source_head (test_pipeline_v21.PipelineV21Tests.test_compact_shell_attaches_without_moving_source_head)",
+      "test_cap_surrounds_rear_and_sides_instead_of_a_front_plate (test_scalp_pipeline.ScalpPipelineTests.test_cap_surrounds_rear_and_sides_instead_of_a_front_plate)",
+      "test_no_posterior_root_observations_are_claimed_from_oblique_front_views (test_scalp_pipeline.ScalpPipelineTests.test_no_posterior_root_observations_are_claimed_from_oblique_front_views)",
+      "test_scaffold_closes_to_one_positive_manifold_volume_without_moving_head (test_scalp_pipeline.ScalpPipelineTests.test_scaffold_closes_to_one_positive_manifold_volume_without_moving_head)",
+      "test_expected_flat_paths_exist (test_hair_on_head_paths.RootLayoutTests.test_expected_flat_paths_exist)",
+      "test_missing_cavity_observations_are_not_replaced_by_an_invented_shell (test_pipeline_v21.PipelineV21Tests.test_missing_cavity_observations_are_not_replaced_by_an_invented_shell)"
+    ]
+  },
+  "architecture": "PASS",
+  "v23_runtime_hashes": {
+    "matched": 63,
+    "modified": 0
+  },
+  "head245_hashes": {
+    "matched": 55,
+    "modified": 0
+  },
+  "batch_preflight_smoke": {
+    "six_artificial_datasets_requested": true,
+    "all_six_recorded": true,
+    "missing_views_and_missing_folder_isolated": true,
+    "real_manifests_checked": true,
+    "new_gpu_fit_executed": false
+  },
+  "cpu_replay": {
+    "source": "previously saved subject05 fit; same geometry and cameras verified against stored workspace",
+    "new_gpu_fit_executed": false,
+    "new_landmarks": {
+      "front": true,
+      "left": true,
+      "right": false
+    },
+    "diagnostic_seconds": 1.8088584649999575,
+    "eye_contour_proxy_median": 0.03948331951666366,
+    "appearance_seconds": 10.69737800799976,
+    "figurine_seconds": 41.661166500000036,
+    "timing_scope": "CPU replay only, exact timings are observations, not performance guarantees",
+    "candidate_count": 8,
+    "candidates": [
+      {
+        "id": "radial_hair_21778_body_0p6",
+        "status": "EXPORTED",
+        "error": null,
+        "arap": null
+      },
+      {
+        "id": "arap_21778_0p6",
+        "status": "FAILED",
+        "error": "ARAP vertex budget exceeded; use a certified lower-resolution cage",
+        "arap": null
+      },
+      {
+        "id": "radial_hair_21778_body_0p85",
+        "status": "EXPORTED",
+        "error": null,
+        "arap": null
+      },
+      {
+        "id": "arap_21778_0p85",
+        "status": "FAILED",
+        "error": "ARAP vertex budget exceeded; use a certified lower-resolution cage",
+        "arap": null
+      },
+      {
+        "id": "radial_hair_11256_body_0p6",
+        "status": "FAILED",
+        "error": "Hair covers too many observed ear samples: {'pass': False, 'limit': 0.1, 'sides': [{'side': -1, 'unique_samples': 240, 'covered_fraction': 0.3375}, {'side': 1, 'unique_samples': 258, 'covered_fraction': 0.1434108527131783}], 'scope': 'visible semantic source-ear samples, not exact clearance or mechanical certification'}",
+        "arap": null
+      },
+      {
+        "id": "arap_11256_0p6",
+        "status": "FAILED",
+        "error": "ARAP solve exceeded bounded movement or became nonfinite",
+        "arap": null
+      },
+      {
+        "id": "radial_hair_11256_body_0p85",
+        "status": "FAILED",
+        "error": "Hair covers too many observed ear samples: {'pass': False, 'limit': 0.1, 'sides': [{'side': -1, 'unique_samples': 240, 'covered_fraction': 0.375}, {'side': 1, 'unique_samples': 258, 'covered_fraction': 0.16666666666666666}], 'scope': 'visible semantic source-ear samples, not exact clearance or mechanical certification'}",
+        "arap": null
+      },
+      {
+        "id": "arap_11256_0p85",
+        "status": "FAILED",
+        "error": "ARAP solve exceeded bounded movement or became nonfinite",
+        "arap": null
+      }
+    ],
+    "selected": "radial_hair_21778_body_0p6",
+    "selected_closed_surface_manifold": true,
+    "skin_rgb8": [
+      177,
+      129,
+      96
+    ],
+    "skin_color_truth_verified": false,
+    "appearance_improvement_verified": false
+  },
+  "unverified": [
+    "new RDF baseline and occlusion CUDA inference",
+    "Pixel3DMM GPU inference and exported camera contract on real new output",
+    "TRUST model inference",
+    "actual input01-06 images beyond supplied saved05 artifacts",
+    "Windows PowerShell execution",
+    "machine slicing with calibrated Saturn/resin profile",
+    "physical printing",
+    "independent identity and aesthetic improvement"
+  ],
+  "ready_for_machine": false
+}

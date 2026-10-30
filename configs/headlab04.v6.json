@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "workspace": "runs/v1_20261025_132459_bbbc53c9/three_photo_346bb6bf/head_workspace_3cdeba95/head.workspace.html",
+  "parser_model": "D:/AI-cache/face-parsing/resnet18.onnx",
+  "front_rgb_sha256": "5735dfa2d9d77955078c5eecb71b78983ae052dfeb0f51a4879371730c392e01",
+  "reference_head_neck_mm": 20.0,
+  "head_neck_heights_mm": [
+    18.0,
+    22.0
+  ],
+  "repeats": 3,
+  "mask_dilation_px": 1,
+  "hair": {
+    "base_mm": 0.45,
+    "seam_mm": 0.08,
+    "edge_taper_mm": 0.65,
+    "rgb": [
+      34,
+      29,
+      27
+    ]
+  },
+  "eyes": {
+    "gaze_yaw_deg": 0,
+    "gaze_pitch_deg": 0,
+    "iris_ratio": 0.7,
+    "pupil_ratio": 0.48,
+    "highlight_ratio": 0.045,
+    "sclera_rgb": [
+      192,
+      183,
+      170
+    ],
+    "iris_rgb": [
+      58,
+      39,
+      27
+    ],
+    "per_eye_yaw_deg": [
+      0,
+      0
+    ],
+    "per_eye_pitch_deg": [
+      0,
+      0
+    ]
+  },
+  "fit": {
+    "controls": 18,
+    "samples_per_view": 100,
+    "min_offset_mm": 0.12,
+    "max_offset_mm": 1.2,
+    "pixel_scale": 3.0,
+    "prior_mm": 0.4,
+    "max_nfev": 40,
+    "basis_mode": "compact"
+  },
+  "deformation_weight": 0.35,
+  "arap_iterations": 8,
+  "max_hair_change_mm": 1.5,
+  "preview_size": 300,
+  "printer": {
+    "machine": "ELEGOO Saturn 4 Ultra 16K",
+    "calibration_status": "UNVALIDATED",
+    "resin": null,
+    "layer_height_mm": null,
+    "exposure_seconds": null,
+    "trial_feature_mm": 0.4,
+    "ray_samples": 128,
+    "scope": "trial screening values, not resin/machine-certified minimums"
+  },
+  "manufacturing_driver": null,
+  "notes": "V6 automatic footprint repair; training-mask proxy acceptance only. Short attached hair; no symmetry or fixed nape length. Not machine ready.",
+  "back_image": "input/04/back.jpg",
+  "back_sha256": "57a54fdc7f0417f41c5ad086acf39aabc48a318c895023abbad78f1411c3e7d7",
+  "fusion": {
+    "back_weight": 2.0,
+    "boundary_regularization": 0.22,
+    "min_patch_width_mm": 0.45
+  },
+  "view_weights": [
+    1.7,
+    1.0,
+    1.0,
+    1.2
+  ],
+  "front_loss_limit": 0.025,
+  "support_preparation": {
+    "enabled": true,
+    "voxel_pitch_mm": 0.15,
+    "max_supports": 64,
+    "lift_mm": 3.0,
+    "shaft_radius_mm": 0.3,
+    "tip_radius_mm": 0.15,
+    "tip_length_mm": 0.8,
+    "protect_front": true
+  },
+  "repair": {
+    "min_facing": 0.15,
+    "mask_uncertainty_px": 2.5,
+    "rear_weight": 2.0,
+    "silhouette_negative_weight": 0.45,
+    "regularization_trials": [
+      0.15,
+      0.5,
+      1.2
+    ],
+    "veto_trials": [
+      0.0,
+      0.5,
+      2.0
+    ],
+    "max_view_iou_loss": 0.025,
+    "max_region_excess_increase": 0.015,
+    "scalp_interior_px": 2.5,
+    "silhouette_root_weight": 0.08,
+    "max_root_change_mm": 1.5
+  },
+  "quality_gate": {
+    "min_view_iou": 0.75,
+    "scope": "experimental rejection threshold; not calibrated likeness or printability"
+  }
+}

@@ -3,7 +3,7 @@ from collections import deque
 import numpy as np
 
 
-def prepare(vertices, weights, coordinates, images, gains, skin, sample, linear):
+def prepare(vertices, weights, coordinates, images, gains, skin, sample, linear, corner_gains=None, source_bias=None):
     # Weld exact duplicates introduced by the triangle-expanded workspace.
     points, inverse = np.unique(vertices, axis=0, return_inverse=True)
     faces = inverse.reshape(-1, 3)
@@ -38,7 +38,9 @@ def prepare(vertices, weights, coordinates, images, gains, skin, sample, linear)
     for j in range(3):
         q=coordinates[j].reshape(-1,3)
         rgb=sample(images[j],q[:,:2]/q[:,2,None])
-        color+=linear(rgb)*gains[j]*flat_weights[:,j,None]
+        corrected=linear(rgb)*(gains[j] if corner_gains is None else corner_gains[j])
+        if source_bias is not None:corrected=np.maximum(corrected+source_bias[j],0)
+        color+=corrected*flat_weights[:,j,None]
     color/=np.maximum(total[:,None],1e-12)
     color=np.where(color<=.0031308,color*12.92,1.055*np.maximum(color,0)**(1/2.4)-.055)
     counts=np.bincount(inverse,weights=(total>1e-8),minlength=len(points))

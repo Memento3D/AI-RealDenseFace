@@ -1,0 +1,30 @@
+{
+  "version": "1.0.1",
+  "unit_tests_passed": 14,
+  "python_compile": "PASS",
+  "hotfix_cpu_validation": "PASS",
+  "gpu_inference": "NOT_RUN_NO_NVIDIA_GPU",
+  "windows_powershell_wsl_execution": "NOT_RUN_ON_THIS_HOST",
+  "cache_or_environment_deleted": false,
+  "ready_for_machine": false,
+  "prior_1_0_validation_record": {
+    "date": "2026-10-28",
+    "unit_tests_passed": 7,
+    "python_compile": "PASS",
+    "dependency_resolver_python_3_10": {
+      "triposr": "PASS",
+      "hunyuan-mini": "PASS",
+      "note": "Resolution only, not installation/import/CUDA inference"
+    },
+    "real_workspace_sha256": "0822ea326a0890d895b8a6dcd3caef9ca5fd6cf067fe3531b7d5efc937e0e5f8",
+    "original_face_sha256": "dbed1ab1636859148057d7a7a5add96cb18e2ec81c77120aa3e3badce177105f",
+    "real_subject_prepare_and_hash": "PASS",
+    "reference04_auto_fallback": "PASS",
+    "studio_http_native_face_load": "PASS",
+    "studio_export_synthetic_fixture": "PASS",
+    "synthetic_fixture_is_model_inference": false,
+    "actual_gpu_inference": "NOT_RUN_NO_NVIDIA_GPU",
+    "windows_powershell_wsl_execution": "NOT_RUN_ON_THIS_LINUX_HOST",
+    "ready_for_machine": false
+  }
+}

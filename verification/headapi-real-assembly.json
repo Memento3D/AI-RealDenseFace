@@ -1,0 +1,15 @@
+{
+  "status": "MVP_ASSEMBLED",
+  "child_job_id": "6fc913aa24a74f40a61d013ed5821f8a",
+  "seconds_cpu_this_host": 34.125369043999854,
+  "source_job_unchanged": true,
+  "rdf_glb_vertices_match_npz_within_1e_minus7": true,
+  "rdf_faces_equal": true,
+  "glb_geometry_nodes": [
+    "RDF_Head_Preserved",
+    "TripoSR_Hair_Surface"
+  ],
+  "artifact_bytes": 519392,
+  "rdf_triposr_neural_regeneration": false,
+  "scope": "real uploaded components, actual CPU semantic and landmark models, ASGI API with real worker subprocesses; Linux host only"
+}
