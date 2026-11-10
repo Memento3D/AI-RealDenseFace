@@ -1,0 +1,20 @@
+{
+  "policy": "reviewed-ipoly-glasses-z-up-forward-minus-y-v1",
+  "units": "metres",
+  "glasses": {
+    "glasses-03": {
+      "left_lens_center_m": [-0.036, -0.0575, 0.0],
+      "right_lens_center_m": [0.036, -0.0575, 0.0],
+      "bridge_height_above_lens_m": 0.0107,
+      "bridge_clearance_m": 0.002,
+      "lens_spacing_factor": 1.18
+    },
+    "glasses-01": {
+      "left_lens_center_m": [-0.034, -0.0455, 0.0],
+      "right_lens_center_m": [0.034, -0.0455, 0.0],
+      "bridge_height_above_lens_m": 0.012,
+      "bridge_clearance_m": 0.002,
+      "lens_spacing_factor": 1.18
+    }
+  }
+}

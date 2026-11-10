@@ -1,0 +1,430 @@
+--- a/scripts/run_face_on_glb.py
++++ b/scripts/run_face_on_glb.py
+@@ -7,17 +7,21 @@
+ import argparse
+ import html
+ import json
++import os
++import re
+ import shutil
+ import subprocess
+ import sys
++import time
+ from pathlib import Path
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+ 
+ from chibi_face_transfer.config import sha256, write_json
+-
+-NEW_FACE = ROOT / 'new_face /AI-RealDenseFace'
++from windows_runtime_budget import run_guarded, available_ram
++
++NEW_FACE = ROOT / 'new_face/AI-RealDenseFace'
+ SLOTS = ('front', 'left', 'right')
+ PHOTO_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp'}
+ DEFAULT_MODEL_SHA256 = (
+@@ -58,7 +62,7 @@
+     for path in candidates:
+         if not path.is_file():
+             continue
+-        manifest = json.loads(path.read_text())
++        manifest = json.loads(path.read_text(encoding='utf-8'))
+         if (
+             manifest.get('status') == 'ready'
+             and manifest.get('source_glb_sha256') == digest
+@@ -70,14 +74,21 @@
+ def run_stage(name, command, output, cwd=ROOT):
+     log = output / (name + '.log')
+     print(name + '…', flush=True)
+-    with log.open('w') as stream:
+-        done = subprocess.run(
+-            [str(value) for value in command],
+-            cwd=cwd,
+-            stdout=stream,
+-            stderr=subprocess.STDOUT,
+-            check=False,
+-        )
++    env = os.environ.copy()
++    env['PYTHONUTF8'] = '1'
++    env['PYTHONPATH'] = os.pathsep.join([str(cwd / 'src'), str(cwd), str(ROOT / 'HeadBodySplit/src'), str(ROOT)])
++    started = time.monotonic()
++    stage = {'available_before_bytes': available_ram(), 'minimum_ram_bytes': 3*2**30, 'abort_ram_bytes': 1024*2**20, 'timeout_seconds': 600, 'peak_memory_measured': False}
++    try:
++        with log.open('w', encoding='utf-8') as stream:
++            done = run_guarded([str(value) for value in command], cwd=cwd, env=env, stdout=stream, timeout=600, minimum=3*2**30, abort=1024*2**20)
++        stage['exit_code'] = done.returncode
++    except Exception as error:
++        stage['error'] = str(error)
++        raise
++    finally:
++        stage['seconds'] = time.monotonic() - started
++        write_json(output / (name + '.stage.json'), stage)
+     if done.returncode:
+         raise RuntimeError(
+             name + ' failed (exit ' + str(done.returncode) + '); see ' + str(log)
+@@ -102,13 +113,19 @@
+ <h1>Kết quả ghép khuôn mặt vào GLB</h1><p>GLB nguồn: SOURCE</p><p><a href="model.glb" download>Tải model.glb</a> · <a href="transfer/validation_report.json">Báo cáo hình học</a> · <a href="quality/report.json">Báo cáo chất lượng ảnh</a></p>
+ <h2>Toàn bộ mô hình</h2><img src="transfer/previews/final_preview.png" alt="Toàn bộ mô hình"><h2>Cận mặt</h2><div class="grid"><img src="transfer/previews/after_face.png" alt="Mặt sau khi ghép"><img src="transfer/previews/after_left.png" alt="Góc trái"><img src="transfer/previews/after_right.png" alt="Góc phải"></div>
+ <h2>Ảnh nguồn</h2><div class="grid">CARDS</div><p>Hình học đã được kiểm tra tự động; độ giống, màu da và phụ kiện cần xem trực quan. Ảnh toàn thân chỉ để review, không dùng dựng đầu.</p></html>'''
++    if not (output / 'transfer/previews/final_preview.png').is_file():
++        page = re.sub(r'<img src="transfer/previews/[^"]+"[^>]*>', '', page)
++        page = page.replace('<h2>Toàn bộ mô hình</h2>', '<p>Preview chưa render; xem model.glb và báo cáo kiểm tra.</p><h2>Toàn bộ mô hình</h2>')
+     (output / 'review.html').write_text(
+-        page.replace('SOURCE', html.escape(glb.name)).replace('CARDS', ''.join(cards))
++        page.replace('SOURCE', html.escape(glb.name)).replace('CARDS', ''.join(cards)), encoding='utf-8'
+     )
+ 
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--face-python', type=Path, help='CPU validation/color Python; MICA worker stays in mica-config')
++    parser.add_argument('--split-python', type=Path, help='HeadBodySplit Python')
++    parser.add_argument('--skip-previews', action='store_true', help='Skip expensive preview renders; keep geometry/export/validation')
+     parser.add_argument('--glb', type=Path, required=True, help='Existing figurine GLB')
+     parser.add_argument(
+         '--photos',
+@@ -152,6 +169,10 @@
+         '--blender', type=Path, default=Path('/snap/blender/current/blender')
+     )
+     args = parser.parse_args()
++    face_python = args.face_python.resolve() if args.face_python else NEW_FACE / '.venv/bin/python'
++    split_python = args.split_python.resolve() if args.split_python else ROOT / 'HeadBodySplit/.venv/bin/python'
++    if args.skip_previews:
++        os.environ['MEMENTO_SKIP_PREVIEWS'] = '1'
+     glb, output = args.glb.resolve(), args.output.resolve()
+     if not glb.is_file() or glb.suffix.lower() != '.glb':
+         parser.error('Select an existing .glb file')
+@@ -197,15 +218,15 @@
+             model,
+             mica_config,
+             pose_model,
+-            NEW_FACE / '.venv/bin/python',
+-            ROOT / 'HeadBodySplit/.venv/bin/python',
++            face_python,
++            split_python,
+         ):
+             if not path.is_file():
+                 raise FileNotFoundError(path)
+         if sha256(model) != args.model_sha256:
+             raise ValueError('Face landmarker checksum does not match --model-sha256')
+-        py = NEW_FACE / '.venv/bin/python'
+-        transfer_py = ROOT / 'HeadBodySplit/.venv/bin/python'
++        py = face_python
++        transfer_py = split_python
+         if template is None:
+             run_stage(
+                 'prepare_draft',
+@@ -311,7 +332,7 @@
+             output,
+             NEW_FACE,
+         )
+-        report = json.loads((output / 'quality/report.json').read_text())
++        report = json.loads((output / 'quality/report.json').read_text(encoding='utf-8'))
+         state['quality_status'] = report.get('status')
+         if report.get('status') in ('FAILED', 'FAIL'):
+             raise RuntimeError('Photo quality did not pass; see quality/report.json')
+--- a/scripts/prepare_subject_template.py
++++ b/scripts/prepare_subject_template.py
+@@ -2,6 +2,8 @@
+ 
+ import argparse
+ import json
++import os
++import shutil
+ import sys
+ from pathlib import Path
+ 
+@@ -23,9 +25,13 @@
+     )
+     if base.is_file() and base.name == 'template.json':
+         base = base.parent
+-    manifest = json.loads((base / 'template.json').read_text())
++    manifest = json.loads((base / 'template.json').read_text(encoding='utf-8'))
+     if manifest.get('status') != 'ready':
+         raise ValueError('Base template is not annotated and ready')
++    for name, expected in manifest.get('pinned_files', {}).items():
++        original = ROOT / name
++        if not original.is_file() or sha256(original) != expected:
++            raise ValueError('Base template input hash mismatch: ' + name)
+     glb_hash = sha256(glb)
+     if glb_hash != manifest.get('source_glb_sha256'):
+         raise ValueError('Selected GLB geometry differs from reviewed template')
+@@ -49,7 +55,7 @@
+         landmarks = embedded_points(
+             vertices, faces, embedding['full_faces'], embedding['full_weights']
+         )
+-    annotation = json.loads((base / 'target_landmarks.json').read_text())
++    annotation = json.loads((base / 'target_landmarks.json').read_text(encoding='utf-8'))
+     ids = manifest.get('alignment_landmark_ids', [36, 39, 42, 45, 30, 48, 54, 8])
+     target = np.asarray([annotation['points'][str(i)]['point'] for i in ids])
+     transform = fit_similarity(landmarks[ids], target)
+@@ -61,7 +67,12 @@
+ 
+     output.mkdir(parents=True, exist_ok=False)
+     for name in SHARED:
+-        (output / name).symlink_to((base / name).resolve())
++        if os.name == 'nt':
++            shutil.copyfile(base / name, output / name)
++        else:
++            (output / name).symlink_to((base / name).resolve())
++        if sha256(output / name) != sha256(base / name):
++            raise ValueError('Template copy hash mismatch: ' + name)
+     np.savez_compressed(
+         output / 'source_aligned.npz',
+         vertices=aligned,
+--- a/scripts/create_face_patch.py
++++ b/scripts/create_face_patch.py
+@@ -288,20 +288,21 @@
+             ]
+ mesh.normals_split_custom_set(custom.tolist())
+ bpy.ops.wm.save_as_mainfile(filepath=str(O / 'candidate_geometry.blend'))
+-sc = bpy.context.scene
+-cam = sc.camera
+-center = Vector((-0.02, -0.08, 0.855))
+-cam.location = center + Vector((0, -2, 0))
+-cam.rotation_euler = (center - cam.location).to_track_quat('-Z', 'Y').to_euler()
+-cam.data.ortho_scale = 0.24
+-sc.render.resolution_x = 900
+-sc.render.resolution_y = 900
+-sc.cycles.samples = 12
+-mat = bpy.data.materials.new('Clay')
+-mat.use_nodes = True
+-n = next(n for n in mat.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+-n.inputs['Base Color'].default_value = (0.5, 0.5, 0.5, 1)
+-n.inputs['Roughness'].default_value = 0.8
+-sc.view_layers[0].material_override = mat
+-sc.render.filepath = str(O / 'after_clay.png')
+-bpy.ops.render.render(write_still=True)
++if os.environ.get('MEMENTO_SKIP_PREVIEWS') != '1':
++    sc = bpy.context.scene
++    cam = sc.camera
++    center = Vector((-0.02, -0.08, 0.855))
++    cam.location = center + Vector((0, -2, 0))
++    cam.rotation_euler = (center - cam.location).to_track_quat('-Z', 'Y').to_euler()
++    cam.data.ortho_scale = 0.24
++    sc.render.resolution_x = 900
++    sc.render.resolution_y = 900
++    sc.cycles.samples = 12
++    mat = bpy.data.materials.new('Clay')
++    mat.use_nodes = True
++    n = next(n for n in mat.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
++    n.inputs['Base Color'].default_value = (0.5, 0.5, 0.5, 1)
++    n.inputs['Roughness'].default_value = 0.8
++    sc.view_layers[0].material_override = mat
++    sc.render.filepath = str(O / 'after_clay.png')
++    bpy.ops.render.render(write_still=True)
+--- a/scripts/finalize_face_patch.py
++++ b/scripts/finalize_face_patch.py
+@@ -111,41 +111,43 @@
+     export_lights=False,
+     export_extras=True,
+ )
+-preview = O / 'previews'
+-preview.mkdir(exist_ok=True)
+-s.render.resolution_x = 900
+-s.render.resolution_y = 1000
+-s.cycles.samples = 16
+-cam = s.camera
++bpy.ops.wm.save_as_mainfile(filepath=str(O / 'candidate.blend'))
++if os.environ.get('MEMENTO_SKIP_PREVIEWS') != '1':
++    preview = O / 'previews'
++    preview.mkdir(exist_ok=True)
++    s.render.resolution_x = 900
++    s.render.resolution_y = 1000
++    s.cycles.samples = 16
++    cam = s.camera
+ 
+ 
+-def render(name, center, direction, scale, res=(900, 1000)):
+-    center = Vector(center)
+-    cam.location = center + Vector(direction).normalized() * 3
+-    cam.rotation_euler = (center - cam.location).to_track_quat('-Z', 'Y').to_euler()
+-    cam.data.type = 'ORTHO'
+-    cam.data.ortho_scale = scale
+-    s.render.resolution_x, s.render.resolution_y = res
+-    s.render.filepath = str(preview / (name + '.png'))
+-    bpy.ops.render.render(write_still=True)
++    def render(name, center, direction, scale, res=(900, 1000)):
++        center = Vector(center)
++        cam.location = center + Vector(direction).normalized() * 3
++        cam.rotation_euler = (center - cam.location).to_track_quat('-Z', 'Y').to_euler()
++        cam.data.type = 'ORTHO'
++        cam.data.ortho_scale = scale
++        s.render.resolution_x, s.render.resolution_y = res
++        s.render.filepath = str(preview / (name + '.png'))
++        bpy.ops.render.render(write_still=True)
+ 
+ 
+-render('after_front', (0, 0, 0.53), (0, -1, 0.025), 1.2)
+-render('after_face', (-0.02, -0.01, 0.856), (0, -1, 0), 0.23, (900, 900))
+-render('after_left', (-0.02, -0.01, 0.856), (-1, -1, 0), 0.25, (800, 800))
+-render('after_right', (-0.02, -0.01, 0.856), (1, -1, 0), 0.25, (800, 800))
+-render('after_three_quarter', (0, 0, 0.53), (1, -2, 0.25), 1.2)
+-render('hairline_closeup', (-0.02, 0, 0.905), (0, -1, 0.1), 0.155, (800, 650))
+-render('chin_closeup', (-0.02, 0, 0.813), (1, -2, -0.15), 0.16, (800, 650))
+-# Save a useful opening camera and render gray geometry for review.
+-render('final_preview', (0, 0, 0.53), (0, -1, 0.025), 1.2)
+-bpy.ops.wm.save_as_mainfile(filepath=str(O / 'candidate.blend'))
+-clay = bpy.data.materials.new('Review_Clay')
+-clay.use_nodes = True
+-bs = next(n for n in clay.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+-bs.inputs['Base Color'].default_value = (0.5, 0.5, 0.5, 1)
+-bs.inputs['Roughness'].default_value = 0.8
+-s.view_layers[0].material_override = clay
+-render('after_face_clay', (-0.02, -0.01, 0.856), (0, -1, 0), 0.23, (900, 900))
+-render('after_side_clay', (-0.02, -0.01, 0.856), (1, -1, 0), 0.25, (800, 800))
+-print('EXPORTED', O, flush=True)
++    render('after_front', (0, 0, 0.53), (0, -1, 0.025), 1.2)
++    render('after_face', (-0.02, -0.01, 0.856), (0, -1, 0), 0.23, (900, 900))
++    render('after_left', (-0.02, -0.01, 0.856), (-1, -1, 0), 0.25, (800, 800))
++    render('after_right', (-0.02, -0.01, 0.856), (1, -1, 0), 0.25, (800, 800))
++    render('after_three_quarter', (0, 0, 0.53), (1, -2, 0.25), 1.2)
++    render('hairline_closeup', (-0.02, 0, 0.905), (0, -1, 0.1), 0.155, (800, 650))
++    render('chin_closeup', (-0.02, 0, 0.813), (1, -2, -0.15), 0.16, (800, 650))
++    # Save a useful opening camera and render gray geometry for review.
++    render('final_preview', (0, 0, 0.53), (0, -1, 0.025), 1.2)
++    bpy.ops.wm.save_as_mainfile(filepath=str(O / 'candidate.blend'))
++    clay = bpy.data.materials.new('Review_Clay')
++    clay.use_nodes = True
++    bs = next(n for n in clay.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
++    bs.inputs['Base Color'].default_value = (0.5, 0.5, 0.5, 1)
++    bs.inputs['Roughness'].default_value = 0.8
++    s.view_layers[0].material_override = clay
++    render('after_face_clay', (-0.02, -0.01, 0.856), (0, -1, 0), 0.23, (900, 900))
++    render('after_side_clay', (-0.02, -0.01, 0.856), (1, -1, 0), 0.25, (800, 800))
++    print('EXPORTED', O, flush=True)
+--- a/chibi_face_transfer/config.py
++++ b/chibi_face_transfer/config.py
+@@ -37,7 +37,7 @@
+                 else str(x)
+             ),
+         )
+-        + '\n'
++        + '\n', encoding='utf-8'
+     )
+ 
+ 
+--- a/new_face/AI-RealDenseFace/scripts/build_face_color_demo.py
++++ b/new_face/AI-RealDenseFace/scripts/build_face_color_demo.py
+@@ -9,6 +9,7 @@
+ import html
+ import io
+ import json
++import os
+ from pathlib import Path
+ import shutil
+ import struct
+@@ -486,7 +487,9 @@
+     )
+     sheet = Image.new('RGB', (1380, 580), '#171f2b')
+     draw = ImageDraw.Draw(sheet)
+-    font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 22)
++    font_candidates = [os.environ.get('MEMENTO_REVIEW_FONT'), str(Path(os.environ.get('WINDIR', 'C:/Windows')) / 'Fonts/arial.ttf'), '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf']
++    font_path = next((p for p in font_candidates if p and Path(p).is_file()), None)
++    font = ImageFont.truetype(font_path, 22) if font_path else ImageFont.load_default(size=22)
+     draw.text(
+         (20, 12), name + ' · Khuôn mặt 3D có màu từ ảnh gốc', font=font, fill='white'
+     )
+--- /dev/null
++++ b/windows_runtime_budget.py
+@@ -0,0 +1,39 @@
++"""Standard-library host RAM guard; no model SDK imported by API process."""
++import ctypes
++from pathlib import Path
++import subprocess
++import sys,time
++
++
++def available_ram():
++    if sys.platform=='win32':
++        class Status(ctypes.Structure):
++            _fields_=[('length',ctypes.c_ulong),('load',ctypes.c_ulong)]+[(n,ctypes.c_ulonglong) for n in ['total','available','total_page','available_page','total_virtual','available_virtual','extended']]
++        status=Status();status.length=ctypes.sizeof(status)
++        if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):raise OSError('Cannot read host RAM')
++        return int(status.available)
++    if sys.platform.startswith('linux'):
++        for line in Path('/proc/meminfo').read_text().splitlines():
++            if line.startswith('MemAvailable:'):return int(line.split()[1])*1024
++    return None
++
++
++def run_guarded(args,*,cwd,env,stdout,timeout,minimum,abort):
++    free=available_ram()
++    if free is not None and free<minimum:raise MemoryError('INSUFFICIENT_HOST_MEMORY_BEFORE_STAGE')
++    child=subprocess.Popen(args,cwd=cwd,env=env,stdout=stdout,stderr=subprocess.STDOUT)
++    started=time.monotonic()
++    try:
++        while child.poll() is None:
++            free=available_ram()
++            if free is not None and free<abort:raise MemoryError('HOST_MEMORY_BUDGET_EXCEEDED')
++            if time.monotonic()-started>timeout:raise subprocess.TimeoutExpired(args,timeout)
++            time.sleep(.5)
++        return subprocess.CompletedProcess(args,child.returncode)
++    finally:
++        if child.poll() is None:
++            if sys.platform == 'win32':
++                subprocess.run(['taskkill','/PID',str(child.pid),'/T','/F'],capture_output=True)
++            else:
++                child.terminate()
++            child.wait()
+--- /dev/null
++++ b/tests/test_windows_portability.py
+@@ -0,0 +1,36 @@
++import hashlib,json,subprocess,sys,tempfile,unittest
++import os
++from pathlib import Path
++from scripts.prepare_subject_template import bind_template
++
++ROOT=Path(__file__).resolve().parents[1]
++
++class WindowsPortabilityTests(unittest.TestCase):
++    def test_unicode_review_and_json_with_legacy_windows_encoding(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            script="from pathlib import Path; from scripts.run_face_on_glb import review_page; from chibi_face_transfer.config import write_json; p=Path("+repr(temporary)+"); review_page(p,Path('men.glb'),{s:Path(s+'.png') for s in ['front','left','right']},None); write_json(p/'unicode.json',{'name':'Ph\\u01b0\\u1edbc'})"
++            env=os.environ.copy();env['PYTHONPATH']=str(ROOT);env['PYTHONUTF8']='0'
++            result=subprocess.run([sys.executable,'-X','utf8=0','-c',script],cwd=temporary,env=env,capture_output=True)
++            self.assertEqual(result.returncode,0,result.stderr)
++            page=(Path(temporary)/'review.html').read_text(encoding='utf-8')
++            self.assertIn('Kết quả ghép khuôn mặt',page)
++            self.assertNotIn('<img src="transfer/previews/',page)
++            self.assertEqual(json.loads((Path(temporary)/'unicode.json').read_text(encoding='utf-8'))['name'],'Phước')
++
++    def test_cli_is_importable_from_foreign_directory(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            result=subprocess.run([sys.executable,str(ROOT/'scripts/run_face_on_glb.py'),'--help'],cwd=temporary,capture_output=True,text=True)
++        self.assertEqual(result.returncode,0,result.stderr)
++        self.assertIn('--face-python',result.stdout)
++        self.assertIn('--split-python',result.stdout)
++
++    def test_tampered_base_pin_rejected_before_output_or_geometry_loading(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            base=Path(temporary);glb=base/'model.glb';glb.write_bytes(b'test-only fixture')
++            altered=base/'altered.npz';altered.write_bytes(b'changed')
++            manifest={'status':'ready','source_glb_sha256':hashlib.sha256(glb.read_bytes()).hexdigest(),'pinned_files':{str(altered):hashlib.sha256(b'original').hexdigest()}}
++            (base/'template.json').write_text(json.dumps(manifest))
++            output=base/'new_output'
++            with self.assertRaisesRegex(ValueError,'Base template input hash mismatch'):
++                bind_template(base,glb,base/'missing-head.obj',base/'missing-color',output,'fixture')
++            self.assertFalse(output.exists())
+--- /dev/null
++++ b/tests/test_windows_runtime_budget.py
+@@ -0,0 +1,18 @@
++import unittest
++from unittest.mock import Mock,patch
++import windows_runtime_budget as budget
++
++class WindowsRuntimeBudgetTests(unittest.TestCase):
++    def test_low_start_memory_does_not_spawn_worker(self):
++        with patch.object(budget,'available_ram',return_value=0),patch.object(budget.subprocess,'Popen') as spawn:
++            with self.assertRaises(MemoryError):
++                budget.run_guarded(['fixture'],cwd='.',env={},stdout=None,timeout=1,minimum=50,abort=10)
++            spawn.assert_not_called()
++
++    def test_memory_abort_stops_only_owned_worker_tree(self):
++        child=Mock(pid=4321);child.poll.return_value=None
++        with patch.object(budget,'available_ram',side_effect=[100,0]),patch.object(budget.subprocess,'Popen',return_value=child),patch.object(budget.subprocess,'run') as stop,patch.object(budget.sys,'platform','win32'):
++            with self.assertRaises(MemoryError):
++                budget.run_guarded(['fixture'],cwd='.',env={},stdout=None,timeout=1,minimum=50,abort=10)
++            stop.assert_called_once_with(['taskkill','/PID','4321','/T','/F'],capture_output=True)
++            child.wait.assert_called_once()

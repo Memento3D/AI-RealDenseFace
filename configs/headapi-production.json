@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "pipeline_policy": "production_direct_bounded_v1",
+  "face_render_policy": "direct_texel_bounded_12_v1",
+  "web_export_policy": "standard_web_figurine_v2",
+  "web_body_ratio": 0.25,
+  "template_sha256": "96496c2d10e2896a780fb060c2171773000df22a8649e15d66096d26080db84d",
+  "paths": {
+    "cpu_python": ".venv/Scripts/python.exe",
+    "runtime": "runs/prod-win-01/src",
+    "runtime_manifest": "runs/prod-win-01/windows-source-manifest.json",
+    "mica_config": "runs/prod-win-01/src/Face/configs/mica.windows.json",
+    "blender": "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
+    "jobs": "runs/headapi-production",
+    "cache_root": "runs/prod-api-01/cache"
+  },
+  "max_pending_jobs": 1,
+  "stage_timeout_seconds": 1800
+}

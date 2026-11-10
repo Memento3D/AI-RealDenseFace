@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "paths": {
+    "cpu_python": ".venv/Scripts/python.exe",
+    "rdf_python": ".venv-rdf/Scripts/python.exe",
+    "haircap_python": ".venv-triposr/Scripts/python.exe",
+    "rdf_repo": "vendor/RealDenseFace",
+    "landmarker": "D:/AI-cache/mediapipe/face_landmarker.task",
+    "cache_root": "D:/AI-cache/triposr-probe",
+    "jobs": "runs/headapi-customization-base",
+    "parser": "D:/AI-cache/face-parsing/resnet18.onnx",
+    "blender": "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe"
+  },
+  "face_render_policy": "strict_uv_v1",
+  "presentation_policy": "harmonized_head_v1",
+  "max_pending_jobs": 1,
+  "stage_timeout_seconds": 1800,
+  "pipeline_policy": "graduation_modular_preview_v1",
+  "assembly": {
+    "policy": "graduation_modular_preview_v1",
+    "neck_cut_z": 0.765,
+    "web_body_ratio": 0.25,
+    "retained_nodes": [
+      "Body_Cuff_Prepared",
+      "Wrist_Lining_Join",
+      "Complete_Hand_Posed_Static"
+    ],
+    "assets": {
+      "template": {
+        "path": "runs/hand-hair-assembly-01/attempt-03/assembly.glb",
+        "sha256": "da8107e99e0f79148f2d8dc6ed5b551ba846d459327205135d55dc53c3123815"
+      },
+      "hair_library": {
+        "path": "runs/male-hair-refined-01/input07/cage-lift/head-hair.glb",
+        "sha256": "92bdeae4d21dc1d920ba1a8b017f1b9ba1d541d732dc58b9bc7ba930d646760b"
+      },
+      "reference_bundle": {
+        "path": "runs/experiments/api-demo-uv-01/case1/rdf/projection_bundle.npz",
+        "sha256": "8cfe4a48c099cf7789a190ed5b21b1bcba921230e864e1bd8b3c1ed14fd02f37"
+      },
+      "reference_pose": {
+        "path": "runs/graduation-assembly-04/report.json",
+        "sha256": "c8e910bd8ee1761297f9481c64d2fdb3966f2b74a81c03580c887885ce7cef6f"
+      },
+      "embedding": {
+        "path": "runs/prod-win-02/input04-production-02/color/embedding.npz",
+        "sha256": "ebba9924af6a107f30040db9db87c2258d6605c973f0eb460d5b8973ab359276"
+      },
+      "semantic_masks": {
+        "path": "vendor/MICA/data/FLAME2020/FLAME_masks/FLAME_masks.pkl",
+        "sha256": "ccefbe1ac0774ff78c68caf2c627b4abc067a6555ebeb0be5d5b0812366ab492"
+      },
+      "uv_assets": {
+        "path": "vendor/RealDenseFace/weights/flame/flame_assets.npz",
+        "sha256": "922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3"
+      }
+    },
+    "appearance_policy": "ear_anchored_hairline_skin_completion_v1",
+    "output_mode": "customization_base",
+    "policy_revision": "customization_base_preview_v1"
+  },
+  "release_status": "TECHNICAL_PREVIEW_NOT_CUSTOMIZATION_READY",
+  "customization": {
+    "policy": "mvp_landmark_fit_v1",
+    "library": "assets/custom-library/mvp-selected-preview-v1",
+    "catalog_sha256": "c9a7096f97f2e605ed0832c04e3ed224d40de7d48fdaa8a13893ce6fb6024e4a",
+    "profile_sha256": "11dfd07a2475540ccd1bd76109bbe086378fb66f630541b44491f582503ebae5"
+  }
+}

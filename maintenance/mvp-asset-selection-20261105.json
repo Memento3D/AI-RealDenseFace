@@ -1,0 +1,23 @@
+﻿{
+    "Selected":  {
+                     "Catalog":  "assets/custom-library/mvp-selected-preview-v1/catalog.json",
+                     "Review":  "validation/customization/mvp-selected-preview-v1/index.html",
+                     "Status":  "MVP_SELECTED_PREVIEW",
+                     "Published":  false,
+                     "PrintReady":  false,
+                     "Scope":  "Single accepted baseline; per-job fitting required"
+                 },
+    "DeletedSupersededTrial":  [
+                                   {
+                                       "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\assets\\custom-library\\mvp-selection-v1",
+                                       "Files":  10,
+                                       "Bytes":  5975315
+                                   },
+                                   {
+                                       "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\validation\\customization\\mvp-selection-v1",
+                                       "Files":  29,
+                                       "Bytes":  91808248
+                                   }
+                               ],
+    "Reason":  "Removed duplicate unselected trial after verifying selected bundle; original sources and baseline retained"
+}

@@ -1,0 +1,100 @@
+{
+  "cache_gib": [
+    [
+      "triposr-probe\\hub",
+      3.12
+    ],
+    [
+      "triposr-probe\\rembg",
+      0.16
+    ],
+    [
+      "pip\\http-v2",
+      0.16
+    ],
+    [
+      "face-parsing\\resnet18.onnx",
+      0.05
+    ],
+    [
+      "mica\\scrfd_10g_bnkps.onnx",
+      0.02
+    ],
+    [
+      "memento-mica-win-build\\sdists-v9",
+      0.01
+    ],
+    [
+      "mediapipe\\face_landmarker.task",
+      0.0
+    ],
+    [
+      "memento-mica-win-build\\archive-v0",
+      0.0
+    ],
+    [
+      "huggingface\\xet",
+      0.0
+    ],
+    [
+      "huggingface\\modules",
+      0.0
+    ],
+    [
+      "memento-mica-win-build\\simple-v21",
+      0.0
+    ],
+    [
+      "huggingface\\.agent_harnesses.json",
+      0.0
+    ],
+    [
+      "memento-mica-win-build\\interpreter-v4",
+      0.0
+    ],
+    [
+      "pip\\wheels",
+      0.0
+    ],
+    [
+      "pip\\selfcheck",
+      0.0
+    ],
+    [
+      "huggingface\\hub",
+      0.0
+    ],
+    [
+      "memento-mica-win-build\\CACHEDIR.TAG",
+      0.0
+    ],
+    [
+      "memento-mica-win-build\\.gitignore",
+      0.0
+    ],
+    [
+      "triposr-probe\\transformers",
+      0.0
+    ],
+    [
+      "memento-mica-win-build\\.lock",
+      0.0
+    ]
+  ],
+  "big": [
+    [
+      1.56,
+      "triposr-probe\\hub\\models--stabilityai--TripoSR\\snapshots\\5b521936b01fbe1890f6f9baed0254ab6351c04a\\model.ckpt"
+    ],
+    [
+      1.56,
+      "triposr-probe\\hub\\models--stabilityai--TripoSR\\blobs\\429e2c6b22a0923967459de24d67f05962b235f79cde6b032aa7ed2ffcd970ee"
+    ]
+  ],
+  "free_gib": 9.78,
+  "cache_env": {
+    "HF_HOME": "D:\\AI-cache\\huggingface",
+    "HUGGINGFACE_HUB_CACHE": "D:\\AI-cache\\huggingface\\hub",
+    "PIP_CACHE_DIR": "D:\\AI-cache\\pip"
+  }
+}

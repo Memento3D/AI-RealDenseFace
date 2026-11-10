@@ -1,0 +1,55 @@
+{
+  "catalog_version": "mvp-v1",
+  "catalog_sha256": "c9a7096f97f2e605ed0832c04e3ed224d40de7d48fdaa8a13893ce6fb6024e4a",
+  "cloudinary_thumbnails_verified": true,
+  "b2_remote_objects_verified": false,
+  "be_imported": false,
+  "assets": [
+    {
+      "asset_id": "graduation-cap",
+      "version": "v1",
+      "cloud_name": "dhtdgxgos",
+      "public_id": "thumbnail_cwgkiz",
+      "version_cloudinary": 1793882047,
+      "asset_id_cloudinary": null,
+      "secure_url": "https://res.cloudinary.com/dhtdgxgos/image/upload/v1793882047/thumbnail_cwgkiz.png",
+      "sha256": "ba3ca2e01e514d8e65822b4e04539dda8f7a4c71178864b9877d8f5999cbabcc",
+      "bytes": 321993,
+      "download_verified": true,
+      "metadata_source": "public_id/version parsed from supplied untransformed delivery URL",
+      "b2_bucket": "memento3d-models-tiendon",
+      "b2_preview_key": "library/mvp-v1/assets/graduation-cap/v1/preview.glb"
+    },
+    {
+      "asset_id": "hair-side-part",
+      "version": "v1",
+      "cloud_name": "dhtdgxgos",
+      "public_id": "thumbnail_czmzh5",
+      "version_cloudinary": 1793882071,
+      "asset_id_cloudinary": null,
+      "secure_url": "https://res.cloudinary.com/dhtdgxgos/image/upload/v1793882071/thumbnail_czmzh5.png",
+      "sha256": "70bb6b9dba62774ee04ed1ef9fe2d8f8e0cf8fb14750d2fdaa8d15999e1acccb",
+      "bytes": 299076,
+      "download_verified": true,
+      "metadata_source": "public_id/version parsed from supplied untransformed delivery URL",
+      "b2_bucket": "memento3d-models-tiendon",
+      "b2_preview_key": "library/mvp-v1/assets/hair-side-part/v1/preview.glb"
+    },
+    {
+      "asset_id": "glasses-round",
+      "version": "v1",
+      "cloud_name": "dhtdgxgos",
+      "public_id": "thumbnail_lbhunj",
+      "version_cloudinary": 1793882080,
+      "asset_id_cloudinary": null,
+      "secure_url": "https://res.cloudinary.com/dhtdgxgos/image/upload/v1793882080/thumbnail_lbhunj.png",
+      "sha256": "a0cbed6d7d8d99d05a3d2ab4f5bf96d702517bf198fc6f225d21c630f5355ed3",
+      "bytes": 290058,
+      "download_verified": true,
+      "metadata_source": "public_id/version parsed from supplied untransformed delivery URL",
+      "b2_bucket": "memento3d-models-tiendon",
+      "b2_preview_key": "library/mvp-v1/assets/glasses-round/v1/preview.glb"
+    }
+  ],
+  "notes": "Cloudinary asset_id is not inferred from public_id. No secrets used. Source catalog pins unchanged."
+}

@@ -24,7 +24,9 @@ def write(path,value):
     os.replace(temporary,path)
 
 
-def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def sha(path):
+    with Path(path).open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
 def load_config(path,root=ROOT):
@@ -71,6 +73,18 @@ class JobService:
         self.executor.shutdown(wait=True,cancel_futures=False);self.lock.release()
     def preflight(self,mode):
         if mode!='mvp':raise ValueError('Only the RDF + hair-cap MVP is supported')
+        if self.config.get('face_render_policy','legacy_vertex_color_v1') not in ('legacy_vertex_color_v1','strict_uv_v1'):
+            raise ValueError('Unsupported versioned face render policy')
+        if self.config.get('presentation_policy','none') not in ('none','harmonized_head_v1'):raise ValueError('Unsupported presentation policy')
+        if self.config.get('presentation_policy','none')!='none' and self.config.get('face_render_policy')!='strict_uv_v1':raise ValueError('Presentation requires strict UV policy')
+        if self.config.get('assembly') is not None:
+            from .assembly_config import validate_assets
+            validate_assets(self.config)
+        if self.config.get('customization'):
+            from tools.customization.contract import library
+            from .assembly_config import base_only
+            if not base_only(self.config):raise ValueError('Customization requires base-only assembly')
+            library(self.config)
         names=['cpu_python','rdf_python','haircap_python','rdf_repo','landmarker','parser']
         missing=[name for name in names if not Path(self.config['paths'][name]).exists()]
         repo=Path(self.config['paths']['rdf_repo'])
@@ -125,7 +139,8 @@ class JobService:
                     'view_hint':image_meta.get('view_hint',slot),'original_sha256':hashlib.sha256(entry['original']).hexdigest(),
                     'normalized_sha256':sha(path),'normalized_size':entry['size'],
                     'normalization':'EXIF transpose and lossless RGB PNG; source upload retained',
-                    'requested_for_rdf':slot in RDF_SLOTS,'used_for_hair_cap':True})
+                    'requested_for_rdf':slot in RDF_SLOTS,
+                    'used_for_hair_cap':self.config.get('assembly', {}).get('output_mode') != 'customization_base'})
             row={'job_id':job_id,'status':'QUEUED','mode':mode,
                  'attempt_id':attempt_id,'profile':profile,'created_at':datetime.now(timezone.utc).isoformat(),
                  'observations':observations,
@@ -138,6 +153,7 @@ class JobService:
         return row
     def code_hashes(self):
         files=list((self.root/'tools/headapi').glob('*.py'))
+        files.extend((self.root/'tools/customization').glob('*.py'))
         files.extend(path for path in
             (self.root/'tools/triposr_probe'/name for name in ('audit.py','common.py'))
             if path.is_file())
@@ -162,15 +178,31 @@ class JobService:
     def stage(self,job_id,name,args):
         folder=self.jobs/job_id;log=folder/(name+'.log');row=self.get(job_id)
         row['stages'].append({'name':name,'status':'RUNNING'});self.update(job_id,current_stage=name,stages=row['stages'])
+        stage_env=self.environment()
         try:
             with log.open('w',encoding='utf-8') as stream:
-                done=subprocess.run([str(v) for v in args],cwd=self.root,env=self.environment(),
-                    stdout=stream,stderr=subprocess.STDOUT,timeout=self.config.get('stage_timeout_seconds',1800),check=False)
+                if name in ('03b_uv_texture','04_scene_export','05_customization_fit') and self.config.get('face_render_policy')=='strict_uv_v1':
+                    from .runtime_budget import run_guarded
+                    done=run_guarded([str(v) for v in args],cwd=self.root,env=stage_env,stdout=stream,
+                        timeout=self.config.get('stage_timeout_seconds',1800),minimum=2*1024**3,abort=768*1024**2)
+                else:
+                    done=subprocess.run([str(v) for v in args],cwd=self.root,env=stage_env,
+                        stdout=stream,stderr=subprocess.STDOUT,timeout=self.config.get('stage_timeout_seconds',1800),check=False)
             code=done.returncode;error=None if code==0 else 'Stage exited '+str(code)
         except subprocess.TimeoutExpired:code=-1;error='STAGE_TIMEOUT'
         except Exception as exc:code=-1;error=str(exc)
         row=self.get(job_id);row['stages'][-1].update(status='EXPORTED' if code==0 else 'FAILED',exit_code=code,log=log.name)
-        if error:row['errors'].append({'stage':name,'error':error,'log':log.name})
+        if error:
+            error_code='PIPELINE_FAILED';message=error
+            if name=='02_rdf_fit':
+                report_path=folder/'rdf/report.json'
+                if report_path.is_file():
+                    fit_report=json.loads(report_path.read_text(encoding='utf-8'))
+                    detail=fit_report.get('error','')
+                    if 'out of memory' in detail.lower():error_code='GPU_OUT_OF_MEMORY';message='GPU memory is insufficient for this job'
+                    elif fit_report.get('status')=='NEEDS_RETAKE':error_code='INPUT_REJECTED';message=detail
+                    elif detail:error_code='FIT_DIVERGED';message='RDF fit did not produce a valid geometry'
+            row['errors'].append({'stage':name,'error':message,'code':error_code,'log':log.name})
         self.update(job_id,stages=row['stages'],errors=row['errors'])
         return code==0
     def collect(self,job_id):
@@ -184,6 +216,8 @@ class JobService:
         return rows
     def run(self,job_id):
         folder=self.jobs/job_id;c=self.config['paths'];job=self.get(job_id);rdf_ok=False;cap_ok=False
+        from .assembly_config import base_only
+        custom_base = base_only(self.config)
         self.update(job_id,status='RUNNING',started_at=datetime.now(timezone.utc).isoformat())
         try:
             for entry in job['observations']:
@@ -205,11 +239,15 @@ class JobService:
                 self.update(job_id,rdf_views_actually_used=used_views)
                 rdf_ok=self.stage(job_id,'02b_rdf_export',[c['haircap_python'],'-m','tools.headapi.face_export',
                     '--fit',folder/'rdf','--crops',folder/'rdf_crops'])
-            if rdf_ok:
+            if rdf_ok and custom_base:
+                cap_ok=True  # Stage dependency satisfied by policy, not an exported hair cap.
+                self.update(job_id,hair_cap_exported=False,hair_cap_skipped_by_policy=True,
+                    output_kind='customization_base',customization_ready=False)
+            if rdf_ok and not custom_base:
                 cap_ok=self.stage(job_id,'03_hair_cap',[c['haircap_python'],'-m','tools.headapi.hair_cap_worker',
                     '--job',folder,'--output',folder/'hair','--parser',c['parser'],
                     '--profile',self.root/'configs/hair-cap.json'])
-            if cap_ok:
+            if cap_ok and not custom_base:
                 scene_path=folder/'hair/scene.glb'
                 if not scene_path.is_file() or scene_path.stat().st_size<12:
                     raise ValueError('Scene GLB output is missing or invalid')
@@ -218,9 +256,44 @@ class JobService:
                     raise ValueError('Hair-cap output contract failed')
                 self.update(job_id,hair_cap_exported=True,
                     hair_flow_or_part_inferred=cap_report.get('hair_flow_or_part_inferred',False))
+            if rdf_ok and cap_ok and self.config.get('face_render_policy')=='strict_uv_v1':
+                rdf_ok=self.stage(job_id,'03b_uv_texture',[c['haircap_python'],'-m','tools.headapi.demo_face_worker',
+                    '--job',folder,'--output',folder/'rdf_uv','--parser',c['parser'],
+                    '--assets',Path(c['rdf_repo'])/'weights/flame/flame_assets.npz'])
+                if rdf_ok:
+                    uv=json.loads((folder/'rdf_uv/report.json').read_text())
+                    if uv.get('status')!='UV_FACE_EXPORTED' or uv.get('head_sha256')!=sha(folder/'rdf_uv/final/face_textured.glb'):
+                        raise ValueError('UV face output contract failed')
+            if rdf_ok and cap_ok and self.config.get('face_render_policy')=='strict_uv_v1':
+                cap_ok=self.stage(job_id,'04_scene_export',[c['haircap_python'],'-m',
+                    'tools.headapi.assembly_worker' if self.config.get('assembly') else 'tools.headapi.demo_scene_worker',
+                    '--job',folder,'--output',folder/'render','--presentation-policy',self.config.get('presentation_policy','none')])
+                if cap_ok:
+                    render=json.loads((folder/'render/report.json').read_text())
+                    if render.get('status')!='UV_SCENE_EXPORTED' or render.get('scene_sha256')!=sha(folder/'render/scene.glb'):
+                        raise ValueError('UV scene output contract failed')
+                    if render.get('presentation_policy','none')!=self.config.get('presentation_policy','none'):
+                        raise ValueError('Scene presentation policy mismatch')
+                    self.update(job_id,scene_artifact='render/scene.glb',face_render_policy='strict_uv_v1')
+            if rdf_ok and cap_ok and custom_base and self.config.get('customization'):
+                cap_ok=self.stage(job_id,'05_customization_fit',[c['cpu_python'],'-m',
+                    'tools.customization.fit_job','--job',folder,'--output',folder/'customization'])
+                if cap_ok:
+                    from tools.customization.contract import library
+                    library(self.config)
+                    manifest_path=folder/'customization/manifest.json'
+                    fitted=json.loads(manifest_path.read_text(encoding='utf8'))
+                    if (fitted.get('job_id')!=job_id or fitted.get('attempt_id')!=job.get('attempt_id')
+                        or fitted.get('base_model',{}).get('sha256')!=sha(folder/'render/scene.glb')):
+                        raise ValueError('Customization fit publication check failed')
+                    self.update(job_id,customization_ready=True,
+                        customization_manifest_artifact='customization/manifest.json',
+                        customization_manifest_sha256=sha(manifest_path))
             status='MVP_EXPORTED' if rdf_ok and cap_ok else 'PARTIAL' if rdf_ok or cap_ok else 'FAILED'
             if self.code_hashes()!=job['code_sha256']:raise ValueError('Pipeline code changed during job')
-            self.update(job_id,status=status,current_stage=None)
+            # Publish the download whitelist atomically with terminal status: the
+            # backend may fetch output immediately after observing "done".
+            self.update(job_id,status=status,current_stage=None,artifacts=self.collect(job_id))
         except Exception as exc:
             row=self.get(job_id);row['errors'].append({'stage':row.get('current_stage'),'error':str(exc)})
             self.update(job_id,status='FAILED',errors=row['errors'],current_stage=None)
@@ -235,6 +308,9 @@ class JobService:
         if (folder/'hair/hair_cap_native.glb').is_file():text+='<p><a href="hair/hair_cap_native.glb">Hair cap (RDF native units)</a> · <a href="hair/hair_cap_design_mm.stl">Hair cap design-scale STL</a> · <a href="hair/report.json">Hair-cap report</a></p>'
         for label,relative in [('RDF geometry','rdf/rdf_face_gray.png'),('RDF photographic color approximation','rdf/rdf_face_photo.png')]:
             if (folder/relative).is_file():text+='<h2>'+label+'</h2><img src="'+relative+'">'
+        if (folder/'rdf_uv/final/face_textured.png').is_file():
+            target='render/scene.glb' if (folder/'render/scene.glb').is_file() else 'rdf_uv/final/face_textured.glb'
+            text+='<h2>UV photographic texture / strict visibility</h2><img src="rdf_uv/final/face_textured.png"><p><a href="'+target+'">UV render GLB</a> · <a href="rdf_uv/final/report.json">Texture provenance</a></p>'
         for slot in ('front','left','right','back'):
             relative='hair/'+slot+'.fit.png'
             if (folder/relative).is_file():text+='<h2>'+slot+' · tóc dự đoán / mask ảnh</h2><img src="'+relative+'">'

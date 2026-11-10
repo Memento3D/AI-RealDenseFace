@@ -55,7 +55,9 @@ def identify(vertices, faces=None):
     for group in eyes:
         size = np.ptp(points[group], axis=0)
         if size.min() <= 0 or size.max()/size.min() > 1.5 or not .05 < size.max()/head_extent.max() < .2:
-            raise ValueError('Unexpected eyeball proportions; refusing automatic split')
+            raise ValueError('Unexpected eyeball proportions; refusing automatic split: '
+                f'extent={size.tolist()}, axis_ratio={size.max()/max(size.min(), 1e-12):.6f}, '
+                f'eye_to_head={size.max()/head_extent.max():.6f}')
     if not .1 < (centers[1][0]-centers[0][0])/head_extent[0] < .5:
         raise ValueError('Unexpected eye separation')
 

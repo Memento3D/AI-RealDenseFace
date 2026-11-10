@@ -1,0 +1,89 @@
+﻿{
+    "Deleted":  [
+                    {
+                        "Path":  "assembly-api-rehearsal/20261105-084409",
+                        "LogicalBytes":  4702178,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "assembly-api-rehearsal/20261105-084609",
+                        "LogicalBytes":  68689221,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "assembly-api-rehearsal/20261105-090853",
+                        "LogicalBytes":  165049679,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "assembly-api-rehearsal/20261105-092202",
+                        "LogicalBytes":  97782197,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "headapi-production/072cc6a1898f45c7a7be769c660a966d",
+                        "LogicalBytes":  937263136,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "headapi-production/87721f2dc2664b6996ffac6aca896554",
+                        "LogicalBytes":  945547135,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "headlab26_20261029_142512_381196",
+                        "LogicalBytes":  938670641,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "headlab_v6_20261028_085504_389",
+                        "LogicalBytes":  320343516,
+                        "Status":  "deleted_old_outputs"
+                    },
+                    {
+                        "Path":  "headlab_v5_20261028_072320_123",
+                        "LogicalBytes":  283469210,
+                        "Status":  "deleted_old_outputs"
+                    }
+                ],
+    "PreservedPipelinePins":  [
+                                  {
+                                      "Name":  "template",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hand-hair-assembly-01\\attempt-03\\assembly.glb",
+                                      "SHA256":  "da8107e99e0f79148f2d8dc6ed5b551ba846d459327205135d55dc53c3123815"
+                                  },
+                                  {
+                                      "Name":  "hair_library",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-refined-01\\input07\\cage-lift\\head-hair.glb",
+                                      "SHA256":  "92bdeae4d21dc1d920ba1a8b017f1b9ba1d541d732dc58b9bc7ba930d646760b"
+                                  },
+                                  {
+                                      "Name":  "reference_bundle",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\experiments\\api-demo-uv-01\\case1\\rdf\\projection_bundle.npz",
+                                      "SHA256":  "8cfe4a48c099cf7789a190ed5b21b1bcba921230e864e1bd8b3c1ed14fd02f37"
+                                  },
+                                  {
+                                      "Name":  "reference_pose",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\graduation-assembly-04\\report.json",
+                                      "SHA256":  "c8e910bd8ee1761297f9481c64d2fdb3966f2b74a81c03580c887885ce7cef6f"
+                                  },
+                                  {
+                                      "Name":  "embedding",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\prod-win-02\\input04-production-02\\color\\embedding.npz",
+                                      "SHA256":  "ebba9924af6a107f30040db9db87c2258d6605c973f0eb460d5b8973ab359276"
+                                  },
+                                  {
+                                      "Name":  "semantic_masks",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\MICA\\data\\FLAME2020\\FLAME_masks\\FLAME_masks.pkl",
+                                      "SHA256":  "ccefbe1ac0774ff78c68caf2c627b4abc067a6555ebeb0be5d5b0812366ab492"
+                                  },
+                                  {
+                                      "Name":  "uv_assets",
+                                      "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame_assets.npz",
+                                      "SHA256":  "922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3"
+                                  }
+                              ],
+    "DiskFreeBefore":  5872115712,
+    "DiskFreeAfter":  8230207488,
+    "ActualFreedBytes":  2358091776
+}

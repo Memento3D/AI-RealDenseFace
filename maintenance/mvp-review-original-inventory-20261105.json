@@ -1,0 +1,185 @@
+{
+  "files": [
+    {
+      "path": "catalog.json",
+      "bytes": 8778,
+      "sha256": "7ba79f3edf86bc39df8c7625038f8bcba2899bd006db5febf21363176a2e2d11"
+    },
+    {
+      "path": "fit-profiles-reference.json",
+      "bytes": 592,
+      "sha256": "2d0c3ccb05a63eff78e03d0fe0078ecf0b16bc3c0308d6a765fab3c5fb1bb2bb"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2463,
+      "sha256": "bfd9936f4abd7268a2afcfba0132fcdb616f07f3b7e3091729d937f79b7e42f3"
+    },
+    {
+      "path": "library/glasses-alternative/review-v1/candidate-thumbnail.png",
+      "bytes": 42739,
+      "sha256": "02ef90cf116b55f92e094b1a0856d800413ca395a860eeee4ea5bdbd4f3c3ec8"
+    },
+    {
+      "path": "library/glasses-alternative/review-v1/canonical-candidate.glb",
+      "bytes": 46856,
+      "sha256": "b317dbaca707d06fa389d18d6535dbb341379d32f26462cde98e6add0dde8992"
+    },
+    {
+      "path": "library/glasses-alternative/review-v1/fitted-reference.glb",
+      "bytes": 54000,
+      "sha256": "44c3161e3fb13e3830c1f6aa248804934364e57a896c5a0a0db000dcce78519b"
+    },
+    {
+      "path": "library/glasses-alternative/review-v1/license-evidence.html",
+      "bytes": 21307,
+      "sha256": "f6007d9b455aa0c8cb40295413758e43b6d22778b2bf5156ba78a7133e056293"
+    },
+    {
+      "path": "library/glasses-alternative/review-v1/manifest.json",
+      "bytes": 2102,
+      "sha256": "bfb2b39af493d2afa8cbcb25f20a389eb4ae53ffc38c2d8f81d837b252ca4d9e"
+    },
+    {
+      "path": "library/glasses-round/review-v1/candidate-thumbnail.png",
+      "bytes": 51238,
+      "sha256": "ba86374b6e8b2c1fca1d49d592f28a98e8ec7ecbbd1fb6023ded9efe8a9ab784"
+    },
+    {
+      "path": "library/glasses-round/review-v1/canonical-candidate.glb",
+      "bytes": 42968,
+      "sha256": "e82861e0d8ea5d04a829a2efa5ef4ce900e127f65e12d7a6b10e3c626e57d36d"
+    },
+    {
+      "path": "library/glasses-round/review-v1/fitted-reference.glb",
+      "bytes": 46368,
+      "sha256": "0ca157a40f9ae012142af48140133934daff1b350815c827d7eaa53d6324d119"
+    },
+    {
+      "path": "library/glasses-round/review-v1/license-evidence.html",
+      "bytes": 21307,
+      "sha256": "f6007d9b455aa0c8cb40295413758e43b6d22778b2bf5156ba78a7133e056293"
+    },
+    {
+      "path": "library/glasses-round/review-v1/manifest.json",
+      "bytes": 2103,
+      "sha256": "e4fe12f7a98a048652c398e953899297057aa80ff1d22c5b365a767b17de26ea"
+    },
+    {
+      "path": "library/graduation-cap/review-v1/fitted-reference.glb",
+      "bytes": 28121576,
+      "sha256": "e2c6a460be8fed88ef72865caf001c276964cc968539f7880346c4b754962541"
+    },
+    {
+      "path": "library/graduation-cap/review-v1/manifest.json",
+      "bytes": 1200,
+      "sha256": "6dc8524f1f3719a989fcb598f56742342cbca41cabb30addc7d6ca476fd9e7f9"
+    },
+    {
+      "path": "library/hair-side-part/review-v1/candidate-thumbnail.png",
+      "bytes": 41802,
+      "sha256": "7f2998129a3272541ec719bd0423b7a351c5fe85453497f84d852e564cc97294"
+    },
+    {
+      "path": "library/hair-side-part/review-v1/canonical-candidate.glb",
+      "bytes": 6128,
+      "sha256": "380cf9b41f41c8b94c51f930ef981b89b00f71baaf34b94e1ef7c33d7edc345c"
+    },
+    {
+      "path": "library/hair-side-part/review-v1/fitted-reference.glb",
+      "bytes": 7736,
+      "sha256": "352e05f9487204f7287b1cc1fdb7d9c110a9658a985be5e7b4bf93e8247d63d5"
+    },
+    {
+      "path": "library/hair-side-part/review-v1/license-evidence.html",
+      "bytes": 21440,
+      "sha256": "702f6388e4db47026576fc919cb71d40ad5de71970387663a580e89daaf685c3"
+    },
+    {
+      "path": "library/hair-side-part/review-v1/manifest.json",
+      "bytes": 2145,
+      "sha256": "cff16898a4790bb67b8c56efce107672c7e5a1bf264161230301e7863b55899c"
+    },
+    {
+      "path": "private-review/cap/back.png",
+      "bytes": 428664,
+      "sha256": "002a1d8b1453cd613b98c8055d20195e5d6da7afb3442cf69d7b31178bf7e0df"
+    },
+    {
+      "path": "private-review/cap/face.png",
+      "bytes": 473952,
+      "sha256": "9f878762d5c52169be85c70e269220f17f59d74c31f13cf2ba8ecebcd2669967"
+    },
+    {
+      "path": "private-review/cap/full.png",
+      "bytes": 341279,
+      "sha256": "6059cb1467c06a2e080b8484d0f2fa7e646f0dff5d3e1c22a405a92977f2092c"
+    },
+    {
+      "path": "private-review/cap/quarter.png",
+      "bytes": 460083,
+      "sha256": "aa2dc3abcfc11af74a913067c742bbf917126a199c51f51dab9d6c5f9846e448"
+    },
+    {
+      "path": "private-review/cap/source-report.json",
+      "bytes": 1684,
+      "sha256": "d780fe4e63c761d3a286775fb7489aa30291d2add26619d61483ec5513ad5315"
+    },
+    {
+      "path": "private-review/glasses-01/back.png",
+      "bytes": 428458,
+      "sha256": "5dd508bff2a118bbfa690d479f590d00f995f921618623a99ace989962ccbf9a"
+    },
+    {
+      "path": "private-review/glasses-01/face.png",
+      "bytes": 473695,
+      "sha256": "726340626891fa0966efb7ee7a7479b5403ce8fed0a6783fecbd27607b8de20b"
+    },
+    {
+      "path": "private-review/glasses-01/full.png",
+      "bytes": 396470,
+      "sha256": "30996ae70c5a6cf02b3e66bffbfee383579c8f47ee34a4f2af875d5424977456"
+    },
+    {
+      "path": "private-review/glasses-01/quarter.png",
+      "bytes": 459134,
+      "sha256": "2f5840efb78c33e82c0cb785ee6899a2c0358909314bf118c8ada942b19d4507"
+    },
+    {
+      "path": "private-review/glasses-01/source-report.json",
+      "bytes": 4716,
+      "sha256": "a29a269f6ce4ab8f00e993d2949b92f63be6e74c61e4568b42d5588b859cb134"
+    },
+    {
+      "path": "private-review/hair/back.png",
+      "bytes": 400792,
+      "sha256": "476a5c15eb17445060d3e4fe1c1bc92d3424eccf8cd744bed9fc1f845cf4d99f"
+    },
+    {
+      "path": "private-review/hair/face.png",
+      "bytes": 439618,
+      "sha256": "2ad2ebb6e8f90ae1b445014c1a8a5d9621d7f5ac23e5dbf66867f42194a220ab"
+    },
+    {
+      "path": "private-review/hair/full.png",
+      "bytes": 337912,
+      "sha256": "6196101588c3789a4af2e9fbe12e1fc37f01dfef7bd4c19c560f94e323cc0128"
+    },
+    {
+      "path": "private-review/hair/quarter.png",
+      "bytes": 438232,
+      "sha256": "9b63b74f2cacc24666dd418e8f7e1d8fc8cbcf5f265a880452d29896e0084e3a"
+    },
+    {
+      "path": "private-review/hair/source-report.json",
+      "bytes": 1839,
+      "sha256": "cdc7b0171a4dd6626418b7484ddab0e165687cbc884eefb4feef5cb8be5b5430"
+    },
+    {
+      "path": "README-VI.md",
+      "bytes": 1353,
+      "sha256": "430f276ebbd2f2ed78e1c64d7339df8d2b28827b1eed067e491ac2f2b9b2e9c2"
+    }
+  ],
+  "total_bytes": 33632729
+}

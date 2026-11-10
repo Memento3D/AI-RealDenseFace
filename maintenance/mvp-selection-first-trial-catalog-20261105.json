@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "selection": "mvp-v1",
+  "status": "PENDING_VISUAL_CHECK",
+  "assets": [
+    {
+      "id": "graduation-cap",
+      "version": "v1",
+      "name": "M\u0169 t\u1ed1t nghi\u1ec7p g\u1ed1c",
+      "kind": "headwear",
+      "selection_status": "MVP_SELECTED_PENDING_VISUAL_CHECK",
+      "published": false,
+      "print_ready": false,
+      "preview_sha256": "5f7ad7ff18e84af3d2dc44e28c0e31c1cbc29a6caec30ff7e5ef1b4c57aeaf80",
+      "preview_bytes": 5867848,
+      "requires_per_job_fit": true,
+      "supported_body_preset": "graduation-standing-base-v1",
+      "placement_policy": "reference_cap_similarity_v1",
+      "source": {
+        "license": "project-template",
+        "authorization": "not audited"
+      },
+      "limitations": [
+        "Cap mask retains hand-contact fragments; template source rights not established in this review"
+      ],
+      "replaced_source": "e2c6a460be8fed88ef72865caf001c276964cc968539f7880346c4b754962541"
+    },
+    {
+      "id": "hair-side-part",
+      "version": "v1",
+      "name": "T\u00f3c r\u1ebd ng\u00f4i",
+      "kind": "hair",
+      "selection_status": "MVP_SELECTED_PENDING_VISUAL_CHECK",
+      "published": false,
+      "print_ready": false,
+      "preview_sha256": "7efc8f3966b2d1feb6ceb152f04c29ef2614f3738d9409caf5e0df1b7961434c",
+      "preview_bytes": 7688,
+      "requires_per_job_fit": true,
+      "supported_body_preset": "graduation-standing-base-v1",
+      "placement_policy": "scalp_envelope_v1",
+      "source": {
+        "id": "micket-side-part",
+        "kind": "hair",
+        "file": "micket-side-part\\asset.glb",
+        "thumbnail": "micket-side-part\\thumbnail.png",
+        "sha256": "380cf9b41f41c8b94c51f930ef981b89b00f71baaf34b94e1ef7c33d7edc345c",
+        "source_id": "micket-side-part",
+        "source_object": "Mesh.002",
+        "source_sha256": "cb41c3753670f9571481201dd0426f659f09501d9c6b0bc82fe613ec54fc3d95",
+        "author": "Micket",
+        "license": "CC0-1.0",
+        "source_page": "https://opengameart.org/content/side-parting-hairstyle-for-male-model",
+        "nominal_design_width_m": 0.18,
+        "source_center": [
+          0.43178462982177734,
+          -2.91129732131958,
+          18.743499755859375
+        ],
+        "source_uniform_scale": 0.008243810056256334,
+        "triangles": 201,
+        "boundary_edges": 25,
+        "nonmanifold_edges": 0,
+        "appearance": "neutral preview brown; original retained separately",
+        "status": "LOCAL_CANDIDATE_NOT_FITTED",
+        "print_ready": false
+      },
+      "limitations": [
+        "Hairline/nape transition remains visible; hair preset uses a different body/hand"
+      ],
+      "replaced_source": "352e05f9487204f7287b1cc1fdb7d9c110a9658a985be5e7b4bf93e8247d63d5"
+    },
+    {
+      "id": "glasses-round",
+      "version": "v1",
+      "name": "K\u00ednh tr\u00f2n",
+      "kind": "glasses",
+      "selection_status": "MVP_SELECTED_PENDING_VISUAL_CHECK",
+      "published": false,
+      "print_ready": false,
+      "preview_sha256": "f928dd9af15b9415c2be5d17d6b28ddfa93422a940716a7442e06797e7f7ac0a",
+      "preview_bytes": 46204,
+      "requires_per_job_fit": true,
+      "supported_body_preset": "graduation-standing-base-v1",
+      "placement_policy": "landmark_fit_v1",
+      "source": {
+        "id": "glasses-03",
+        "kind": "glasses",
+        "file": "glasses-03\\asset.glb",
+        "thumbnail": "glasses-03\\thumbnail.png",
+        "sha256": "e82861e0d8ea5d04a829a2efa5ef4ce900e127f65e12d7a6b10e3c626e57d36d",
+        "source_id": "ipoly3d-glasses",
+        "source_object": "glasses3.001",
+        "source_sha256": "24718539c0a9e20b99ee06d3fb5b8a1f9f433d0a64f50990faebedd13d31eff9",
+        "author": "iPoly3D",
+        "license": "CC0-1.0",
+        "source_page": "https://opengameart.org/content/lowpoly-glasses-pack",
+        "nominal_design_width_m": 0.14,
+        "source_center": [
+          39.666954040527344,
+          0.6079813241958618,
+          0.004760265350341797
+        ],
+        "source_uniform_scale": 0.07203313117038608,
+        "triangles": 992,
+        "boundary_edges": 64,
+        "nonmanifold_edges": 0,
+        "appearance": "original material",
+        "status": "LOCAL_CANDIDATE_NOT_FITTED",
+        "print_ready": false
+      },
+      "limitations": [
+        "Charcoal frame, lenses omitted for local preview; not a lens production specification"
+      ],
+      "replaced_source": "0ca157a40f9ae012142af48140133934daff1b350815c827d7eaa53d6324d119"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "glasses-alternative",
+      "reason": "Keep MVP scope small; no finalized fit on accepted baseline"
+    }
+  ],
+  "groups": [
+    {
+      "id": "headwear",
+      "required": true,
+      "exclusive": true,
+      "assets": [
+        "graduation-cap",
+        "hair-side-part"
+      ]
+    },
+    {
+      "id": "glasses",
+      "required": false,
+      "assets": [
+        "glasses-round"
+      ],
+      "none_allowed": true
+    }
+  ],
+  "print_ready": false,
+  "published": false
+}

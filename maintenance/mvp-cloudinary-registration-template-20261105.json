@@ -1,0 +1,33 @@
+{
+  "catalog_version": "mvp-v1",
+  "assets": [
+    {
+      "asset_id": "graduation-cap",
+      "version": "v1",
+      "local_thumbnail": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\assets\\custom-library\\mvp-selected-preview-v1\\assets\\graduation-cap\\v1\\thumbnail.png",
+      "public_id": null,
+      "asset_id_cloudinary": null,
+      "version_cloudinary": null,
+      "secure_url": null
+    },
+    {
+      "asset_id": "hair-side-part",
+      "version": "v1",
+      "local_thumbnail": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\assets\\custom-library\\mvp-selected-preview-v1\\assets\\hair-side-part\\v1\\thumbnail.png",
+      "public_id": null,
+      "asset_id_cloudinary": null,
+      "version_cloudinary": null,
+      "secure_url": null
+    },
+    {
+      "asset_id": "glasses-round",
+      "version": "v1",
+      "local_thumbnail": "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\assets\\custom-library\\mvp-selected-preview-v1\\assets\\glasses-round\\v1\\thumbnail.png",
+      "public_id": null,
+      "asset_id_cloudinary": null,
+      "version_cloudinary": null,
+      "secure_url": null
+    }
+  ],
+  "instructions": "Fill upload response metadata only; never add api_secret or application keys"
+}

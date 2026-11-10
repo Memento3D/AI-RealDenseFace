@@ -30,3 +30,11 @@ htmlcov/
 
 .venv-rdf/
 local_setup/
+assets/hair-library/
+assets/custom-library/
+
+# Private customization review renders
+validation/customization/
+
+# Local output backups; keep archives outside source history
+maintenance/runs-archive-*/

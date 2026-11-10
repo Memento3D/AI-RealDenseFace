@@ -1,0 +1,10 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Memento3D — thử kính, mũ và tóc</title>
+<style>body{margin:0;background:#14151b;color:#eee;font:15px system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:24px}h1{font-size:24px;margin:10px 0}p{line-height:1.6;color:#c4c4d0}a{color:#bcb1ff}button,select{font:inherit;color:#eee;background:#30313c;border:1px solid #575767;border-radius:6px;padding:9px 12px;cursor:pointer}button:hover{background:#474158}.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}#canvas{height:65vh;min-height:380px;position:relative;border:1px solid #45454f;border-radius:10px;overflow:hidden}#canvas canvas{display:block;width:100%;height:100%}.badge{color:#c8baff}#status{padding:12px 0;color:#ead698}#cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:24px}.card{padding:0;overflow:hidden;text-align:left}.card img{width:100%;display:block}.card span{display:block;padding:12px}#notes{white-space:pre-line}label{cursor:pointer}small{color:#b6b6c3}</style>
+<main><span class="badge">THỬ NGHIỆM LOCAL · CHƯA TÍCH HỢP API</span><h1>So sánh kính với mũ hoặc tóc</h1>
+<p>Kéo để xoay, cuộn để phóng to. Các số đo chỉ giúp phát hiện vùng cần rà soát; chưa xác nhận hết va chạm hoặc sẵn sàng in.</p>
+<div class="bar"><select id="case" aria-label="Bản phối"></select><button data-view="front">Chính diện</button><button data-view="quarter">Góc ¾</button><button data-view="side">Bên hông</button><button data-view="back">Phía sau</button><button data-view="full">Toàn thân</button><label><input id="hideBody" type="checkbox">Ẩn thân và tay</label></div>
+<div id="canvas"></div><div id="status" role="status"></div>
+<div class="bar"><a id="glb">Mở/tải GLB</a><a id="report">Báo cáo số đo</a></div><p id="notes"></p>
+<small>Kính tròn dùng bản xem gọng không tròng để tránh hiện tượng tròng bị đục. Tóc là asset thiết kế có sẵn, không phải tóc tái tạo từ ảnh. Bản xám dùng để kiểm tra hình học.</small>
+<div id="cards"></div></main><script type="module" src="./viewer.bundle.js"></script></html>

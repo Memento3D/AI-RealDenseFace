@@ -1,0 +1,410 @@
+{
+  "scope": "runs excluding environments, weights and vendored source",
+  "totals": {
+    "personal04_20261027_164721_57ebd419.dataset.txt": 77,
+    "assembly-cohesion-01": 1699530026,
+    "experiments": 1001010906,
+    "graduation-assembly-01": 258237917,
+    "graduation-assembly-02": 384477286,
+    "graduation-assembly-03": 384507960,
+    "graduation-assembly-04": 256372613,
+    "hair-cc0-selection-01": 1599,
+    "hairprep04_20261027_144453_14f44c88": 12597811,
+    "hair_bench_20261028_173609_963": 80538,
+    "hair_bench_20261028_191855_874": 6737046,
+    "hair_bench_20261028_192116_818": 23245179,
+    "hair_mask04_20261027_144118_f73a443e": 1724425,
+    "hand-hair-assembly-01": 482819052,
+    "hand-hair-research-01": 100857568,
+    "head-assembly-01": 1538127876,
+    "head245_resume_20261029_110935_399377": 220849700,
+    "head24_20261029_004003_863602": 2710,
+    "head24_20261029_042915_535377": 2537890,
+    "head24_20261029_044424_683718": 5242291,
+    "head24_resume_20261029_045503_656309": 18804127,
+    "headapi": 216950345,
+    "headapi-demo": 62019507,
+    "headapi-production": 1882810274,
+    "headlab26_20261029_142512_381196": 938670641,
+    "headlab_v4_20261027_235342_861": 109964205,
+    "headlab_v5_20261028_072320_123": 283469210,
+    "headlab_v6_20261028_085504_389": 320343516,
+    "pipeline_v23_20261028_232602_556": 149630163,
+    "pipeline_v23_20261029_000739_566": 15994,
+    "prod-api-01": 126036432,
+    "prod-win-01": 1799556600,
+    "prod-win-02": 2942184636,
+    "triposr_probe_20261030_043601_397_fcdfec": 2794791,
+    "triposr_review_20261030_061823_52bceebd": 16851900,
+    "v1_20261029_000607_5d3586b7": 52245912
+  },
+  "duplicates": [
+    {
+      "bytes": 128621966,
+      "sha256": "eabf7657e29513cefb9e6fcaa6c0b26bf44808ddc498fb9d91d3091af0edcb3c",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\template\\baseline.npz",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\template\\baseline.npz",
+        "runs\\prod-win-01\\binding-01\\baseline.npz",
+        "runs\\prod-win-01\\images-phuoc-02\\template\\baseline.npz",
+        "runs\\prod-win-01\\images-phuoc-03\\template\\baseline.npz",
+        "runs\\prod-win-02\\binding-mica-rdf\\baseline.npz",
+        "runs\\prod-win-02\\binding-rdf-rdf\\baseline.npz",
+        "runs\\prod-win-02\\input03-production\\template\\baseline.npz",
+        "runs\\prod-win-02\\input04-production-02\\template\\baseline.npz"
+      ]
+    },
+    {
+      "bytes": 84690605,
+      "sha256": "860efb4cdb436209fd7e80c7ac997b2df530ee5b5cb4f44c1e1e75aa38548632",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\template\\template.blend",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\template\\template.blend",
+        "runs\\prod-win-01\\binding-01\\template.blend",
+        "runs\\prod-win-01\\images-phuoc-02\\template\\template.blend",
+        "runs\\prod-win-01\\images-phuoc-03\\template\\template.blend",
+        "runs\\prod-win-02\\binding-mica-rdf\\template.blend",
+        "runs\\prod-win-02\\binding-rdf-rdf\\template.blend",
+        "runs\\prod-win-02\\input03-production\\template\\template.blend",
+        "runs\\prod-win-02\\input04-production-02\\template\\template.blend"
+      ]
+    },
+    {
+      "bytes": 77510332,
+      "sha256": "a5e5cf2f50a0ec410923b6c794208c9788a18c0657294b6f797c0b421b4ab931",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\model.glb",
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\transfer\\face_transferred.glb",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\model.glb",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\transfer\\face_transferred.glb",
+        "runs\\prod-win-02\\input04-production-02\\model.glb",
+        "runs\\prod-win-02\\input04-production-02\\transfer\\face_transferred.glb"
+      ]
+    },
+    {
+      "bytes": 84608184,
+      "sha256": "28dbff80f46e3603dd96ede2f3a320624910456eabf8dd4ce8f0b446133a1734",
+      "paths": [
+        "runs\\prod-win-02\\input04-production-02\\transfer\\candidate_geometry.blend",
+        "runs\\prod-win-02\\mica-rdf-direct\\candidate_geometry.blend",
+        "runs\\prod-win-02\\mica-rdf-vertex-base\\candidate_geometry.blend",
+        "runs\\prod-win-02\\production-direct\\candidate_geometry.blend",
+        "runs\\prod-win-02\\production-direct-bounded\\candidate_geometry.blend"
+      ]
+    },
+    {
+      "bytes": 31539286,
+      "sha256": "cbca37408dc75ad2a20138208b083b6c02fc2b610291d52de43ebff6d197d0e5",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\transfer\\patch_data.npz",
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\texture\\patch_data.npz",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\transfer\\patch_data.npz",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\texture\\patch_data.npz",
+        "runs\\prod-win-02\\input04-production-02\\transfer\\patch_data.npz",
+        "runs\\prod-win-02\\mica-rdf-direct\\patch_data.npz",
+        "runs\\prod-win-02\\mica-rdf-vertex-base\\patch_data.npz",
+        "runs\\prod-win-02\\production-direct\\patch_data.npz",
+        "runs\\prod-win-02\\production-direct-bounded\\patch_data.npz"
+      ]
+    },
+    {
+      "bytes": 77488564,
+      "sha256": "71f9db20c453f60270faab81b53100852cd4bba44bd75c32c7fe3734d680e3c4",
+      "paths": [
+        "runs\\prod-win-01\\images-phuoc-02\\model.glb",
+        "runs\\prod-win-01\\images-phuoc-02\\transfer\\face_transferred.glb",
+        "runs\\prod-win-01\\images-phuoc-03\\model.glb",
+        "runs\\prod-win-01\\images-phuoc-03\\transfer\\face_transferred.glb"
+      ]
+    },
+    {
+      "bytes": 77469432,
+      "sha256": "3e9aa9a8e96244ddc8050be0c71390afa52883a1635b5b9694015c47de10e2b2",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\texture\\face_transferred.glb",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\texture\\face_transferred.glb",
+        "runs\\prod-win-02\\production-direct-bounded\\face_transferred.glb"
+      ]
+    },
+    {
+      "bytes": 16409464,
+      "sha256": "a7d6e4e131162411897d58b90ce10d20e5de72f9a60479347df63dfced0234ff",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\template\\chart_draft.npz",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\template\\chart_draft.npz",
+        "runs\\prod-win-01\\binding-01\\chart_draft.npz",
+        "runs\\prod-win-01\\images-phuoc-02\\template\\chart_draft.npz",
+        "runs\\prod-win-01\\images-phuoc-03\\template\\chart_draft.npz",
+        "runs\\prod-win-02\\binding-mica-rdf\\chart_draft.npz",
+        "runs\\prod-win-02\\binding-rdf-rdf\\chart_draft.npz",
+        "runs\\prod-win-02\\input03-production\\template\\chart_draft.npz",
+        "runs\\prod-win-02\\input04-production-02\\template\\chart_draft.npz"
+      ]
+    },
+    {
+      "bytes": 84608184,
+      "sha256": "a512f12d21e363aea65014cec0cc3ba57ad27031d08a14ad199a8ef9e508d546",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\production\\transfer\\candidate_geometry.blend",
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\texture\\candidate_geometry.blend"
+      ]
+    },
+    {
+      "bytes": 84608184,
+      "sha256": "f41ed19e3ae913eb7355285f7ec69edb8a1c68d1d754d442fd52fdc095120b19",
+      "paths": [
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\production\\transfer\\candidate_geometry.blend",
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\texture\\candidate_geometry.blend"
+      ]
+    },
+    {
+      "bytes": 84607343,
+      "sha256": "e73a7db37e6055c2a2ff80a4c6ab3bf48e03a463feac4a9165a4287943aa81ec",
+      "paths": [
+        "runs\\prod-win-02\\input03-direct-bounded\\candidate_geometry.blend",
+        "runs\\prod-win-02\\input03-production\\transfer\\candidate_geometry.blend"
+      ]
+    },
+    {
+      "bytes": 77496660,
+      "sha256": "089ce91bead04a2cce5c39aef60d498345cd335a39cdd0f93526d5b2663e45e4",
+      "paths": [
+        "runs\\prod-win-02\\input03-production\\model.glb",
+        "runs\\prod-win-02\\input03-production\\transfer\\face_transferred.glb"
+      ]
+    },
+    {
+      "bytes": 38037696,
+      "sha256": "7c1f040be9198004ba1962179631a9fa80d07b133569851eb717290edb0cd96e",
+      "paths": [
+        "runs\\headapi-production\\072cc6a1898f45c7a7be769c660a966d\\render\\scene.glb",
+        "runs\\prod-api-01\\download.glb",
+        "runs\\prod-api-01\\web-export-02\\scene.glb"
+      ]
+    },
+    {
+      "bytes": 66930700,
+      "sha256": "bad278083861923e7d1288f31cf45b095df3d586594216f696934fc13a358c26",
+      "paths": [
+        "runs\\assembly-cohesion-01\\attempt-01\\restored\\assembly.glb",
+        "runs\\assembly-cohesion-01\\attempt-02\\restored\\assembly.glb"
+      ]
+    },
+    {
+      "bytes": 54426932,
+      "sha256": "81b89c93e92071cf5346114fee35b7f34bfea0442ac7eab3fa1e341d0b5c4cac",
+      "paths": [
+        "runs\\head-assembly-01\\attempt-03\\neck-high\\body.glb",
+        "runs\\head-assembly-01\\attempt-04\\neck-high\\body.glb"
+      ]
+    },
+    {
+      "bytes": 54106584,
+      "sha256": "85fb7959370adc17ea5a814a0301d07d2fd39dacae831689c1d7be03f9ffaf69",
+      "paths": [
+        "runs\\head-assembly-01\\attempt-03\\neck-low\\body.glb",
+        "runs\\head-assembly-01\\attempt-04\\neck-low\\body.glb"
+      ]
+    },
+    {
+      "bytes": 46320632,
+      "sha256": "8f2c06f326d999677b9192d71772c47c57aeaf7d6f1d4615946a5d327d9a1319",
+      "paths": [
+        "runs\\headapi-production\\87721f2dc2664b6996ffac6aca896554\\render\\scene.glb",
+        "runs\\prod-api-01\\attempt-02\\download.glb"
+      ]
+    },
+    {
+      "bytes": 31539605,
+      "sha256": "4a69594f3088282883ee21ecd7cd5bdb5e7440eacbd0423b686ae98f34187916",
+      "paths": [
+        "runs\\prod-win-02\\input03-direct-bounded\\patch_data.npz",
+        "runs\\prod-win-02\\input03-production\\transfer\\patch_data.npz"
+      ]
+    },
+    {
+      "bytes": 31539481,
+      "sha256": "ab4e8fcae6132b156838854396edc206d8f6879f22bec6a5541542fab834719e",
+      "paths": [
+        "runs\\prod-win-01\\images-phuoc-02\\transfer\\patch_data.npz",
+        "runs\\prod-win-01\\images-phuoc-03\\transfer\\patch_data.npz"
+      ]
+    },
+    {
+      "bytes": 30543364,
+      "sha256": "44290f91f73037f1755cd97db08a2ca3c7a0e4c51f685aa9a23b452da91ff448",
+      "paths": [
+        "runs\\head-assembly-01\\attempt-03\\neck-low\\removed-template-head.glb",
+        "runs\\head-assembly-01\\attempt-04\\neck-low\\removed-template-head.glb"
+      ]
+    },
+    {
+      "bytes": 30219956,
+      "sha256": "4e0d8e1bc02cf7d0098a49d65b12ea3dfaf5ef6df3dbcec6ecede5c841202f88",
+      "paths": [
+        "runs\\head-assembly-01\\attempt-03\\neck-high\\removed-template-head.glb",
+        "runs\\head-assembly-01\\attempt-04\\neck-high\\removed-template-head.glb"
+      ]
+    },
+    {
+      "bytes": 10449148,
+      "sha256": "728e760d8bd0afca3ca66b998daa6f683a21ffb1bc1819610e9ec21b7b55ef8b",
+      "paths": [
+        "runs\\pipeline_v23_20261028_232602_556\\selected\\eye_pbr_probe.glb",
+        "runs\\pipeline_v23_20261028_232602_556\\sideburn_21778_0p4\\eye_pbr_probe.glb"
+      ]
+    },
+    {
+      "bytes": 10449136,
+      "sha256": "0751c732b631844b519f0b836a23174ccd64ba9047c4622678bf2af2935aedc1",
+      "paths": [
+        "runs\\pipeline_v23_20261028_232602_556\\selected\\unlit.glb",
+        "runs\\pipeline_v23_20261028_232602_556\\sideburn_21778_0p4\\unlit.glb"
+      ]
+    },
+    {
+      "bytes": 10449112,
+      "sha256": "dfe281562b29349070339f1a4ef17df3f267ce196ddcd589d49f394d740f77e8",
+      "paths": [
+        "runs\\pipeline_v23_20261028_232602_556\\selected\\appearance.glb",
+        "runs\\pipeline_v23_20261028_232602_556\\sideburn_21778_0p4\\appearance.glb"
+      ]
+    },
+    {
+      "bytes": 10192676,
+      "sha256": "9371bde37470607bd15f6e97f3bd54cb0ee72d15716d8f1d39829764cdc6dee3",
+      "paths": [
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\hair_21778_body_0p85\\eye_pbr_probe.glb",
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\selected\\eye_pbr_probe.glb"
+      ]
+    },
+    {
+      "bytes": 10192668,
+      "sha256": "5063ba4568cea297ffecf6e39f42bcb2ae903060a085fe465f9c04525bfa4274",
+      "paths": [
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\hair_21778_body_0p85\\unlit.glb",
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\selected\\unlit.glb"
+      ]
+    },
+    {
+      "bytes": 10192644,
+      "sha256": "a41648425b05ebbfa853058f0b46d6794e90b0b320843f96b4e3264aa4d74cac",
+      "paths": [
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\hair_21778_body_0p85\\appearance.glb",
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\selected\\appearance.glb"
+      ]
+    },
+    {
+      "bytes": 8834884,
+      "sha256": "f4c975d13b479e587f301bb6a91ed0af4a1c0e0f8d0b5853c5b834fe05c5ca41",
+      "paths": [
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\hair_21778_body_0p85\\hair_mm.stl",
+        "runs\\head245_resume_20261029_110935_399377\\04_figurine\\selected\\hair_mm.stl"
+      ]
+    },
+    {
+      "bytes": 8834884,
+      "sha256": "9c62ad327f51a362ab1576dbbfdea3d2cd4868d4615a1c99f0d108de7fb7b63c",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p85\\hair_mm.stl",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\selected\\hair_mm.stl"
+      ]
+    },
+    {
+      "bytes": 8834884,
+      "sha256": "f632e078d7e1225cb702272c8795520c125321ddd31a93b61e19e26030c30d5b",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\radial_hair_21778_body_0p6\\hair_mm.stl",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\selected\\hair_mm.stl"
+      ]
+    },
+    {
+      "bytes": 8834884,
+      "sha256": "a804731491374253227d80ca1e73ce1625fefe4c0e8d3f1882fdd8d795f2dab5",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p6\\hair_mm.stl",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\selected\\hair_mm.stl"
+      ]
+    },
+    {
+      "bytes": 8834884,
+      "sha256": "6bd6f3a0f75f42b93c948accff60ae97cb2c26958c24afee29b139152be64084",
+      "paths": [
+        "runs\\pipeline_v23_20261028_232602_556\\selected\\hair_mm.stl",
+        "runs\\pipeline_v23_20261028_232602_556\\sideburn_21778_0p4\\hair_mm.stl"
+      ]
+    },
+    {
+      "bytes": 8489720,
+      "sha256": "768b32dc7600dea72cc9d1123aaf1e09a1a8da4abaad53cf5c0c1e00a35b18b3",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p85\\eye_pbr_probe.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\selected\\eye_pbr_probe.glb"
+      ]
+    },
+    {
+      "bytes": 8489712,
+      "sha256": "f982933c903be9597c26333761c889c2724c67aae79bc4a702990cdb932ac6c0",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p85\\unlit.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\selected\\unlit.glb"
+      ]
+    },
+    {
+      "bytes": 8489688,
+      "sha256": "791e71853aaf016301a8ab5743f607b301a2958cc5e66e9158080c06d9f674b7",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p85\\appearance.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\02\\rdf_occlusion\\figurine\\selected\\appearance.glb"
+      ]
+    },
+    {
+      "bytes": 8469380,
+      "sha256": "0fee1bab69d5d7a836049e83302b6412e74f8d9194ac75c26cacad04dfbe6404",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p6\\eye_pbr_probe.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\selected\\eye_pbr_probe.glb"
+      ]
+    },
+    {
+      "bytes": 8469372,
+      "sha256": "d49920a9f35d378c35c3b70ea7e6833491d7cdd817b30f5d4e63d8d47cc7ef31",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p6\\unlit.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\selected\\unlit.glb"
+      ]
+    },
+    {
+      "bytes": 8469348,
+      "sha256": "deba1118aa913c067287e64d2bba47b0ef5d3ca14b91d25b88742a6cea9c4fc1",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\arap_hair_21778_body_0p6\\appearance.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\06\\rdf_occlusion\\figurine\\selected\\appearance.glb"
+      ]
+    },
+    {
+      "bytes": 8409768,
+      "sha256": "65a48fbf2ddcc5711b0fb76660e79d2d84617e0111c5f7abd0dd4469a3e27879",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\radial_hair_21778_body_0p6\\eye_pbr_probe.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\selected\\eye_pbr_probe.glb"
+      ]
+    },
+    {
+      "bytes": 8409760,
+      "sha256": "4b952d198b039efe55402a14804d5d1d60ba43b894267cb14650b436cd6127ee",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\radial_hair_21778_body_0p6\\unlit.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\selected\\unlit.glb"
+      ]
+    },
+    {
+      "bytes": 8409736,
+      "sha256": "2d2959ec3ef80a7b4df54d45bc7356700459d1002674730ab0f39007f8843a25",
+      "paths": [
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\radial_hair_21778_body_0p6\\appearance.glb",
+        "runs\\headlab26_20261029_142512_381196\\datasets\\05\\rdf_baseline\\figurine\\selected\\appearance.glb"
+      ]
+    }
+  ]
+}

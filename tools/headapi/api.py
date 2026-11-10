@@ -15,7 +15,8 @@ import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Optional
-from fastapi import FastAPI, File, Form, Header, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Request, Security, UploadFile
+from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTextResponse
 from PIL import Image, ImageOps, UnidentifiedImageError
 from .service import ROOT, JobService, RDF_SLOTS, SLOTS, load_config
@@ -72,9 +73,12 @@ def _backend_status(row):
     status='queued' if state=='QUEUED' else 'running' if state=='RUNNING' else 'done' if state=='MVP_EXPORTED' else 'failed'
     stage=row.get('current_stage')
     if stage=='01_rdf_observations':stage='preprocessing'
+    elif stage=='03b_uv_texture':stage='texturing'
     elif stage in ('02_rdf_fit','02b_rdf_export','03_hair_cap'):stage='shape_generation'
-    elif stage=='04_scene_export':stage='exporting'
+    elif stage in ('04_scene_export','05_customization_fit'):stage='exporting'
+    elif stage=='production_reconstruction':stage='shape_generation'
     else:stage=None
+    if status in ('done','failed'):stage=None
     errors=row.get('errors') or []
     last_error=errors[-1] if errors else {}
     return {
@@ -83,8 +87,11 @@ def _backend_status(row):
         'status':status,
         'stage':stage,
         'progress':100 if status=='done' else None,
-        'error_code':'PIPELINE_FAILED' if status=='failed' else None,
-        'error_message':('Reconstruction failed during '+str(last_error.get('stage') or 'processing')) if status=='failed' else None,
+        'output_kind':row.get('output_kind','assembled_preview'),
+        'customization_ready':status=='done' and bool(row.get('customization_ready')),
+        'ready_for_machine':False,
+        'error_code':last_error.get('code','PIPELINE_FAILED') if status=='failed' else None,
+        'error_message':(last_error.get('error') if last_error.get('code') else 'Reconstruction failed during '+str(last_error.get('stage') or 'processing')) if status=='failed' else None,
         'created_at':row.get('created_at'),
         'started_at':row.get('started_at'),
         'completed_at':row.get('completed_at') or row.get('finished_at'),
@@ -120,8 +127,11 @@ def create_app(service,api_key=None,allowed_image_hosts=None):
         service.start()
         try:yield
         finally:service.close()
+    swagger_api_key=APIKeyHeader(name='X-API-Key',scheme_name='HeadApiKey',auto_error=False,
+        description='Enter HEADAPI_API_KEY from your local configuration. Do not include a Bearer prefix.')
     app=FastAPI(title='Memento3D Head API',version='0.3.0',lifespan=lifespan,
-                description='Experimental RDF head and image-conditioned solid hair-cap MVP. Not machine-ready.')
+                description='Experimental RDF head and image-conditioned solid hair-cap MVP. Not machine-ready.',
+                dependencies=[Security(swagger_api_key)])
     @app.middleware('http')
     async def protect_api(request,call_next):
         if request.url.path not in ('/health','/docs','/openapi.json','/redoc'):
@@ -133,7 +143,7 @@ def create_app(service,api_key=None,allowed_image_hosts=None):
         return await call_next(request)
     @app.get('/',response_class=HTMLResponse,include_in_schema=False)
     def home():return (Path(__file__).parent/'index.html').read_text(encoding='utf-8')
-    @app.get('/health')
+    @app.get('/health',openapi_extra={'security':[]})
     def health():
         try:
             service.preflight('mvp')
@@ -141,10 +151,51 @@ def create_app(service,api_key=None,allowed_image_hosts=None):
         except ValueError:
             backend_ready=False
         return {'status':'ok','service_status':'API_RUNNING','backend_ready':backend_ready,
-                'gpu_jobs_parallel':1,'ready_for_machine':False}
+                'gpu_jobs_parallel':1,'ready_for_machine':False,
+                'assembly_output_mode':service.config.get('assembly',{}).get('output_mode','assembled_preview'),
+                'customization_fit_enabled':bool(service.config.get('customization')),
+                'pipeline_policy':service.config.get('pipeline_policy','rdf_hair_cap_mvp'),
+                'face_render_policy':service.config.get('face_render_policy','legacy_vertex_color_v1'),
+                'presentation_policy':service.config.get('presentation_policy','none')}
+
+    @app.get('/customization/catalog')
+    def customization_catalog():
+        from tools.customization.contract import library
+        try:_,catalog,_=library(service.config)
+        except (ValueError,KeyError,OSError) as exc:raise HTTPException(503,'Customization library unavailable') from exc
+        return {'schema_version':1,'catalog_version':catalog['selection'],'groups':catalog['groups'],
+            'default_selection':catalog['default_selection'],'ready_for_machine':False,
+            'assets':[{key:a[key] for key in ('id','version','name','kind','preview_sha256','preview_bytes','thumbnail_sha256','requires_per_job_fit')} for a in catalog['assets']]}
+
+    @app.get('/customization/assets/{asset_id}/{variant}')
+    def customization_library_file(asset_id:str,variant:str):
+        from tools.customization.contract import library,confined
+        if variant not in ('preview','thumbnail'):raise HTTPException(404,'Unknown asset variant')
+        try:
+            root,catalog,_=library(service.config)
+            asset=next((a for a in catalog['assets'] if a['id']==asset_id),None)
+            if asset is None:raise HTTPException(404,'Unknown asset')
+            path=confined(root,asset['preview_file' if variant=='preview' else 'thumbnail_file'])
+        except (ValueError,KeyError,OSError) as exc:raise HTTPException(503,'Customization library unavailable') from exc
+        return FileResponse(path,media_type='model/gltf-binary' if variant=='preview' else 'image/png')
+
+    @app.get('/jobs/{job_id}/customization')
+    def customization_scene(job_id:str,attempt_id:str):
+        from tools.customization.contract import manifest
+        try:return manifest(service,job_id,_parse_uuid(attempt_id,'attempt_id'))
+        except KeyError as exc:raise HTTPException(404,'Job/attempt not found') from exc
+        except (ValueError,OSError) as exc:raise HTTPException(409,'Customization unavailable or changed') from exc
+
+    @app.get('/jobs/{job_id}/customization/assets/{asset_id}')
+    def customization_fitted_file(job_id:str,asset_id:str,attempt_id:str):
+        from tools.customization.contract import asset_file
+        try:path=asset_file(service,job_id,_parse_uuid(attempt_id,'attempt_id'),asset_id)
+        except KeyError as exc:raise HTTPException(404,'Job/attempt/asset not found') from exc
+        except (ValueError,OSError) as exc:raise HTTPException(409,'Customization unavailable or changed') from exc
+        return FileResponse(path,media_type='model/gltf-binary',filename=asset_id+'.glb')
 
     @app.post('/jobs',status_code=202)
-    async def submit_backend(request:Request,x_api_key:Optional[str]=Header(None,alias='X-API-Key')):
+    async def submit_backend(request:Request,x_api_key:Optional[str]=Security(swagger_api_key)):
         require_backend_key(x_api_key)
         content_length=request.headers.get('content-length')
         if content_length and content_length.isdigit() and int(content_length)>MAX_BACKEND_REQUEST_BYTES:
@@ -219,26 +270,28 @@ def create_app(service,api_key=None,allowed_image_hosts=None):
         return _backend_status(row)
 
     @app.get('/jobs/{job_id}')
-    def backend_status(job_id:str,x_api_key:Optional[str]=Header(None,alias='X-API-Key')):
+    def backend_status(job_id:str,x_api_key:Optional[str]=Security(swagger_api_key)):
         require_backend_key(x_api_key)
         try:return _backend_status(service.get(job_id))
         except KeyError:raise HTTPException(404,'Unknown job')
 
     @app.get('/jobs/{job_id}/outputs/glb')
-    def backend_glb(job_id:str,attempt_id:str,x_api_key:Optional[str]=Header(None,alias='X-API-Key')):
+    def backend_glb(job_id:str,attempt_id:str,x_api_key:Optional[str]=Security(swagger_api_key)):
         require_backend_key(x_api_key)
         try:
             row=service.get(job_id)
             if row.get('status')!='MVP_EXPORTED':raise HTTPException(409,'GLB output is not ready')
             if row.get('attempt_id')!=_parse_uuid(attempt_id,'attempt_id'):
                 raise HTTPException(404,'Output attempt not found')
-            path=service.artifact(job_id,'hair/scene.glb')
+            artifact=row.get('scene_artifact','hair/scene.glb')
+            if artifact not in ('hair/scene.glb','render/scene.glb'):raise HTTPException(409,'Unsupported scene artifact')
+            path=service.artifact(job_id,artifact)
         except KeyError:raise HTTPException(404,'Output not found')
         return FileResponse(path,media_type='model/gltf-binary',filename='scene.glb')
 
     @app.post('/v1/head/jobs',status_code=202)
     async def submit(front:UploadFile=File(...),left:UploadFile=File(...),right:UploadFile=File(...),
-                     back:Optional[UploadFile]=File(None),mode:str=Form('mvp')):
+                     back:Optional[UploadFile]=File(None),mode:str=Form('mvp'),attempt_id:Optional[str]=Form(None)):
         if mode!='mvp':raise HTTPException(422,'Only the RDF + hair-cap MVP mode is supported')
         images={}
         for slot,upload in [('front',front),('left',left),('right',right),('back',back)]:
@@ -251,7 +304,8 @@ def create_app(service,api_key=None,allowed_image_hosts=None):
         if len(set(hashes))!=len(hashes):raise HTTPException(422,'Duplicate photo across view slots')
         if not set(RDF_SLOTS)<=set(images):
             raise HTTPException(422,'MVP requires front, left and right; back is optional')
-        try:row=service.submit(images,mode)
+        if attempt_id is not None:attempt_id=_parse_uuid(attempt_id,'attempt_id')
+        try:row=service.submit(images,mode,attempt_id=attempt_id)
         except OverflowError as exc:raise HTTPException(429,str(exc)) from exc
         except ValueError as exc:raise HTTPException(503,str(exc)) from exc
         return {'job_id':row['job_id'],'status':row['status'],'status_url':'/v1/head/jobs/'+row['job_id']}
@@ -274,6 +328,11 @@ def create_app(service,api_key=None,allowed_image_hosts=None):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--config',type=Path,default=ROOT/'configs/headapi.json');p.add_argument('--port',type=int,default=8090)
     a=p.parse_args();import uvicorn
-    uvicorn.run(create_app(JobService(load_config(a.config))),host='127.0.0.1',port=a.port,workers=1)
+    config=load_config(a.config)
+    if config.get('pipeline_policy')=='production_direct_bounded_v1':
+        from .production_service import ProductionJobService
+        service=ProductionJobService(config)
+    else:service=JobService(config)
+    uvicorn.run(create_app(service),host='0.0.0.0',port=a.port,workers=1)
 
 if __name__=='__main__':main()

@@ -1,0 +1,21 @@
+{
+  "asset_integrity": "PASS",
+  "ready_to_upload_private_library": true,
+  "ready_for_be_preview_integration": true,
+  "full_order_print_workflow_complete": false,
+  "cloud_upload_verified": false,
+  "be_fe_integration_verified": false,
+  "catalog_sha256": "c9a7096f97f2e605ed0832c04e3ed224d40de7d48fdaa8a13893ce6fb6024e4a",
+  "profile_sha256": "11dfd07a2475540ccd1bd76109bbe086378fb66f630541b44491f582503ebae5",
+  "real_api_job_id": "ead03dd2a83a4317922f2e7b1f6e85f4",
+  "real_api_elapsed_s": 102.5,
+  "full_suite_tests": 602,
+  "full_suite_preexisting_errors": 4,
+  "full_suite_skipped": 1,
+  "custom_tests_passed": 21,
+  "limitations": [
+    "Accepted MVP face/neck/cap defects retained",
+    "Only same source person tested end-to-end",
+    "Order snapshot export endpoint and manufacturing approval remain future order-phase work"
+  ]
+}

@@ -1,0 +1,474 @@
+﻿{
+    "Root":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction",
+    "AssetDestination":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\assets\\custom-library\\mvp-review-20261105",
+    "PrivateReviewDestination":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\validation\\customization\\mvp-review-20261105",
+    "VerifiedRelocatedFiles":  36,
+    "PipelinePins":  [
+                         {
+                             "Name":  "template",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hand-hair-assembly-01\\attempt-03\\assembly.glb",
+                             "SHA256":  "da8107e99e0f79148f2d8dc6ed5b551ba846d459327205135d55dc53c3123815"
+                         },
+                         {
+                             "Name":  "hair_library",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-refined-01\\input07\\cage-lift\\head-hair.glb",
+                             "SHA256":  "92bdeae4d21dc1d920ba1a8b017f1b9ba1d541d732dc58b9bc7ba930d646760b"
+                         },
+                         {
+                             "Name":  "reference_bundle",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\experiments\\api-demo-uv-01\\case1\\rdf\\projection_bundle.npz",
+                             "SHA256":  "8cfe4a48c099cf7789a190ed5b21b1bcba921230e864e1bd8b3c1ed14fd02f37"
+                         },
+                         {
+                             "Name":  "reference_pose",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\graduation-assembly-04\\report.json",
+                             "SHA256":  "c8e910bd8ee1761297f9481c64d2fdb3966f2b74a81c03580c887885ce7cef6f"
+                         },
+                         {
+                             "Name":  "embedding",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\prod-win-02\\input04-production-02\\color\\embedding.npz",
+                             "SHA256":  "ebba9924af6a107f30040db9db87c2258d6605c973f0eb460d5b8973ab359276"
+                         },
+                         {
+                             "Name":  "semantic_masks",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\MICA\\data\\FLAME2020\\FLAME_masks\\FLAME_masks.pkl",
+                             "SHA256":  "ccefbe1ac0774ff78c68caf2c627b4abc067a6555ebeb0be5d5b0812366ab492"
+                         },
+                         {
+                             "Name":  "uv_assets",
+                             "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\vendor\\RealDenseFace\\weights\\flame\\flame_assets.npz",
+                             "SHA256":  "922cb76f3afef0c2e9801a63991de269a98e6b67b1728232493f851589151dd3"
+                         }
+                     ],
+    "Preserved":  [
+                      {
+                          "name":  "assembly-cohesion-01",
+                          "references":  [
+                                             "tools\\customization\\restore_cap_trial.py",
+                                             "tools\\headapi\\assembly_cohesion_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "buzz-framework-unified-01",
+                          "references":  [
+                                             "tools\\headapi\\male_hair_fit_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "customization-prep-20261105",
+                          "references":  [
+                                             "START-CUSTOMIZATION-REVIEW.ps1",
+                                             "tools\\customization\\build_final_low_memory.py",
+                                             "tools\\customization\\neck_natural_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "experiments",
+                          "references":  [
+                                             "configs\\headapi-assembly.json",
+                                             "configs\\im2.review04.json",
+                                             "src\\memento3d_hair_on_head\\runtime\\run_headlab_v5.py",
+                                             "src\\memento3d_hair_on_head\\runtime\\run_headlab_v6.py",
+                                             "src\\memento3d_head\\research_commands.py",
+                                             "src\\memento3d_head\\domain\\experiment.py",
+                                             "src\\memento3d_head\\pipelines\\single_photo_validation_v1.py",
+                                             "scripts\\run_headlab_v5.py",
+                                             "scripts\\run_headlab_v6.py",
+                                             "scripts\\run_im2_review.py",
+                                             "scripts\\run_im2_sample.py",
+                                             "tools\\customization\\cross_head_trial.py",
+                                             "tools\\headapi\\ab_experiment.py",
+                                             "tools\\headapi\\assembly_cohesion_trial.py",
+                                             "tools\\headapi\\assembly_worker.py",
+                                             "tools\\headapi\\bounded_landmark_trial.py",
+                                             "tools\\headapi\\face_texture_trial.py",
+                                             "tools\\headapi\\flame_parameter_trial.py",
+                                             "tools\\headapi\\fov_experiment.py",
+                                             "tools\\headapi\\geometry_camera_review.py"
+                                         ]
+                      },
+                      {
+                          "name":  "graduation-assembly-04",
+                          "references":  [
+                                             "configs\\headapi-assembly.json",
+                                             "tools\\customization\\cross_head_trial.py",
+                                             "tools\\headapi\\assembly_cohesion_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "hairprep04_20261027_144453_14f44c88",
+                          "references":  [
+                                             "configs\\im2.review04.json"
+                                         ]
+                      },
+                      {
+                          "name":  "hand-hair-assembly-01",
+                          "references":  [
+                                             "configs\\headapi-assembly.json",
+                                             "tools\\headapi\\modular_hand_hair_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "hand-hair-research-01",
+                          "references":  [
+                                             "tools\\headapi\\modular_hand_hair_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "head-assembly-01",
+                          "references":  [
+                                             "tools\\headapi\\graduation_assembly_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "headapi",
+                          "references":  [
+                                             "RUN-HEADAPI.ps1",
+                                             "SETUP-HEADAPI.ps1",
+                                             "START-HEADAPI-ASSEMBLY.ps1",
+                                             "START-HEADAPI-DEMO.ps1",
+                                             "TEST-HEADAPI.ps1",
+                                             "configs\\headapi-assembly.json",
+                                             "configs\\headapi-demo.json",
+                                             "configs\\headapi-production.json",
+                                             "configs\\headapi.json",
+                                             "tools\\customization\\build_final_low_memory.py",
+                                             "tools\\customization\\cross_head_trial.py",
+                                             "tools\\customization\\fit_trial.py",
+                                             "tools\\customization\\lip_natural_trial.py",
+                                             "tools\\customization\\neck_natural_trial.py",
+                                             "tools\\customization\\restore_cap_trial.py",
+                                             "tools\\headapi\\ab_experiment.py",
+                                             "tools\\headapi\\api.py",
+                                             "tools\\headapi\\assembly_worker.py",
+                                             "tools\\headapi\\bald_combined_trial.py",
+                                             "tools\\headapi\\bald_head_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "headapi-assembly",
+                          "references":  [
+                                             "START-HEADAPI-ASSEMBLY.ps1",
+                                             "configs\\headapi-assembly.json",
+                                             "tools\\customization\\build_final_low_memory.py",
+                                             "tools\\customization\\lip_natural_trial.py",
+                                             "tools\\customization\\neck_natural_trial.py",
+                                             "tools\\customization\\restore_cap_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "headapi-demo",
+                          "references":  [
+                                             "START-HEADAPI-DEMO.ps1",
+                                             "configs\\headapi-demo.json"
+                                         ]
+                      },
+                      {
+                          "name":  "headapi-production",
+                          "references":  [
+                                             "configs\\headapi-production.json"
+                                         ]
+                      },
+                      {
+                          "name":  "male-hair-library-01",
+                          "references":  [
+                                             "tools\\headapi\\male_hair_fit_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "male-hair-refined-01",
+                          "references":  [
+                                             "configs\\headapi-assembly.json"
+                                         ]
+                      },
+                      {
+                          "name":  "neck-natural-review-20261105",
+                          "references":  [
+                                             "tools\\customization\\build_final_low_memory.py",
+                                             "tools\\customization\\lip_natural_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "prod-api-01",
+                          "references":  [
+                                             "configs\\headapi-production.json"
+                                         ]
+                      },
+                      {
+                          "name":  "prod-win-01",
+                          "references":  [
+                                             "configs\\headapi-production.json",
+                                             "tools\\customization\\restore_cap_trial.py",
+                                             "tools\\headapi\\graduation_assembly_trial.py"
+                                         ]
+                      },
+                      {
+                          "name":  "prod-win-02",
+                          "references":  [
+                                             "configs\\headapi-assembly.json",
+                                             "tools\\customization\\build_final_low_memory.py",
+                                             "tools\\customization\\cross_head_trial.py",
+                                             "tools\\customization\\fit_trial.py",
+                                             "tools\\customization\\lip_natural_trial.py",
+                                             "tools\\headapi\\graduation_assembly_trial.py"
+                                         ]
+                      }
+                  ],
+    "Deleted":  [
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\assembly-api-rehearsal",
+                        "Files":  18,
+                        "LogicalBytes":  96707522
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\ear-gap-cross-input-01",
+                        "Files":  38,
+                        "LogicalBytes":  26738751
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\graduation-assembly-01",
+                        "Files":  27,
+                        "LogicalBytes":  258237917
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\graduation-assembly-02",
+                        "Files":  36,
+                        "LogicalBytes":  384477286
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\graduation-assembly-03",
+                        "Files":  38,
+                        "LogicalBytes":  384507960
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair-cc0-selection-01",
+                        "Files":  19,
+                        "LogicalBytes":  1159824
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair-completion-batch-01",
+                        "Files":  39,
+                        "LogicalBytes":  111502617
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair-redesign-01",
+                        "Files":  29,
+                        "LogicalBytes":  319231743
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair-solid-trial-01",
+                        "Files":  50,
+                        "LogicalBytes":  709944659
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair_bench_20261028_173609_963",
+                        "Files":  7,
+                        "LogicalBytes":  80538
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair_bench_20261028_191042_601",
+                        "Files":  0,
+                        "LogicalBytes":  null
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair_bench_20261028_191855_874",
+                        "Files":  16,
+                        "LogicalBytes":  6737046
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair_bench_20261028_192116_818",
+                        "Files":  73,
+                        "LogicalBytes":  23245179
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\hair_mask04_20261027_144118_f73a443e",
+                        "Files":  5,
+                        "LogicalBytes":  1724425
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\head245_resume_20261029_110935_399377",
+                        "Files":  84,
+                        "LogicalBytes":  220849700
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\head24_20261029_004003_863602",
+                        "Files":  3,
+                        "LogicalBytes":  2710
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\head24_20261029_042915_535377",
+                        "Files":  10,
+                        "LogicalBytes":  2537890
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\head24_20261029_044424_683718",
+                        "Files":  21,
+                        "LogicalBytes":  5242291
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\head24_resume_20261029_045503_656309",
+                        "Files":  8,
+                        "LogicalBytes":  18804127
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\headlab_v4_20261027_235342_861",
+                        "Files":  107,
+                        "LogicalBytes":  109964205
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-buzz-base-01",
+                        "Files":  47,
+                        "LogicalBytes":  14243563
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-clump-refine-01",
+                        "Files":  64,
+                        "LogicalBytes":  25622377
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-ear-arc-sweep-01",
+                        "Files":  77,
+                        "LogicalBytes":  39241587
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-ear-protection-01",
+                        "Files":  37,
+                        "LogicalBytes":  10707963
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-ear-topology-01",
+                        "Files":  23,
+                        "LogicalBytes":  11858600
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-face-finish-01",
+                        "Files":  65,
+                        "LogicalBytes":  19184706
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-face-stage1-01",
+                        "Files":  78,
+                        "LogicalBytes":  21214497
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-guide-clumps-01",
+                        "Files":  65,
+                        "LogicalBytes":  49596911
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-hair-exclusion-01",
+                        "Files":  42,
+                        "LogicalBytes":  17778235
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-outer-hair-01",
+                        "Files":  20,
+                        "LogicalBytes":  7666054
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-outer-hair-02",
+                        "Files":  19,
+                        "LogicalBytes":  7696464
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-outer-hair-03",
+                        "Files":  13,
+                        "LogicalBytes":  4307688
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\input07-skin-mouth-01",
+                        "Files":  40,
+                        "LogicalBytes":  9700276
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-cage-01",
+                        "Files":  23,
+                        "LogicalBytes":  75323279
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-fit-01",
+                        "Files":  18,
+                        "LogicalBytes":  30385543
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-fit-02",
+                        "Files":  18,
+                        "LogicalBytes":  30589984
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-fit-03",
+                        "Files":  18,
+                        "LogicalBytes":  30569941
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-surface-01",
+                        "Files":  37,
+                        "LogicalBytes":  62735669
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\male-hair-surface-02",
+                        "Files":  57,
+                        "LogicalBytes":  94030359
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\pipeline_v23_20261028_232602_556",
+                        "Files":  56,
+                        "LogicalBytes":  149630163
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\pipeline_v23_20261029_000739_566",
+                        "Files":  2,
+                        "LogicalBytes":  15994
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\triposr_probe_20261030_043601_397_fcdfec",
+                        "Files":  10,
+                        "LogicalBytes":  2794791
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\triposr_review_20261030_061823_52bceebd",
+                        "Files":  23,
+                        "LogicalBytes":  16851900
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\v1_20261029_000607_5d3586b7",
+                        "Files":  42,
+                        "LogicalBytes":  52245912
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\customization-prep-20261105\\mvp-asset-review-01",
+                        "Files":  12,
+                        "LogicalBytes":  28366011
+                    },
+                    {
+                        "Path":  "D:\\FPTU\\07\\EXE201\\ai-3d-generation\\Memento3D-Head-Reconstruction\\runs\\customization-prep-20261105\\mvp-asset-review-02",
+                        "Files":  0,
+                        "LogicalBytes":  null
+                    }
+                ],
+    "FreeBefore":  3847245824,
+    "Complete":  true,
+    "FreeAfter":  7265079296,
+    "ActualFreedBytes":  3417833472,
+    "RemainingRunDirectories":  [
+                                    "assembly-cohesion-01",
+                                    "buzz-framework-unified-01",
+                                    "customization-prep-20261105",
+                                    "experiments",
+                                    "graduation-assembly-04",
+                                    "hairprep04_20261027_144453_14f44c88",
+                                    "hand-hair-assembly-01",
+                                    "hand-hair-research-01",
+                                    "head-assembly-01",
+                                    "headapi",
+                                    "headapi-assembly",
+                                    "headapi-demo",
+                                    "headapi-production",
+                                    "male-hair-library-01",
+                                    "male-hair-refined-01",
+                                    "neck-natural-review-20261105",
+                                    "prod-api-01",
+                                    "prod-win-01",
+                                    "prod-win-02"
+                                ]
+}

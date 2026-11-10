@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "paths": {
+    "cpu_python": ".venv/Scripts/python.exe",
+    "rdf_python": ".venv-rdf/Scripts/python.exe",
+    "haircap_python": ".venv-triposr/Scripts/python.exe",
+    "rdf_repo": "vendor/RealDenseFace",
+    "landmarker": "D:/AI-cache/mediapipe/face_landmarker.task",
+    "cache_root": "D:/AI-cache/triposr-probe",
+    "jobs": "runs/headapi-demo",
+    "parser": "D:/AI-cache/face-parsing/resnet18.onnx"
+  },
+  "face_render_policy": "strict_uv_v1",
+  "presentation_policy": "harmonized_head_v1",
+  "max_pending_jobs": 1,
+  "stage_timeout_seconds": 1800
+}

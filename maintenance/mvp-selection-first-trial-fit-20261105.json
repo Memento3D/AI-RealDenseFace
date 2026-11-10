@@ -1,0 +1,342 @@
+{
+  "job_id": "e0a57466-a84b-4609-a18e-eeb95f749885",
+  "base_sha256": "f928492f7f65abfcfc3e5b594bee788865a6cfee8db6610d123425abf57c1d30",
+  "matrix_native_to_working": [
+    [
+      0.6994440511590267,
+      0.0,
+      -0.005531736584743284,
+      -0.01965834185211062
+    ],
+    [
+      -0.005531736584743284,
+      0.0,
+      -0.6994440511590267,
+      0.00393100856420155
+    ],
+    [
+      0.0,
+      0.6994659254112342,
+      0.0,
+      0.8568602350760143
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "reference_eye_anchor_working_m": [
+    -0.019284999696537852,
+    -0.01998084783554077,
+    0.873484995484352
+  ],
+  "assets": {
+    "graduation-cap": {
+      "placement_source_to_working": [
+        [
+          1.000000025016096,
+          3.550430393916143e-19,
+          0.0,
+          -1.1361401333620513e-08
+        ],
+        [
+          3.123287269305849e-19,
+          1.000000025016096,
+          0.0,
+          -1.438980902317144e-08
+        ],
+        [
+          0.0,
+          0.0,
+          1.0000000250160963,
+          -0.018000030770043862
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "preview_changes": [
+        {
+          "node": "Cap_Original",
+          "source_faces": 87183,
+          "preview_faces": 86956,
+          "removed_skin_faces": 227,
+          "resized": [
+            {
+              "texture": "baseColorTexture",
+              "before": [
+                4096,
+                4096
+              ],
+              "after": [
+                1024,
+                1024
+              ]
+            },
+            {
+              "texture": "normalTexture",
+              "before": [
+                4096,
+                4096
+              ],
+              "after": [
+                1024,
+                1024
+              ]
+            },
+            {
+              "texture": "metallicRoughnessTexture",
+              "before": [
+                4096,
+                4096
+              ],
+              "after": [
+                1024,
+                1024
+              ]
+            }
+          ]
+        },
+        {
+          "node": "Tassel_Original",
+          "source_faces": 23258,
+          "preview_faces": 23258,
+          "removed_skin_faces": 0,
+          "resized": [
+            {
+              "texture": "baseColorTexture",
+              "before": [
+                4096,
+                4096
+              ],
+              "after": [
+                1024,
+                1024
+              ]
+            },
+            {
+              "texture": "normalTexture",
+              "before": [
+                4096,
+                4096
+              ],
+              "after": [
+                1024,
+                1024
+              ]
+            },
+            {
+              "texture": "metallicRoughnessTexture",
+              "before": [
+                4096,
+                4096
+              ],
+              "after": [
+                1024,
+                1024
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "hair-side-part": {
+      "axis_scale": [
+        0.670733965567876,
+        0.7836587768685457,
+        0.5931624164089787
+      ],
+      "source_bounds": [
+        [
+          -0.09000000357627869,
+          -0.09808500111103058,
+          -0.09175105392932892
+        ],
+        [
+          0.09000000357627869,
+          0.09808500111103058,
+          0.09175105392932892
+        ]
+      ],
+      "target_bounds_in_head_frame": [
+        [
+          -0.06161892595822152,
+          -0.015129235220120748,
+          -0.018
+        ],
+        [
+          0.05911319264145933,
+          0.1386011087795196,
+          0.09084655371358252
+        ]
+      ],
+      "policy": "Reviewed scalp-envelope bounding-box initialization; collision review required"
+    },
+    "glasses-round": {
+      "fit": {
+        "scale": 0.7882376597518016,
+        "eye_spacing_m": 0.047128056334723674,
+        "bridge_clearance_m": 0.002,
+        "world_eye_midpoint": [
+          -0.019284999696537852,
+          -0.01998084783554077,
+          0.873484995484352
+        ],
+        "world_basis": [
+          [
+            0.9987762643783388,
+            0.02198151631570938,
+            0.044303348123059125
+          ],
+          [
+            -0.0249619124887763,
+            0.9973810100095596,
+            0.0678824262767141
+          ],
+          [
+            -0.042695159437030304,
+            -0.0689052524324021,
+            0.9967091800258857
+          ]
+        ],
+        "lens_spacing_factor": 1.2042319568421147
+      },
+      "matrix_source_to_working": [
+        [
+          0.7872730652492285,
+          0.017326658978490804,
+          0.034921567443689495,
+          -0.01850429166873117
+        ],
+        [
+          -0.0196759194830823,
+          0.7861732732108234,
+          0.05350748482663133,
+          0.013500382089139139
+        ],
+        [
+          -0.03365393255737482,
+          -0.054313714921923766,
+          0.7856437115167413,
+          0.8721733038417404
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "width": {
+        "ear_span_m": 0.11495132586987342,
+        "target_frame_fraction_of_ear_span": 0.96,
+        "requested_uniform_upscale": 1.02053555664586,
+        "maximum_uniform_upscale": 1.2,
+        "requires_wider_asset": false,
+        "applied_uniform_upscale": 1.02053555664586
+      },
+      "front": {
+        "forward_offset_mm": 0.0,
+        "front_min_local_clearance_before_mm": 0.6354279694960319,
+        "front_min_local_clearance_after_mm": 0.6354279694960319,
+        "maximum_forward_offset_mm": 6,
+        "requires_manual_review": false
+      },
+      "temples": [
+        {
+          "arm_vertices": 248,
+          "moved_vertices": 248,
+          "max_displacement_mm": 6.938276633717542,
+          "max_outward_spread_mm": 5.300857842842474,
+          "ear_support_adjustment": [
+            {
+              "side": -1,
+              "support_anchor_m": [
+                -0.07601798852388629,
+                0.04638823913381842,
+                0.8729439650498583
+              ],
+              "support_rise_mm": 4.476671618062463
+            },
+            {
+              "side": 1,
+              "support_anchor_m": [
+                0.03885819884086913,
+                0.044707834657507044,
+                0.8688739374288177
+              ],
+              "support_rise_mm": 5.395367512104638
+            }
+          ],
+          "max_outward_allowed_mm": 8,
+          "max_vertical_allowed_mm": 12,
+          "scope": "Semantic ear-crest initialization and local sampled surface clearance, arms only; no global collision guarantee"
+        },
+        {
+          "arm_vertices": 16,
+          "moved_vertices": 16,
+          "max_displacement_mm": 3.1297239213758536,
+          "max_outward_spread_mm": 3.1297239213758536,
+          "ear_support_adjustment": [],
+          "max_outward_allowed_mm": 8,
+          "max_vertical_allowed_mm": 12,
+          "scope": "Semantic ear-crest initialization and local sampled surface clearance, arms only; no global collision guarantee"
+        }
+      ],
+      "sampled_clearance": {
+        "samples": 1008,
+        "nearest_triangle_candidates": 32,
+        "signed_clearance_quantiles_mm": [
+          -0.661632135036795,
+          1.499999999999998,
+          4.268594092131634,
+          19.294925087563232,
+          21.339106977330083
+        ],
+        "samples_below_minus_1mm": 0,
+        "scope": "Nearest 32 triangle centers; local normal sign only, open/nonmanifold surfaces allowed; not full mesh collision certification"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "cap-none",
+      "headwear_asset": "graduation-cap",
+      "glasses_asset": null,
+      "file": "cases/cap-none/scene.glb",
+      "sha256": "a43dbc5b6ca8f97c0996a3469f3dbf774d9dba5692643a57d53bbb401d4fee9b",
+      "head_geometry_uv_texture_preserved": true
+    },
+    {
+      "id": "cap-glasses",
+      "headwear_asset": "graduation-cap",
+      "glasses_asset": "glasses-round",
+      "file": "cases/cap-glasses/scene.glb",
+      "sha256": "a9f415a5c2214b746b37d5ee53f4e107b4b18cb6355796f05c9fe22b753216cf",
+      "head_geometry_uv_texture_preserved": true
+    },
+    {
+      "id": "hair-none",
+      "headwear_asset": "hair-side-part",
+      "glasses_asset": null,
+      "file": "cases/hair-none/scene.glb",
+      "sha256": "98e9ee3e87303395ea4b14300aa4d0cdc9b5cb17ba545a3364affb8e8bde1c30",
+      "head_geometry_uv_texture_preserved": true
+    },
+    {
+      "id": "hair-glasses",
+      "headwear_asset": "hair-side-part",
+      "glasses_asset": "glasses-round",
+      "file": "cases/hair-glasses/scene.glb",
+      "sha256": "de13b813d1b9b363098f576e2aa4477fdfa26fb32648dd3787eb85e0b76f1f61",
+      "head_geometry_uv_texture_preserved": true
+    }
+  ],
+  "print_ready": false,
+  "global_fit_verified": false
+}
