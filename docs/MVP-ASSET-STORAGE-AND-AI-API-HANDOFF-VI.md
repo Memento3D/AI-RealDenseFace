@@ -100,8 +100,8 @@ Không tạo bảng hay nhập record rời rạc bằng SQL thủ công trong b
 Từ thư mục gốc Memento3D-Head-Reconstruction:
 
 ```powershell
-.\START-HEADAPI-CUSTOMIZATION-BASE.ps1 -CheckOnly
-.\START-HEADAPI-CUSTOMIZATION-BASE.ps1 -Port 8090
+.\scripts/api/START-HEADAPI-CUSTOMIZATION-BASE.ps1 -CheckOnly
+.\scripts/api/START-HEADAPI-CUSTOMIZATION-BASE.ps1 -Port 8090
 ```
 
 Launcher dùng HEADAPI_API_KEY từ environment/.env.local/.env, không cần gửi key trong chat. Không chạy hai API cùng port. Job của chế độ này ở runs/headapi-customization-base, nên job thuộc thư mục assembly cũ không tự xuất hiện trong API mới.

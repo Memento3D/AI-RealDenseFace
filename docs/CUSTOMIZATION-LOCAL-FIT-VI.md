@@ -8,7 +8,7 @@ Trong PowerShell:
 
 ```powershell
 cd D:\FPTU\07\EXE201\ai-3d-generation\Memento3D-Head-Reconstruction
-.\START-CUSTOMIZATION-REVIEW.ps1
+.\scripts/review/START-CUSTOMIZATION-REVIEW.ps1
 ```
 
 Mở `http://127.0.0.1:8092/review-site/`. Có nút chính diện, góc 3/4, bên hông, phía sau, toàn thân và ẩn thân/tay. Chỉ tải một model mỗi lần; khi đổi mẫu, viewer giải phóng geometry/material/texture cũ. Ctrl+C dừng server. Cổng này dành cho xem local; không cần ngrok và không thay đổi AI API.

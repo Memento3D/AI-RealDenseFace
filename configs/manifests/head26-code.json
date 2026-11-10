@@ -1,0 +1,129 @@
+{
+  "version": "HeadLab26.1 control-graph hybrid hair and stage-bound batch cache",
+  "files": [
+    {
+      "path": "docs/legacy/HEADLAB26-METHODS.md",
+      "sha256": "cb1ab6af1ea9c637658a4b836f33bec9fe0f88241d3bae401df1e12da3f8ebf8"
+    },
+    {
+      "path": "docs/legacy/HEADLAB26-START-VI.md",
+      "sha256": "0392c12e553789a2ca7ef60a23d233094fdf5cb4a64b56e09b03d184a4a8fa9e"
+    },
+    {
+      "path": "scripts/experiments/RUN-HEADLAB26.ps1",
+      "sha256": "fdc68c5202985453e9e3fe19246a9b636466527c2b9b534bdd209c2494ea12a3"
+    },
+    {
+      "path": "configs/headlab26.json",
+      "sha256": "2478f46449533b2e753b8d7ee281c176f9ba345eddceb34cf98c87d31e8fe024"
+    },
+    {
+      "path": "tests/test_headlab26.py",
+      "sha256": "a31602df25885ee1d8aaa08d4bf2a3a458e539976f4e499d91cd34497755607e"
+    },
+    {
+      "path": "tools/headlab26/__init__.py",
+      "sha256": "563e7bcb3713ca129765d5b6149d180b462a9fbe16c699d0fd1c035ffe378a3d"
+    },
+    {
+      "path": "tools/headlab26/appearance.py",
+      "sha256": "5dbbc5b25733860a8e2f34c8b2f89483a741c572ba6195c349e2d14a06227ade"
+    },
+    {
+      "path": "tools/headlab26/cache.py",
+      "sha256": "603411b5c857437400132877ae948a557182cc50928c31e9323091f3abfd2370"
+    },
+    {
+      "path": "tools/headlab26/cli.py",
+      "sha256": "e1e1651ea8b4ea212596393f99a71c50d66e33ec6e55570ac0fd5b8bb86c7768"
+    },
+    {
+      "path": "tools/headlab26/config.py",
+      "sha256": "be315227a5c129e539270d3200e7d00ffdf067d247586806bdbed7e9dc767b01"
+    },
+    {
+      "path": "tools/headlab26/diagnostics.py",
+      "sha256": "1340cd131d404a44dc199a981085976b084bd65705e5e47e63cf7a2c70429a11"
+    },
+    {
+      "path": "tools/headlab26/external.py",
+      "sha256": "fe118cab11e963ba88e02f1684ab9d0c4ccd89d0cc5fe389ca5098d46d02afc6"
+    },
+    {
+      "path": "tools/headlab26/face.py",
+      "sha256": "5e13cc319b90f9e9f3e0a97524795f9471232b69c56aff4a5f3b076f4e064975"
+    },
+    {
+      "path": "tools/headlab26/face_states.py",
+      "sha256": "646c018e6145436e31f07d043f9d4a0bde7dab26a99773d866d4d566a98a3145"
+    },
+    {
+      "path": "tools/headlab26/figurine.py",
+      "sha256": "00ef83b57a34ec77c125dac3a06a810543e5f8d0474663aad56e4d951a2cd24c"
+    },
+    {
+      "path": "tools/headlab26/geometry.py",
+      "sha256": "b2c2d9830984f61ae732a545c6501d5eb7f7f93d798611a2e2744c73fb14433f"
+    },
+    {
+      "path": "tools/headlab26/io.py",
+      "sha256": "fbc59b2f748c809a2beb49699157d6c72ec4255f70e44ff8ac3cc8337d0dd332"
+    },
+    {
+      "path": "tools/headlab26/manufacturing.py",
+      "sha256": "be1467eda4ca436bdead5298485307378381ea6172de07b4c39969d93f74862b"
+    },
+    {
+      "path": "tools/headlab26/pixel_export.py",
+      "sha256": "8eadeb16395f128f0dee5e6dc679fa6ac95fc784536b20c313849a233347a7a1"
+    },
+    {
+      "path": "tools/headlab26/policy.py",
+      "sha256": "5b3d664f5165946da4bc714dce80ad17ec39d31107633cc99c87ec490a2c0e97"
+    },
+    {
+      "path": "tools/headlab26/prepare.py",
+      "sha256": "4e25b515fe4c98dd93fdfb53a3b4552464813473889024b92ce9ca077ca67143"
+    },
+    {
+      "path": "tools/headlab26/process.py",
+      "sha256": "52760f28a3b7fec7eb3949ea5cb6731d45aefea092b611b1dd5baa3757aa646a"
+    },
+    {
+      "path": "tools/headlab26/rdf_worker.py",
+      "sha256": "f20956d928688f76097a40ddb2728fb21a650749a4588c4652537d7674a301f9"
+    },
+    {
+      "path": "tools/headlab26/report.py",
+      "sha256": "e39b5bf1e3db28ec30e86a8adf28b5e8b4dca1263dd8f4d2ead1208a1540b35e"
+    },
+    {
+      "path": "tools/headlab26/semantics.py",
+      "sha256": "8cd51831273c4f62955a721b6fd89a404cbe781b63c40e0be87f2a43a7a3a708"
+    },
+    {
+      "path": "tools/headlab26/trust_worker.py",
+      "sha256": "a45d05629e09ead6f0fdb6911287091e51856186dd24c4b6ecca02a33938685b"
+    },
+    {
+      "path": "maintenance/verification/head261-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "path": "maintenance/verification/head261-full-after.log",
+      "sha256": "a6b8f050f997b84e014c2086ab767117acfb23d0ab9090a3e2a34c5217f4111a"
+    },
+    {
+      "path": "maintenance/verification/head261-full-before.log",
+      "sha256": "f3bc0bc2833f7b590b627eda4ca43e421831a4256eb71b1710e2cd0804ce5e9e"
+    },
+    {
+      "path": "maintenance/verification/head261-release.json",
+      "sha256": "5f8d709dad7f736fad48ab384574c1aa7f62983c32e08d143894596a2ea5c102"
+    },
+    {
+      "path": "maintenance/verification/head261-targeted.log",
+      "sha256": "69191d44527aeffbd06e1102d9ccd290584df0e5104e2cb6e68da34cbb23414d"
+    }
+  ]
+}

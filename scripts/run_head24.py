@@ -40,9 +40,9 @@ def main():
     out.mkdir(parents=True);report={'status':'RUNNING','version':'Head24.4 cranial frame and observed feature fallback','input':str(a.input.resolve()),'stages':[],'ready_for_machine':False,'physical_print_verified':False,'windows_gpu_inference_verified_by_release_author':False};start=time.perf_counter()
     repo=ROOT/'vendor/RealDenseFace';rdf=ROOT/'.venv-rdf/Scripts/python.exe'
     try:
-        check_manifest(ROOT/'pipeline-v23-code.json',ROOT)
-        check_manifest(ROOT/'head24-code.json',ROOT)
-        check_manifest(ROOT/'head24-rdf-source.json',repo)
+        check_manifest(ROOT/'configs/manifests/pipeline-v23-code.json',ROOT)
+        check_manifest(ROOT/'configs/manifests/head24-code.json',ROOT)
+        check_manifest(ROOT/'configs/manifests/head24-rdf-source.json',repo)
         if a.resume:
             crops,fit,reused=resume_artifacts(a.resume)
             report.update(reused)

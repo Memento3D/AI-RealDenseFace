@@ -23,7 +23,7 @@ Master đầy đủ: `texture/face_transferred.glb`. Bản web: `render/scene.gl
 API thử nghiệm dùng cổng 8090. Nếu đang chạy đúng tiến trình này thì không mở thêm instance:
 
 ```powershell
-.\START-HEADAPI-DEMO.ps1 -ConfigPath configs/headapi-production.json
+.\scripts/api/START-HEADAPI-DEMO.ps1 -ConfigPath configs/headapi-production.json
 ```
 
 Key đọc từ `.env.local`/`.env` hoặc biến môi trường hiện tại và phải khớp `AI_API_KEY` của backend. Không đưa key vào frontend hoặc URL. Health: `http://127.0.0.1:8090/health`; schema: `/docs`.

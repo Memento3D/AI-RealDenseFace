@@ -12,10 +12,10 @@ class RootLayoutTests(unittest.TestCase):
         for name in ['scripts/run_on_head.py','scripts/serve_hair_on_head.py','configs/hair-on-head.json','requirements/hair-on-head-cpu.txt','viewer/hair-on-head/index.html','src/memento3d_hair_on_head/runtime/pipeline.py']:
             self.assertTrue((ROOT/name).is_file(),name)
     def test_launcher_uses_flat_entrypoint_and_scoped_manifest(self):
-        s=(ROOT/'RUN-HAIR-ON-HEAD.ps1').read_text()
-        self.assertIn('$project=$PSScriptRoot',s)
+        s=(ROOT/'scripts/experiments/RUN-HAIR-ON-HEAD.ps1').read_text()
+        self.assertIn('$project=(Split-Path (Split-Path $PSScriptRoot -Parent) -Parent)',s)
         self.assertIn('"scripts\\run_on_head.py"',s)
-        self.assertIn('"hair-on-head-code.json"',s)
+        self.assertIn('"configs/manifests/hair-on-head-code.json"',s)
         self.assertNotIn('"hair-on-head\\scripts\\',s)
         self.assertIn('requirements\\hair-on-head-cpu.txt',s)
     def test_python_cli_from_foreign_cwd(self):
@@ -31,7 +31,7 @@ class RootLayoutTests(unittest.TestCase):
         self.assertIn("PROJECT/'src'",s)
         self.assertIn('memento3d_hair_on_head.entrypoint',s)
     def test_manifest_covers_feature_owned_paths_only(self):
-        p=ROOT/'hair-on-head-code.json'
+        p=ROOT/'configs/manifests/hair-on-head-code.json'
         if not p.exists():self.skipTest('Manifest generated during packaging')
         m=json.loads(p.read_text())
         for e in m['files']:

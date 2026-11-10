@@ -260,7 +260,7 @@ def latest_run(project):
                 if data.get('selected') and (run/'selected/hair_mm.stl').is_file():candidates.append(run)
             except (OSError,ValueError):continue
         if candidates:return max(candidates,key=lambda p:(p/'report.json').stat().st_mtime)
-    raise ValueError('No V2.2 run found. Run RUN-PIPELINE-V22.ps1 first, or pass -RunDir to extracted Results04 folder.')
+    raise ValueError('No V2.2 run found. Run scripts/experiments/RUN-PIPELINE-V22.ps1 first, or pass -RunDir to extracted Results04 folder.')
 
 
 

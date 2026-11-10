@@ -1,0 +1,397 @@
+{
+  "moves": [
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-2-PROFILE-VI.md",
+      "new": "docs/legacy/HEAD24-2-PROFILE-VI.md",
+      "sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-3-RESUME-VI.md",
+      "new": "docs/legacy/HEAD24-3-RESUME-VI.md",
+      "sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-4-START-VI.md",
+      "new": "docs/legacy/HEAD24-4-START-VI.md",
+      "sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-METHODS.md",
+      "new": "docs/legacy/HEAD24-METHODS.md",
+      "sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-START-VI.md",
+      "new": "docs/legacy/HEAD24-START-VI.md",
+      "sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504"
+    },
+    {
+      "old": "verification/architecture.log",
+      "new": "maintenance/verification/architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "old": "verification/baseline-current-runtime.log",
+      "new": "maintenance/verification/baseline-current-runtime.log",
+      "sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d"
+    },
+    {
+      "old": "verification/head244-architecture.log",
+      "new": "maintenance/verification/head244-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "old": "verification/head244-full-after.log",
+      "new": "maintenance/verification/head244-full-after.log",
+      "sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8"
+    },
+    {
+      "old": "verification/head244-full-before.log",
+      "new": "maintenance/verification/head244-full-before.log",
+      "sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581"
+    },
+    {
+      "old": "verification/head244-targeted.log",
+      "new": "maintenance/verification/head244-targeted.log",
+      "sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9"
+    },
+    {
+      "old": "verification/profile-policy-tests.log",
+      "new": "maintenance/verification/profile-policy-tests.log",
+      "sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc"
+    },
+    {
+      "old": "verification/unit-tests.log",
+      "new": "maintenance/verification/unit-tests.log",
+      "sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5"
+    },
+    {
+      "old": "verification/workspace-resume-tests.log",
+      "new": "maintenance/verification/workspace-resume-tests.log",
+      "sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-5-START-VI.md",
+      "new": "docs/legacy/HEAD24-5-START-VI.md",
+      "sha256": "6cc83fac6cdfef020d6e6e45526af1825737f39ffbe88aade38e63b109e65067"
+    },
+    {
+      "old": "verification/head245-architecture.log",
+      "new": "maintenance/verification/head245-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "old": "verification/head245-baseline-embree.log",
+      "new": "maintenance/verification/head245-baseline-embree.log",
+      "sha256": "477d8f8d4a8ee888ad80626fc6ef98c82c72d879db692d5ecf5993163bc3dee6"
+    },
+    {
+      "old": "verification/head245-full-rtree.log",
+      "new": "maintenance/verification/head245-full-rtree.log",
+      "sha256": "3876b6daa637dfbbdbf81a942267fa4ff4aa7e4fdaa161eeb5207262ee39618b"
+    },
+    {
+      "old": "verification/head245-full-tests-final.log",
+      "new": "maintenance/verification/head245-full-tests-final.log",
+      "sha256": "45da3791cf009adcb8cf244cb6b3ab87e67db3517232f1e860e6139257353831"
+    },
+    {
+      "old": "verification/head245-head-tests.log",
+      "new": "maintenance/verification/head245-head-tests.log",
+      "sha256": "994f5c6f1218f69af469740fb192e23948260d6517832cb72ce14992432a2015"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEADLAB26-METHODS.md",
+      "new": "docs/legacy/HEADLAB26-METHODS.md",
+      "sha256": "cb1ab6af1ea9c637658a4b836f33bec9fe0f88241d3bae401df1e12da3f8ebf8"
+    },
+    {
+      "old": "_archive/project_cleanup_20261030_182137/root-docs/HEADLAB26-START-VI.md",
+      "new": "docs/legacy/HEADLAB26-START-VI.md",
+      "sha256": "0392c12e553789a2ca7ef60a23d233094fdf5cb4a64b56e09b03d184a4a8fa9e"
+    },
+    {
+      "old": "verification/head261-architecture.log",
+      "new": "maintenance/verification/head261-architecture.log",
+      "sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+    },
+    {
+      "old": "verification/head261-full-after.log",
+      "new": "maintenance/verification/head261-full-after.log",
+      "sha256": "a6b8f050f997b84e014c2086ab767117acfb23d0ab9090a3e2a34c5217f4111a"
+    },
+    {
+      "old": "verification/head261-full-before.log",
+      "new": "maintenance/verification/head261-full-before.log",
+      "sha256": "f3bc0bc2833f7b590b627eda4ca43e421831a4256eb71b1710e2cd0804ce5e9e"
+    },
+    {
+      "old": "verification/head261-targeted.log",
+      "new": "maintenance/verification/head261-targeted.log",
+      "sha256": "69191d44527aeffbd06e1102d9ccd290584df0e5104e2cb6e68da34cbb23414d"
+    }
+  ],
+  "code_manifest_updates": [
+    {
+      "manifest": "configs/manifests/head24-code.json",
+      "entries": [
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-2-PROFILE-VI.md",
+          "new": "docs/legacy/HEAD24-2-PROFILE-VI.md",
+          "old_sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84",
+          "new_sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-3-RESUME-VI.md",
+          "new": "docs/legacy/HEAD24-3-RESUME-VI.md",
+          "old_sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c",
+          "new_sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-4-START-VI.md",
+          "new": "docs/legacy/HEAD24-4-START-VI.md",
+          "old_sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5",
+          "new_sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-METHODS.md",
+          "new": "docs/legacy/HEAD24-METHODS.md",
+          "old_sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f",
+          "new_sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-START-VI.md",
+          "new": "docs/legacy/HEAD24-START-VI.md",
+          "old_sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504",
+          "new_sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504"
+        },
+        {
+          "old": "verification/architecture.log",
+          "new": "maintenance/verification/architecture.log",
+          "old_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52",
+          "new_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+        },
+        {
+          "old": "verification/baseline-current-runtime.log",
+          "new": "maintenance/verification/baseline-current-runtime.log",
+          "old_sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d",
+          "new_sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d"
+        },
+        {
+          "old": "verification/head244-architecture.log",
+          "new": "maintenance/verification/head244-architecture.log",
+          "old_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52",
+          "new_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+        },
+        {
+          "old": "verification/head244-full-after.log",
+          "new": "maintenance/verification/head244-full-after.log",
+          "old_sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8",
+          "new_sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8"
+        },
+        {
+          "old": "verification/head244-full-before.log",
+          "new": "maintenance/verification/head244-full-before.log",
+          "old_sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581",
+          "new_sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581"
+        },
+        {
+          "old": "verification/head244-targeted.log",
+          "new": "maintenance/verification/head244-targeted.log",
+          "old_sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9",
+          "new_sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9"
+        },
+        {
+          "old": "verification/profile-policy-tests.log",
+          "new": "maintenance/verification/profile-policy-tests.log",
+          "old_sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc",
+          "new_sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc"
+        },
+        {
+          "old": "verification/unit-tests.log",
+          "new": "maintenance/verification/unit-tests.log",
+          "old_sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5",
+          "new_sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5"
+        },
+        {
+          "old": "verification/workspace-resume-tests.log",
+          "new": "maintenance/verification/workspace-resume-tests.log",
+          "old_sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1",
+          "new_sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/head245-code.json",
+      "entries": [
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-2-PROFILE-VI.md",
+          "new": "docs/legacy/HEAD24-2-PROFILE-VI.md",
+          "old_sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84",
+          "new_sha256": "a803bc636c3ca7b01bc65fadbb3905026891e241428e5e53249b96e9b21f2f84"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-3-RESUME-VI.md",
+          "new": "docs/legacy/HEAD24-3-RESUME-VI.md",
+          "old_sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c",
+          "new_sha256": "d7991df5617e27030baada1b511fe6e4e8e9befb1c88efcd232070f5b599d21c"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-4-START-VI.md",
+          "new": "docs/legacy/HEAD24-4-START-VI.md",
+          "old_sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5",
+          "new_sha256": "efd49b3a45995b3c402937dafe7312371bb24d982210ebfff6b4b0772774cae5"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-5-START-VI.md",
+          "new": "docs/legacy/HEAD24-5-START-VI.md",
+          "old_sha256": "6cc83fac6cdfef020d6e6e45526af1825737f39ffbe88aade38e63b109e65067",
+          "new_sha256": "6cc83fac6cdfef020d6e6e45526af1825737f39ffbe88aade38e63b109e65067"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-METHODS.md",
+          "new": "docs/legacy/HEAD24-METHODS.md",
+          "old_sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f",
+          "new_sha256": "2b470c5acc4f0e361b9213e5dbb634182a3ed43959daf2afde3bc9711bf6ff2f"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEAD24-START-VI.md",
+          "new": "docs/legacy/HEAD24-START-VI.md",
+          "old_sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504",
+          "new_sha256": "687b0ce6436539c81c967d0046662648480fe2a9e981b4447f722fce1996d504"
+        },
+        {
+          "old": "configs/manifests/head24-code.json",
+          "new": "configs/manifests/head24-code.json",
+          "old_sha256": "6990d14deaebed7276eb26951191ec3836b256e86c68d623fe77add1af2b889a",
+          "new_sha256": "d56765c552e5b3d79258322d0983be5cac0111c2871657f382ff24bc50624659"
+        },
+        {
+          "old": "verification/architecture.log",
+          "new": "maintenance/verification/architecture.log",
+          "old_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52",
+          "new_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+        },
+        {
+          "old": "verification/baseline-current-runtime.log",
+          "new": "maintenance/verification/baseline-current-runtime.log",
+          "old_sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d",
+          "new_sha256": "293a12674050e8cefe80821fd78db33f8a9d7f4725bff13fd9fd5c8e27c9ce5d"
+        },
+        {
+          "old": "verification/head244-architecture.log",
+          "new": "maintenance/verification/head244-architecture.log",
+          "old_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52",
+          "new_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+        },
+        {
+          "old": "verification/head244-full-after.log",
+          "new": "maintenance/verification/head244-full-after.log",
+          "old_sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8",
+          "new_sha256": "49e1404c3da3f2030fbdb7ea17114ad2fad9ce06b9db283b649ce53821d417e8"
+        },
+        {
+          "old": "verification/head244-full-before.log",
+          "new": "maintenance/verification/head244-full-before.log",
+          "old_sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581",
+          "new_sha256": "82abbaa1da6c6b2a3a5c9a2446ddb713de5497b526bfa5acb2cb3144bdb23581"
+        },
+        {
+          "old": "verification/head244-targeted.log",
+          "new": "maintenance/verification/head244-targeted.log",
+          "old_sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9",
+          "new_sha256": "957cee03b3baaff03cf4200fda4a4dd5a2fe1a29a7ce39552b5b24479c96dac9"
+        },
+        {
+          "old": "verification/head245-architecture.log",
+          "new": "maintenance/verification/head245-architecture.log",
+          "old_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52",
+          "new_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+        },
+        {
+          "old": "verification/head245-baseline-embree.log",
+          "new": "maintenance/verification/head245-baseline-embree.log",
+          "old_sha256": "477d8f8d4a8ee888ad80626fc6ef98c82c72d879db692d5ecf5993163bc3dee6",
+          "new_sha256": "477d8f8d4a8ee888ad80626fc6ef98c82c72d879db692d5ecf5993163bc3dee6"
+        },
+        {
+          "old": "verification/head245-full-rtree.log",
+          "new": "maintenance/verification/head245-full-rtree.log",
+          "old_sha256": "3876b6daa637dfbbdbf81a942267fa4ff4aa7e4fdaa161eeb5207262ee39618b",
+          "new_sha256": "3876b6daa637dfbbdbf81a942267fa4ff4aa7e4fdaa161eeb5207262ee39618b"
+        },
+        {
+          "old": "verification/head245-full-tests-final.log",
+          "new": "maintenance/verification/head245-full-tests-final.log",
+          "old_sha256": "45da3791cf009adcb8cf244cb6b3ab87e67db3517232f1e860e6139257353831",
+          "new_sha256": "45da3791cf009adcb8cf244cb6b3ab87e67db3517232f1e860e6139257353831"
+        },
+        {
+          "old": "verification/head245-head-tests.log",
+          "new": "maintenance/verification/head245-head-tests.log",
+          "old_sha256": "994f5c6f1218f69af469740fb192e23948260d6517832cb72ce14992432a2015",
+          "new_sha256": "994f5c6f1218f69af469740fb192e23948260d6517832cb72ce14992432a2015"
+        },
+        {
+          "old": "verification/profile-policy-tests.log",
+          "new": "maintenance/verification/profile-policy-tests.log",
+          "old_sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc",
+          "new_sha256": "94ddeb5e1bd14949401eea3faf361601c611492af273d363bf76bc4b055252cc"
+        },
+        {
+          "old": "verification/unit-tests.log",
+          "new": "maintenance/verification/unit-tests.log",
+          "old_sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5",
+          "new_sha256": "be9dfb04f20f22bb81d195a429bd0b7630604dd17d22a205120a21cadf595fd5"
+        },
+        {
+          "old": "verification/workspace-resume-tests.log",
+          "new": "maintenance/verification/workspace-resume-tests.log",
+          "old_sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1",
+          "new_sha256": "00f1b1a67851c2763ce92a50592434fab61a4e240eab6119d7fc6ff1f4b4fcf1"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/head26-code.json",
+      "entries": [
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEADLAB26-METHODS.md",
+          "new": "docs/legacy/HEADLAB26-METHODS.md",
+          "old_sha256": "cb1ab6af1ea9c637658a4b836f33bec9fe0f88241d3bae401df1e12da3f8ebf8",
+          "new_sha256": "cb1ab6af1ea9c637658a4b836f33bec9fe0f88241d3bae401df1e12da3f8ebf8"
+        },
+        {
+          "old": "_archive/project_cleanup_20261030_182137/root-docs/HEADLAB26-START-VI.md",
+          "new": "docs/legacy/HEADLAB26-START-VI.md",
+          "old_sha256": "0392c12e553789a2ca7ef60a23d233094fdf5cb4a64b56e09b03d184a4a8fa9e",
+          "new_sha256": "0392c12e553789a2ca7ef60a23d233094fdf5cb4a64b56e09b03d184a4a8fa9e"
+        },
+        {
+          "old": "verification/head261-architecture.log",
+          "new": "maintenance/verification/head261-architecture.log",
+          "old_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52",
+          "new_sha256": "49827e1628cb4718f0c0ed529b63a1bbc77a33a9133b141f70970be2bbe7cb52"
+        },
+        {
+          "old": "verification/head261-full-after.log",
+          "new": "maintenance/verification/head261-full-after.log",
+          "old_sha256": "a6b8f050f997b84e014c2086ab767117acfb23d0ab9090a3e2a34c5217f4111a",
+          "new_sha256": "a6b8f050f997b84e014c2086ab767117acfb23d0ab9090a3e2a34c5217f4111a"
+        },
+        {
+          "old": "verification/head261-full-before.log",
+          "new": "maintenance/verification/head261-full-before.log",
+          "old_sha256": "f3bc0bc2833f7b590b627eda4ca43e421831a4256eb71b1710e2cd0804ce5e9e",
+          "new_sha256": "f3bc0bc2833f7b590b627eda4ca43e421831a4256eb71b1710e2cd0804ce5e9e"
+        },
+        {
+          "old": "verification/head261-targeted.log",
+          "new": "maintenance/verification/head261-targeted.log",
+          "old_sha256": "69191d44527aeffbd06e1102d9ccd290584df0e5104e2cb6e68da34cbb23414d",
+          "new_sha256": "69191d44527aeffbd06e1102d9ccd290584df0e5104e2cb6e68da34cbb23414d"
+        }
+      ]
+    }
+  ]
+}

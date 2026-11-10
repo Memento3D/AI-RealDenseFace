@@ -1,0 +1,210 @@
+{
+  "moves": [
+    {
+      "old": "hair-on-head-code.json",
+      "new": "configs/manifests/hair-on-head-code.json",
+      "old_sha256": "dbd8bea6edfeffaf2e9a6ccbd583d193bd86d3a602d93192d49c313aa06e8ae3",
+      "new_sha256": "559a8bce8ab9c3efb5f3b5642da22896ebd22e6a2ae64d77d9e5cf7320864fd4"
+    },
+    {
+      "old": "head24-code.json",
+      "new": "configs/manifests/head24-code.json",
+      "old_sha256": "7d997c3e533db044bc2657b80256224878c3f91b66e978ea490b9ee26bec2126",
+      "new_sha256": "6990d14deaebed7276eb26951191ec3836b256e86c68d623fe77add1af2b889a"
+    },
+    {
+      "old": "head245-code.json",
+      "new": "configs/manifests/head245-code.json",
+      "old_sha256": "a09cd6bcd1fce6065c920a944ea6a81a938c9c3e799343cc8bc9a573fb5b4505",
+      "new_sha256": "2dd5b8c56bb35edd6b271d5389c1e25cb08e6b61ebb6c83b890fe189263b9fcb"
+    },
+    {
+      "old": "head26-code.json",
+      "new": "configs/manifests/head26-code.json",
+      "old_sha256": "14ac583ef1952c7c38a83753c832c2a46649a1a2dd519f5945ae3f824bde704c",
+      "new_sha256": "b007636e893b90ccf9d7b76d23093f12b48aff38d16c6b843f48358d55b9d707"
+    },
+    {
+      "old": "pipeline-v22-code.json",
+      "new": "configs/manifests/pipeline-v22-code.json",
+      "old_sha256": "78221c3aa9d1dc12d18a4779f5964270252ae7dd06e05e9a64cb247d710defbf",
+      "new_sha256": "00751f934624e85c5d090ab503f2dd95921cb0493468c05405bf2d5c4412a3aa"
+    },
+    {
+      "old": "pipeline-v23-code.json",
+      "new": "configs/manifests/pipeline-v23-code.json",
+      "old_sha256": "872b3db6df6b91dbe5eb8cb42b5b9ca8999629f375dedf426240aa20d18da5e0",
+      "new_sha256": "6c414663b847d6630abc51dd6da3aa41ccc57f6774610010dca85ed1e4eeb7c2"
+    },
+    {
+      "old": "head24-rdf-source.json",
+      "new": "configs/manifests/head24-rdf-source.json",
+      "old_sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557",
+      "new_sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557"
+    },
+    {
+      "old": "verification/actual05-summary.json",
+      "new": "maintenance/verification/actual05-summary.json",
+      "old_sha256": "416350a6c65cd624469eade5bfc247ea9584ae77974495f209d0cfccd5f506a3",
+      "new_sha256": "416350a6c65cd624469eade5bfc247ea9584ae77974495f209d0cfccd5f506a3"
+    },
+    {
+      "old": "verification/head26-release.json",
+      "new": "maintenance/verification/head26-release.json",
+      "old_sha256": "7c4950cb93b4e8990cf8da6237174faf4fd56a12c40fe857d1816c8141698f24",
+      "new_sha256": "7c4950cb93b4e8990cf8da6237174faf4fd56a12c40fe857d1816c8141698f24"
+    },
+    {
+      "old": "verification/head261-release.json",
+      "new": "maintenance/verification/head261-release.json",
+      "old_sha256": "5f8d709dad7f736fad48ab384574c1aa7f62983c32e08d143894596a2ea5c102",
+      "new_sha256": "5f8d709dad7f736fad48ab384574c1aa7f62983c32e08d143894596a2ea5c102"
+    },
+    {
+      "old": "verification/headapi-real-assembly.json",
+      "new": "maintenance/verification/headapi-real-assembly.json",
+      "old_sha256": "abbbb4a950ecc388a3a988f96dc969fe2584c91e776322e38dc97a19fb7b9c99",
+      "new_sha256": "abbbb4a950ecc388a3a988f96dc969fe2584c91e776322e38dc97a19fb7b9c99"
+    },
+    {
+      "old": "verification/headapi-release.json",
+      "new": "maintenance/verification/headapi-release.json",
+      "old_sha256": "29f7a9d9b383aa71ce65f6348524d0acae7f69918f5435b8f36589aecfd2d016",
+      "new_sha256": "29f7a9d9b383aa71ce65f6348524d0acae7f69918f5435b8f36589aecfd2d016"
+    },
+    {
+      "old": "verification/triposr-probe-release.json",
+      "new": "maintenance/verification/triposr-probe-release.json",
+      "old_sha256": "7336dfba305ff82eb6f2d2416ed6c7b2b880f961a01ac2b1f2cfe00afa287225",
+      "new_sha256": "7336dfba305ff82eb6f2d2416ed6c7b2b880f961a01ac2b1f2cfe00afa287225"
+    }
+  ],
+  "reference_edits": [
+    "scripts/experiments/RUN-HAIR-ON-HEAD.ps1",
+    "scripts/experiments/RUN-PIPELINE-V22.ps1",
+    "scripts/experiments/RUN-PIPELINE-V23.ps1",
+    "scripts/run_head24.py",
+    "scripts/run_head245.py",
+    "tests/test_hair_on_head_paths.py",
+    "tools/headlab26/cache.py",
+    "tools/headlab26/cli.py"
+  ],
+  "code_manifest_updates": [
+    {
+      "manifest": "configs/manifests/hair-on-head-code.json",
+      "entries": [
+        {
+          "old": "scripts/experiments/RUN-HAIR-ON-HEAD.ps1",
+          "new": "scripts/experiments/RUN-HAIR-ON-HEAD.ps1",
+          "old_sha256": "f6bed586c1dc86c102c8c62dbcfb1d4c323f3b9d47fc1e0ffef938c2820cfe81",
+          "new_sha256": "4d45d8fdab51692341c2a0476c1a3636e0956c2279367f0072fe5ef40413154d"
+        },
+        {
+          "old": "tests/test_hair_on_head_paths.py",
+          "new": "tests/test_hair_on_head_paths.py",
+          "old_sha256": "ae6395e206c8642e234ad2dfb071398d87146de0b3f8f60e0140a70b83fcfac5",
+          "new_sha256": "f0f3e594e0e65c22d250b71ea5c4506920b60f156bad3688a6dafa77178e8de2"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/head24-code.json",
+      "entries": [
+        {
+          "old": "head24-rdf-source.json",
+          "new": "configs/manifests/head24-rdf-source.json",
+          "old_sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557",
+          "new_sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557"
+        },
+        {
+          "old": "scripts/run_head24.py",
+          "new": "scripts/run_head24.py",
+          "old_sha256": "60249e161a31c00a89a03d216a8c1d94a5e4f407d6c8bda1464d149828b45756",
+          "new_sha256": "1c247a85cc21f2cd1f6e6c2ab08e84ef8bbd63a71868c70eb08bee8353d43a86"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/head245-code.json",
+      "entries": [
+        {
+          "old": "head24-code.json",
+          "new": "configs/manifests/head24-code.json",
+          "old_sha256": "222924027801fb50e53aec8c48946ea1fd807193c788e9035fb2bb7c1ed31bca",
+          "new_sha256": "6990d14deaebed7276eb26951191ec3836b256e86c68d623fe77add1af2b889a"
+        },
+        {
+          "old": "head24-rdf-source.json",
+          "new": "configs/manifests/head24-rdf-source.json",
+          "old_sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557",
+          "new_sha256": "6819070bece088d993566f8e27d7be2e9c401eda162afd109a07c0a83346e557"
+        },
+        {
+          "old": "scripts/run_head24.py",
+          "new": "scripts/run_head24.py",
+          "old_sha256": "60249e161a31c00a89a03d216a8c1d94a5e4f407d6c8bda1464d149828b45756",
+          "new_sha256": "1c247a85cc21f2cd1f6e6c2ab08e84ef8bbd63a71868c70eb08bee8353d43a86"
+        },
+        {
+          "old": "scripts/run_head245.py",
+          "new": "scripts/run_head245.py",
+          "old_sha256": "90a088b2c14719efe31d55fd6dd6bbcda824dc195a6b3499f5dc165cb1a3467e",
+          "new_sha256": "5435a7acd0bcdf010d677f1aeeb31c46cc63a6631faca67e3356eea1919877c2"
+        },
+        {
+          "old": "verification/actual05-summary.json",
+          "new": "maintenance/verification/actual05-summary.json",
+          "old_sha256": "416350a6c65cd624469eade5bfc247ea9584ae77974495f209d0cfccd5f506a3",
+          "new_sha256": "416350a6c65cd624469eade5bfc247ea9584ae77974495f209d0cfccd5f506a3"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/head26-code.json",
+      "entries": [
+        {
+          "old": "tools/headlab26/cache.py",
+          "new": "tools/headlab26/cache.py",
+          "old_sha256": "f832dad8cfd2f67a103753e10d2fe2a6f026a12d36fc145f8f2940aa269bc4a1",
+          "new_sha256": "603411b5c857437400132877ae948a557182cc50928c31e9323091f3abfd2370"
+        },
+        {
+          "old": "tools/headlab26/cli.py",
+          "new": "tools/headlab26/cli.py",
+          "old_sha256": "8822ae21659d8b11c1043ee895c991c0acb57c80030422d3e848dd5cddb91540",
+          "new_sha256": "e1e1651ea8b4ea212596393f99a71c50d66e33ec6e55570ac0fd5b8bb86c7768"
+        },
+        {
+          "old": "verification/head261-release.json",
+          "new": "maintenance/verification/head261-release.json",
+          "old_sha256": "5f8d709dad7f736fad48ab384574c1aa7f62983c32e08d143894596a2ea5c102",
+          "new_sha256": "5f8d709dad7f736fad48ab384574c1aa7f62983c32e08d143894596a2ea5c102"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/pipeline-v22-code.json",
+      "entries": [
+        {
+          "old": "scripts/experiments/RUN-PIPELINE-V22.ps1",
+          "new": "scripts/experiments/RUN-PIPELINE-V22.ps1",
+          "old_sha256": "ba8d5a7c380232526c218431a2398251a2742c5564d774815bb45e89a2f6f903",
+          "new_sha256": "e636fbaa460b2aadc7da2680fd54df0cc3a7f2bfa74f12945e8539ebe7a63d38"
+        }
+      ]
+    },
+    {
+      "manifest": "configs/manifests/pipeline-v23-code.json",
+      "entries": [
+        {
+          "old": "scripts/experiments/RUN-PIPELINE-V23.ps1",
+          "new": "scripts/experiments/RUN-PIPELINE-V23.ps1",
+          "old_sha256": "2826044f1fb55ec6a727eb4193817af82fd72d4935754cf10c435d295a4ed8d8",
+          "new_sha256": "9600a516045469b53fbbdce1cf9c787aac5cfc7e8e53f021335e4710ace7765d"
+        }
+      ]
+    }
+  ],
+  "pipeline_configs_changed": false,
+  "model_pins_changed": false
+}

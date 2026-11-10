@@ -7,8 +7,8 @@ Policy opt-in: `graduation_modular_preview_v1`. Không dùng nhánh Production v
 Tại thư mục `Memento3D-Head-Reconstruction`:
 
 ```powershell
-.\START-HEADAPI-ASSEMBLY.ps1 -CheckOnly
-.\START-HEADAPI-ASSEMBLY.ps1
+.\scripts/api/START-HEADAPI-ASSEMBLY.ps1 -CheckOnly
+.\scripts/api/START-HEADAPI-ASSEMBLY.ps1
 ```
 
 Launcher dùng `configs/headapi-assembly.json`, cổng mặc định 8090 và thư mục job mới `runs/headapi-assembly`. Không khởi động thêm instance nếu cổng đang được dùng; restart phiên AI của bạn với launcher này. `-CheckOnly` kiểm tra key đã có và prerequisites/pins, không chạy inference hoặc mở server.
@@ -30,7 +30,7 @@ Giữ nguyên hợp đồng BE: `POST /jobs` nhận job/attempt, profile `defaul
 
 API dùng stage `04_scene_export` cho phần lắp ghép. Chi tiết nằm ở `render.compose.log`, `render/web-export.log`, `render/assembly-report.json`, `render/report.json` và `render/assembly-config.snapshot.json` của job. Head master dùng để đối chiếu ở `render/assembly-master.glb`; BE nhận bản web, không nhận master.
 
-Các asset tham chiếu được khóa SHA-256 trong config. Nếu file bị sửa/mất, preflight từ chối; không tự nhận asset mới hay tự đổi pin. Dữ liệu và model cũ vẫn giữ nguyên. Quay về nhánh đầu + cap cũ bằng `START-HEADAPI-DEMO.ps1`.
+Các asset tham chiếu được khóa SHA-256 trong config. Nếu file bị sửa/mất, preflight từ chối; không tự nhận asset mới hay tự đổi pin. Dữ liệu và model cũ vẫn giữ nguyên. Quay về nhánh đầu + cap cũ bằng `scripts/api/START-HEADAPI-DEMO.ps1`.
 
 ## Phạm vi và kiểm chứng
 

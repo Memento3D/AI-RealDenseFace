@@ -38,3 +38,4 @@ validation/customization/
 
 # Local output backups; keep archives outside source history
 maintenance/runs-archive-*/
+maintenance/local-cleanup/

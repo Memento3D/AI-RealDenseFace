@@ -1,0 +1,201 @@
+{
+  "moves": [
+    {
+      "old": "REVIEW-TRIPOSR-PROBE.ps1",
+      "new": "scripts/review/REVIEW-TRIPOSR-PROBE.ps1",
+      "old_sha256": "7219a4f9b7faa144706a81b18407f52910c9038d516c937b192204cbae2417fa",
+      "new_sha256": "6e07e6e4db96772f02483ae7aea3ff2ead1b4a51476a010ce43102d260ca9929"
+    },
+    {
+      "old": "RUN-CURRENT.ps1",
+      "new": "scripts/experiments/RUN-CURRENT.ps1",
+      "old_sha256": "8da7d807fe6672d1a8865d554581cd612a9a3f0a9686791eeb9f4b2073718ca6",
+      "new_sha256": "bf6943c7ce22a9531a36821b186102af4975a9b8c7c94b2d46f85a71c3e54981"
+    },
+    {
+      "old": "RUN-HAIR-ON-HEAD.ps1",
+      "new": "scripts/experiments/RUN-HAIR-ON-HEAD.ps1",
+      "old_sha256": "ebb50a3702f66b8ac3cd5f63de14a02da14b697a611e5726e46720c5102d3fb6",
+      "new_sha256": "f6bed586c1dc86c102c8c62dbcfb1d4c323f3b9d47fc1e0ffef938c2820cfe81"
+    },
+    {
+      "old": "RUN-HEAD24.ps1",
+      "new": "scripts/experiments/RUN-HEAD24.ps1",
+      "old_sha256": "619b6c079cd41d1a3c4a8d61f484ea6545cae688c1bbb3213fe49ad7c9ec4966",
+      "new_sha256": "e2dd245b41895c2f0dd2beb73e59da134e1396ce4e343e31eb8ef3973f71f883"
+    },
+    {
+      "old": "RUN-HEAD245.ps1",
+      "new": "scripts/experiments/RUN-HEAD245.ps1",
+      "old_sha256": "de77ae79b1029569672383cf97f157adca1b78e49fd36252fa34fa20193122e7",
+      "new_sha256": "9efa489a9b8a69bb66fd5d9b6696462491d390dc27a6f648541acabb538015ad"
+    },
+    {
+      "old": "RUN-HEADAPI.ps1",
+      "new": "scripts/api/RUN-HEADAPI.ps1",
+      "old_sha256": "38bce65b0f3141a0ab62170256f514d5efa382b134c20ace0afcc66f2a5d9116",
+      "new_sha256": "ec76b0a076f0f1c66e5b7245e0b032c2fb708198d1a4d6c5c78f08260fcc632b"
+    },
+    {
+      "old": "RUN-HEADLAB26.ps1",
+      "new": "scripts/experiments/RUN-HEADLAB26.ps1",
+      "old_sha256": "0d90de37690c46411f9efde13a1f2a13c317492233aead67f81b652b02835545",
+      "new_sha256": "fdc68c5202985453e9e3fe19246a9b636466527c2b9b534bdd209c2494ea12a3"
+    },
+    {
+      "old": "RUN-PIPELINE-V22.ps1",
+      "new": "scripts/experiments/RUN-PIPELINE-V22.ps1",
+      "old_sha256": "e6e2a8642e0e18a52161956fccb76ca4b0af0df5d791bbf592c7ff8e7b327775",
+      "new_sha256": "ba8d5a7c380232526c218431a2398251a2742c5564d774815bb45e89a2f6f903"
+    },
+    {
+      "old": "RUN-PIPELINE-V23.ps1",
+      "new": "scripts/experiments/RUN-PIPELINE-V23.ps1",
+      "old_sha256": "5ec4fc1cb7aca24de4cff08f2d79d9af6181075fff1f9d381c634963fe04554a",
+      "new_sha256": "2826044f1fb55ec6a727eb4193817af82fd72d4935754cf10c435d295a4ed8d8"
+    },
+    {
+      "old": "RUN-TRIPOSR-PROBE.ps1",
+      "new": "scripts/experiments/RUN-TRIPOSR-PROBE.ps1",
+      "old_sha256": "ba484bec31d9dbf8997a0288225219abc1c99ac24982d7d0087880fc8b484518",
+      "new_sha256": "995a044d7458f82b634024607ae0bc0370c52f7c72c67606458468d95f37e210"
+    },
+    {
+      "old": "SETUP-HEADAPI.ps1",
+      "new": "scripts/setup/SETUP-HEADAPI.ps1",
+      "old_sha256": "3b522fb909151c6e9f9f2e446aefc8d972433cdd71c8b3ed724f636b51d8fdd7",
+      "new_sha256": "31835c9b0a18eb2badcb8dbe68924f88d60352e5ccddac16cd50d577dc9b2560"
+    },
+    {
+      "old": "SETUP-TRIPOSR-PROBE.ps1",
+      "new": "scripts/setup/SETUP-TRIPOSR-PROBE.ps1",
+      "old_sha256": "be55b906bdecc6ecbf7fceadd1b733d9730bb24306776b3073dad98683834e6a",
+      "new_sha256": "761aa7d7f7000feeee565c873c779b2a533e8b0ec997480fe807f0c7be777624"
+    },
+    {
+      "old": "START-CUSTOMIZATION-REVIEW.ps1",
+      "new": "scripts/review/START-CUSTOMIZATION-REVIEW.ps1",
+      "old_sha256": "8c36f90b2f8f9f4deec0a6c7cf98175f736e580decb90ba32a12bc15cb03fc5f",
+      "new_sha256": "064f1e0ac27baaafec82037f306883b3b8ef81467b20388dbd26d3aed1be6080"
+    },
+    {
+      "old": "START-HEADAPI-ASSEMBLY.ps1",
+      "new": "scripts/api/START-HEADAPI-ASSEMBLY.ps1",
+      "old_sha256": "e9c911e28baf296c62b453801776da0377110f4df096da399d63056fa2d156b7",
+      "new_sha256": "088d2b7fea3f1cd8035fea4a4d2ca22ed1f3cb259de58dc7f038089fcc6ea13b"
+    },
+    {
+      "old": "START-HEADAPI-CUSTOMIZATION-BASE.ps1",
+      "new": "scripts/api/START-HEADAPI-CUSTOMIZATION-BASE.ps1",
+      "old_sha256": "608c99fa55b0299485e28f176233edf12bc98f73c0b902f367b14d74a77e0858",
+      "new_sha256": "fdafc8946955129021418a2699eb9a996c172e108badd546220f1877cfbb1818"
+    },
+    {
+      "old": "START-HEADAPI-DEMO.ps1",
+      "new": "scripts/api/START-HEADAPI-DEMO.ps1",
+      "old_sha256": "158cd8b72223167fac47bdcc7d2996ba27eb2f84fac372be684c0d9f2cb7910b",
+      "new_sha256": "dd4dafa8d61d5aad93f40f481f2d2044af5bfbf03ec12ddf3ca1252923fda90d"
+    },
+    {
+      "old": "TEST-HEADAPI.ps1",
+      "new": "scripts/api/TEST-HEADAPI.ps1",
+      "old_sha256": "34d72cf71da024de5b2249df544b227f4fce50f71fbbe6c0bf3c63ca3203962d",
+      "new_sha256": "c2facc0995c9ab041be0d9efdc283c21acfcf30e24cbcd707ac7e7ffb5f5889e"
+    },
+    {
+      "old": "VERIFY-MVP-ASSETS.ps1",
+      "new": "scripts/maintenance/VERIFY-MVP-ASSETS.ps1",
+      "old_sha256": "7225875764dff504c44aa1f68d1e879a70fa92c24dc547edd43d7c1d36a4839f",
+      "new_sha256": "bf212543ad3d16b0ba51d857b3273f0163adf4a9e1434e4ea528123fbd0aa1e9"
+    },
+    {
+      "old": "BE-AI-INTEGRATION-HANDOFF-VI.md",
+      "new": "docs/guides/BE-AI-INTEGRATION-HANDOFF-VI.md",
+      "old_sha256": "1c87a283412ef681d6665e5009662f4e13ee7ed0e0b92973fa0fa946a508c622",
+      "new_sha256": "1c87a283412ef681d6665e5009662f4e13ee7ed0e0b92973fa0fa946a508c622"
+    },
+    {
+      "old": "HEADAPI-START-VI.md",
+      "new": "docs/guides/HEADAPI-START-VI.md",
+      "old_sha256": "70fb982b1bd7c3f791928c42b21d04195633d4c118f0eea28945028332032c60",
+      "new_sha256": "3c052775c12aedb3c9e7a83710563ed9216913699555e1b1b2b49e90329347f7"
+    },
+    {
+      "old": "MVP-PRINT-PREPARATION-VI.md",
+      "new": "docs/guides/MVP-PRINT-PREPARATION-VI.md",
+      "old_sha256": "3c40c0e23df52c18162f821ebc020fc828a7d9aefd13185e57e167945078da69",
+      "new_sha256": "3c40c0e23df52c18162f821ebc020fc828a7d9aefd13185e57e167945078da69"
+    },
+    {
+      "old": "PIPELINE-V23-METHODS.md",
+      "new": "docs/guides/PIPELINE-V23-METHODS.md",
+      "old_sha256": "865d2f32ab52a27ccab23096e7579921330ab196c61838b7ca5e50b5bff43d65",
+      "new_sha256": "865d2f32ab52a27ccab23096e7579921330ab196c61838b7ca5e50b5bff43d65"
+    },
+    {
+      "old": "PIPELINE-V23-START-VI.md",
+      "new": "docs/guides/PIPELINE-V23-START-VI.md",
+      "old_sha256": "8599fb159c520a8a933cea0402bb8e5ac60ae4cd84ca9dbcb53ee1c2a542b9a1",
+      "new_sha256": "bf13a65fbf06964d7d1817f787b57ab53a7b1b3f9f2041ff103e3f3fd84bca10"
+    },
+    {
+      "old": "WEB-API-DEMO-RUNBOOK-VI.md",
+      "new": "docs/guides/WEB-API-DEMO-RUNBOOK-VI.md",
+      "old_sha256": "b2ccfc816259884175d9118e048d860d5fd05ef712f257ccd050abc33b13d3aa",
+      "new_sha256": "5fa75cecbf99179c4a2208ce1996db874472bd6e9643576121711fd116e42a85"
+    },
+    {
+      "old": "maintenance/plan_source_cleanup.py",
+      "new": "scripts/maintenance/plan_source_cleanup.py",
+      "old_sha256": "3ccd7d8faaf27956efcb287146f2f90e0cbecae59d5f5056cea5baca5ead64ef",
+      "new_sha256": "d549f5b14f247db28346d09ac0e590385d43c9b7cb15e552f6556bcd13f9f150"
+    },
+    {
+      "old": "maintenance/execute_source_cleanup.ps1",
+      "new": "scripts/maintenance/execute_source_cleanup.ps1",
+      "old_sha256": "e126dd9116863d3411606cadfdea06ee80d5f17a20a45569af4b7f825bbf745e",
+      "new_sha256": "3f0552725dc29e1cad1e6913c3b933622df6e7249e7c0b586ed80e8a3cbd8240"
+    }
+  ],
+  "code_manifest_relocations": [
+    {
+      "path": "hair-on-head-code.json",
+      "relocated_entries": [
+        "RUN-HAIR-ON-HEAD.ps1"
+      ]
+    },
+    {
+      "path": "head24-code.json",
+      "relocated_entries": [
+        "RUN-HEAD24.ps1"
+      ]
+    },
+    {
+      "path": "head245-code.json",
+      "relocated_entries": [
+        "RUN-HEAD24.ps1",
+        "RUN-HEAD245.ps1"
+      ]
+    },
+    {
+      "path": "head26-code.json",
+      "relocated_entries": [
+        "RUN-HEADLAB26.ps1"
+      ]
+    },
+    {
+      "path": "pipeline-v22-code.json",
+      "relocated_entries": [
+        "RUN-PIPELINE-V22.ps1"
+      ]
+    },
+    {
+      "path": "pipeline-v23-code.json",
+      "relocated_entries": [
+        "RUN-PIPELINE-V23.ps1"
+      ]
+    }
+  ],
+  "model_pins_changed": false,
+  "compatibility_wrapper": "START-HEADAPI-ASSEMBLY.ps1"
+}

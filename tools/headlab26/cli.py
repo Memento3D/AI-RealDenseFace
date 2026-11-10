@@ -184,8 +184,8 @@ def main(argv=None):
  if not backends or any(b not in ['rdf_baseline','rdf_occlusion','pixel3dmm'] for b in backends):raise ValueError('Unsupported/empty backend list')
  backends=list(dict.fromkeys(backends));output=(a.output or ROOT/'runs'/('headlab26_'+stamp())).resolve()
  if output.exists():raise ValueError('Output already exists; never overwrite a run')
- verify_code(ROOT,ROOT/'head26-code.json');verify_code(ROOT,ROOT/'pipeline-v23-code.json');verify_code(ROOT,ROOT/'head245-code.json')
- if Path(profile['resolved']['rdf_repo']).is_dir():verify_code(Path(profile['resolved']['rdf_repo']),ROOT/'head24-rdf-source.json')
+ verify_code(ROOT,ROOT/'configs/manifests/head26-code.json');verify_code(ROOT,ROOT/'configs/manifests/pipeline-v23-code.json');verify_code(ROOT,ROOT/'configs/manifests/head245-code.json')
+ if Path(profile['resolved']['rdf_repo']).is_dir():verify_code(Path(profile['resolved']['rdf_repo']),ROOT/'configs/manifests/head24-rdf-source.json')
  output.mkdir(parents=True);write(output/'profile.used.json',profile)
  code_key=key({str(p.relative_to(ROOT)):sha(p) for p in (ROOT/'tools/headlab26').glob('*.py')})
  report={'version':'HeadLab26.1','status':'RUNNING','input_root':str(a.input_root.resolve()),'code_key':code_key,'datasets':[],'ready_for_machine':False,'physical_print_verified':False,'backends':backends};started=time.perf_counter();old={}

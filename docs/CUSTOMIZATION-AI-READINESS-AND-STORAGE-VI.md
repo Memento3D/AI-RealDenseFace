@@ -6,7 +6,7 @@ Ngày kiểm tra: 2026-11-05. Trạng thái: **base-only chạy được để t
 
 ## Kết quả đã xác minh
 
-- Chế độ thử mới: `configs/headapi-customization-base.json`, launcher `START-HEADAPI-CUSTOMIZATION-BASE.ps1`. Cấu hình assembly cũ không đổi, các checksum nguồn vẫn giữ nguyên. Dữ liệu job thử mới dùng `runs/headapi-customization-base`, không trộn với job cũ.
+- Chế độ thử mới: `configs/headapi-customization-base.json`, launcher `scripts/api/START-HEADAPI-CUSTOMIZATION-BASE.ps1`. Cấu hình assembly cũ không đổi, các checksum nguồn vẫn giữ nguyên. Dữ liệu job thử mới dùng `runs/headapi-customization-base`, không trộn với job cũ.
 - Bỏ bước `03_hair_cap` khi tạo base; không lắp mesh tóc hoặc mũ. Body/tay và đầu của từng job vẫn được dùng, không thay đầu bằng người mẫu thử nghiệm.
 - Thử lại bước assembly từ dữ liệu job có sẵn, không chạy lại inference: `validation/customization/base-pipeline-check-20261105/attempt-01/scene.glb`, 17.241.824 byte. Audit sau Blender đạt: hình học các thành phần được bảo vệ, UV và pixel atlas của đầu giữ nguyên so với master của lần xuất này; body được giảm chi tiết riêng cho web.
 - Không nhầm kết quả này với baseline mặt/cổ local đã duyệt. `local_neck_lip_baseline_integrated=false`, `customization_ready=false`, `ready_for_machine=false`.
@@ -35,7 +35,7 @@ Không thay cấu hình API đang dùng sang chế độ thử như thể tính 
 Chạy từ thư mục gốc AI:
 
 ```powershell
-.\START-HEADAPI-CUSTOMIZATION-BASE.ps1 -CheckOnly
+.\scripts/api/START-HEADAPI-CUSTOMIZATION-BASE.ps1 -CheckOnly
 .\.venv\Scripts\python.exe -B -X utf8 -m tools.customization.audit_library --library assets/custom-library/mvp-review-20261105
 ```
 
